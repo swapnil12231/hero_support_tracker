@@ -7,15 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  isForgotPasswordForm = true;
-  isResetForm = false;
+  isForgotPassword = true;
   constructor() { }
 
   ngOnInit(): void {
   }
 
   forgotPassword() {
-    this.isForgotPasswordForm = false;
-    this.isResetForm = true;
+    this.isForgotPassword = false;
   }
 }
