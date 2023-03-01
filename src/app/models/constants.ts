@@ -1,11 +1,11 @@
 export class Constants {
 
     // Token
-    public static  Token = 'payrolltoken';
-    public static RefToken = 'payrollreftoken';
+    public static  Token = 'AvisToken';
+    public static RefToken = 'AvisToken';
 
     // Cokkies encryption
-    public static encryptionKey = 'GlobalPayRoll';
+    public static encryptionKey = 'Contique';
 
     // Defaul Images
     public static DefaultImageUrl = 'assets/images/defaultProfile.jpg';
