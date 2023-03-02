@@ -15,6 +15,6 @@ export class ForgotPasswordComponent implements OnInit {
 
   forgotPassword() {
     this.isForgotPassword = false;
-    this.isAddNewPassword = true;
+    // this.isAddNewPassword = true;
   }
 }
