@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent implements OnInit {
-
-  isForgotPassword = true;
+  isAddNewPassword: boolean = false;
+  isForgotPassword: boolean = true;
   constructor() { }
 
   ngOnInit(): void {
@@ -15,5 +15,6 @@ export class ForgotPasswordComponent implements OnInit {
 
   forgotPassword() {
     this.isForgotPassword = false;
+    this.isAddNewPassword = true;
   }
 }
