@@ -7,18 +7,16 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
-
+  
+  user!: User;
   fieldTextType: boolean = false;
   repeatFieldTextType: boolean = false;
   show_button: Boolean = false;
   show_eye: Boolean = false;
   submitted!: boolean;
   constructor() {
-    this.loginForm = new FormGroup({
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-    })
+    this.user = new User();
+    
   }
   ngOnInit(): void {
   }
@@ -31,6 +29,15 @@ export class LoginComponent implements OnInit {
     this.repeatFieldTextType = !this.repeatFieldTextType;
   }
 
-  login(loginForm: any) {
+  async login() {
+    console.log(this.user);
+    
+    alert('Form Submitted succesfully!!!\n Check the values in browser console.');
+
   }
+
+}
+export class User {
+  public username!: string;
+  public password!: string;
 }
