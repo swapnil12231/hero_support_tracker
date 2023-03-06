@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('RememberMe', JSON.stringify(this.rememberMe));
       localStorage.setItem('Username', this.user.username);
     }
-    console.log(this.user);
+ 
   }
 
 }
