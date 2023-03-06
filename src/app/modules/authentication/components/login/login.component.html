@@ -21,40 +21,45 @@
                             </div>
                             <div class="form-group mb-4">
                                 <div class="position-relative">
-                                    <input name="username" class="ps-4 form-control" id="username"  [(ngModel)]="user.username" #username="ngModel"
-                                    required
-                                        placeholder="Username" type="text">
+                                    <input name="username" class="ps-4 form-control" id="username"
+                                        [(ngModel)]="user.username" #username="ngModel" required placeholder="Username"
+                                        type="text">
                                     <i class="bi bi-person"></i>
                                     <span class="text-danger" *ngIf="username.invalid && username.touched">
                                         *username is required
-                                    </span> 
+                                    </span>
                                 </div>
                             </div>
                             <div class="form-group mb-4">
                                 <div class="position-relative">
-                                    <input [type]="fieldTextType ? 'text' : 'password'" class="ps-4 form-control" #password="ngModel"
-                                        [(ngModel)]="user.password" name="txtpassword"  required placeholder="Password" type="text">
+                                    <input [type]="fieldTextType ? 'text' : 'password'" class="ps-4 form-control"
+                                        #password="ngModel" [(ngModel)]="user.password" name="txtpassword" required
+                                        placeholder="Password" type="text">
                                     <span>
                                         <i class="fa eye-icon" [ngClass]="{
                                             'fa-eye-slash': !fieldTextType,
                                             'fa-eye': fieldTextType
-                                          }" (click)="toggleFieldTextType()"></i>
+                                          }" (click)="fieldTextType = !fieldTextType"></i>
                                         <i class="bi bi-lock"></i>
                                     </span>
                                     <span class="text-danger" *ngIf="password.invalid && password.touched">
                                         *password is required
-                                    </span> 
+                                    </span>
                                 </div>
                             </div>
 
                             <div class="form-group mb-4 d-flex justify-content-between align-items-center">
-                                <span class="small"> <input type="checkbox"> Remember Me</span>
+                                <span class="small">
+                                    <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe">
+                                    Remember Me
+                                </span>
                                 <span> <a class="float-end small fst-italic text-decoration-none"
                                         routerLink="/forgot-password">Forgot Password?</a></span>
                             </div>
 
                             <div class="form-group mb-4   text-center">
-                                <button type="button"  (click)="login()"
+                                <button type="button" (click)="login()"
+                                    [disabled]="password.invalid || username.invalid"
                                     class="btn btn-md btn-block btn-outline-warning px-5 w-100">
                                     LOGIN </button>
                             </div>
