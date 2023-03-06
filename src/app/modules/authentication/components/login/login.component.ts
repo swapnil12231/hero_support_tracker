@@ -7,33 +7,30 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
-  user!: User;
+
+  user: User;
   fieldTextType: boolean = false;
-  repeatFieldTextType: boolean = false;
-  show_button: Boolean = false;
-  show_eye: Boolean = false;
-  submitted!: boolean;
+  rememberMe!: boolean;
+
   constructor() {
     this.user = new User();
-    
+    this.rememberMe = !!localStorage.getItem('RememberMe');
+
+    if (this.rememberMe)
+      this.user.username = localStorage.getItem('Username') || "";
+
   }
   ngOnInit(): void {
   }
 
-  toggleFieldTextType() {
-    this.fieldTextType = !this.fieldTextType;
-  }
-
-  toggleRepeatFieldTextType() {
-    this.repeatFieldTextType = !this.repeatFieldTextType;
-  }
-
   async login() {
+    localStorage.removeItem('RememberMe');
+    localStorage.removeItem('Username');
+    if (this.rememberMe) {
+      localStorage.setItem('RememberMe', JSON.stringify(this.rememberMe));
+      localStorage.setItem('Username', this.user.username);
+    }
     console.log(this.user);
-    
-    alert('Form Submitted succesfully!!!\n Check the values in browser console.');
-
   }
 
 }
