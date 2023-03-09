@@ -17,3 +17,7 @@ export class OtpVerify {
     otpVerify!: string;
 }
 
+export class ForgotPasswordModel {
+    email!: string;
+}
+
