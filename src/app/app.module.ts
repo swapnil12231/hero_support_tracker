@@ -5,14 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { TableModule } from 'primeng/table';
-import { LoginComponent } from './modules/authentication/components/login/login.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './custom.route';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
