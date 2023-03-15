@@ -27,14 +27,14 @@
               "src/assets"
             ],
             "styles": [
-             
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/assets/css/common.css"
+              "node_modules/boxicons/css/boxicons.min.css",
+              "src/assets/css/common.css",
+              "src/assets/css/sidebar.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "src/assets/js/main.js"
-
             ]
           },
           "configurations": {

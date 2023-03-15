@@ -7,10 +7,16 @@ import { AppComponent } from './app.component';
 import { TableModule } from 'primeng/table';
 import { RouterModule } from '@angular/router';
 import { routes } from './custom.route';
+import { HeaderComponent } from './core/header/header.component';
+import { MainComponent } from './core/main/main.component';
+import { SidebarComponent } from './core/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    MainComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

@@ -21,6 +21,7 @@
     "@popperjs/core": "^2.11.6",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^5.2.3",
+    "boxicons": "^2.1.4",
     "bootstrap-icons": "^1.10.2",
     "primeng": "^14.0.2",
     "rxjs": "~7.4.0",
