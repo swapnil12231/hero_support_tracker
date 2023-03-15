@@ -7,11 +7,11 @@ import { ForgotPasswordModel } from 'src/app/models/authentication/login';
   styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent implements OnInit {
-  forgetPasswordModel : ForgotPasswordModel;
-  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+  forgetPasswordModel: ForgotPasswordModel;
+  emailPattern = "^[a-z0-9._%+-]{1,40}[@]{1}[a-z]{1,30}[.]{1}[a-z]{3}$";
   isAddNewPassword: boolean = false;
   isForgotPassword: boolean = true;
-  constructor() { 
+  constructor() {
     this.forgetPasswordModel = new ForgotPasswordModel();
   }
 
