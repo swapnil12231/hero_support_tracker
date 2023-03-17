@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-create-table',
@@ -7,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateTableComponent implements OnInit {
 
-  constructor() { }
+  @Output() createTableSubmit = new EventEmitter<any>();
+  @Output() hideNewCrmPopup = new EventEmitter<boolean>();
 
+  constructor() { }
+  submit() {
+    this.createTableSubmit.emit({ test: 'testi' });
+  }
   ngOnInit(): void {
   }
 

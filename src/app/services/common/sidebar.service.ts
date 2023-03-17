@@ -4,6 +4,6 @@ import { EventEmitter, Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SidebarService {
-  showSidenav = new EventEmitter();
+  isSidebarOpen = new EventEmitter();
   constructor() { }
 }

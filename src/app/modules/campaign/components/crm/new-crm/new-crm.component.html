@@ -1,1 +1,13 @@
-<p>new-crm works!</p>
+<div [ngSwitch]="stepIndex">
+    <div *ngSwitchCase="0">
+        <app-create-table (createTableSubmit)="createTableSubmit($event)"
+            (hideNewCrmPopup)="hideNewCrmPopup.emit(true)"></app-create-table>
+    </div>
+    <div *ngSwitchCase="1">
+        <app-design-table (designTableSubmit)="designTableSubmit()"
+            (setStepIndex)="stepIndex = $event"></app-design-table>
+    </div>
+    <div *ngSwitchCase="2">
+        <app-create-crm (createCrmSubmit)="createCrmSubmit()" (setStepIndex)="stepIndex = $event"></app-create-crm>
+    </div>
+</div>

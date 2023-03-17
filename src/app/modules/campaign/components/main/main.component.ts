@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SidebarService } from 'src/app/services/common/sidebar.service';
 
 @Component({
   selector: 'app-main',
@@ -7,11 +6,9 @@ import { SidebarService } from 'src/app/services/common/sidebar.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  isSidebarOpen: boolean = true;
-  constructor(sideBarService: SidebarService) {
-    sideBarService.isSidebarOpen.subscribe(e => this.isSidebarOpen = e);
-  }
 
+  constructor() { }
+  showAddNewCrm: boolean = false;
   ngOnInit(): void {
   }
 

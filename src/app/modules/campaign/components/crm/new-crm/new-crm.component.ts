@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-new-crm',
@@ -7,8 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewCrmComponent implements OnInit {
 
+  @Output() hideNewCrmPopup = new EventEmitter<boolean>();
+
+  stepIndex: number = 0;
+
   constructor() { }
 
+  createTableSubmit(data: any) {
+    console.log({ data });
+
+    this.stepIndex++;
+  }
+  designTableSubmit() {
+    this.stepIndex++;
+  }
+  createCrmSubmit() {
+    this.stepIndex = 0;
+  }
   ngOnInit(): void {
   }
 

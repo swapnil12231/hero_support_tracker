@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-create-crm',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateCrmComponent implements OnInit {
 
+  @Output() setStepIndex = new EventEmitter<number>();
   constructor() { }
 
   ngOnInit(): void {

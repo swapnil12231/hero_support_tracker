@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
 
   toggleSideBar() {
     this.isSidebarOpen = !this.isSidebarOpen;
-    this.sidebarSevice.showSidenav.emit(this.isSidebarOpen);
+    this.sidebarSevice.isSidebarOpen.emit(this.isSidebarOpen);
   }
 
 }
