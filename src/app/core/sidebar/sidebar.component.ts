@@ -7,9 +7,7 @@ import { SidebarService } from 'src/app/services/common/sidebar.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  sidebarSevice: SidebarService;
-  constructor(sidebarSevice: SidebarService) {
-    this.sidebarSevice = sidebarSevice;
+  constructor(private sidebarSevice: SidebarService) {
   }
   isSidebarOpen: boolean = true;
   ngOnInit(): void {

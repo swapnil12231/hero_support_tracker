@@ -2,75 +2,64 @@
     <div class="row">
         <div class="col-md-12 d-flex mb-5">
             <a class="d-inline w-auto  text-muted" (click)="hideNewCrmPopup.emit(true)">
-
-                <i class="fa fa-angle-left text-muted rounded border p-2"></i></a>
+                <i class="fa fa-angle-left text-muted rounded border p-2"></i>
+            </a>
             <h1 class="fs-3 mx-auto">
-                Create Table </h1>
+                Create Table
+            </h1>
         </div>
     </div>
     <div class="row g-4">
         <div class="col-sm-12">
             <div class="row">
-
-                <div class="col-md-12 col-lg-8"> <label for="firstName" class="form-label">Table
-                        Name <sup class="text-red">*</sup></label>
-                    <input type="text" class="form-control " id="" placeholder="Enter table name">
-
+                <div class="col-md-12 col-lg-8">
+                    <label for="firstName" class="form-label">Table Name
+                        <sup class="text-red">*</sup>
+                    </label>
+                    <input type="text" class="form-control" placeholder="Enter table name">
                 </div>
-
                 <div class="col-md-12 text-lg-start text-end col-lg-4 pt-4">
-
-                    <label for="" class="form-label"> &nbsp; </label>
+                    <label class="form-label"> &nbsp; </label>
                     <button class="btn btn-warning text-white">Choose From Existing</button>
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-lg-8 me-auto">
-            <div class="row g-4">
-
-                <div class="col-md-6"><label for="lastName" class="form-label">Column Name
-                        <sup class="text-red">*</sup></label>
-                    <input type="text" class="form-control" id="" placeholder="Enter Column Name " value="" required="">
-                </div>
-                <div class="col-md-6">
-
-                    <label for="country" class="form-label">Type <sup class="text-red">*</sup></label>
-                    <select class="form-select" id="" required="">
-                        <option value="">Select type</option>
-
-                    </select>
-                </div>
-                <div class="col-sm-6">
-
-
-                    <div class="border p-2 rounded"> <input type="checkbox">
-                        Primary
-                        Key</div>
-
-                </div>
-                <div class="col-sm-6">
-
-
-                    <div class="border p-2 rounded"> <input type="checkbox"> Update
-                        Timestamp Key</div>
-
-                </div>
-
-                <div class="col-sm-6">
-
-
-                    <div class="border p-2 rounded"> <input type="checkbox"> Mask
+        <div>
+            <div class="col-sm-12 col-lg-8 me-auto">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label for="lastName" class="form-label">Column Name
+                            <sup class="text-red">*</sup>
+                        </label>
+                        <input type="text" class="form-control" placeholder="Enter Column Name">
                     </div>
-
+                    <div class="col-md-6">
+                        <label for="country" class="form-label">Type <sup class="text-red">*</sup></label>
+                        <select class="form-select" id="" required="">
+                            <option value="">Select type</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="border p-2 rounded">
+                            <input type="checkbox">
+                            Primary Key
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="border p-2 rounded">
+                            <input type="checkbox"> Update Timestamp Key
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="border p-2 rounded">
+                            <input type="checkbox"> Mask
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button class="btn btn-outline-warning btn-sm" (click)="addAnother()"> Add Another</button>
+                    </div>
                 </div>
-
-                <div class="col-md-12">
-
-                    <button class="btn btn-outline-warning btn-sm"> Add Another</button>
-                </div>
-
             </div>
-
         </div>
     </div>
     <div class="row">
@@ -79,62 +68,61 @@
             Select Interactions </h1>
     </div>
     <div class="row mt-3 g-4">
-
-
         <div class="col-lg-4 col-md-6">
-            <div class="border p-2 rounded"> <input type="checkbox"> Call</div>
-        </div>
-
-
-        <div class="col-lg-4 col-md-6">
-            <div class="border p-2 rounded"> <input type="checkbox"> Email</div>
-
-
-        </div>
-
-
-        <div class="col-lg-4 col-md-6">
-            <div class="border p-2 rounded"> <input type="checkbox"> Facebook</div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-            <div class="border p-2 rounded"> <input type="checkbox"> SMS</div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="border p-2 rounded"> <input type="checkbox"> Twitter</div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-            <div class="border p-2 rounded"> <input type="checkbox"> Instagram
+            <div class="border p-2 rounded">
+                <input type="checkbox"> Call
             </div>
         </div>
-
         <div class="col-lg-4 col-md-6">
-            <div class="border p-2 rounded"> <input type="checkbox"> Viber</div>
-
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-            <div class="border p-2 rounded"> <input type="checkbox"> Chat</div>
-
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-            <div class="border p-2 rounded"> <input type="checkbox"> Whats app
+            <div class="border p-2 rounded">
+                <input type="checkbox"> Email
             </div>
-
         </div>
-
         <div class="col-lg-4 col-md-6">
-            <div class="border p-2 rounded"> <input type="checkbox"> Video Chat
+            <div class="border p-2 rounded">
+                <input type="checkbox"> Facebook
             </div>
-
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="border p-2 rounded">
+                <input type="checkbox"> SMS
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="border p-2 rounded">
+                <input type="checkbox"> Twitter
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="border p-2 rounded">
+                <input type="checkbox"> Instagram
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="border p-2 rounded">
+                <input type="checkbox"> Viber
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="border p-2 rounded">
+                <input type="checkbox"> Chat
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="border p-2 rounded">
+                <input type="checkbox"> Whats app
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="border p-2 rounded">
+                <input type="checkbox"> Video Chat
+            </div>
         </div>
     </div>
     <div class="row g-3 mt-3">
         <div class="col col-md-6 text-end">
-            <button type="button" class="btn btn-outline-warning px-4"
-                (click)="hideNewCrmPopup.emit(true)">CANCEL</button>
+            <button type="button" class="btn btn-outline-warning px-4" (click)="hideNewCrmPopup.emit(true)">CANCEL
+            </button>
         </div>
         <div class="col col-md-6 text-start">
             <button type="button" class="btn btn-warning text-white px-4" (click)="submit()">NEXT</button>

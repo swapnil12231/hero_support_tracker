@@ -1,13 +1,11 @@
 export class LoginModel {
-    userEmail! : string;
-    userName!: string;   
-    otpRememberToken!: string;
-   
+    userName!: string;
+    password!: string;
 }
 
 export class OtpModel {
-    userEmail!:string;
-    userName!: string;  
+    userEmail!: string;
+    userName!: string;
     otp!: string;
     rememberLogin!: boolean;
     otpToken!: string;

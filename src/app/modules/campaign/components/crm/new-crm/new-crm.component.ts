@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { DesignTable, Table } from 'src/app/models/campaign/crm';
 
 @Component({
   selector: 'app-new-crm',
@@ -13,12 +14,10 @@ export class NewCrmComponent implements OnInit {
 
   constructor() { }
 
-  createTableSubmit(data: any) {
-    console.log({ data });
-
+  createTableSubmit(data: Table) {
     this.stepIndex++;
   }
-  designTableSubmit() {
+  designTableSubmit(data: DesignTable) {
     this.stepIndex++;
   }
   createCrmSubmit() {

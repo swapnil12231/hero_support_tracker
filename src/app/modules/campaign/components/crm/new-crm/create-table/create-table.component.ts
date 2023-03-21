@@ -12,7 +12,10 @@ export class CreateTableComponent implements OnInit {
 
   constructor() { }
   submit() {
-    this.createTableSubmit.emit({ test: 'testi' });
+    this.createTableSubmit.emit({});
+  }
+  addAnother() {
+
   }
   ngOnInit(): void {
   }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginModel } from 'src/app/models/authentication/login';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -8,16 +11,16 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 })
 export class LoginComponent implements OnInit {
 
-  user: User;
+  user: LoginModel;
   fieldTextType: boolean = false;
   rememberMe!: boolean;
 
-  constructor() {
-    this.user = new User();
+  constructor(private loginService: LoginService, private router: Router, private authenticationService: AuthenticationService) {
+    this.user = new LoginModel();
     this.rememberMe = !!localStorage.getItem('RememberMe');
 
     if (this.rememberMe)
-      this.user.username = localStorage.getItem('Username') || "";
+      this.user.userName = localStorage.getItem('Username') || "";
 
   }
   ngOnInit(): void {
@@ -28,13 +31,13 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem('Username');
     if (this.rememberMe) {
       localStorage.setItem('RememberMe', JSON.stringify(this.rememberMe));
-      localStorage.setItem('Username', this.user.username);
+      localStorage.setItem('Username', this.user.userName);
     }
+    this.loginService.login(this.user).then((res: any) => {
+      this.authenticationService.LogonPortalSetCredentials(res.data.authtokens.accesstoken, res.data.authtokens.refreshtoken)
+      this.router.navigate(['/']);
+    });
 
   }
 
-}
-export class User {
-  public username!: string;
-  public password!: string;
 }

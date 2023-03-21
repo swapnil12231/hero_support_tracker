@@ -1,13 +1,22 @@
 <div [ngSwitch]="stepIndex">
     <div *ngSwitchCase="0">
-        <app-create-table (createTableSubmit)="createTableSubmit($event)"
-            (hideNewCrmPopup)="hideNewCrmPopup.emit(true)"></app-create-table>
+
+        <div class="card-body px-5 greenBorder-33per">
+            <app-create-table (createTableSubmit)="createTableSubmit($event)"
+                (hideNewCrmPopup)="hideNewCrmPopup.emit(true)">
+            </app-create-table>
+        </div>
     </div>
     <div *ngSwitchCase="1">
-        <app-design-table (designTableSubmit)="designTableSubmit()"
-            (setStepIndex)="stepIndex = $event"></app-design-table>
+        <div class="card-body px-5 greenBorder-66per">
+            <app-design-table (designTableSubmit)="designTableSubmit($event)" (setStepIndex)="stepIndex = $event">
+            </app-design-table>
+        </div>
     </div>
     <div *ngSwitchCase="2">
-        <app-create-crm (createCrmSubmit)="createCrmSubmit()" (setStepIndex)="stepIndex = $event"></app-create-crm>
+        <div class="greenBorder-100per">
+            <app-create-crm (createCrmSubmit)="createCrmSubmit()" (setStepIndex)="stepIndex = $event">
+            </app-create-crm>
+        </div>
     </div>
 </div>

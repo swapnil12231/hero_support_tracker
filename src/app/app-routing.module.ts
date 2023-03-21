@@ -1,12 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './core/main/main.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
+    path: 'auth',
+    loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule)
+  },
+  {
     path: '',
     component: MainComponent,
+    canActivate: [AuthGuard],
     children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
       {
         path: 'campaign',
         loadChildren: () => import('./modules/campaign/campaign.module').then(m => m.CampaignModule)
@@ -65,10 +76,7 @@ const routes: Routes = [
       },
     ]
   },
-  {
-    path: 'authenticate',
-    loadChildren: () => import('./modules/authentication/authentication.module').then(m => m.AuthenticationModule)
-  },
+
 ];
 
 @NgModule({

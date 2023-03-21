@@ -22,7 +22,7 @@ export class AuthenticationService {
     constructor(private cookieService: CookieService,
         private jwtService: JwtService,
         private authorizationService: AuthorizationService,
-       
+
     ) {
         // const role = this.getRolesFromJwtToken();
         // this.isLoggedIn = role.length > 0;
@@ -43,7 +43,7 @@ export class AuthenticationService {
 
     public isLoggedIn = false;
     async isAuthenticated() {
-        return await getCurrent(this.isLoggedIn$);
+        return await getCurrent(this.isLoggedIn$) || false;
     }
 
     async maybeRefreshToken(currentToken: string) {
@@ -62,22 +62,24 @@ export class AuthenticationService {
     public login = () => this.onNewJwtToken$.next(void 0);
 
     logout(reason: string) {
-       
+
         this.cookieService.deleteCookie(Constants.RefToken);
         this.cookieService.deleteCookie(Constants.Token);
-        this.isLoggedIn = false;        
+        this.isLoggedIn = false;
         this.onNewJwtToken$.next(void 0);
         this.redirectToLoginPage();
     }
 
-     LogonPortalSetCredentials(jwttoken: string, refreshtoken: string) {
-        
-        const parsedToken = this.jwtService.decodeToken(jwttoken);       
-        this.saveJwtToken(jwttoken);
-        this.saveRefreshToken(refreshtoken, jwttoken); 
-        if (parsedToken.sub) {           
-            this.isLoggedIn = true;
-        }
+    LogonPortalSetCredentials(jwttoken: string, refreshtoken: string) {
+
+        this.isLoggedIn = true;
+        // const parsedToken = this.jwtService.decodeToken(jwttoken);
+        // this.saveJwtToken(jwttoken);
+        // this.saveRefreshToken(refreshtoken, jwttoken);
+
+        // if (parsedToken.sub) {
+        //     this.isLoggedIn = true;
+        // }
         // this.setPermission();
         // this.setFeaturePermission();
         this.onNewJwtToken$.next(void 0);
@@ -96,7 +98,7 @@ export class AuthenticationService {
 
     public getFromJwtToken() {
         const jwtToken = this.cookieService.getCookie(Constants.Token);
-        if (jwtToken) {          
+        if (jwtToken) {
             return jwtToken;
         }
         return [];
