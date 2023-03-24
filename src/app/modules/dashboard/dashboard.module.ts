@@ -6,7 +6,8 @@ import { MainDashboardComponent } from './components/main-dashboard/main-dashboa
 import { TopCampaignsComponent } from './components/top-campaigns/top-campaigns.component';
 import { TeamsListComponent } from './components/teams-list/teams-list.component';
 import { RecentUsersComponent } from './components/recent-users/recent-users.component';
-
+import { ProgressBarModule } from 'primeng/progressbar';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,8 @@ import { RecentUsersComponent } from './components/recent-users/recent-users.com
   ],
   imports: [
     CommonModule,
+    ProgressBarModule,
+    HttpClientModule,
     DashboardRoutingModule
   ]
 })

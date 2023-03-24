@@ -3,9 +3,11 @@
         <div class="d-flex justify-content-between mb-3">
             <h2 class="h4   card-title   fw-medium"> Recent Users</h2>
             <div class=" ">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Today</option>
-
+                <select class="form-select" aria-label="Default select example" (change)="getRecentUsersList($event)">
+                    <option value="today" selected>Today</option>
+                    <option value="this-week">This Week</option>
+                    <option value="this-month">This Month</option>
+                    <option value="this.year">This Year</option>
                 </select>
             </div>
         </div>
@@ -14,190 +16,14 @@
             <table class="table  table-sm table-borderless mb-0">
                 <thead class="light-blue">
                     <tr>
-
                         <th> Name</th>
                         <th>Extension</th>
                     </tr>
                 </thead>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
+                <tr *ngFor="let item of recentUsers">
+                    <td>{{item.name}}<br> <span class="text-muted small">{{item.usergroup}}</span>
                     </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
-                </tr>
-                <tr>
-
-                    <td>Nirmal Pandya <br> <span class="text-muted small">Sales UG</span>
-                    </td>
-
-                    <td>
-                        <div> 2015</div>
-                    </td>
+                    <td>{{item.extension}}</td>
                 </tr>
             </table>
         </div>

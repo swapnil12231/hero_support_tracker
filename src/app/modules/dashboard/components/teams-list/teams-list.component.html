@@ -3,9 +3,11 @@
         <div class="d-flex justify-content-between mb-3">
             <h2 class="h4   card-title   fw-medium"> List of Teams</h2>
             <div class="recent">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Recent</option>
-
+                <select class="form-select" aria-label="Default select example" (change)="selectTeams($event)">
+                    <option value="today" selected>Today</option>
+                    <option value="this-week">This Week</option>
+                    <option value="this-month">This Month</option>
+                    <option value="this-year">This Year</option>
                 </select>
             </div>
         </div>
@@ -15,104 +17,18 @@
                 <thead class="light-blue">
                     <tr>
                         <th>Name of Teams</th>
-                        <th>Team Size</th>
                         <th>Interactions</th>
                         <th>Campaign</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Team A</td>
-                        <td>30 </td>
-                        <td>Call, Chat, Email</td>
-                        <td>Sales camp</td>
+                    <tr *ngFor="let item of teamListObj">
+                        <td>{{item.team}}</td>
+                        <td>{{item.interactions}}</td>
+                        <td>{{item.campaign}}</td>
                     </tr>
-                    <tr>
-                        <td>Team A</td>
-                        <td>30 </td>
-                        <td>Call, Chat, Email</td>
-                        <td>Sales camp</td>
-                    </tr>
-                    <tr>
-                        <td>Team A</td>
-                        <td>30 </td>
-                        <td>Call, Chat, Email</td>
-                        <td>Sales camp</td>
-                    </tr>
-                    <tr>
-                        <td>Team A</td>
-                        <td>30 </td>
-                        <td>Call, Chat, Email</td>
-                        <td>Sales camp</td>
-                    </tr>
-                    <tr>
-                        <td>Team A</td>
-                        <td>30 </td>
-                        <td>Call, Chat, Email</td>
-                        <td>Sales camp</td>
-                    </tr>
-                    <tr>
-                        <td>Team A</td>
-                        <td>30 </td>
-                        <td>Call, Chat, Email</td>
-                        <td>Sales camp</td>
-                    </tr>
-                    <tr>
-                        <td>Team A</td>
-                        <td>30 </td>
-                        <td>Call, Chat, Email</td>
-                        <td>Sales camp</td>
-                    </tr>
-                    <tr>
-                        <td>Team A</td>
-                        <td>30 </td>
-                        <td>Call, Chat, Email</td>
-                        <td>Sales camp</td>
-                    </tr>
-                    <tr>
-                        <td>Team A</td>
-                        <td>30 </td>
-                        <td>Call, Chat, Email</td>
-                        <td>Sales camp</td>
-                    </tr>
-
                 </tbody>
             </table>
-
-            <div class="d-none">
-                <table class="table table-borderless">
-                    <thead class="light-blue">
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            <th>Auto Dispose </th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Sales camp</td>
-                            <td>Lorem Ipsum is simply dummy text</td>
-                            <td>Active</td>
-                            <td> Disallow </td>
-                            <td>
-                                <div class="d-flex">
-                                    <span class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
-                                            checked>
-                                        <label class="form-check-label" for="flexSwitchCheckChecked"> </label>
-                                    </span>
-                                    <span class="me-2"> <a href="#" class="" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal"> <i class="fa fa-edit"></i></a>
-                                    </span>
-                                    <span> <a href="#"><i class="fa fa-trash"></i></a> </span>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 </div>
