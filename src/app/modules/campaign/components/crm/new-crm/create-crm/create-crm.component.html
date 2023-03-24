@@ -4,7 +4,7 @@
             <div class="p-0 card-body">
                 <div class="card-header d-flex py-3 bg-white justify-content-center">
                     <ul class="list-inline mb-0">
-                        <li class="list-inline-item">
+                        <li class="list-inline-item" (click)="goBack()">
                             <a class="cursor-pointer">
                                 <img src="assets/images/crm/back.png" alt="Back" width="15"> Back
                             </a>
@@ -19,7 +19,7 @@
                                 <img src="assets/images/crm/preview.png" alt="Preview" width="22"> Preview
                             </a>
                         </li>
-                        <li class="list-inline-item">
+                        <li class="list-inline-item" (click)="fullscreen()">
                             <a class="cursor-pointer">
                                 <img src="assets/images/crm/full-screen.png" alt="Fullscreen" width="22"> Fullscreen
                             </a>

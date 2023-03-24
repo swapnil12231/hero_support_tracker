@@ -6,17 +6,18 @@ import { DebugCampaignComponent } from './components/debug-campaign/debug-campai
 import { DispositionComponent } from './components/disposition/disposition.component';
 import { MainComponent } from './components/main/main.component';
 import { QueueComponent } from './components/queue/queue.component';
+import { rootNavigationRoutes } from 'src/app/constants/navigation-routes.constants';
 
 const routes: Routes = [
   {
     path: '',
     component: MainComponent,
     children: [
-      { path: 'campaigns', component: CampaignsComponent },
-      { path: 'disposition', component: DispositionComponent },
-      { path: 'queue', component: QueueComponent },
-      { path: 'crm', component: CrmComponent },
-      { path: 'debug-campaign', component: DebugCampaignComponent }
+      { path: rootNavigationRoutes.campaigns, component: CampaignsComponent },
+      { path: rootNavigationRoutes.disposition, component: DispositionComponent },
+      { path: rootNavigationRoutes.queue, component: QueueComponent },
+      { path: rootNavigationRoutes.crm, component: CrmComponent },
+      { path: rootNavigationRoutes.debugCampaign, component: DebugCampaignComponent }
     ]
   },
 ];

@@ -18,7 +18,7 @@
             <li class="nav-item d-flex align-items-center ms-2" role="presentation">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="rootNavigationRoutes.queue">Queue</a>
                 <a class="btn btn-warning btn-sm text-white small rounded addNewBtn" data-bs-toggle="modal"
-                    data-bs-target="#queueModal"> Add New</a>
+                    data-bs-target="#queueModal "> Add New</a>
             </li>
             <li class="nav-item d-flex align-items-center ms-2" role="presentation">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="rootNavigationRoutes.crm">CRM</a>
@@ -44,23 +44,6 @@
         </div>
     </div>
     <router-outlet></router-outlet>
-</div>
-<!-- ------ Campaign -->
-<div>
-    <app-new-campaign></app-new-campaign>
-</div>
-
-<!-- ------ Disposition -->
-<div class="modal fade" id="dispositionModal">
-    <app-create-disposition></app-create-disposition>
-
-</div>
-
-<!-- ------ Queue -->
-<div>
-    <app-new-queue></app-new-queue>
-    <!-- <app-create-queue></app-create-queue>     -->
-    <!-- <app-create-queue-next></app-create-queue-next> -->
 </div>
 
 <section *ngIf="showAddNewCrm">

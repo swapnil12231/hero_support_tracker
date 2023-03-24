@@ -42,8 +42,11 @@ export class AuthenticationService {
     public isLoggedIn$ = this.jwtTokenString$.pipe(map(it => !!it));
 
     public isLoggedIn = false;
-    async isAuthenticated() {
-        return await getCurrent(this.isLoggedIn$) || false;
+
+    isAuthenticated() {
+        // return getCurrent(this.isLoggedIn$) || false;
+        return !!this.getJwtToken();
+
     }
 
     async maybeRefreshToken(currentToken: string) {
@@ -70,16 +73,16 @@ export class AuthenticationService {
         this.redirectToLoginPage();
     }
 
-    LogonPortalSetCredentials(jwttoken: string, refreshtoken: string) {
+    LogonPortalSetCredentials(data: any) {
 
         this.isLoggedIn = true;
-        // const parsedToken = this.jwtService.decodeToken(jwttoken);
-        // this.saveJwtToken(jwttoken);
-        // this.saveRefreshToken(refreshtoken, jwttoken);
+        const parsedToken = this.jwtService.decodeToken(data.authtokens.refreshtoken);
+        this.saveJwtToken(data.authtokens.accesstoken);
+        this.saveRefreshToken(data.authtokens.refreshtoken, data.authtokens.accesstoken);
 
-        // if (parsedToken.sub) {
-        //     this.isLoggedIn = true;
-        // }
+        if (parsedToken.sub) {
+            this.isLoggedIn = true;
+        }
         // this.setPermission();
         // this.setFeaturePermission();
         this.onNewJwtToken$.next(void 0);
@@ -146,6 +149,8 @@ export class AuthenticationService {
             new Date(this.jwtService.decodeJwtToken(token).exp * 1000 + 60000).toUTCString() + ';path=/';
     }
 
-    saveRefreshToken = (token: string, jwtToken: string) => document.cookie = Constants.RefToken + '=' + token + ';expires=' +
-        new Date(this.jwtService.decodeJwtToken(jwtToken).exp * 1000 + 60000).toUTCString() + ';path=/'
+    saveRefreshToken(token: string, jwtToken: string) {
+        document.cookie = Constants.RefToken + '=' + token + ';expires=' +
+            new Date(this.jwtService.decodeJwtToken(jwtToken).exp * 1000 + 60000).toUTCString() + ';path=/';
+    }
 }

@@ -19,3 +19,8 @@ export class ForgotPasswordModel {
     email!: string;
 }
 
+export class ResetPassword {
+    token!: string;
+    password!: string;
+
+}

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginModel } from 'src/app/models/authentication/login';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { LoginService } from '../../services/login.service';
+import { navigationRoutes } from 'src/app/constants/navigation-routes.constants';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +15,11 @@ export class LoginComponent implements OnInit {
   user: LoginModel;
   fieldTextType: boolean = false;
   rememberMe!: boolean;
-
+  navigationRoutes: any = navigationRoutes;
   constructor(private loginService: LoginService, private router: Router, private authenticationService: AuthenticationService) {
+
     this.user = new LoginModel();
     this.rememberMe = !!localStorage.getItem('RememberMe');
-
     if (this.rememberMe)
       this.user.userName = localStorage.getItem('Username') || "";
 
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('Username', this.user.userName);
     }
     this.loginService.login(this.user).then((res: any) => {
-      this.authenticationService.LogonPortalSetCredentials(res.data.authtokens.accesstoken, res.data.authtokens.refreshtoken)
+      this.authenticationService.LogonPortalSetCredentials(res.data)
       this.router.navigate(['/']);
     });
 

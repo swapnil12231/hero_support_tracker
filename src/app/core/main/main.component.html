@@ -1,7 +1,8 @@
 <div>
-    <app-sidebar></app-sidebar>
-    <div class="content" [class]="isSidebarOpen ? 'sidebar-expand':''">
-        <app-header></app-header>
+    <app-sidebar *ngIf="showSidebar"></app-sidebar>
+    <div [class]="{'sidebar-expand':isSidebarOpen && showSidebar, 'content': showSidebar}">
+        <app-header *ngIf="showHeader"></app-header>
         <router-outlet></router-outlet>
     </div>
+    <!-- <p-progressBar [value]="50" class="blue-progressbar"></p-progressBar> -->
 </div>

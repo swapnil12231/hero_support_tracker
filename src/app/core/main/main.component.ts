@@ -7,9 +7,13 @@ import { SidebarService } from 'src/app/services/common/sidebar.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  isSidebarOpen: boolean = true;
+  isSidebarOpen: Boolean = true;
+  showSidebar: Boolean = true;
+  showHeader: Boolean = true;
   constructor(sideBarService: SidebarService) {
     sideBarService.isSidebarOpen.subscribe(e => this.isSidebarOpen = e);
+    sideBarService.showHeader.subscribe(e => this.showHeader = e);
+    sideBarService.showSidebar.subscribe(e => this.showSidebar = e);
   }
 
   ngOnInit(): void {

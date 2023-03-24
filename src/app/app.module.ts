@@ -11,20 +11,32 @@ import { HeaderComponent } from './core/header/header.component';
 import { MainComponent } from './core/main/main.component';
 import { SidebarComponent } from './core/sidebar/sidebar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './modules/authentication/components/login/login.component';
+import { ResetPasswordComponent } from './modules/authentication/components/reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './modules/authentication/components/forgot-password/forgot-password.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainComponent,
-    SidebarComponent
+    SidebarComponent,
+    LoginComponent,
+    ResetPasswordComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     TableModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    ProgressBarModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

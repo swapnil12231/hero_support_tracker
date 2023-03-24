@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { SidebarService } from 'src/app/services/common/sidebar.service';
 
 @Component({
   selector: 'app-create-crm',
@@ -8,7 +9,16 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class CreateCrmComponent implements OnInit {
 
   @Output() setStepIndex = new EventEmitter<number>();
-  constructor() { }
+  fullscreen() {
+    this.sidebarService.showHeader.emit(false);
+    this.sidebarService.showSidebar.emit(false);
+  }
+  goBack() {
+    this.sidebarService.showHeader.emit(true);
+    this.sidebarService.showSidebar.emit(true);
+    this.setStepIndex.emit(1);
+  }
+  constructor(private sidebarService: SidebarService) { }
 
   ngOnInit(): void {
   }
