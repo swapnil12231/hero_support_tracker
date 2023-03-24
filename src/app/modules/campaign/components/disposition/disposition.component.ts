@@ -6,9 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./disposition.component.css']
 })
 export class DispositionComponent implements OnInit {
-
-  constructor() { }
-
+  constructor() {
+  }
   ngOnInit(): void {
   }
 

@@ -1,0 +1,48 @@
+<!-- <div   > -->
+<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="modal-body pt-1 px-5 pb-5 pt-1 px-5 pb-5">
+
+            <div class="row g-3 mt-3">
+                <h1 class="modal-title fs-5 w-100 text-center">
+                    Dispositions
+                </h1>
+                <div class="col-md-12">
+                    <button class="btn btn-warning btn-sm text-white"> Choose from Existing </button>
+                </div>
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">Disposition Type<sup class="text-red">*</sup></label>
+                    <select class="form-select" name="type" #CampaignsDispositionType="ngModel"
+                        [(ngModel)]="disposition.type" required>
+                        <option value="">Select </option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label for="" class="form-label">Disposition Name <sup class="text-red">*</sup></label>
+                    <input type="text" class="form-control" name="campaignsDescriptionName"
+                        #CampaignsDescriptionName="ngModel" [(ngModel)]="disposition.name"
+                        placeholder="Enter Disposition Name" required>
+                </div>
+                <div class="col-sm-12">
+                    <label for="" class="form-label">Description <sup class="text-red">*</sup></label>
+                    <input type="text" class="form-control" name="campaignsDescription" #CampaignsDescription="ngModel"
+                        [(ngModel)]="disposition.description" placeholder=" Enter Description here" required>
+                </div>
+
+                <div class="col-md-12">
+
+                    <button class="btn btn-outline-warning btn-sm"> Add Another</button>
+                </div>
+
+            </div>
+
+            <div class="row g-3 mt-3">
+                <div class="col col-md-6 text-end"> <button type="button" class="btn btn-outline-warning px-4"
+                        data-bs-toggle="modal" data-bs-target="#campaignModal">PREVIOUS</button> </div>
+                <div class="col col-md-6 text-start"> <button type="button" class="btn btn-warning text-white px-4"
+                        (click)="submit()" data-bs-dismiss="modal">SUBMIT</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div> -->

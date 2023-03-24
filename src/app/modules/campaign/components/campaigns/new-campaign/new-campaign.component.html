@@ -1,1 +1,6 @@
-<p>new-campaign works!</p>
+<div class="modal" id="campaignModal" tabindex="-1" aria-labelledby=" " aria-hidden="true">
+    <app-create-campaign (createCampaignSubmit)="createCampaignSubmit($event)"></app-create-campaign>
+</div>
+<div class="modal" id="campaignDisposition" tabindex="-1" aria-labelledby="" aria-hidden="true">
+    <app-campaign-disposition (createCampaignNextSubmit)="createCampaignNextSubmit($event)"></app-campaign-disposition>
+</div>

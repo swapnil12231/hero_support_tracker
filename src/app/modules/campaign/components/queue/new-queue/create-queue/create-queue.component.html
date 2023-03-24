@@ -1,0 +1,111 @@
+<!-- <div class="modal fade" id="queueModal"> -->
+<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+        <div class="modal-header border-0">
+            <h1 class="modal-title fs-5 w-100 text-center" id="campaignModalLabel">
+                Create Queue
+
+
+            </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body pt-1 px-5 pb-5">
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">Campaign <sup class="text-red">*</sup></label>
+                    <select class="form-select" name="queueCampaign" #queueCampaign="ngModel"
+                        [(ngModel)]="createQueue.campaign" required>
+                        <option value="">Select campaign</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label for="" class="form-label">Queue Name <sup class="text-red">*</sup></label>
+                    <input type="text" class="form-control" name="queueQueueName" #queueQueueName="ngModel"
+                        [(ngModel)]="createQueue.name" placeholder="Enter name" required>
+                    <span class="text-danger" *ngIf="queueQueueName.invalid && queueQueueName.touched">
+                        *minimum time is required
+                    </span>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="" class="form-label">Queue Priority <sup class="text-red">*</sup></label>
+                    <select class="form-select" name="queueQueuepriority" #queueQueuepriority="ngModel"
+                        [(ngModel)]="createQueue.priority" required>
+                        <option value="">Select any</option>
+                    </select>
+
+                </div>
+                <div class="col-sm-6 d-flex align-items-center">
+                    <div class=" w-75"> <label for="" class="form-label">Music Class <sup
+                                class="text-red">*</sup></label>
+                        <select class="form-select" name="queueMusicClass" #queueMusicClass="ngModel"
+                            [(ngModel)]="createQueue.musicClass" required>
+                            <option value="">Select music</option>
+                        </select>
+                    </div>
+
+                    <div class="w-25 text-end">
+                        <label for="">&nbsp;</label>
+                        <div> <button class="btn btn-outline-secondary"> <i
+                                    class="fa fa-plus text-success"></i></button></div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="row g-3 mt-3">
+                <h1 class="modal-title fs-5 w-100 text-center" id="campaignModalLabel">
+                    Post Call
+                </h1>
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">Disposition Type <sup class="text-red">*</sup> </label>
+                    <select class="form-select" name="queuedispositionType" #queuedispositionType="ngModel"
+                        [(ngModel)]="postCall.type" required>
+                        <option value="">Select Type</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label for="" class="form-label">Disposition <sup class="text-red">*</sup> </label>
+                    <select class="form-select" name="queueDisposition" #queueDisposition="ngModel"
+                        [(ngModel)]="postCall.disposition" required>
+                        <option value="">Select Any</option>
+                    </select>
+
+                </div>
+
+                <div class="col-sm-6">
+                    <input type="radio" name="queueDisposition" class=""> API
+                    <input type="radio" name="queueDisposition" class="ms-3"> IVR
+                </div>
+                <div class="col-sm-6">
+                    <label for="" class="form-label">API/IVR Options <sup class="text-red">*</sup> </label>
+                    <select class="form-select" name="queueAPIIVROptions" #queueAPIIVROptions="ngModel"
+                        [(ngModel)]="postCall.APIIVROptions" required>
+                        <option value="">Select Any</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row   mt-3">
+                <div class="col col-md-6 text-end">
+                    <button type="button" class="btn btn-outline-warning px-4 " data-bs-dismiss="modal">BACK</button>
+                </div>
+                <div class="col col-md-6 text-start">
+                    <button type="button" class="btn btn-warning text-white px-4 " (click)="submit()"
+                        data-bs-toggle="modal" data-bs-target="#queueModalNext">NEXT</button>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+    </div>
+</div>
+<!-- </div> -->

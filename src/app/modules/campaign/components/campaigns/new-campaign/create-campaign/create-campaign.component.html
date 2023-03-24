@@ -1,1 +1,146 @@
-<p>create-campaign works!</p>
+<!-- <div    class="modal" id="campaignModal" tabindex="-1" aria-labelledby=" " aria-hidden="true"> -->
+
+<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="modal-header border-0">
+            <h1 class="modal-title fs-5 w-100 text-center" id="campaignModalLabel">
+                Create Campaign </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-1 px-5 pb-5 pt-1 px-5 pb-5">
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <label for="firstName" class="form-label">Campaign Name <sup class="text-red">*</sup></label>
+                    <input type="text" class="form-control" name="CampaignsName" placeholder="Enter campaign name"
+                        #campaignsName="ngModel" [(ngModel)]="createCampaign.campaignsName" required>
+                    <span class="text-danger" *ngIf="campaignsName.invalid && campaignsName.touched">
+                        *name is required
+                    </span>
+
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="lastName" class="form-label">Description <sup class="text-red">*</sup></label>
+                    <input type="text" class="form-control" name="campaignsDescription" placeholder="Enter Description"
+                        #campaignsDescription="ngModel" [(ngModel)]="createCampaign.campaignsDescription" required>
+                    <span class="text-danger" *ngIf="campaignsDescription.invalid && campaignsDescription.touched">
+                        *description is required
+                    </span>
+
+                </div>
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">Status <sup class="text-red">*</sup></label>
+                    <select class="form-select" name="campaignsStatus" #campaignsStatus="ngModel"
+                        [(ngModel)]="createCampaign.campaignsStatus">
+                        <option value="">Select any</option>
+
+                    </select>
+                    <!-- <span class="text-danger" *ngIf="campaignsStatus.invalid && campaignsStatus.touched">
+                            *status is required
+                        </span> -->
+
+                </div>
+                <div class="col-sm-6">
+                    <label for="state" class="form-label">Auto Dispose <sup class="text-red">*</sup></label>
+                    <select class="form-select" name="campaignsAutoDispose" #autoDispose="ngModel"
+                        [(ngModel)]="createCampaign.campaignsAutoDispose" required>
+                        <option value="">Allow</option>
+
+                    </select>
+                    <div class="invalid-feedback">
+                        Please provide a valid state.
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="" class="form-label">Minimum Time <sup class="text-red">*</sup></label>
+                    <input type="text" class="form-control" name="campaignsMinimumTime" placeholder="Enter minimum time"
+                        #campaignsMinimumTime="ngModel" [(ngModel)]="createCampaign.campaignsMinimumTime" required>
+                    <!-- <span class="text-danger" *ngIf="campaignsMinimumTime.invalid && campaignsMinimumTime.touched">
+                                *minimum time is required
+                            </span> -->
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="" class="form-label">Maximum Time <sup class="text-red">*</sup></label>
+                    <input type="text" class="form-control" name="campaignsMaximumTime" placeholder="Enter maximum time"
+                        #campaignsMaximumTime="ngModel" [(ngModel)]="createCampaign.campaignsMaximumTime" required>
+                    <div class="invalid-feedback">
+                        Valid last name is required.
+                    </div>
+                    <!-- <span class="text-danger" *ngIf="campaignsMaximumTime.invalid && campaignsMaximumTime.touched">
+                            *miximum time is required
+                        </span> -->
+                </div>
+
+
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">Start Call URL</label>
+                    <select class="form-select" name="campaignsStartCallUrl" #campaignsStartCallUrl="ngModel"
+                        [(ngModel)]="createCampaign.campaignsStartCallUrl" required>
+                        <option value="">Select any</option>
+
+                    </select>
+                    <!-- <span class="text-danger" *ngIf="campaignsStartCallUrl.invalid && campaignsStartCallUrl.touched">
+                            *start call url time is required
+                        </span> -->
+
+                </div>
+
+
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">Mask</label>
+                    <select class="form-select" name="campaignsMask" #campaignsMask="ngModel"
+                        [(ngModel)]="createCampaign.campaignsMask" required>
+                        <option value="">Select any</option>
+
+                    </select>
+                    <!-- <span class="text-danger" *ngIf="campaignsMask.invalid && campaignsMask.touched">
+                            *mask  is required
+                        </span> -->
+
+                </div>
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">CRM <sup class="text-red">*</sup></label>
+
+                    <select class="form-select" name="campaignsCrm" #campaignsCrm="ngModel"
+                        [(ngModel)]="createCampaign.campaignsCrm" required>
+                        <option value="">Select any</option>
+
+                    </select>
+                    <!-- <span class="text-danger" *ngIf="campaignsCrm.invalid && campaignsCrm.touched">
+                            *crm  is required
+                        </span> -->
+
+                </div>
+
+
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">CRM History <sup class="text-red">*</sup></label>
+                    <select class="form-select" name="campaignsCrmHistory" #campaignsCrmHistory="ngModel"
+                        [(ngModel)]="createCampaign.campaignsCrmHistory" required>
+                        <option value="">Select any</option>
+
+                    </select>
+                    <!-- <span class="text-danger" *ngIf="campaignsCrmHistory.invalid && campaignsCrmHistory.touched">
+                            *crm history  is required
+                        </span> -->
+
+                </div>
+
+
+            </div>
+            <div class="row g-3 mt-3">
+                <div class="col col-md-6 text-end">
+                    <button type="button" class="btn btn-outline-warning px-4 " data-bs-dismiss="modal">BACK</button>
+                </div>
+                <div class="col col-md-6 text-start">
+                    <button type="button" class="btn btn-warning text-white px-4 " (click)="submit()"
+                        data-bs-toggle="modal" data-bs-target="#campaignDisposition">NEXT</button>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- </div> -->

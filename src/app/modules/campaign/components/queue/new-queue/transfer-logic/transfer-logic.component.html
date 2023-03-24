@@ -1,0 +1,78 @@
+<!-- <div class="modal fade" id="queueModalNext"> -->
+<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="modal-body pt-1 px-5 pb-5">
+
+            <div class="row g-3 mt-3">
+                <h1 class="modal-title fs-5 w-100 text-center" id="campaignModalLabel">
+                    Transfer Logic
+                </h1>
+
+                <div class="col-sm-6">
+                    <label for="" class="form-label">Criteria </label>
+                    <input type="text" class="form-control" name="queueCriteria" #queueCriteria="ngModel"
+                        [(ngModel)]="transferLogic.criteria" placeholder="Enter here" required>
+                    <span class="text-danger" *ngIf="queueCriteria.invalid && queueCriteria.touched">
+                        *criteria name time is required
+                    </span>
+                </div>
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">Transfer Type </label>
+                    <select class="form-select" name="queueTransferType" #queueTransferType="ngModel"
+                        [(ngModel)]="transferLogic.transferType" required>
+                        <option value="">Select Type</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">Skill </label>
+                    <select class="form-select" name="queueSkill" #queueSkill="ngModel"
+                        [(ngModel)]="transferLogic.skill" required>
+                        <option value="">Select Any</option>
+                    </select>
+                </div>
+                <div class="col-md-12">
+                    <button class="btn btn-outline-warning btn-sm"> Add Another</button>
+                </div>
+            </div>
+
+            <div class="row g-3 mt-3">
+                <h1 class="modal-title fs-5 w-100 text-center" id="campaignModalLabel">
+                    Voice Logic
+                </h1>
+
+
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">Event </label>
+                    <select class="form-select" name="queueEvent" #queueEvent="ngModel" [(ngModel)]="voiceLogic.event"
+                        required>
+                        <option value="">Select Type</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">Data </label>
+                    <select class="form-select" name="queueDate" #queueDate="ngModel" [(ngModel)]="voiceLogic.data"
+                        required>
+                        <option value="">Select Any</option>
+                    </select>
+                </div>
+                <div class="col-md-12">
+
+                    <button class="btn btn-outline-warning btn-sm"> Add Another</button>
+                </div>
+            </div>
+
+
+            <div class="row g-3 mt-3">
+                <div class="col col-md-6 text-end">
+                    <button type="button" class="btn btn-outline-warning px-4 " data-bs-toggle="modal"
+                        data-bs-target="#queueModal">PREVIOUS</button>
+                </div>
+                <div class="col col-md-6 text-start">
+                    <button type="button" class="btn btn-warning text-white px-4 " data-bs-dismiss="modal"
+                        (click)="submit()">SUBMIT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div> -->

@@ -891,3 +891,6 @@ h1.modal-title {
     left: 3px;
     border-radius: 10px 10px 0 0;
 }
+.modal-backdrop{
+    z-index:  -1;
+ }

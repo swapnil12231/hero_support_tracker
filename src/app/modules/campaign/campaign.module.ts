@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CampaignRoutingModule } from './campaign-routing.module';
-import { CrmComponent } from './components/crm/crm.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateTableComponent } from './components/crm/new-crm/create-table/create-table.component';
 import { NewCrmComponent } from './components/crm/new-crm/new-crm.component';
@@ -15,9 +14,16 @@ import { MainComponent } from './components/main/main.component';
 import { DispositionComponent } from './components/disposition/disposition.component';
 import { QueueComponent } from './components/queue/queue.component';
 import { DebugCampaignComponent } from './components/debug-campaign/debug-campaign.component';
+import { CrmComponent } from './components/crm/crm.component';
+import { CreateDispositionComponent } from './components/disposition/create-disposition/create-disposition.component';
+import { CreateQueueComponent } from './components/queue/new-queue/create-queue/create-queue.component';
+import { CampaignDispositionComponent } from './components/campaigns/new-campaign/campaign-disposition/campaign-disposition.component';
+import { NewQueueComponent } from './components/queue/new-queue/new-queue.component';
+import { TransferLogicComponent } from './components/queue/new-queue/transfer-logic/transfer-logic.component';
 
 
 @NgModule({
+
   declarations: [
     CrmComponent,
     CreateTableComponent,
@@ -30,7 +36,12 @@ import { DebugCampaignComponent } from './components/debug-campaign/debug-campai
     MainComponent,
     DispositionComponent,
     QueueComponent,
-    DebugCampaignComponent
+    DebugCampaignComponent,
+    CreateDispositionComponent,
+    CreateQueueComponent,
+    TransferLogicComponent,
+    CampaignDispositionComponent,
+    NewQueueComponent
   ],
   imports: [
     CommonModule,

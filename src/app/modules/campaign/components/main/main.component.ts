@@ -9,7 +9,11 @@ export class MainComponent implements OnInit {
 
   constructor() { }
   showAddNewCrm: boolean = false;
+  showModal: boolean = true;
+  showCreateCampaign: boolean = false;
   ngOnInit(): void {
+  
   }
+
 
 }

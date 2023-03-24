@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-new-campaign',
@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewCampaignComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+
+  createCampaignSubmit(data: any) {
+    console.log({ data });
+  }
+
+  createCampaignNextSubmit(data: any) {
+    console.log({ data });
   }
 
 }
