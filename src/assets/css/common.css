@@ -895,13 +895,17 @@ h1.modal-title {
     z-index: -1;
 }
 .red-progressbar .p-progressbar .p-progressbar-value {
-    background-color: red;
+    background-color: rgb(220, 53, 69);
 }
 
 .blue-progressbar .p-progressbar .p-progressbar-value {
-    background-color: blue;
+    background-color: rgb(13, 202, 240);
 }
 
 .green-progressbar .p-progressbar .p-progressbar-value {
-    background-color: green;
+    background-color: rgb(25, 135, 84);
+}
+
+.yellow-progressbar .p-progressbar .p-progressbar-value {
+    background-color: rgb(255, 193, 7);
 }

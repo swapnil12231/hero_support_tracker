@@ -10,7 +10,14 @@ export class TeamsListComponent implements OnInit {
 
   recentTeamsObj: any = {}
   teamListObj: any;
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService) {
+    let data: any = {
+      target: {
+        value: 'today'
+      }
+    };
+    this.selectTeams(data);
+  }
 
   ngOnInit(): void {
   }
@@ -20,15 +27,9 @@ export class TeamsListComponent implements OnInit {
       date: e.target.value,
       domainId: 1672730382222
     }
-    this.dashboardService.getAllTeams(this.recentTeamsObj).then(
-      res => {
-        if (res != null)
-          this.teamListObj = res;
-        else
-          this.teamListObj = null;
-      },
-      err => { }
-    )
+    this.dashboardService.getTeamListData(this.recentTeamsObj).then(res => {
+      this.teamListObj = res;
+    });
   }
 
 }

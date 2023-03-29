@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: rootNavigationRoutes.resetPassword,
-    component: ResetPasswordComponent
+    component: ResetPasswordComponent,
   },
   {
     path: '',

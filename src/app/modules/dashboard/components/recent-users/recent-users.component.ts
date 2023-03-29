@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { HttpClientService } from 'src/app/services/authentication/httpclient.service';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 
 @Component({
@@ -10,7 +12,14 @@ export class RecentUsersComponent implements OnInit {
   recentUserListObj: any = [];
   recentUsers: any;
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService, private httpClient: HttpClientService) {
+    let data: any = {
+      target: {
+        value: 'today'
+      }
+    };
+    this.getRecentUsersList(data);
+  }
 
   ngOnInit(): void {
   }
@@ -20,16 +29,9 @@ export class RecentUsersComponent implements OnInit {
       date: e.target.value,
       domainId: 1672730382222
     }
-    this.dashboardService.getRecentUsers(this.recentUserListObj).then(res => {
-
-      if (res != null) {
-        this.recentUsers = res;
-        if (this.recentUsers.length == 0) {
-          this.recentUsers = null;
-        }
-      }
-    },
-      err => { this.recentUsers = err });
+    this.dashboardService.getRecentUsersData(this.recentUserListObj).then(res => {
+      this.recentUsers = res;
+    });
   }
 }
 

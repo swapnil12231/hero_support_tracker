@@ -3,27 +3,30 @@ import { Injectable } from '@angular/core';
 
 // services
 import { CookieService } from './cookie.service';
-import { tap, catchError, map } from 'rxjs/operators';
+import { tap, catchError, map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpRequest, HttpEventType } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { filterNull } from './utils';
+import { filterNull, getCurrent } from './utils';
 import { SpinnerService } from './spinner.service';
 import { SessionStorageService } from 'angular-web-storage';
 import { Constants } from 'src/app/models/constants';
+import { AppSettingsService } from './appsettings.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class HttpClientService {
 
+    public webServiceUrl$ = this.appSettingsService.appSettings$.pipe(map(it => it.WebServiceUrl));
     public requestIsActive = false;
 
     constructor(private httpClient: HttpClient,
-                private cookieService: CookieService,
-                private spinnerService: SpinnerService,
-                public session: SessionStorageService
-                ) { }
+        private cookieService: CookieService,
+        private spinnerService: SpinnerService,
+        public session: SessionStorageService,
+        private appSettingsService: AppSettingsService
+    ) { }
 
     public setRequestIsActive(val: boolean) {
         this.requestIsActive = val;
@@ -31,13 +34,14 @@ export class HttpClientService {
 
     private getHttpHeaders() {
         if (this.session.get('companyCodeAdmin') != null) {
-            const tenant =   this.session.get('companyCodeAdmin');
-            return  this.getHttpHeadersWithTenant(tenant);
+            const tenant = this.session.get('companyCodeAdmin');
+            return this.getHttpHeadersWithTenant(tenant);
         } else {
             return {
                 headers: new HttpHeaders()
                     .set('Content-Type', 'application/json')
                     .append('Authorization', 'Bearer ' + this.getJwtToken())
+                    .append('version', 'version: V1.0.0')
             };
         }
     }
@@ -65,11 +69,9 @@ export class HttpClientService {
         return options;
     }
 
-    public post(url: string, body: any = {}) {
-        return this.httpClient.post(url, body, this.getHttpHeaders()).pipe(
-            tap(res => res),
-           // catchError((error: any) => this.onErrorHandler(error))
-        );
+    public async post(url: string, body: any = {}, params?: any) {
+        let response = await this.postRequest(url, body, params);
+        return response;
     }
 
     public async postXMLResponse(url: string, body: any = {}) {
@@ -79,7 +81,7 @@ export class HttpClientService {
     public postWithTenant(url: string, body: any = {}, companyCode: string) {
         return this.httpClient.post(url, body, this.getHttpHeadersWithTenant(companyCode)).pipe(
             tap(res => res),
-           // catchError((error: any) => this.onErrorHandler(error))
+            // catchError((error: any) => this.onErrorHandler(error))
         );
     }
 
@@ -100,7 +102,7 @@ export class HttpClientService {
 
     public getWithoutToken(url: string) {
         const headers = new HttpHeaders()
-                            .set('Content-Type', 'application/json');
+            .set('Content-Type', 'application/json');
         return this.httpClient.get(url, { headers }).pipe(
             tap(res => res),
             //catchError((error: any) => this.onErrorHandler(error))
@@ -109,26 +111,24 @@ export class HttpClientService {
 
     public getWithTenant(url: string, companyCode: string) {
         const headers = new HttpHeaders()
-                            .set('Content-Type', 'application/json')
-                            .append('tenant', companyCode)
-                            .append('Authorization', 'Bearer ' + this.getJwtToken());
+            .set('Content-Type', 'application/json')
+            .append('tenant', companyCode)
+            .append('Authorization', 'Bearer ' + this.getJwtToken());
         return this.httpClient.get(url, { headers }).pipe(
             tap(res => res),
             //catchError((error: any) => this.onErrorHandler(error))
         );
     }
 
-    public get(url: string) {
-        return this.httpClient.get(url, this.getHttpHeaders()).pipe(
-            tap(res => res),
-            //catchError((error: any) => this.onErrorHandler(error))
-        );
+    public async get(url: string) {
+        const response = await this.getRequest(url);
+        return response;
     }
 
     public getWithParameters(url: string, searchParams: any) {
         let headers;
         if (this.session.get('companyCodeAdmin') != null) {
-            const tenant =   this.session.get('companyCodeAdmin');
+            const tenant = this.session.get('companyCodeAdmin');
             headers = new HttpHeaders()
                 .set('Content-Type', 'application/json')
                 .append('tenant', tenant)
@@ -140,9 +140,9 @@ export class HttpClientService {
         }
 
         const params = searchParams;
-        return this.httpClient.get(url, {headers, params}).pipe(
+        return this.httpClient.get(url, { headers, params }).pipe(
             tap(res => res),
-           // catchError((error: any) => this.onErrorHandler(error))
+            // catchError((error: any) => this.onErrorHandler(error))
         );
     }
 
@@ -156,7 +156,7 @@ export class HttpClientService {
     public delete(url: string) {
         return this.httpClient.delete(url, this.getHttpHeaders()).pipe(
             tap(res => res),
-           // catchError((error: any) => this.onErrorHandler(error))
+            // catchError((error: any) => this.onErrorHandler(error))
         );
     }
 
@@ -165,7 +165,7 @@ export class HttpClientService {
 
     private onErrorHandler(error: any) {
         if (error.error instanceof ProgressEvent) {
-           
+
         } else {
             if (error.error === 'Invalid Token') {
                 this.cookieService.deleteCookie(Constants.RefToken);
@@ -173,7 +173,7 @@ export class HttpClientService {
                 document.location.href = '';
                 return;
             }
-            
+
         }
         this.spinnerService.hideSpinner();
         return throwError(error);
@@ -187,8 +187,17 @@ export class HttpClientService {
             }),
             filterNull(),
             //catchError((error: any) => this.onErrorHandler(error))
-            );
+        );
     }
+    private postRequest = <T>(url: string, payload: any, params?: any) => getCurrent(this.webServiceUrl$.pipe(
+        switchMap(baseUrl => this.httpClient.post(baseUrl + url, payload, params)),
+        map(x => x as T)
+    ))
+
+    private getRequest = <T>(url: string) => getCurrent(this.webServiceUrl$.pipe(
+        switchMap(baseUrl => this.httpClient.get(baseUrl + url, this.getHttpHeaders())),
+        map(x => x as T))
+    )
 
     getJwtToken = () => this.cookieService.getCookie(Constants.Token);
 }

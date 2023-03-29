@@ -7,26 +7,22 @@
             <div class=" ">
                 <select class="form-select" aria-label="Default select example" (change)="getCampaignDetails($event)">
                     <option selected value="this-week">This Week</option>
-                    <option  value="this-month">Last Week</option>
+                    <option value="this-month">Last Week</option>
                     <option value="this-month">This Month</option>
                     <option value="last-month">Last Month</option>
                     <option value="this-year">This Year</option>
                 </select>
             </div>
         </div>
-
-        <div class="row mb-3" *ngFor="let item of campaignDetails">
+        <div class="row mb-3" *ngFor="let item of campaignDetails; let i = index">
             <div class="col-md-3">
                 <span> {{item.description}} </span>
             </div>
             <div class="col-md-9">
-                <div class="progress  ">
-                    <div class="d-flex justify-content-between">
-                        <span>{{item.value}}</span>
-                    </div>
-                    <div class="progress progress-bar" style="width:100%;background-color:#ff0055">
-                        <p-progressBar [value]="item.value"></p-progressBar>
-                    </div>
+                <div>
+                    <p-progressBar [value]="item.value / maxCampaignsValue * 100" class="progress-bar"
+                        [class]="pbColorClassList[i%pbColorClassList.length]" [showValue]="false">
+                    </p-progressBar>
                 </div>
             </div>
         </div>
