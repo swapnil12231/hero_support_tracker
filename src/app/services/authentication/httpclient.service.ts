@@ -33,17 +33,13 @@ export class HttpClientService {
     }
 
     private getHttpHeaders() {
-        if (this.session.get('companyCodeAdmin') != null) {
-            const tenant = this.session.get('companyCodeAdmin');
-            return this.getHttpHeadersWithTenant(tenant);
-        } else {
-            return {
-                headers: new HttpHeaders()
-                    .set('Content-Type', 'application/json')
-                    .append('Authorization', 'Bearer ' + this.getJwtToken())
-                    .append('version', 'version: V1.0.0')
-            };
-        }
+        const options = {
+            headers: new HttpHeaders()
+                .set('Content-Type', 'application/json')
+                .append('Authorization', 'Bearer ' + this.getJwtToken())
+                .append('version', 'version: V1.0.0')
+        };
+        return options;
     }
 
     private getHttpHeadersWithPostXML() {
@@ -126,18 +122,10 @@ export class HttpClientService {
     }
 
     public getWithParameters(url: string, searchParams: any) {
-        let headers;
-        if (this.session.get('companyCodeAdmin') != null) {
-            const tenant = this.session.get('companyCodeAdmin');
-            headers = new HttpHeaders()
-                .set('Content-Type', 'application/json')
-                .append('tenant', tenant)
-                .append('Authorization', 'Bearer ' + this.getJwtToken());
-        } else {
-            headers = new HttpHeaders()
-                .set('Content-Type', 'application/json')
-                .append('Authorization', 'Bearer ' + this.getJwtToken());
-        }
+        let headers = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .append('Authorization', 'Bearer ' + this.getJwtToken());
+
 
         const params = searchParams;
         return this.httpClient.get(url, { headers, params }).pipe(
@@ -190,7 +178,7 @@ export class HttpClientService {
         );
     }
     private postRequest = <T>(url: string, payload: any, params?: any) => getCurrent(this.webServiceUrl$.pipe(
-        switchMap(baseUrl => this.httpClient.post(baseUrl + url, payload, params)),
+        switchMap(baseUrl => this.httpClient.post(baseUrl + url, payload, this.getHttpHeaders())),
         map(x => x as T)
     ))
 
