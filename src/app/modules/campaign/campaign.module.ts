@@ -20,6 +20,8 @@ import { CreateQueueComponent } from './components/queue/new-queue/create-queue/
 import { CampaignDispositionComponent } from './components/campaigns/new-campaign/campaign-disposition/campaign-disposition.component';
 import { NewQueueComponent } from './components/queue/new-queue/new-queue.component';
 import { TransferLogicComponent } from './components/queue/new-queue/transfer-logic/transfer-logic.component';
+import { TableModule } from 'primeng/table';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -47,7 +49,9 @@ import { TransferLogicComponent } from './components/queue/new-queue/transfer-lo
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    CampaignRoutingModule
+    CampaignRoutingModule,
+    TableModule,
+    NgxPaginationModule
   ]
 })
 export class CampaignModule { }

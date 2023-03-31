@@ -9,10 +9,13 @@ export class CreateCampaigns {
     campaignsMask!: string;
     campaignsCrm!: string;
     campaignsCrmHistory!: string;
+    selectedCrmTableId!: string;
 }
 
 export class Disposition {
     type!: string;
     name!: string;
     description!: string;
+    campaignsOtherType!: string;
+    autoDispose !: boolean;
 }

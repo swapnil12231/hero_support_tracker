@@ -16,7 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './modules/authentication/components/login/login.component';
 import { ResetPasswordComponent } from './modules/authentication/components/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './modules/authentication/components/forgot-password/forgot-password.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,8 @@ import { ForgotPasswordComponent } from './modules/authentication/components/for
     HttpClientModule,
     ProgressBarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

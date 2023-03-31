@@ -11,9 +11,23 @@ export class CampaignDispositionComponent implements OnInit {
   @Output() dispositionSubmit = new EventEmitter<any>();
 
   disposition!: Disposition;
+  campaignsOtherType: boolean = false;
+
   constructor() {
     this.disposition = new Disposition();
   }
+
+  
+  getDispoType(e: any) {
+    if (e.target.value == 'others') {
+      this.campaignsOtherType = true;
+      this.disposition.autoDispose = true;
+    } else {
+      this.campaignsOtherType = false;
+      this.disposition.autoDispose = false;
+    }
+  }
+
   submit() {
     this.dispositionSubmit.emit(this.disposition);
   }
