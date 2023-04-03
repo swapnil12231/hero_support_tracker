@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { CampaignsService } from 'src/app/services/campaigns/campaigns.service';
+import { Component, OnInit } from '@angular/core';
+import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.service';
 
 @Component({
   selector: 'app-new-campaign',
@@ -24,7 +24,6 @@ export class NewCampaignComponent implements OnInit {
   }
 
   createCampaignNextSubmit(data: any) {
-    debugger
     if (this.createCampaignObj.campaignsMask == 'true') {
       this.createCampaignObj.campaignsMask = true;
     }
@@ -33,7 +32,7 @@ export class NewCampaignComponent implements OnInit {
       this.createCampaignObj.isMask = false;
     }
 
-    
+
     this.createCampaignObj;
 
     if (this.createCampaignObj.campaignsMinimumTime == undefined || this.createCampaignObj.campaignsMinimumTime == null) {
@@ -41,7 +40,7 @@ export class NewCampaignComponent implements OnInit {
       this.createCampaignObj.campaignsMaximumTime = "";
     }
 
-  
+
     let dataObj = {
       "name": this.createCampaignObj.campaignsName,
       "description": this.createCampaignObj.campaignsDescription,
@@ -70,8 +69,6 @@ export class NewCampaignComponent implements OnInit {
       res => {
         if (res != null) {
           this.campaignsData = res;
-          alert(this.campaignsData.message);
-          console.log(this.campaignsData.message);
         }
       },
       err => { this.campaignsData = err }

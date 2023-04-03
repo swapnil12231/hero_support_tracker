@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CreateCampaigns } from 'src/app/models/campaign/campaigns';
-import { CampaignsService } from 'src/app/services/campaigns/campaigns.service';
+import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.service';
 
 @Component({
   selector: 'app-create-campaign',
@@ -40,10 +40,9 @@ export class CreateCampaignComponent implements OnInit {
 
 
   async getStartCallCrmData() {
-    debugger
     this.campaignsService.getEntityToAddCampaign(this.domainId).then(
       res => {
-        if (res != null) {
+        if (!res) {
           this.startCallCrmData = res;
           this.crmData = this.startCallCrmData.crmData;
           this.startCallUrl = this.startCallCrmData.startCallUrl;
@@ -54,7 +53,6 @@ export class CreateCampaignComponent implements OnInit {
   }
 
   getCrmTableId(event: any) {
-    debugger
     let res1: any[] = this.crmData;
     this.createCampaign.selectedCrmTableId = res1.find(x => x.id == this.createCampaign.campaignsCrm).tableid;
   }

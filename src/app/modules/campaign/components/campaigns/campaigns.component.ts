@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { CampaignsService } from 'src/app/services/campaigns/campaigns.service';
+import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.service';
 
 @Component({
   selector: 'app-campaigns',

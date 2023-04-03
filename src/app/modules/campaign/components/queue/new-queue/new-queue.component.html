@@ -1,9 +1,13 @@
 <div class="modal" id="queueModal" tabindex="-1" aria-labelledby=" " aria-hidden="true">
 
-    <app-create-queue (createQueueSubmit)="createQueueSubmit($event)"></app-create-queue>
+    <app-create-queue (createQueueSubmit)="createQueueSubmit($event)" [campaignsArray]="campaignsArray"
+        [musicClassArray]="musicClassArray" [apiOptionArray]="apiOptionArray" [ivrOptionArray]="ivrOptionArray"
+        [dispositionOptionArray]="dispositionOptionArray">
+    </app-create-queue>
 
 
 </div>
 <div class="modal" id="queueModalNext" tabindex="-1" aria-labelledby="" aria-hidden="true">
-    <app-transfer-logic (createQueueNextSubmit)="createQueueNextSubmit($event)"></app-transfer-logic>
+    <app-transfer-logic (createQueueNextSubmit)="createQueueNextSubmit($event)" [skillOptionArray]="skillOptionArray">
+    </app-transfer-logic>
 </div>

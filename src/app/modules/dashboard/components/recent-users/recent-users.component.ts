@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { HttpClientService } from 'src/app/services/authentication/httpclient.service';
-import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
+import { DashboardService } from 'src/app/modules/dashboard/services/dashboard.service';
 
 @Component({
   selector: 'app-recent-users',

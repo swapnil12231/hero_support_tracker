@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
+import { DashboardService } from 'src/app/modules/dashboard/services/dashboard.service';
 
 @Component({
   selector: 'app-teams-list',

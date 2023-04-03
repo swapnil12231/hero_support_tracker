@@ -1,5 +1,4 @@
-<div class="tab-pane " id="pills-Queue" >
-
+<div class="tab-pane " id="pills-Queue">
     <div class="card mb-3">
         <div class="card-body">
             <div class="queueTable  table-responsive">
@@ -15,17 +14,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr *ngFor="let queue of queueData">
                             <td><input type="checkbox"></td>
-                            <td>lorem ipsum </td>
-                            <td> Sales Camp </td>
-                            <td>Default</td>
-
-
-                            <td class="actionsColumn">
-                                <a href="" title="Edit" class="me-2">                                                             
-                         <img src="assets/images/edit.png" alt="Edit"  width="17"></a>                                                            
-                                <a href="" title="Delete">  <img src="assets/images/delete.png" alt="Delete" width="17"></a>  
+                            <td>{{queue.queuename}}</td>
+                            <td> {{queue.camp}} </td>
+                            <td>{{queue.priority}}</td>
+                            <td>
+                                <a title="Edit"> <i class="p-2 border rounded fa fa-edit me-2 text-muted"></i></a>
+                                <a title="Delete"> <i class="p-2 border rounded fa fa-trash text-muted"></i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -51,15 +47,12 @@
                                 <td>
                                     <div class="d-flex">
                                         <span class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox"
-                                            id="flexSwitchCheckChecked" checked>
-                                        <label class="form-check-label"
-                                            for="flexSwitchCheckChecked"> </label>
-                                    </span>
-                                        <span class="me-2"> <a href="#" class=""
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#campaignModal"> <i
-                                                class="fa fa-edit"></i></a> </span>
+                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                                                checked>
+                                            <label class="form-check-label" for="flexSwitchCheckChecked"> </label>
+                                        </span>
+                                        <span class="me-2"> <a href="#" class="" data-bs-toggle="modal"
+                                                data-bs-target="#campaignModal"> <i class="fa fa-edit"></i></a> </span>
                                         <span> <a href="#"><i class="fa fa-trash"></i></a> </span>
                                     </div>
                                 </td>
