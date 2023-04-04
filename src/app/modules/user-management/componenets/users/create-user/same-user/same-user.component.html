@@ -1,0 +1,62 @@
+<div class="tab-content" id="createUserTabContent">
+
+    <div class="tab-pane fade show active py-4" id="sameUser-tab-pane" role="tabpanel" aria-labelledby="sameUser-tab"
+        tabindex="0">
+        <div class="row gy-3">
+            <div class="col-sm-6">
+                <label for="" class="form-label">User Name <sup class="text-red">*</sup></label>
+                <input type="text" class="form-control" name="SameUserName" #SameUserName="ngModel" [(ngModel)]="sameUser.name" placeholder="Enter campaign name"  required>
+                <span class="text-danger" *ngIf="SameUserName.invalid && SameUserName.touched">
+                    *user name is required
+                </span>
+            </div>
+
+
+            <div class="col-sm-6">
+                <label for="" class="form-label">User ID <sup class="text-red">*</sup></label>
+                <input type="text" class="form-control" name="SameUserId" #SameUserId="ngModel" [(ngModel)]="sameUser.id" placeholder="Enter user ID" required  >
+                <span class="text-danger" *ngIf="SameUserId.invalid && SameUserId.touched">
+                    *user Id name is required
+                </span>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="" class="form-label">Password<sup class="text-red">*</sup></label>
+                <input type="password" class="form-control" name="SameUserPassword" #SameUserPassword="ngModel" [(ngModel)]="sameUser.password" placeholder="Enter password" required >
+                <span class="text-danger" *ngIf="SameUserPassword.invalid && SameUserPassword.touched">
+                    *password is required
+                </span>
+            </div>
+            <div class="col-sm-6 d-flex align-items-center">
+                <div class="w-100"> <label for="" class="form-label">Extension <sup class="text-red">*</sup></label>
+                    <select class="form-select" name="SameUserExtension" #SameUserExtension="ngModel" [(ngModel)]="sameUser.extension" required>
+                        <option value="-1">Select music</option>
+                    </select>
+                </div>
+
+                <div class="pt-1 ms-2 text-end" style="width:20%">
+                    <label for="">&nbsp;</label>
+                    <div> <button class="btn btn-outline-secondary small py-1"> <i
+                                class="fa fa-plus text-success"></i></button></div>
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <label for="state" class="form-label">Status <sup class="text-red">*</sup></label>
+                <select class="form-select" name="SameUserStatus" #SameUserStatus="ngModel" [(ngModel)]="sameUser.status" required>
+                    <option value="-1">Select status</option>
+
+                </select>
+
+            </div>
+
+
+
+
+        </div>
+        <div class="col col-md-12 text-center mt-3"> <button type="button" class="btn btn-warning text-white px-4" (click)="submit()">SUBMIT</button></div>
+
+    </div>
+
+
+</div>
