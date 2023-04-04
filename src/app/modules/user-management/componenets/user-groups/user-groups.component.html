@@ -1,0 +1,56 @@
+<div class="tab-pane " role="tabpanel" >
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="dispositionTable  table-responsive">
+                <table class="table table-bordered table-md">
+                    <thead class="light-blue">
+                        <tr>
+                            <th><input type="checkbox"> </th>
+                            <th>Group Name </th>
+                            <th>Agent Login</th>
+
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let userGroup of allUserGroup;">
+                            <td><input type="checkbox"></td>
+                            <td>{{userGroup.name}} </td>
+                            <td>{{userGroup.agentlogin}} </td>
+
+                            <td>
+                                <a href="" class="" title="Edit"> <i class=" p-2 border rounded fa fa-edit me-2 text-muted"></i></a>
+                                <!-- </i> -->
+                                <a href="" title="Delete"> <i class="p-2 border rounded  p-2 border rounded fa fa-trash text-muted"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

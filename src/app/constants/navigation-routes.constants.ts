@@ -20,7 +20,16 @@ export const rootNavigationRoutes = Object.freeze({
     disposition: 'disposition',
     queue: 'queue',
     crm: 'crm',
-    debugCampaign: 'debug-campaign'
+    debugCampaign: 'debug-campaign',
+
+    // user-management
+    users:'users',
+    userGroups:'user-groups',
+    skillSet:'skill-set',
+    extension:'extension',
+    pauseCode:'pause-code',
+    role:'role'
+
 })
 
 export const navigationRoutes = Object.freeze({
@@ -42,7 +51,16 @@ export const navigationRoutes = Object.freeze({
     ivrDesign: `/${rootNavigationRoutes.ivrDesign}`,
     wfm: `/${rootNavigationRoutes.wfm}`,
     disposition: `/${rootNavigationRoutes.disposition}`,
-    queue: `${rootNavigationRoutes.queue}`,
-    crm: `${rootNavigationRoutes.crm}`,
-    debugCampaign: `${rootNavigationRoutes.debugCampaign}`
+    queue: `/${rootNavigationRoutes.queue}`,
+    crm: `/${rootNavigationRoutes.crm}`,
+    debugCampaign: `/${rootNavigationRoutes.debugCampaign}`,
+
+
+    // user-management
+    users:`/${rootNavigationRoutes.users}`,
+    userGroups:`/${rootNavigationRoutes.userGroups}`,
+    skillSet:`/${rootNavigationRoutes.skillSet}`,
+    extension:`/${rootNavigationRoutes.extension}`,
+    pauseCode:`/${rootNavigationRoutes.pauseCode}`,
+    role:`/${rootNavigationRoutes.role}`,
 })
