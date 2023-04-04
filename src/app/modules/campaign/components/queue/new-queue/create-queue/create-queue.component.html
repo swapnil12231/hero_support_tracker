@@ -1,95 +1,145 @@
-<!-- <div class="modal fade" id="queueModal"> -->
 <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
-
         <div class="modal-header border-0">
             <h1 class="modal-title fs-5 w-100 text-center" id="campaignModalLabel">
                 Create Queue
-
-
             </h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-
         <div class="modal-body pt-1 px-5 pb-5">
             <div class="row g-3">
                 <div class="col-sm-6">
-                    <label for="country" class="form-label">Campaign <sup class="text-red">*</sup></label>
+                    <label for="country" class="form-label">Campaign
+                        <sup class="text-red">*</sup>
+                    </label>
                     <select class="form-select" name="queueCampaign" #queueCampaign="ngModel"
                         [(ngModel)]="createQueue.campaign" required>
-                        <option value="">Select campaign</option>
+                        <option [value]="-1">Select campaign</option>
+                        <option *ngFor="let campaign of campaignsArray" [value]="campaign.id">{{campaign.value}}
+                        </option>
                     </select>
                 </div>
                 <div class="col-sm-6">
-                    <label for="" class="form-label">Queue Name <sup class="text-red">*</sup></label>
+                    <label class="form-label">Queue Name
+                        <sup class="text-red">*</sup>
+                    </label>
                     <input type="text" class="form-control" name="queueQueueName" #queueQueueName="ngModel"
                         [(ngModel)]="createQueue.name" placeholder="Enter name" required>
                     <span class="text-danger" *ngIf="queueQueueName.invalid && queueQueueName.touched">
-                        *minimum time is required
+                        *Queue name is required
                     </span>
                 </div>
 
                 <div class="col-sm-6">
-                    <label for="" class="form-label">Queue Priority <sup class="text-red">*</sup></label>
+                    <label class="form-label">Queue Priority
+                        <sup class="text-red">*</sup>
+                    </label>
                     <select class="form-select" name="queueQueuepriority" #queueQueuepriority="ngModel"
                         [(ngModel)]="createQueue.priority" required>
-                        <option value="">Select any</option>
+                        <option [value]="-1">Select any</option>
+                        <option [value]="0">0</option>
+                        <option [value]="1">1</option>
+                        <option [value]="2">2</option>
+                        <option [value]="3">3</option>
+                        <option [value]="4">4</option>
+                        <option [value]="5">5</option>
+                        <option [value]="6">6</option>
+                        <option [value]="7">7</option>
+                        <option [value]="8">8</option>
+                        <option [value]="9">9</option>
                     </select>
 
                 </div>
                 <div class="col-sm-6 d-flex align-items-center">
-                    <div class=" w-75"> <label for="" class="form-label">Music Class <sup
-                                class="text-red">*</sup></label>
+                    <div class=" w-75">
+                        <label class="form-label">Music Class
+                            <sup class="text-red">*</sup>
+                        </label>
                         <select class="form-select" name="queueMusicClass" #queueMusicClass="ngModel"
                             [(ngModel)]="createQueue.musicClass" required>
-                            <option value="">Select music</option>
+                            <option [value]="-1">Select music</option>
+                            <option *ngFor="let music of musicClassArray" [value]="music.id">{{music.value}}</option>
                         </select>
                     </div>
 
                     <div class="w-25 text-end">
-                        <label for="">&nbsp;</label>
-                        <div> <button class="btn btn-outline-secondary"> <i
-                                    class="fa fa-plus text-success"></i></button></div>
+                        <label>&nbsp;</label>
+                        <div>
+                            <button class="btn btn-outline-secondary">
+                                <i class="fa fa-plus text-success"></i>
+                            </button>
+                        </div>
                     </div>
-
                 </div>
-
-
+                <div class="col-sm-6">
+                    <input type="checkbox" [(ngModel)]="enablePostCall" name="enablePostCall">
+                    Post Call
+                </div>
             </div>
 
-            <div class="row g-3 mt-3">
-                <h1 class="modal-title fs-5 w-100 text-center" id="campaignModalLabel">
+            <div class="row g-3 mt-3" *ngIf="enablePostCall">
+                <h1 class="modal-title fs-5 w-100 text-center">
                     Post Call
                 </h1>
-                <div class="col-sm-6">
-                    <label for="country" class="form-label">Disposition Type <sup class="text-red">*</sup> </label>
-                    <select class="form-select" name="queuedispositionType" #queuedispositionType="ngModel"
-                        [(ngModel)]="postCall.type" required>
-                        <option value="">Select Type</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <label for="" class="form-label">Disposition <sup class="text-red">*</sup> </label>
-                    <select class="form-select" name="queueDisposition" #queueDisposition="ngModel"
-                        [(ngModel)]="postCall.disposition" required>
-                        <option value="">Select Any</option>
-                    </select>
+                <div *ngFor="let postCall of postCallArray;let i = index">
+                    <div class="mt-3">
+                        <div class="row mt-2">
+                            <div class="col-sm-6">
+                                <label for="country" class="form-label">Disposition Type
+                                    <sup class="text-red">*</sup>
+                                </label>
+                                <select class="form-select" name="queuedispositionType" #queuedispositionType="ngModel"
+                                    [(ngModel)]="postCall.type" required>
+                                    <option value="">Select Type</option>
+                                    <option
+                                        *ngFor="let dispositionType of dispositionOptionArray | dispositionFilter:createQueue.campaign"
+                                        [value]="dispositionType.type">{{dispositionType.type}}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label">Disposition <sup class="text-red">*</sup> </label>
+                                <select class="form-select" name="queueDisposition" #queueDisposition="ngModel"
+                                    [(ngModel)]="postCall.disposition" required>
+                                    <option value="">Select Any</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-6">
+                                <input type="radio" value="api" [(ngModel)]="postCall.apiOrIvr"
+                                    [name]="'api-ivr-radio' + i">
+                                API
+                                <input type="radio" value="ivr" [(ngModel)]="postCall.apiOrIvr"
+                                    [name]="'api-ivr-radio' + i" class="ms-3"> IVR
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label">API/IVR Options
+                                    <sup class="text-red">*</sup>
+                                </label>
+                                <select class="form-select" name="queueAPIIVROptions" #queueAPIIVROptions="ngModel"
+                                    [(ngModel)]="postCall.APIIVROptions" required>
+                                    <option [value]="-1">Select Any</option>
+                                    <ng-container *ngIf="postCall.apiOrIvr === 'api'">
+                                        <option *ngFor="let apiOption of apiOptionArray" [value]="apiOption.id">
+                                            {{apiOption.value}}
+                                        </option>
+                                    </ng-container>
+                                    <ng-container *ngIf="postCall.apiOrIvr === 'ivr'">
+                                        <option *ngFor="let ivrOption of ivrOptionArray" [value]="ivrOption.id">
+                                            {{ivrOption.value}}
+                                        </option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                        </div>
 
+                    </div>
                 </div>
-
-                <div class="col-sm-6">
-                    <input type="radio" name="queueDisposition" class=""> API
-                    <input type="radio" name="queueDisposition" class="ms-3"> IVR
-                </div>
-                <div class="col-sm-6">
-                    <label for="" class="form-label">API/IVR Options <sup class="text-red">*</sup> </label>
-                    <select class="form-select" name="queueAPIIVROptions" #queueAPIIVROptions="ngModel"
-                        [(ngModel)]="postCall.APIIVROptions" required>
-                        <option value="">Select Any</option>
-                    </select>
+                <div class="col-md-12">
+                    <button class="btn btn-outline-warning btn-sm" (click)="addAnotherPostCall()"> Add Another</button>
                 </div>
             </div>
-            <div class="row   mt-3">
+            <div class="row mt-3">
                 <div class="col col-md-6 text-end">
                     <button type="button" class="btn btn-outline-warning px-4 " data-bs-dismiss="modal">BACK</button>
                 </div>
@@ -98,14 +148,6 @@
                         data-bs-toggle="modal" data-bs-target="#queueModalNext">NEXT</button>
                 </div>
             </div>
-
-
-
-
         </div>
-
-
-
     </div>
 </div>
-<!-- </div> -->

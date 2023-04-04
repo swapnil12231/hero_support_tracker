@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService, private router: Router, private authenticationService: AuthenticationService) {
 
     this.user = new LoginModel();
+    this.user.userName = "demo@contaque.com";
+    this.user.password = "1234";
     this.rememberMe = !!localStorage.getItem('RememberMe');
     if (this.rememberMe)
       this.user.userName = localStorage.getItem('Username') || "";
@@ -35,6 +37,9 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('Username', this.user.userName);
     }
     this.loginService.login(this.user).then((res: any) => {
+
+
+      // sessionStorage.setItem('user', JSON.stringify(res.data));
       this.authenticationService.LogonPortalSetCredentials(res.data)
       this.router.navigate(['/']);
     });

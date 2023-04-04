@@ -22,7 +22,7 @@ import { NewQueueComponent } from './components/queue/new-queue/new-queue.compon
 import { TransferLogicComponent } from './components/queue/new-queue/transfer-logic/transfer-logic.component';
 import { TableModule } from 'primeng/table';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { DispositionFilterPipe } from './pipes/disposition-filter.pipe';
 
 @NgModule({
 
@@ -43,7 +43,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CreateQueueComponent,
     TransferLogicComponent,
     CampaignDispositionComponent,
-    NewQueueComponent
+    NewQueueComponent,
+    DispositionFilterPipe
   ],
   imports: [
     CommonModule,

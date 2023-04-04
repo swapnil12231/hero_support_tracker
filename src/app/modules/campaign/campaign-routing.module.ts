@@ -13,6 +13,7 @@ const routes: Routes = [
     path: '',
     component: MainComponent,
     children: [
+      { path: '', redirectTo: rootNavigationRoutes.campaigns, pathMatch: 'full', },
       { path: rootNavigationRoutes.campaigns, component: CampaignsComponent },
       { path: rootNavigationRoutes.disposition, component: DispositionComponent },
       { path: rootNavigationRoutes.queue, component: QueueComponent },

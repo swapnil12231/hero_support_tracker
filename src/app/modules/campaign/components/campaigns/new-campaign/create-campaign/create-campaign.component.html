@@ -11,8 +11,9 @@
             <div class="row g-3">
                 <div class="col-sm-6">
                     <label for="firstName" class="form-label">Campaign Name <sup class="text-red">*</sup></label>
-                    <input type="text" class="form-control" name="CampaignsName" id="campaignsName" placeholder="Enter campaign name"
-                        #campaignsName="ngModel" [(ngModel)]="createCampaign.campaignsName" required>
+                    <input type="text" class="form-control" name="CampaignsName" id="campaignsName"
+                        placeholder="Enter campaign name" #campaignsName="ngModel"
+                        [(ngModel)]="createCampaign.campaignsName" required>
                     <span class="text-danger" *ngIf="campaignsName.invalid && campaignsName.touched">
                         *name is required
                     </span>
@@ -57,8 +58,9 @@
                 </div>
                 <div class="col-sm-6" *ngIf="isAutodispose">
                     <label for="" class="form-label">Minimum Time <sup class="text-red">*</sup></label>
-                    <input type="text" class="form-control" id="txtCampaignsMinimumTime" name="campaignsMinimumTime" placeholder="Enter minimum time"
-                        #campaignsMinimumTime="ngModel" [(ngModel)]="createCampaign.campaignsMinimumTime" required>
+                    <input type="text" class="form-control" id="txtCampaignsMinimumTime" name="campaignsMinimumTime"
+                        placeholder="Enter minimum time" #campaignsMinimumTime="ngModel"
+                        [(ngModel)]="createCampaign.campaignsMinimumTime" required>
                     <!-- <span class="text-danger" *ngIf="campaignsMinimumTime.invalid && campaignsMinimumTime.touched">
                                 *minimum time is required
                             </span> -->
@@ -66,8 +68,9 @@
 
                 <div class="col-sm-6" *ngIf="isAutodispose">
                     <label for="" class="form-label">Maximum Time <sup class="text-red">*</sup></label>
-                    <input type="text" class="form-control" id="txtCampaignsMaximumTime" name="campaignsMaximumTime" placeholder="Enter maximum time"
-                        #campaignsMaximumTime="ngModel" [(ngModel)]="createCampaign.campaignsMaximumTime" required>
+                    <input type="text" class="form-control" id="txtCampaignsMaximumTime" name="campaignsMaximumTime"
+                        placeholder="Enter maximum time" #campaignsMaximumTime="ngModel"
+                        [(ngModel)]="createCampaign.campaignsMaximumTime" required>
                     <div class="invalid-feedback">
                         Valid last name is required.
                     </div>
@@ -79,7 +82,7 @@
 
                 <div class="col-sm-6">
                     <label for="country" class="form-label">Start Call URL</label>
-                    <select class="form-select" name="campaignsStartCallUrl"  #campaignsStartCallUrl="ngModel"
+                    <select class="form-select" name="campaignsStartCallUrl" #campaignsStartCallUrl="ngModel"
                         [(ngModel)]="createCampaign.campaignsStartCallUrl" required>
                         <option value="undefined" selected>SELECT</option>
                         <option *ngFor="let obj of startCallUrl; let i=index" [value]="startCallUrl[i].id">
@@ -109,8 +112,8 @@
                 <div class="col-sm-6">
                     <label for="country" class="form-label">CRM <sup class="text-red">*</sup></label>
 
-                    <select class="form-select" name="campaignsCrm" #campaignsCrm="ngModel" (change)="getCrmTableId($event)"
-                        [(ngModel)]="createCampaign.campaignsCrm" required>
+                    <select class="form-select" name="campaignsCrm" #campaignsCrm="ngModel"
+                        (change)="getCrmTableId($event)" [(ngModel)]="createCampaign.campaignsCrm" required>
                         <option value="undefined" selected>SELECT</option>
                         <option *ngFor="let obj of crmData; let i=index" [value]="crmData[i].id">
                             {{crmData[i].name}}</option>

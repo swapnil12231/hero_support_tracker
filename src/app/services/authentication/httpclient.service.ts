@@ -37,7 +37,7 @@ export class HttpClientService {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json')
                 .append('Authorization', 'Bearer ' + this.getJwtToken())
-                .append('version', 'version: V1.0.0')
+                .append('version', 'V1.0.0')
         };
         return options;
     }

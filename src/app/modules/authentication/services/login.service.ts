@@ -1,7 +1,5 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginModel } from 'src/app/models/authentication/login';
-import { AppSettingsService } from 'src/app/services/authentication/appsettings.service';
 import { HttpClientService } from 'src/app/services/authentication/httpclient.service';
 
 @Injectable({
@@ -10,7 +8,6 @@ import { HttpClientService } from 'src/app/services/authentication/httpclient.se
 export class LoginService {
 
   constructor(
-    private appSettingsService: AppSettingsService,
     private httpClientService: HttpClientService
   ) { }
 
