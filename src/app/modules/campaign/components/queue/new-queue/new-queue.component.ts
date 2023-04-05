@@ -12,7 +12,7 @@ export class NewQueueComponent implements OnInit {
   musicClassArray: Array<any> = [];
   apiOptionArray: Array<any> = [];
   ivrOptionArray: Array<any> = [];
-  dispositionOptionArray: Array<any> = [];
+  dispositionTypeOptionArray: Array<any> = [];
   skillOptionArray: Array<any> = [];
   constructor(private queueService: QueueService) {
     this.getQueueDropdownsData();
@@ -25,8 +25,8 @@ export class NewQueueComponent implements OnInit {
         this.musicClassArray = Object.keys(res.musicClassOption).map((e: any) => ({ id: e, value: res.musicClassOption[e] }));
         this.apiOptionArray = Object.keys(res.apiOption).map((e: any) => ({ id: e, value: res.apiOption[e] }));
         this.ivrOptionArray = Object.keys(res.ivrOption).map((e: any) => ({ id: e, value: res.ivrOption[e] }));
-        this.skillOptionArray = Object.keys(res.skillOption).map((e: any) => ({ id: e, value: res.skillOption[e] }));
-        this.dispositionOptionArray = res.dispositionOption;
+        this.skillOptionArray = Object.keys(res.transferSkillOption).map((e: any) => ({ id: e, value: res.transferSkillOption[e] }));
+        this.dispositionTypeOptionArray = Object.keys(res.dispositionTypeOption).map((e: any) => ({ campId: e, values: res.dispositionTypeOption[e].map((e: any) => ({ name: e })) }));
       }
 
     });

@@ -23,6 +23,7 @@ import { TransferLogicComponent } from './components/queue/new-queue/transfer-lo
 import { TableModule } from 'primeng/table';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DispositionFilterPipe } from './pipes/disposition-filter.pipe';
+import { MultiSelectModule } from "primeng/multiselect";
 
 @NgModule({
 
@@ -44,7 +45,8 @@ import { DispositionFilterPipe } from './pipes/disposition-filter.pipe';
     TransferLogicComponent,
     CampaignDispositionComponent,
     NewQueueComponent,
-    DispositionFilterPipe
+    DispositionFilterPipe,
+
   ],
   imports: [
     CommonModule,
@@ -52,7 +54,9 @@ import { DispositionFilterPipe } from './pipes/disposition-filter.pipe';
     FormsModule,
     CampaignRoutingModule,
     TableModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MultiSelectModule,
+    
   ]
 })
 export class CampaignModule { }

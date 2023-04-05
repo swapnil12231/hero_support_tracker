@@ -113,12 +113,6 @@ body {
     font-size: 16px;
 }
 
-.or {
-}
-
-.or::after {
-}
-
 .line {
     display: block;
 }
@@ -135,10 +129,6 @@ body {
     position: relative;
     top: 10px;
     padding: 0 10px;
-}
-
-.form-control {
-    /* font-size: 13px; */
 }
 
 .b-example-divider {
@@ -292,15 +282,9 @@ a.sidebarToggle:hover {
     margin-left: -135px;
 }
 
-#sideBar.active ul li a span {
-}
-
 #sideBar.active a {
     position: relative;
     display: inline-block;
-}
-
-.tooltipblock .tooltiptext {
 }
 
 #sideBar.active span.menuname {
@@ -348,9 +332,6 @@ a.sidebarToggle:hover {
     z-index: 1;
 }
 
-.listofItemsTable {
-}
-
 /* .recentUsersTable {
             height: 750px;
             overflow: auto;
@@ -359,12 +340,6 @@ a.sidebarToggle:hover {
 #sideBar.active .tooltipblock:hover .tooltiptext {
     visibility: visible;
     z-index: 999;
-}
-
-.recentUsersTable {
-    /* height:calc(85vh - 90px);   
-            
-            overflow: auto; */
 }
 
 #sideBar.active a:hover .span {
@@ -419,7 +394,6 @@ a.sidebarToggle:hover {
 
 .dashboard {
     background-color: #0d2960;
-    /* height: calc(100vh - 80px); */
 }
 
 h5.card-title {
@@ -490,12 +464,6 @@ h5.card-title {
 
 #content.active {
     margin-left: 135px;
-}
-
-label {
-}
-
-#content {
 }
 
 #collapsiblesideBar {
@@ -689,9 +657,6 @@ h1.modal-title {
 }
 
 /*   Acctive  */
-
-#content.active {
-}
 
 /*  ----- */
 
@@ -891,8 +856,11 @@ h1.modal-title {
     left: 3px;
     border-radius: 10px 10px 0 0;
 }
+#campaignModal {
+    z-index: 5 !important;
+}
 .modal-backdrop {
-    z-index: -1;
+    z-index: 1;
 }
 .red-progressbar .p-progressbar .p-progressbar-value {
     background-color: rgb(220, 53, 69);

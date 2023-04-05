@@ -17,6 +17,7 @@ import { LoginComponent } from './modules/authentication/components/login/login.
 import { ResetPasswordComponent } from './modules/authentication/components/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './modules/authentication/components/forgot-password/forgot-password.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ProgressBarModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
