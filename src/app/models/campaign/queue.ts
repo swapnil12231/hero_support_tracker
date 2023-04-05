@@ -6,7 +6,7 @@ export class CreateQueue {
 }
 
 export class PostCall {
-    type: string = '';
+    type: any = [];
     disposition: number = -1;
     APIIVROptions: number = -1;
     apiOrIvr: string = 'api';

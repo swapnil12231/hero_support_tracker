@@ -21,8 +21,9 @@ export class CreateQueueComponent implements OnInit {
   @Input()
   ivrOptionArray: Array<any> = [];
   @Input()
-  dispositionOptionArray: Array<any> = [];
+  dispositionOptionTypeArray: Array<any> = [];
 
+  dispositionOptionArray: Array<any> = [];
   queuePriorityArray: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   enablePostCall: boolean = false;
   createQueue: CreateQueue;
@@ -30,7 +31,6 @@ export class CreateQueueComponent implements OnInit {
 
 
   constructor(private queueService: QueueService) {
-
     this.createQueue = new CreateQueue();
     this.postCallArray = new Array<PostCall>();
 
@@ -42,7 +42,13 @@ export class CreateQueueComponent implements OnInit {
     let postCall = new PostCall();
     this.postCallArray.push(postCall);
   }
-
+  onCampaignChange() {
+    if (this.createQueue.campaign) {
+      this.queueService.getDispositionData(this.createQueue.campaign).then((res: any) => {
+        this.dispositionOptionArray = res[0].disposition;
+      });
+    }
+  }
   submit() {
     this.createQueueSubmit.emit(this.createQueue)
   }

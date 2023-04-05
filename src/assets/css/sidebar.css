@@ -6,7 +6,7 @@
   width: 78px;
   background: #fff;
   padding: 6px 14px;
-  z-index: 99;
+  /* z-index: 99; */
   transition: all 0.5s ease;
 }
 
@@ -34,7 +34,7 @@
   transition: all 0.5s ease;
   margin-left: 5px;
   margin-top: 5px;
-  z-index: 999;
+  /* z-index: 999; */
   color: #333;
   font-size: 20px;
   font-weight: 600;
