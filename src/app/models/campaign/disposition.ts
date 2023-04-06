@@ -1,14 +1,31 @@
+
+export class VmDisposition{
+    CreateDisposition! : CreateDisposition[];
+    dispositionTypeArray!: disposition[];
+    gender!:any;
+}
 export class CreateDisposition {
-    type!: string;
-    name!: string;
-    description!: string;
-    despositionOtherType !: string;
+    dispositionTypeArray!: disposition;
+    Name!: any;
+    Description!: any;
+    Campaign !:Campaign;
+    gender!:any;
+    //dispositionTypeArray !: disposition[];
 }
 
-export class ExistingDesposition {
+
+export class CampdispositionType { 
+    Id!:number;  
+    Name!: string
+}
+
+export class Campaign {   
     campaign!: string;
-    disposition!: string;
-    dispositionName!: string;
+    campid!:number;
+}
+export class Existingdisposition{
+    Campaign !:Campaign;
+    MultipleCamdispositionType!: CampdispositionType[];
 }
 
 export class DispositionModel {

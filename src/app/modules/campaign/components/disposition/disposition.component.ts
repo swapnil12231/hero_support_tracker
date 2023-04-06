@@ -25,7 +25,6 @@ export class DispositionComponent implements OnInit {
     let domainId = 1672730382222
     let userId = 1672750235414
     let userGroupId = 0;
-
     this.dispositionService.getAllCampaignDispositionData(domainId, userId, userGroupId).then(
       res => {
         if (res != null) {

@@ -12,30 +12,22 @@
         </div>
 
         <div class="modal-body pt-1 px-5 pb-5">
-            <div class="row g-3 mt-3" *ngFor="let createDisposition of createDispositionArray; let i = index;">
+            <div class="row g-3 mt-3" *ngFor="let createDisposition of vmDisposition.CreateDisposition; let i = index;">
                 <div class="col-sm-6">
                     <label for="country" class="form-label">Disposition Type<sup class="text-red">*</sup></label>
                     <select class="form-select" name="dispositionDispositionType" #dispositionDispositionType="ngModel"
-                        (change)="getDispoType($event)" [(ngModel)]="createDisposition.type" required>
+                        (change)="getDispoType($event)" [(ngModel)]="vmDisposition.CreateDisposition[i].dispositionTypeArray" required>
                         <option value="">Select Type</option>
-                        <option *ngFor="let dispoOption of dispositionTypeArray" [value]="dispoOption.Id">
+                        <option *ngFor="let dispoOption of vmDisposition.dispositionTypeArray" [value]="dispoOption.Id">
                             {{dispoOption.Name}}
                         </option>
                     </select>
-                </div>
-
-                <div class="col-sm-6" *ngIf="campaignsOtherType">
-                    <label for="" class="form-label">Mention Other Type <sup class="text-red">*</sup></label>
-                    <input type="text" class="form-control" id="txtDispositionOtherType" name="dispositionOtherType"
-                        #CampaignsOtherType="ngModel" [(ngModel)]="createDisposition.despositionOtherType"
-                        placeholder="Enter Mention Other Type" required>
-                </div>
-
+                </div>               
 
                 <div class="col-sm-6">
                     <label for="" class="form-label">Disposition Name <sup class="text-red">*</sup></label>
                     <input type="text" class="form-control" name="dispositionDispositionType"
-                        #dispositionDispositionType="ngModel" [(ngModel)]="createDisposition.name"
+                        #dispositionDispositionType="ngModel" [(ngModel)]="createDisposition.Name"
                         placeholder="Enter Disposition Name" required>
                     <span class="text-danger"
                         *ngIf="dispositionDispositionType.invalid && dispositionDispositionType.touched">
@@ -46,7 +38,7 @@
                 <div class="col-sm-12">
                     <label for="" class="form-label">Description <sup class="text-red">*</sup></label>
                     <input type="text" class="form-control" name="dispositionDescription"
-                        #dispositionDescription="ngModel" [(ngModel)]="createDisposition.description"
+                        #dispositionDescription="ngModel" [(ngModel)]="createDisposition.Description"
                         placeholder="Enter Description here" value="" required="">
                     <span class="text-danger" *ngIf="dispositionDescription.invalid && dispositionDescription.touched">
                         *description time is required
@@ -69,7 +61,7 @@
                 <div class="col-sm-6">
                     <label for="country" class="form-label">Campaign </label>
                     <select class="form-select" (change)="getCampaignId($event)" name="dropDownExistingCampaign"
-                        #dispositionExistingCampaign="ngModel" [(ngModel)]="existingDesposition.campaign" required>
+                        #dispositionExistingCampaign="ngModel" [(ngModel)]="existingDesposition.Campaign" required>
                         <option value="-1">Select Campaign</option>
                         <option *ngFor="let obj of dispositionObj; let i=index" [value]="dispositionObj[i].campid">
                             {{dispositionObj[i].campaign}}</option>
@@ -79,17 +71,10 @@
                 <div class="col-sm-6">
 
                     <label for="country" class="form-label">Select Disposition </label>
-                    <p-multiSelect [(ngModel)]="existingDesposition.disposition" [options]="currentDispoListArray"
+                    <p-multiSelect [(ngModel)]="existingDesposition.MultipleCamdispositionType" [options]="currentDispoListArray"
                         optionLabel="name" optionValue="name" [style]="{'width':'100%', 'height':'38px'}">
                     </p-multiSelect>
-
-                    <!-- <select multiple="multiple" class="form-select" name="dispositionExistingDisposition"
-                        #dispositionExistingDisposition="ngModel" [(ngModel)]="existingDesposition.disposition"
-                        required="">
-                        <option value="">Select Any</option>
-                        <option *ngFor="let obj of currentDispo]List; let i=index" [value]="currentDispoList[i].campid">
-                            {{currentDispoList[i].name}}</option>
-                    </select> -->
+                    
                 </div>
                 <div class="col-md-12"><button class="btn btn-outline-warning btn-sm mt-3"
                         (click)="addDisposition($event)">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateDisposition, ExistingDesposition, disposition } from 'src/app/models/campaign/disposition';
+import { CampdispositionType, CreateDisposition, disposition, Existingdisposition, VmDisposition} from 'src/app/models/campaign/disposition';
 import { DispositionService } from '../../../services/disposition.service';
 @Component({
   selector: 'app-create-disposition',
@@ -7,39 +7,34 @@ import { DispositionService } from '../../../services/disposition.service';
   styleUrls: ['./create-disposition.component.css']
 })
 export class CreateDispositionComponent implements OnInit {
-
-  createDisposition!: CreateDisposition;
-  existingDesposition!: ExistingDesposition;
-
-  createDispositionArray: Array<CreateDisposition>;
-  dispositionTypeArray: Array<any> = [{ Id: 1, Name: "followup" },
-  { Id: 2, Name: "dnd" }, { Id: 3, Name: "transfer" }, { Id: 4, Name: "redial" }, { Id: 5, Name: "others" }];
+  
+  vmDisposition!: VmDisposition;  
+  existingDesposition!: Existingdisposition; 
   campaignsOtherType: boolean = false;
-
   dispositionObj: any;
   domainId: any;
   currentDispoListArray: Array<any> = [];
-  selectedDisposition !: any[];
-  selectedItems: any = [];
-  currentDispoList1: any = []
-  addDispoResponse: any;
+  tempDisposition: Array<any> = [];
   constructor(
     private dispositionService: DispositionService,
   ) {
-    this.domainId = sessionStorage.getItem('domainId');
-    let createdisposition = new CreateDisposition();
-
-    this.createDisposition = new CreateDisposition();
-    this.existingDesposition = new ExistingDesposition();
-
-    this.createDispositionArray = new Array<CreateDisposition>();
-    this.createDispositionArray.push(createdisposition);
+    
+    this.tempDisposition =  [{ Id: 1, Name: "followup" },
+    { Id: 2, Name: "dnd" }, { Id: 3, Name: "transfer" }, { Id: 4, Name: "redial" }, { Id: 5, Name: "others" }];
+    this.addAnotherCreateDisposition();
   }
 
   addAnotherCreateDisposition() {
-    let createdisposition = new CreateDisposition();
-    this.createDispositionArray.push(createdisposition);
-    this.createDisposition.type = this.existingDesposition.disposition;
+    debugger;
+    this.vmDisposition = new VmDisposition();
+    this.vmDisposition.CreateDisposition =new Array<CreateDisposition>();
+    this.vmDisposition.CreateDisposition.push(new CreateDisposition());
+    this.vmDisposition.dispositionTypeArray = new Array<disposition>();    
+    this.vmDisposition.dispositionTypeArray = [{ Id: 1, Name: "followup" },
+    { Id: 2, Name: "dnd" }, { Id: 3, Name: "transfer" }, { Id: 4, Name: "redial" }, { Id: 5, Name: "others" }];
+    this.existingDesposition = new Existingdisposition();
+    this.existingDesposition.MultipleCamdispositionType = new Array<CampdispositionType>();
+    // this.existingDesposition.MultipleCamdispositionType.push(new CampdispositionType())
   }
 
   submit() {
@@ -101,12 +96,13 @@ export class CreateDispositionComponent implements OnInit {
   }
 
   addDisposition(e: any) {
-    for (let i = 0; i < this.existingDesposition.disposition.length; i++) {
-      let createDispo = new CreateDisposition();
-      createDispo.type = this.existingDesposition.disposition[i];
-      this.dispositionTypeArray.push(createDispo);
-      this.createDispositionArray.push(createDispo);
+    debugger
+    for (let i = 0; i < this.existingDesposition.MultipleCamdispositionType.length; i++) {
+      let item = new CreateDisposition();
+      item.Name =this.existingDesposition.MultipleCamdispositionType[i];
+      item.Description =this.existingDesposition.MultipleCamdispositionType[i];     
+      item.dispositionTypeArray = this.tempDisposition.find(x=>x.Name==this.existingDesposition.MultipleCamdispositionType[i]);
+      this.vmDisposition.CreateDisposition.push(item);
     }
   }
-
 }
