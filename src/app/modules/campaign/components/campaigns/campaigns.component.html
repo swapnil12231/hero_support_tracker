@@ -4,20 +4,26 @@
             <div class="card-body">
                 <div class="campaignTable  table-responsive">
 
-                    <table class="table table-borderless table-md">
-                        <thead class="light-blue">
+                    <p-table class="table table-borderless table-md" [value]="campaignsData" styleClass="p-datatable-sm"
+                        [rowHover]="true" [rows]="5" [rowsPerPageOptions]="[5,10,15]" [showCurrentPageReport]="true"
+                        [paginator]="true">
+                        <ng-template pTemplate="header">
                             <tr>
-                                <th><input type="checkbox"> </th>
+                                <th style="width: 3rem">
+                                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                </th>
                                 <th>Name </th>
                                 <th>Description</th>
                                 <th>Status</th>
                                 <th>Auto Dispose</th>
                                 <th> Actions</th>
                             </tr>
-                        </thead>
-                        <tbody *ngFor="let item of campaignsData | paginate: { itemsPerPage: 5, currentPage: p }">
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
                             <tr>
-                                <td><input type="checkbox"></td>
+                                <td>
+                                    <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                                </td>
                                 <td>{{item.name}}</td>
                                 <td>{{item.description}} </td>
                                 <td>{{item.status}}</td>
@@ -29,9 +35,8 @@
                                     <a href="" title="Delete"> <i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
-                    <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
+                        </ng-template>
+                    </p-table>
                 </div>
             </div>
         </div>

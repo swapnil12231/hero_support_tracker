@@ -9,7 +9,6 @@ import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.se
 export class CampaignsComponent implements OnInit {
 
   campaignsData: any = [];
-  p: any;
   collection: any = [];
 
   constructor(private campaignsService: CampaignsService) { }
