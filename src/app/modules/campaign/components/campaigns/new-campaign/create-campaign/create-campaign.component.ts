@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CreateCampaigns } from 'src/app/models/campaign/campaigns';
 import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.service';
+// import { ToastModule } from 'primeng/toast';
+// import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-create-campaign',
@@ -42,7 +44,7 @@ export class CreateCampaignComponent implements OnInit {
   async getStartCallCrmData() {
     this.campaignsService.getEntityToAddCampaign(this.domainId).then(
       res => {
-        if (!res) {
+        if (res) {
           this.startCallCrmData = res;
           this.crmData = this.startCallCrmData.crmData;
           this.startCallUrl = this.startCallCrmData.startCallUrl;
