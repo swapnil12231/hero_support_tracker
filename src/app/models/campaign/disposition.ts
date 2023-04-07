@@ -1,7 +1,7 @@
 
 export class VmDisposition{
     CreateDisposition! : CreateDisposition[];
-    dispositionTypeArray!: disposition[];
+    dispositionTypeArray!: any;
     gender!:any;
 }
 export class CreateDisposition {
@@ -13,6 +13,16 @@ export class CreateDisposition {
     //dispositionTypeArray !: disposition[];
 }
 
+export class dispositionTypeArray {
+    campId!:number;
+    description!:string;
+    domainId!:string;
+    id!:string;
+    name!:string;
+    status!:string;
+    type!:string;
+
+}
 
 export class CampdispositionType { 
     Id!:number;  
@@ -33,6 +43,14 @@ export class DispositionModel {
 }
 
 export class disposition {
-    Id!: number;
-    Name!: string
+    id!:number;
+    name!:string;
+    isActive!:true;
 }
+
+
+
+interface City {
+    name: string;
+    code: string;
+  }
