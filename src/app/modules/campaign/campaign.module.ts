@@ -25,7 +25,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DispositionFilterPipe } from './pipes/disposition-filter.pipe';
 import { MultiSelectModule } from "primeng/multiselect";
 import { DropdownModule } from 'primeng/dropdown';
-
+import { CalendarModule } from 'primeng/calendar';
 @NgModule({
 
   declarations: [
@@ -45,7 +45,7 @@ import { DropdownModule } from 'primeng/dropdown';
     CreateQueueComponent,
     TransferLogicComponent,
     CampaignDispositionComponent,
-    NewQueueComponent,   
+    NewQueueComponent,
     DispositionFilterPipe,
 
   ],
@@ -58,7 +58,8 @@ import { DropdownModule } from 'primeng/dropdown';
     NgxPaginationModule,
     MultiSelectModule,
     DropdownModule,
-    
+    CalendarModule
+
   ]
 })
 export class CampaignModule { }

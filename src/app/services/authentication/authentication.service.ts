@@ -68,6 +68,7 @@ export class AuthenticationService {
 
         this.cookieService.deleteCookie(Constants.RefToken);
         this.cookieService.deleteCookie(Constants.Token);
+        sessionStorage.removeItem(Constants.domainId);
         this.isLoggedIn = false;
         this.onNewJwtToken$.next(void 0);
         this.redirectToLoginPage();
@@ -79,6 +80,7 @@ export class AuthenticationService {
         const parsedToken = this.jwtService.decodeToken(data.authtokens.refreshtoken);
         this.saveJwtToken(data.authtokens.accesstoken);
         this.saveRefreshToken(data.authtokens.refreshtoken, data.authtokens.accesstoken);
+        this.saveDomainId(data.domainid);
 
         if (parsedToken.sub) {
             this.isLoggedIn = true;
@@ -148,9 +150,11 @@ export class AuthenticationService {
         document.cookie = Constants.Token + '=' + token + ';expires=' +
             new Date(this.jwtService.decodeJwtToken(token).exp * 1000 + 60000).toUTCString() + ';path=/';
     }
-
     saveRefreshToken(token: string, jwtToken: string) {
         document.cookie = Constants.RefToken + '=' + token + ';expires=' +
             new Date(this.jwtService.decodeJwtToken(jwtToken).exp * 1000 + 60000).toUTCString() + ';path=/';
+    }
+    saveDomainId(domainId: string) {
+        sessionStorage.setItem(Constants.domainId, domainId);
     }
 }

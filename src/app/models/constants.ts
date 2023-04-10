@@ -1,9 +1,9 @@
 export class Constants {
 
     // Token
-    public static  Token = 'AvisToken';
+    public static Token = 'AvisToken';
     public static RefToken = 'AvisToken';
-
+    public static domainId = 'AvisDomainId';
     // Cokkies encryption
     public static encryptionKey = 'Contique';
 
@@ -19,7 +19,7 @@ export class Constants {
 
 }
 
-export enum Language  {
+export enum Language {
     English = 'en',
     French = 'fr'
 }

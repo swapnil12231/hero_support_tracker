@@ -42,15 +42,18 @@ export class CreateQueueComponent implements OnInit {
     let postCall = new PostCall();
     this.postCallArray.push(postCall);
   }
-  onCampaignChange() {
-    if (this.createQueue.campaign) {
-      this.queueService.getDispositionData(this.createQueue.campaign).then((res: any) => {
-        this.dispositionOptionArray = res[0].disposition;
-      });
+  onDispositionTypeChange(index: number) {
+    let data = {
+      campId: this.createQueue.campaign,
+      dispoType: this.postCallArray[index].type.join()
     }
+    this.queueService.getDispositionData(data).then((res: any) => {
+      this.postCallArray[index].dispositionOptionArray = res;
+    });
+
   }
   submit() {
-    this.createQueueSubmit.emit(this.createQueue)
+    // this.createQueueSubmit.emit(this.createQueue)
   }
 
 
