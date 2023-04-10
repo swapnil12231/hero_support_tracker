@@ -19,38 +19,67 @@ export class CreateDispositionComponent implements OnInit {
   data!: dispositionType;
   campaignDisposition!: CampaignDisposition;
   dispositionTypeList: any;
-  multiDispositionType!: dispositionTypeArray[]; 
-  constructor(private dispositionService: DispositionService,  ) {
-    this.domainId =1673350192404; //sessionStorage.getItem('domainId');;
-this.vmDisposition = new VmDisposition();
-this.campaignDisposition = new CampaignDisposition();
-this.campaignDisposition.campaignDisositionList = new Array<dispositionList>();
-this.campaignDisposition.campaignDisositionList.push(new dispositionList);
-this.dispositionTypeList = this.GetCustomerData();
-this.vmDisposition.dispositionTypeArray = new dispositionTypeArray();
-this.vmDisposition.CreateDisposition = new Array<CreateDisposition>(); 
+  multiDispositionType!: dispositionTypeArray[];
+  despositionDetails: any;
+  usergroupid: any;
+  constructor(private dispositionService: DispositionService,) {
+    this.domainId = sessionStorage.getItem('domainId');
+    this.usergroupid = sessionStorage.getItem('usergroupid');
+    this.vmDisposition = new VmDisposition();
+    this.campaignDisposition = new CampaignDisposition();
+    this.campaignDisposition.campaignDisositionList = new Array<dispositionList>();
+    this.campaignDisposition.campaignDisositionList.push(new dispositionList);
+    this.dispositionTypeList = this.GetCustomerData();
+    this.vmDisposition.dispositionTypeArray = new dispositionTypeArray();
+    this.vmDisposition.CreateDisposition = new Array<CreateDisposition>();
     this.vmDisposition.CreateDisposition.push(new CreateDisposition());
     this.vmDisposition.dispositionTypeArray = new Array<disposition>();
     this.existingDesposition = new Existingdisposition();
     this.existingDesposition.MultipleCamdispositionType = new Array<CampdispositionType>();
-    this.existingDesposition.MultipleCamdispositionType.push(new CampdispositionType())  
+    this.existingDesposition.MultipleCamdispositionType.push(new CampdispositionType())
   }
 
-  addAnother(){    
+  addAnother() {
     const item1 = new dispositionList();
-      item1.id = 0;
-      item1.Name ="abc";   
-      item1.dispositionTypes = Object.assign({});
-      this.campaignDisposition.campaignDisositionList.push(item1); 
+    item1.id = 0;
+    item1.Name = "";
+    item1.dispositionTypes = Object.assign({});
+    this.campaignDisposition.campaignDisositionList.push(item1);
   }
 
- 
+
   submit() {
-    this.AddCampaignDisposition();
+    let postArray: any = [];
+    this.campaignDisposition.campaignDisositionList.forEach(element => {
+      let post = {
+        "campid": this.existingDesposition?.Campaign,
+        "domainid": this.domainId,
+        "name": element?.Name ? element?.Name : "",
+        "description": element?.Description ? element?.Description : "",
+        "type": element.dispositionTypes?.name ? element.dispositionTypes?.name : "",
+        "status": element.dispositionTypes?.isActive == true ? "ACTIVE" : "INACTIVE"
+
+      };
+      if (post.description || post.type || post.name) {
+        postArray.push(post);
+      }
+    }
+    );
+    this.campaignDisposition.campaignDisositionList;
+    this.existingDesposition.Campaign;
+    this.AddCampaignDisposition(postArray);
   }
 
-  AddCampaignDisposition() {
+  AddCampaignDisposition(postArray: any) {
 
+    this.dispositionService.addDisposition(postArray).then(
+      res => {
+        if (res != null) {
+          this.despositionDetails = res;
+        }
+      },
+      err => { this.despositionDetails = err },
+    )
   }
 
   getDispoType(e: any) {
@@ -62,9 +91,7 @@ this.vmDisposition.CreateDisposition = new Array<CreateDisposition>();
   }
 
   async getEntityToAddDisposition() {
-    this.domainId = this.domainId;
-    let userGroupId = 0;
-    this.dispositionService.getEntityToAddDispotision(this.domainId, userGroupId).then(
+    this.dispositionService.getEntityToAddDispotision(this.domainId, this.usergroupid).then(
       res => {
         if (res != 0) {
           this.dispositionObj = res;
@@ -75,20 +102,18 @@ this.vmDisposition.CreateDisposition = new Array<CreateDisposition>();
   }
 
   getCampaignId(e: any) {
-
     let currentCampaignId = e.target.value;
-    let res1: any[] = this.dispositionObj;    ;
-    var data = res1.find(x => x.campid == currentCampaignId).disposition;   
+    let res1: any[] = this.dispositionObj;;
+    var data = res1.find(x => x.campid == currentCampaignId).disposition;
     this.vmDisposition.dispositionTypeArray = data;
-  
+
   }
 
   ngOnInit(): void {
-    this.domainId =  this.domainId;
     this.getEntityToAddDisposition();
   }
- 
-  addDisposition(e: any) {    
+
+  addDisposition(e: any) {
     var count = this.dispositionTypeList.length;
     for (let i = 0; i < this.multiDispositionType.length; i++) {
       const item1 = new dispositionType();

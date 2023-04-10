@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.user).then((res: any) => {
       this.authenticationService.LogonPortalSetCredentials(res.data);
       sessionStorage.setItem('domainId', res.data.domainid);
+      sessionStorage.setItem('usergroupid', res.data.usergroupid);
+      sessionStorage.setItem('id', res.data.id);
       this.router.navigate(['/']);
     });
 

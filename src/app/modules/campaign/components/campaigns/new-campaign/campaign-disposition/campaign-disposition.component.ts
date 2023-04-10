@@ -33,16 +33,11 @@ export class CampaignDispositionComponent implements OnInit {
   }
 
   getDispoType(e: any) {
-    // for (let i = 0; i < this.disposition.length; i++) {
-    // if (e.target.value == 'others') {
-    //   this.campaignsOtherType = true;
-    //   this.disposition[i].autoDispose = true;
-    // } else {
-    //   this.campaignsOtherType = false;
-    //   this.disposition.autoDispose = false;
-    // }
-
-
+    if (e.target.value == 'others') {
+      this.campaignsOtherType = true;
+    } else {
+      this.campaignsOtherType = false;
+    }
   }
 
   submit() {

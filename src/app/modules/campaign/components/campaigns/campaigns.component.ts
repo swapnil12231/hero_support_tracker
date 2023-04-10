@@ -21,8 +21,7 @@ export class CampaignsComponent implements OnInit {
   }
 
   getAllCampaigns() {
-    let domainId = this.domainId;
-    this.campaignsService.getAllCampaigns(domainId).then(
+    this.campaignsService.getAllCampaigns(this.domainId).then(
       res => {
         if (res != null) {
           this.campaignsData = res;
