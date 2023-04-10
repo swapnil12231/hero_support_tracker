@@ -8,9 +8,7 @@ export class CreateDisposition {
     dispositionTypeArray!: disposition;
     Name!: any;
     Description!: any;
-    Campaign !:Campaign;
-    gender!:any;
-    //dispositionTypeArray !: disposition[];
+    Campaign !:Campaign;  
 }
 
 export class dispositionTypeArray {
@@ -47,10 +45,3 @@ export class disposition {
     name!:string;
     isActive!:true;
 }
-
-
-
-interface City {
-    name: string;
-    code: string;
-  }

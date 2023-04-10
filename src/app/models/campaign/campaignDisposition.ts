@@ -13,5 +13,24 @@ export class CampaignDisposition {
 export class dispositionType {
     id!:number;
     name!:string;
-    isActive!:true;
+    description!:string
+    type!:string;
+    otherType!:string;
+    autoDispose!:string;
+    isActive!:boolean;
+}
+
+export class newCampaign{
+    name!:string;
+    description!:string 
+    status!:string
+    autoDispose!:string 
+    minimumTime!:string 
+    maximumTime!:string
+    callStartUrl!:string; 
+    tableId!:string;
+    crmId!:string;
+    isMask!:string; 
+    crmHistory!:string;
+    disposition!:dispositionType[];
 }

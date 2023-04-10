@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { dispositionType, newCampaign } from 'src/app/models/campaign/campaignDisposition';
 import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.service';
 
 @Component({
@@ -12,7 +13,10 @@ export class NewCampaignComponent implements OnInit {
   dispositionObj: any;
   addCampaignObj: any;
   domainId : any;
+  newCampaign!: newCampaign;
   constructor(private campaignsService: CampaignsService) {
+    this.newCampaign =  new newCampaign();
+    this.newCampaign.disposition = new Array<dispositionType>();
   }
 
   ngOnInit(): void {
@@ -41,7 +45,8 @@ export class NewCampaignComponent implements OnInit {
       this.createCampaignObj.campaignsMaximumTime = "";
     }
 
-
+    this.newCampaign.name = this.createCampaignObj.campaignsName;
+    this.newCampaign.disposition = this.newCampaign.disposition; 
     let dataObj = {
       "name": this.createCampaignObj.campaignsName,
       "description": this.createCampaignObj.campaignsDescription,
@@ -66,7 +71,7 @@ export class NewCampaignComponent implements OnInit {
         }
       ]
     }
-    this.campaignsService.addCampaigns(dataObj).then(
+    this.campaignsService.addCampaigns(this.newCampaign).then(
       res => {
         if (res != null) {
           this.campaignsData = res;
