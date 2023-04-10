@@ -11,11 +11,12 @@ export class NewCampaignComponent implements OnInit {
   createCampaignObj: any;
   dispositionObj: any;
   addCampaignObj: any;
-  domainId = 1673350192404;
+  domainId : any;
   constructor(private campaignsService: CampaignsService) {
   }
 
   ngOnInit(): void {
+    this.domainId = sessionStorage.getItem('domainId');
   }
 
 

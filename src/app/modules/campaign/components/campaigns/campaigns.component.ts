@@ -10,15 +10,17 @@ export class CampaignsComponent implements OnInit {
 
   campaignsData: any = [];
   collection: any = [];
+  domainId: any;
 
   constructor(private campaignsService: CampaignsService) { }
 
   ngOnInit(): void {
+    this.domainId = sessionStorage.getItem('domainId');
     this.getAllCampaigns();
   }
 
   getAllCampaigns() {
-    let domainId = 1672730382222;
+    let domainId = this.domainId;
     this.campaignsService.getAllCampaigns(domainId).then(
       res => {
         if (res != null) {

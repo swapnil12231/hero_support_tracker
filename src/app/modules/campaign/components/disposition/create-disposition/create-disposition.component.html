@@ -1,3 +1,4 @@
+
 <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
 
     <div class="modal-content">
@@ -25,14 +26,14 @@
             <div class="row g-3" *ngFor="let item of campaignDisposition.campaignDisositionList; let i = index;">
                 <div class="col-sm-6">
                     <label for="country" class="form-label">Disposition Type<sup class="text-red">*</sup></label>
-                    <p-dropdown [options]="dispositionTypeList"
+                    <p-dropdown [options]="dispositionTypeList" placeholder="Select Disposition Type"
                         [(ngModel)]="campaignDisposition.campaignDisositionList[i].dispositionTypes" optionLabel="name">
                     </p-dropdown>
 
                 </div>
                 <div class="col-sm-6">
                     <label for="" class="form-label">Disposition Name <sup class="text-red">*</sup></label>
-                    <input type="text" class="form-control" name="dispositionDispositionType"
+                    <input type="text" class="form-control" name="Name"
                         #dispositionDispositionType="ngModel"
                         [(ngModel)]="campaignDisposition.campaignDisositionList[i].Name"
                         placeholder="Enter Disposition Name" required>
@@ -44,7 +45,7 @@
 
                 <div class="col-sm-12">
                     <label for="" class="form-label">Description <sup class="text-red">*</sup></label>
-                    <input type="text" class="form-control" name="dispositionDescription"
+                    <input type="text" class="form-control" name="Descriptionkil"
                         #dispositionDescription="ngModel"
                         [(ngModel)]="campaignDisposition.campaignDisositionList[i].Description"
                         placeholder="Enter Description here" value="" required="">
@@ -55,7 +56,7 @@
             </div>
             <div class="col-md-12">
 
-                <button class="btn btn-outline-warning btn-sm mt-3" (click)="addAnotherCreateDisposition()"> Add
+                <button class="btn btn-outline-warning btn-sm mt-3" (click)="addAnother()"> Add
                     Another</button>
             </div>
 

@@ -2,40 +2,43 @@
     <div class="card mb-3">
         <div class="card-body">
             <div class="dispositionTable  table-responsive">
-                <table class="table table-borderless table-md">
-                    <thead class="light-blue">
+                <p-table class="table table-borderless table-md" [value]="crmDispoData" styleClass="p-datatable-sm"
+                    [rowHover]="true" [rows]="5" [rowsPerPageOptions]="[5,10,15]" [showCurrentPageReport]="true"
+                    [paginator]="true">
+                    <ng-template pTemplate="header">
                         <tr>
-                            <th><input type="checkbox"> </th>
-                            <th>Debug Campaign </th>
-                            <th>Campaign</th>
-                            <th>Type</th>
-                            <th>Description</th>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th>Campaign Name </th>
+                            <th>Disposition Name</th>
+                            <th>Disposition Desc</th>
+                            <th>Disposition Type</th>
+                            <th>Auto Disposition</th>
                             <th> Status</th>
-                            <th> Auto Dispose</th>
                             <th>Action</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
                         <tr>
-                            <td><input type="checkbox"></td>
-                            <td>lorem ipsum </td>
-                            <td> Sales Camp </td>
-                            <td>Default</td>
-                            <td>Lorem ipsum dolor sit amet.</td>
-                            <td>Active</td>
-                            <td>Disallow</td>
+                            <td>
+                                <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                            </td>
+                            <td> {{item.campaign}} </td>
+                            <td>{{item.disposition}}</td>
+                            <td>{{item.description}}</td>
+                            <td>{{item.type}}</td>
+                            <td>{{item.autoDispose}}</td>
+                            <td>{{item.status}}</td>
                             <td class="actionsColumn">
-                                <span href="" title="Edit" class="me-2">
-                                    <img src="assets/images/edit.png" alt="Edit" width="17">
-                                </span>
-                                <span href="" title="Delete"> <img src="assets/images/delete.png" alt="Delete"
-                                        width="17">
-                                </span>
+                                <a href="" title="Edit" class="me-2">
+                                    <i class="p-2 border rounded fa fa-edit me-2 text-muted"></i></a>
+                                <a href="" title="Delete"> <i class="p-2 border me-2 rounded fa fa-trash text-muted"></i></a>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-
+                    </ng-template>
+                </p-table>
+                
                 <div class="d-none">
                     <table class="table table-borderless">
                         <thead class="light-blue">
@@ -68,28 +71,6 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-body">
-
-            <div class="row">
-
-                <div class="col-md-12">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>

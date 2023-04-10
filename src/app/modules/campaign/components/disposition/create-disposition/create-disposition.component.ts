@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CampaignDisposition, dispositionList, dispositionType } from 'src/app/models/campaign/campaignDisposition';
-import { CampdispositionType, CreateDisposition, disposition, dispositionTypeArray, Existingdisposition, VmDisposition} from 'src/app/models/campaign/disposition';
+import { CampdispositionType, CreateDisposition, disposition, dispositionTypeArray, Existingdisposition, VmDisposition } from 'src/app/models/campaign/disposition';
 import { DispositionService } from '../../../services/disposition.service';
 
 @Component({
@@ -9,13 +9,14 @@ import { DispositionService } from '../../../services/disposition.service';
   styleUrls: ['./create-disposition.component.css']
 })
 export class CreateDispositionComponent implements OnInit {
-  
-  vmDisposition!: VmDisposition;  
-  existingDesposition!: Existingdisposition; 
+
+  vmDisposition!: VmDisposition;
+  vmDispositionArray: any = [];
+  existingDesposition!: Existingdisposition;
   campaignsOtherType: boolean = false;
   dispositionObj: any;
   domainId: any;
-  data!:dispositionType;  
+  data!: dispositionType;
   campaignDisposition!: CampaignDisposition;
   dispositionTypeList: any;
   selectedCityCodes!: dispositionTypeArray[];
@@ -23,28 +24,50 @@ export class CreateDispositionComponent implements OnInit {
   //   selectedCity!: City;
   constructor(
     private dispositionService: DispositionService,
-  ) {   
-   
-    this.addAnotherCreateDisposition();
-    this.campaignDisposition = new CampaignDisposition();
-    this.campaignDisposition.campaignDisositionList = new Array<dispositionList>();
-    let item = new dispositionList()
-    this.campaignDisposition.campaignDisositionList.push(item);
-    this.dispositionTypeList = this.GetCustomerData();
-    this.vmDisposition.dispositionTypeArray = new dispositionTypeArray();
+  ) {
+
+debugger
+this.campaignDisposition = new CampaignDisposition();
+this.campaignDisposition.campaignDisositionList = new Array<dispositionList>();
+let item = new dispositionList()
+this.campaignDisposition.campaignDisositionList.push(item);
+this.dispositionTypeList = this.GetCustomerData();
+this.vmDisposition.dispositionTypeArray = new dispositionTypeArray();
     // let item1  =new dispositionType()
     // this.vmDisposition.dispositionTypeArray.push(item1);
+  }
+  addAnother(){
+    const item1 = new dispositionList();
+      item1.id = 0;
+      item1.Name ="abc";   
+      item1.dispositionTypes = Object.assign({});
+      this.campaignDisposition.campaignDisositionList.push(item1);
+      
   }
 
   addAnotherCreateDisposition() {
     debugger;
-    this.vmDisposition = new VmDisposition();
-    this.vmDisposition.CreateDisposition =new Array<CreateDisposition>();
-    this.vmDisposition.CreateDisposition.push(new CreateDisposition());
+
+    
+    // let item = new CreateDisposition();
+    // item.Name="abc";
+    // item.Description="desc";
+    // item.dispositionType=Object.assign({});
+    // this.campaignDisposition.(item);
+
+    
+    
+
+    
+    // this.vmDisposition.CreateDisposition = new Array<CreateDisposition>();
+    
+    
+
+    // this.vmDisposition.CreateDisposition.push(new CreateDisposition());
     //this.vmDisposition.dispositionTypeArray = new Array<disposition>();    
-   
-    this.existingDesposition = new Existingdisposition();
-    this.existingDesposition.MultipleCamdispositionType = new Array<CampdispositionType>();
+
+    // this.existingDesposition = new Existingdisposition();
+    // this.existingDesposition.MultipleCamdispositionType = new Array<CampdispositionType>();
     // this.existingDesposition.MultipleCamdispositionType.push(new CampdispositionType())
   }
 
@@ -53,11 +76,11 @@ export class CreateDispositionComponent implements OnInit {
   }
 
   AddCampaignDisposition() {
-   
+
   }
 
   getDispoType(e: any) {
-    if (e.target.value == 'others') {
+    if (e.target.value == 'OTHERS') {
       this.campaignsOtherType = true;
     } else {
       this.campaignsOtherType = false;
@@ -95,40 +118,34 @@ export class CreateDispositionComponent implements OnInit {
 
   ngOnInit(): void {
     this.domainId = sessionStorage.getItem('domainId');
-   
+
     this.getEntityToAddDisposition();
   }
   private GetCustomerData() {
     return [
       {
         id: 0,
-        name: "",
+        name: "FOLLOWUP",
         isActive: true
-       
+
       },
       {
         id: 1,
-        name: "FOLLOWUP",
-        isActive: true
-       
-      },
-      {
-        id: 2,
         name: "DND",
         isActive: true
       },
       {
-        id: 3,
+        id: 2,
         name: "TRANSFER",
         isActive: true
       },
       {
-        id: 4,
+        id: 3,
         name: "REDIAL",
         isActive: true
       },
       {
-        id: 5,
+        id: 4,
         name: "OTHERS",
         isActive: true
       }
@@ -136,43 +153,21 @@ export class CreateDispositionComponent implements OnInit {
   }
   addDisposition(e: any) {
     debugger
-    var count =  this.dispositionTypeList.length;
-     for (let i = 0; i < this.selectedCityCodes.length; i++) {
+    var count = this.dispositionTypeList.length;
+    for (let i = 0; i < this.selectedCityCodes.length; i++) {
 
-    const item1 = new dispositionType();
-    item1.id=count+i;
-    const name = this.selectedCityCodes[i];
-    item1.name =String(name);// this.selectedCityCodes[i];
-    item1.isActive = true;
-    this.dispositionTypeList.push(item1) 
+      const item1 = new dispositionType();
+      item1.id = count + i;
+      const name = this.selectedCityCodes[i];
+      item1.name = String(name);// this.selectedCityCodes[i];
+      item1.isActive = true;
+      this.dispositionTypeList.push(item1)
 
-    const item = new dispositionList();
-    item.id = item1.id 
-    item.dispositionTypes = this.dispositionTypeList.find((x: { id: number; })=>x.id==item1.id);
-    this.campaignDisposition.campaignDisositionList.push(item);
+      const item = new dispositionList();
+      item.id = item1.id
+      item.dispositionTypes = this.dispositionTypeList.find((x: { id: number; }) => x.id == item1.id);
+      this.campaignDisposition.campaignDisositionList.push(item);
 
-    // const item4 = new dispositionType();
-    // item4.id=7;
-    // item4.name ="xyz";
-    // item4.isActive = true;
-    // this.dispositionTypeList.push(item4) 
-
-    // const item3 = new dispositionList();
-    // item3.id = 7;  
-    // item3.dispositionTypes = this.dispositionTypeList.find((x: { id: number; }) => x.id == 7);
-    // this.campaignDisposition.campaignDisositionList.push(item3);
-
-
-    // const item5 = new dispositionType();
-    // item5.id=8;
-    // item5.name ="Akshay pudch tula net karych ahe";
-    // item5.isActive = true;
-    // this.dispositionTypeList.push(item5) 
-
-    // const item6 = new dispositionList();
-    // item6.id = 8  
-    // item6.dispositionTypes = this.dispositionTypeList.find((x: { id: number; }) => x.id == 8);
-    // this.campaignDisposition.campaignDisositionList.push(item6);  
+    }
   }
-}
 }
