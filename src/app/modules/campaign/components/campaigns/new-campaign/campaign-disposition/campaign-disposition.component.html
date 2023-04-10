@@ -10,39 +10,41 @@
                 <div class="col-md-12">
                     <button class="btn btn-warning btn-sm text-white"> Choose from Existing </button>
                 </div>
-                <div class="col-sm-6">
-                    <label for="country" class="form-label">Disposition Type<sup class="text-red">*</sup></label>
-                    <select class="form-select" name="type" #CampaignsDispositionType="ngModel"
-                        (change)="getDispoType($event)" [(ngModel)]="disposition.type" required>
-                        <option value="undefined" selected>Select </option>
-                        <option value="followup">FOLLOWUP</option>
-                        <option value="dnd">DND</option>
-                        <option value="transfer">TRANSFER</option>
-                        <option value="others">OTHERS</option>
-                    </select>
+                <div *ngFor="let obj of disposition; let i= index">
+                    <div class="col-sm-6">
+                        <label for="country" class="form-label">Disposition Type<sup class="text-red">*</sup></label>
+                        <select class="form-select" name="type" #CampaignsDispositionType="ngModel"
+                            (change)="getDispoType($event)" [(ngModel)]="disposition[i].type" required>
+                            <option value="undefined" selected>Select </option>
+                            <option value="followup">FOLLOWUP</option>
+                            <option value="dnd">DND</option>
+                            <option value="transfer">TRANSFER</option>
+                            <option value="others">OTHERS</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6" *ngIf="campaignsOtherType">
+                        <label for="" class="form-label">Mention Other Type <sup class="text-red">*</sup></label>
+                        <input type="text" class="form-control" id="txtCampaignsOtherType" name="campaignsOtherType"
+                            #CampaignsOtherType="ngModel" [(ngModel)]="disposition[i].campaignsOtherType"
+                            placeholder="Enter Mention Other Type" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="" class="form-label">Disposition Name <sup class="text-red">*</sup></label>
+                        <input type="text" class="form-control" id="txtCampaignsDescriptionName"
+                            name="campaignsDescriptionName" #CampaignsDescriptionName="ngModel"
+                            [(ngModel)]="disposition[i].name" placeholder="Enter Disposition Name" required>
+                    </div>
+                    <div class="col-sm-12">
+                        <label for="" class="form-label">Description <sup class="text-red">*</sup></label>
+                        <input type="text" class="form-control" id="txtCampaignsDescription" name="campaignsDescription"
+                            #CampaignsDescription="ngModel" [(ngModel)]="disposition[i].description"
+                            placeholder=" Enter Description here" required>
+                    </div>
                 </div>
-                <div class="col-sm-6" *ngIf="campaignsOtherType">
-                    <label for="" class="form-label">Mention Other Type <sup class="text-red">*</sup></label>
-                    <input type="text" class="form-control" id="txtCampaignsOtherType" name="campaignsOtherType"
-                        #CampaignsOtherType="ngModel" [(ngModel)]="disposition.campaignsOtherType"
-                        placeholder="Enter Mention Other Type" required>
-                </div>
-                <div class="col-sm-6">
-                    <label for="" class="form-label">Disposition Name <sup class="text-red">*</sup></label>
-                    <input type="text" class="form-control" id="txtCampaignsDescriptionName"
-                        name="campaignsDescriptionName" #CampaignsDescriptionName="ngModel"
-                        [(ngModel)]="disposition.name" placeholder="Enter Disposition Name" required>
-                </div>
-                <div class="col-sm-12">
-                    <label for="" class="form-label">Description <sup class="text-red">*</sup></label>
-                    <input type="text" class="form-control" id="txtCampaignsDescription" name="campaignsDescription"
-                        #CampaignsDescription="ngModel" [(ngModel)]="disposition.description"
-                        placeholder=" Enter Description here" required>
-                </div>
-
                 <div class="col-md-12">
 
-                    <button class="btn btn-outline-warning btn-sm"> Add Another</button>
+                    <button class="btn btn-outline-warning btn-sm" (click)="AddAnotherDisposition()"> Add
+                        Another</button>
                 </div>
 
             </div>

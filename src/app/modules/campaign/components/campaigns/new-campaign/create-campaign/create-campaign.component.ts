@@ -15,13 +15,14 @@ export class CreateCampaignComponent implements OnInit {
 
   createCampaign!: CreateCampaigns;
   campaignsData: any = [];
-  domainId: any = 1672730382222;
+  domainId: any;
   crmData: any;
   isAutodispose: boolean = false;
   startCallCrmData: any;
   startCallUrl: any;
 
   constructor(private campaignsService: CampaignsService) {
+    this.domainId = sessionStorage.getItem('domainId');
     this.createCampaign = new CreateCampaigns();
   }
 

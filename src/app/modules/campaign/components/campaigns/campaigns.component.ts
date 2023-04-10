@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.se
   styleUrls: ['./campaigns.component.css']
 })
 export class CampaignsComponent implements OnInit {
+  @Output() campaignData = new EventEmitter<void>();
 
   campaignsData: any = [];
   collection: any = [];
