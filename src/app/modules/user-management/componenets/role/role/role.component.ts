@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./role.component.css']
 })
 export class RoleComponent implements OnInit {
-
+p:any;
   constructor() { }
 
   ngOnInit(): void {

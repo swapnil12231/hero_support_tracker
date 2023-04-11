@@ -1,0 +1,62 @@
+<div *ngIf="!showAddNewCrm">
+    <div class="d-flex justify-content-between">
+        <ul class="nav nav-pills mb-2 subMenus" id="pills-tab" role="tablist">
+
+            <li class="nav-item d-flex align-items-center ms-2" role="presentation">
+                <a class="nav-link" [routerLink]="rootNavigationRoutes.soundFile"
+                    routerLinkActive="active">Sound Files</a>
+
+                <a class="btn btn-warning btn-sm text-white small rounded addNewBtn" data-bs-toggle="modal"
+                    data-bs-target="#addSoundModal"> Add New</a>
+            </li>
+
+            <li class="nav-item d-flex align-items-center ms-2" role="presentation">
+                <a class="nav-link" routerLinkActive="active"
+                    [routerLink]="rootNavigationRoutes.musicOnHold">Music On Hold</a>
+                <a class="btn btn-warning btn-sm text-white small rounded addNewBtn" data-bs-toggle="modal"
+                    data-bs-target="#musicOnHoldModal"> Add New</a>
+            </li>
+
+            <li class="nav-item d-flex align-items-center ms-2" role="presentation">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="rootNavigationRoutes.trunk">Trunk</a>
+                <a class="btn btn-warning btn-sm text-white small rounded addNewBtn" data-bs-toggle="modal"
+                    data-bs-target="#queueModal"> Add New</a>
+            </li>
+
+            <li class="nav-item d-flex align-items-center ms-2" role="presentation">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="rootNavigationRoutes.voiceServers">Voice Server</a>
+                <a class="btn btn-warning btn-sm text-white small rounded addNewBtn">
+                    Add New
+                </a>
+            </li>
+
+            <li class="nav-item d-flex align-items-center ms-2" role="presentation">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="rootNavigationRoutes.recording">Recording</a>
+                <a class="btn btn-warning btn-sm text-white small rounded addNewBtn" data-bs-toggle="modal"
+                data-bs-target="#createVoiceRecordingModal"> Add New</a>
+            </li>
+
+            <li class="nav-item d-flex align-items-center ms-2" role="presentation">
+                <a class="nav-link"  >Recording</a>
+
+                <!-- <a class="flex-sm-fill text-sm-center nav-link disabled" href="#" tabindex="-1" aria-disabled="true">ccc </a> -->
+
+                <!-- <a class="btn btn-warning btn-sm text-white small rounded addNewBtn" data-bs-toggle="modal"
+                data-bs-target="#createVoiceREcordingModal"> Add New</a> -->
+            </li>
+        </ul>
+
+        <div style="width:200px">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search in Table">
+                <span class="input-group-text bg-primary text-white"> <i class="fa fa-search"></i></span>
+            </div>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+
+  <!-- <app-add-sound></app-add-sound> -->
+  <app-create-music-on-hold></app-create-music-on-hold>
+  <!-- <app-create-voice-recording></app-create-voice-recording> -->
+  

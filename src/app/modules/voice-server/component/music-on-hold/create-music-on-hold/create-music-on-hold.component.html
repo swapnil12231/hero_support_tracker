@@ -1,0 +1,40 @@
+<div class="modal fade" id="musicOnHoldModal" >
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <div class="modal-header border-0">
+                <h1 class="modal-title fs-5 w-100 text-center" id="musicOnHoldModal">
+                   Create Music On Hold
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-1 px-5 pb-3">
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <label for="" class="form-label">Music Class Name<sup class="text-red">*</sup></label>
+                        <input type="text" class="form-control" 
+                           placeholder="Enter Name here"  required>
+                        <!-- <span class="text-danger" *ngIf="pauseCodePauseCode.invalid && pauseCodePauseCode.touched">
+                            *Pause Code is required
+                        </span> -->
+                    </div>
+                </div>
+                <label for="country" class="form-label">Music<sup class="text-red">*</sup></label>
+                    <select class="form-select" name="type" placeholder="select music file">
+                        <option value="undefined" selected>Select music file </option>
+                        <option value="followup">FOLLOWUP</option>
+                        <option value="dnd">DND</option>
+                        <option value="transfer">TRANSFER</option>
+                        <option value="others">OTHERS</option>
+                    </select>
+                <div>
+
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center border-top-0">
+                <button type="button" class="btn btn-warning text-white px-4" data-bs-dismiss="modal" >SUBMIT</button>
+            </div>
+
+        </div>
+    </div>
+</div>

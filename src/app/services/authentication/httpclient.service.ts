@@ -37,6 +37,15 @@ export class HttpClientService {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json')
                 .append('Authorization', 'Bearer ' + this.getJwtToken())
+                .append('version', 'V1.0.0'),
+        };
+        return options;
+    }
+
+    private getHttpHeadersformData() {
+        const options = {
+            headers: new HttpHeaders()
+                .append('Authorization', 'Bearer ' + this.getJwtToken())
                 .append('version', 'V1.0.0')
         };
         return options;
@@ -68,6 +77,10 @@ export class HttpClientService {
     public async post(url: string, body: any = {}, params?: any) {
         let response = await this.postRequest(url, body, params);
         return response;
+    }
+
+    public async postWithFormData(url: string, body: any, params?: any) {
+        return await this.postRequestForFormData(url, body, params);   
     }
 
     public async postXMLResponse(url: string, body: any = {}) {
@@ -140,7 +153,6 @@ export class HttpClientService {
             //catchError((error: any) => this.onErrorHandler(error))
         );
     }
-
     public delete(url: string) {
         return this.httpClient.delete(url, this.getHttpHeaders()).pipe(
             tap(res => res),
@@ -177,8 +189,14 @@ export class HttpClientService {
             //catchError((error: any) => this.onErrorHandler(error))
         );
     }
-    private postRequest = <T>(url: string, payload: any, params?: any) => getCurrent(this.webServiceUrl$.pipe(
+    
+    private postRequest = <T>(url: string, payload: any, params?: any) =>getCurrent(this.webServiceUrl$.pipe(
         switchMap(baseUrl => this.httpClient.post(baseUrl + url, payload, this.getHttpHeaders())),
+        map(x => x as T)
+    ))
+
+    private postRequestForFormData = <T>(url: string, payload: any, params?: any) => getCurrent(this.webServiceUrl$.pipe(
+        switchMap(baseUrl => this.httpClient.post(baseUrl + url, payload,this.getHttpHeadersformData())),
         map(x => x as T)
     ))
 
@@ -186,6 +204,16 @@ export class HttpClientService {
         switchMap(baseUrl => this.httpClient.get(baseUrl + url, this.getHttpHeaders())),
         map(x => x as T))
     )
+
+    public async deleteWithBody(url: string, body: any = {}, params?: any) {
+        let response = await this.deleteWithBodyUtil(url, body, params);
+        return response;
+    }
+
+    private deleteWithBodyUtil = <T>(url: string, payload: any, params?: any) => getCurrent(this.webServiceUrl$.pipe(
+        switchMap(baseUrl => this.httpClient.request('delete', baseUrl + url, { body: payload, headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.getJwtToken() } })),
+        map(x => x as T)
+    ))
 
     getJwtToken = () => this.cookieService.getCookie(Constants.Token);
 }

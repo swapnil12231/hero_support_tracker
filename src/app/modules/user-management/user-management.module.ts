@@ -18,6 +18,7 @@ import { CreateUserComponent } from './componenets/users/create-user/create-user
 import { SamePassComponent } from './componenets/extension/create-extension/same-pass/same-pass.component';
 import { DoublePassComponent } from './componenets/extension/create-extension/double-pass/double-pass.component'; 
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     UserManagementRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class UserManagementModule { }
