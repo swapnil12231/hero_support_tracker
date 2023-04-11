@@ -1,0 +1,13 @@
+<div>
+
+    <div class="modal fade" id="userGroupsModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
+        <app-create-user-group (createUserGroupSubmit)="createUserGroupSubmit($event)"></app-create-user-group>
+    </div>
+    <div class="modal " id="settingDetails" tabindex="-1" aria-labelledby="" aria-hidden="true">
+        <app-setting-details (settingDetailsSubmit)="settingDetailsSubmit($event)" ></app-setting-details>
+    </div>
+
+    <!-- <div *ngIf="settingDetails">
+        <app-setting-details (settingDetailsSubmit)="settingDetailsSubmit($event)" ></app-setting-details>
+    </div> -->
+</div>

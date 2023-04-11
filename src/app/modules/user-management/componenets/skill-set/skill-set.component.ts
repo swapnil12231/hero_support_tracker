@@ -8,7 +8,8 @@ import { SkillSetService } from 'src/app/services/user-managenemt/skill-set.serv
 })
 export class SkillSetComponent implements OnInit {
 
-public allSkillSet!:any;
+  public p!:any;
+  public allSkillSet!:any;
 
   constructor(
     private skillSetService:SkillSetService
@@ -16,6 +17,11 @@ public allSkillSet!:any;
 
   ngOnInit(): void {
     this.getAllSkillSet()
+  }
+
+  createPauseCodeSubmit()
+  {
+    this.getAllSkillSet();
   }
 
 
@@ -29,8 +35,6 @@ public allSkillSet!:any;
            if(res!=null)
               {
                 this.allSkillSet=res;
-
-                console.log("skill data",this.allSkillSet);
                 
               }
        })

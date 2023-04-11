@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from 'src/app/services/user-managenemt/users.service';
 
 @Component({
   selector: 'app-create-user',
@@ -7,23 +8,65 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateUserComponent implements OnInit {
 
-  constructor() { }
+public createUsersRes!:any;
+
+  constructor(
+    private usersService:UsersService,
+  ) { }
 
   ngOnInit(): void {
   }
 
 
-  createSameUserSubmit(data:any)
-{
-  console.log({data});
-  
-}
+  createSameUserSubmit(sameUser: any) {
+    console.log({ sameUser });
+
+    let dataObj = {
+      "data": {
+        "id": 0,
+        "name": sameUser.name,
+        "password": sameUser.password,
+        "fullname": sameUser.fullName,
+        "extension": sameUser.extension,
+        "webadminrole": sameUser.webRole,
+        "usergroupid": "",
+        "multiusergroupid": [
+          0
+        ],
+        "parentuser": "string",
+        "domainid": 0,
+        "trunkid": 0,
+        "prefix": "string",
+        "callerid": 0,
+        "manualnumber": 0,
+        "extensionpbx": "string",
+        "authenticationmode": "string",
+        "status": "string"
+      },
+      "selectionOptionl": "string",
+      "fileContent": [
+        "string"
+      ]
+    }
 
 
 
-createMultiUserSubmit(data:any)
-{
-console.log({data});
 
-}
+    //  this.usersService.createSameUser(dataObj)
+    //   .then(
+    //     res => {
+    //       if (res != null) {
+    //         this.createUsersRes = res;
+    //       }
+    //     },
+    //     err => { this.createUsersRes = err }
+    //   )
+  }
+
+
+
+  createMultiUserSubmit(data: any) {
+    console.log({ data });
+
+  }
 }

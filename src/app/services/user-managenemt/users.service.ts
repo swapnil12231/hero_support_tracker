@@ -1,12 +1,10 @@
-
-
 import { Injectable } from '@angular/core';
 import { HttpClientService } from '../authentication/httpclient.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SkillSetService {
+export class UsersService {
 
   constructor(
     private  httpClientService: HttpClientService
@@ -17,16 +15,14 @@ export class SkillSetService {
 
   async getAllSkillSet(domainId:any)
    {
-        let url=`/usermanagement/skills/?domainid=${domainId}`;
-        
+        let url=`/user/users/?domainid=${domainId}`;        
         return this.httpClientService.get(url);
-   } 
+   }
 
 
-
-   async createSkillSet(data:any)
+   async createSameUser(data:any)
    {
-    let url=`/usermanagement/skills/`;
+    let url=`/user/users/`;        
     return this.httpClientService.post(url, data)
-  }
+   }
 }

@@ -1,4 +1,4 @@
-<div class="tab-pane " role="tabpanel" >
+<div class="tab-pane " role="tabpanel">
     <div class="card mb-3">
         <div class="card-body">
             <div class="dispositionTable  table-responsive">
@@ -13,24 +13,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let userGroup of allUserGroup;">
+                        <tr *ngFor="let userGroup of allUserGroup | paginate: { itemsPerPage: 5, currentPage: p }">
                             <td><input type="checkbox"></td>
                             <td>{{userGroup.name}} </td>
                             <td>{{userGroup.agentlogin}} </td>
 
                             <td>
-                                <a href="" class="" title="Edit"> <i class=" p-2 border rounded fa fa-edit me-2 text-muted"></i></a>
+                                <a href="" class="" title="Edit"> <i
+                                        class=" p-2 border rounded fa fa-edit me-2 text-muted"></i></a>
                                 <!-- </i> -->
-                                <a href="" title="Delete"> <i class="p-2 border rounded  p-2 border rounded fa fa-trash text-muted"></i></a>
+                                <a href="" title="Delete"> <i
+                                        class="p-2 border rounded  p-2 border rounded fa fa-trash text-muted"></i></a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
 
+                <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
 
             </div>
         </div>
-        <div class="card-body">
+        <!-- <div class="card-body">
             <div class="row">
 
                 <div class="col-md-12">
@@ -50,7 +53,9 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
 
     </div>
 </div>
+<app-new-user-group></app-new-user-group>
+<!-- <app-new-user-group></app-new-user-group> -->
