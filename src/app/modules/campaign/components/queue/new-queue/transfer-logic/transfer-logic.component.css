@@ -1,0 +1,8 @@
+#voice-accordion {
+    margin-top: 20px;
+}
+
+.txt-json {
+    display: flex;
+    place-items: flex-end;
+}

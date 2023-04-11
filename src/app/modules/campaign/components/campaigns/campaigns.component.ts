@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.service';
 
 @Component({
@@ -7,20 +7,21 @@ import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.se
   styleUrls: ['./campaigns.component.css']
 })
 export class CampaignsComponent implements OnInit {
+  @Output() campaignData = new EventEmitter<void>();
 
   campaignsData: any = [];
-  p: any;
   collection: any = [];
+  domainId: any;
 
   constructor(private campaignsService: CampaignsService) { }
 
   ngOnInit(): void {
+    this.domainId = sessionStorage.getItem('domainId');
     this.getAllCampaigns();
   }
 
   getAllCampaigns() {
-    let domainId = 1672730382222;
-    this.campaignsService.getAllCampaigns(domainId).then(
+    this.campaignsService.getAllCampaigns(this.domainId).then(
       res => {
         if (res != null) {
           this.campaignsData = res;

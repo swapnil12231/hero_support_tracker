@@ -1,0 +1,44 @@
+<div class="tab-pane "  role="tabpanel" >
+    <div class="col-md-12 col-lg-12">
+        <div class="card  mb-3">
+            <div class="card-body">
+                <div class="campaignTable  table-responsive">
+                    <table class="table table-bordered table-md">
+                        <thead class="light-blue">
+                            <tr>
+                                <th><input type="checkbox"> </th>
+                                <th>Sound Name</th>
+                                <th>Duration</th>   
+                                <th>Actions</th>   
+                            </tr>
+                        </thead>
+                       <tbody *ngFor="let item of soundFileResponse | paginate: { itemsPerPage: 5, currentPage: p }">
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td> {{item.name}}</td>
+                                <td> {{item.duration}}</td>
+                                <td class="actionsColumn">
+                                    <a title="Play" class="me-2" (click)="onSoundPlay(item)">
+                                     </a>
+
+                                    <a title="Edit" class="me-2" (click)="onSoundEdit(item)" data-bs-toggle="modal"
+                                    data-bs-target="#addSoundModal"><i  class="fa fa-edit"></i>
+                                    </a>
+
+                                    <span title="Delete" (click)="onSoundDelete(item)"> <i class="fa fa-trash"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-add-sound (addSoundFileSubmit)="addSoundFileSubmit1()"></app-add-sound>
+
+
+

@@ -1,0 +1,39 @@
+<div class="modal fade" id="addSoundModal" >
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h1 class="modal-title fs-5 w-100 text-center" id="addSoundModal">
+                   {{modalHeaderText}}
+                </h1>
+                <button (click)="reset()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-1 px-5 pb-3">
+                <div class="row g-3">
+                    <div class="col-sm-12">
+                        <label for="" class="form-label" >Sound Name<sup class="text-red">*</sup></label>
+                        <input type="text" class="form-control" id='soundname' [(ngModel)]="soundname" name="soundName" #soundName="ngModel"
+                           placeholder="Enter Sound Name" required>
+                        <!-- <span class="text-danger" *ngIf="soundname.invalid && soundname.touched">
+                            *Sound Name is required
+                        </span> -->
+                    </div>
+                </div>
+                <div class="invalid-feedback text-red">
+                    Upload Wav Files Only. 
+                </div>
+                <div class="dragFileArea mt-2 bg-light text-center p-3">
+                    <img src="images/file-icon.png" alt="File Icon" width="76" style="margin-bottom:25px;">
+                    <i class="fa-solid fa-music"></i>
+                    <input type="file" #soundInput   required (change)="soundFileUpload($event)">
+                    <h4>Click or drag file to this area to upload</h4>
+                    <h5 class="text-muted">Support for single upload. Maximum file size 5MB</h5>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center border-top-0">
+                <button type="button" class="btn btn-warning text-white px-4" data-bs-dismiss="modal" (click)="onUploadSoundFile()">{{ voiceServerData?.canShowUpdate?'UPDATE':'SUBMIT'}}</button>
+            </div>
+        </div>
+    </div>
+</div>

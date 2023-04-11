@@ -1,0 +1,93 @@
+<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" id="createVoiceRecordingModal">
+    <div class="modal-content">
+        <div class="modal-header border-0">
+            <h1 class="modal-title fs-5 w-100 text-center" id="createVoiceRecordingModal">
+                Create Voice Recording </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body pt-1 px-5 pb-5 pt-1 px-5 pb-5">
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <label for="firstName" class="form-label"> Name <sup class="text-red">*</sup></label>
+                    <input type="text" class="form-control" placeholder="Enter name" required>
+                    <!-- <span class="text-danger" *ngIf="campaignsName.invalid && campaignsName.touched">
+                            *name is required
+                        </span> -->
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="lastName" class="form-label">Recording Type <sup class="text-red">*</sup></label>
+                    <select class="form-select">
+                        <option value="undefined" selected>SELECT</option>
+                        <option value="active">ACTIVE</option>
+                        <option value="inactive">INACTIVE</option>
+                    </select>
+
+                </div>
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">Recording Call Type <sup class="text-red">*</sup></label>
+                    <select class="form-select">
+                        <option value="undefined" selected>Select Type</option>
+                        <option value="active">ACTIVE</option>
+                        <option value="inactive">INACTIVE</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="state" class="form-label">Voice File Formate <sup class="text-red">*</sup></label>
+                    <select class="form-select" required>
+                        <option value="undefined" selected>Select formate</option>
+                        <option value="disallow">DISALLOW</option>
+                        <option value="allow">ALLOW</option>
+                        <option value="alert">ALERT</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">Recording File Type <sup class="text-red">*</sup></label>
+                    <select class="form-select">
+                        <option value="undefined" selected>Select Type</option>
+                        <option value="active">ACTIVE</option>
+                        <option value="inactive">INACTIVE</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label for="firstName" class="form-label"> Minimum Duration(In Second) <sup
+                            class="text-red">*</sup></label>
+                    <input type="text" class="form-control" placeholder="Enter minimum duration" required>
+                    <!-- <span class="text-danger" *ngIf="campaignsName.invalid && campaignsName.touched">
+                            *name is required
+                        </span> -->
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="firstName" class="form-label"> Maximum Duration(In Second) <sup
+                            class="text-red">*</sup></label>
+                    <input type="text" class="form-control" placeholder="Enter minimum duration" required>
+                    <!-- <span class="text-danger" *ngIf="campaignsName.invalid && campaignsName.touched">
+                            *name is required
+                        </span> -->
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="firstName" class="form-label">Delete (Days)<sup class="text-red">*</sup></label>
+                    <input type="text" class="form-control" placeholder="Enter minimum duration" required>
+                    <!-- <span class="text-danger" *ngIf="campaignsName.invalid && campaignsName.touched">
+                            *name is required
+                        </span> -->
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">Recording Storage <sup class="text-red">*</sup></label>
+                    <select class="form-select">
+                        <option value="undefined" selected>Select Type</option>
+                        <option value="active">ACTIVE</option>
+                        <option value="inactive">INACTIVE</option>
+                    </select>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

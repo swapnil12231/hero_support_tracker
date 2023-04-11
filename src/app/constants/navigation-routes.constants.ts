@@ -28,7 +28,15 @@ export const rootNavigationRoutes = Object.freeze({
     skillSet:'skill-set',
     extension:'extension',
     pauseCode:'pause-code',
-    role:'role'
+    role:'role',
+
+    // voice-sever
+    soundFile:'sound-file',
+    musicOnHold:'music-on-hold',
+    trunk:'trunk',
+    voiceServers:'voice-server',
+    recording:'recording'
+
 
 })
 
@@ -63,4 +71,11 @@ export const navigationRoutes = Object.freeze({
     extension:`/${rootNavigationRoutes.extension}`,
     pauseCode:`/${rootNavigationRoutes.pauseCode}`,
     role:`/${rootNavigationRoutes.role}`,
+
+    // voice-server 
+    soundFile:`${rootNavigationRoutes.soundFile}`, 
+    musicOnHold:`${rootNavigationRoutes.musicOnHold}`, 
+    trunk:`${rootNavigationRoutes.trunk}`, 
+    voiceServers:`${rootNavigationRoutes.voiceServers}`, 
+    recording:`${rootNavigationRoutes.recording}`, 
 })

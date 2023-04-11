@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('Username', this.user.userName);
     }
     this.loginService.login(this.user).then((res: any) => {
-
-
-      // sessionStorage.setItem('user', JSON.stringify(res.data));
-      this.authenticationService.LogonPortalSetCredentials(res.data)
+      this.authenticationService.LogonPortalSetCredentials(res.data);
+      sessionStorage.setItem('domainId', res.data.domainid);
+      sessionStorage.setItem('usergroupid', res.data.usergroupid);
+      sessionStorage.setItem('id', res.data.id);
       this.router.navigate(['/']);
     });
 

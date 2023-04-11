@@ -14,6 +14,7 @@ const routes: Routes = [
     path: '',
     component: MainComponent,
     children: [
+      { path: '', redirectTo: rootNavigationRoutes.users, pathMatch: 'full', },
 
       {
         path: rootNavigationRoutes.users,

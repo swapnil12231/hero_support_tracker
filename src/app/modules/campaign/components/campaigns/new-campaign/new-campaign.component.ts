@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { dispositionType, newCampaign } from 'src/app/models/campaign/campaignDisposition';
+import { Disposition } from 'src/app/models/campaign/campaigns';
 import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.service';
+import { CampaignsComponent } from '../campaigns.component';
 
 @Component({
   selector: 'app-new-campaign',
@@ -7,15 +10,24 @@ import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.se
   styleUrls: ['./new-campaign.component.css']
 })
 export class NewCampaignComponent implements OnInit {
+
+  @Output()
+  refreshCampaigns = new EventEmitter<void>();
   campaignsData: any;
   createCampaignObj: any;
+  dispositionObj1: any;
   dispositionObj: any;
   addCampaignObj: any;
-  domainId = 1673350192404;
+  domainId: any;
+  newCampaign!: newCampaign;
   constructor(private campaignsService: CampaignsService) {
+
+    this.newCampaign = new newCampaign();
+    this.newCampaign.disposition = new Array<Disposition>();
   }
 
   ngOnInit(): void {
+    this.domainId = sessionStorage.getItem('domainId');
   }
 
 
@@ -24,6 +36,8 @@ export class NewCampaignComponent implements OnInit {
   }
 
   createCampaignNextSubmit(data: any) {
+
+    this.createCampaignObj.disposition = data;
     if (this.createCampaignObj.campaignsMask == 'true') {
       this.createCampaignObj.campaignsMask = true;
     }
@@ -32,43 +46,32 @@ export class NewCampaignComponent implements OnInit {
       this.createCampaignObj.isMask = false;
     }
 
-
-    this.createCampaignObj;
-
     if (this.createCampaignObj.campaignsMinimumTime == undefined || this.createCampaignObj.campaignsMinimumTime == null) {
       this.createCampaignObj.campaignsMinimumTime = "";
       this.createCampaignObj.campaignsMaximumTime = "";
     }
 
+    this.newCampaign.name = this.createCampaignObj.campaignsName;
+    this.newCampaign.description = this.createCampaignObj.campaignsDescription;
+    this.newCampaign.status = this.createCampaignObj.campaignsStatus;
+    this.newCampaign.autoDispose = this.createCampaignObj.campaignsAutoDispose;
+    this.newCampaign.minimumTime = this.createCampaignObj.campaignsMinimumTime;
+    this.newCampaign.maximumTime = this.createCampaignObj.campaignsMaximumTime;
+    this.newCampaign.callStartUrl = this.createCampaignObj.campaignsStartCallUrl;
+    this.newCampaign.tableId = this.createCampaignObj.selectedCrmTableId;
 
-    let dataObj = {
-      "name": this.createCampaignObj.campaignsName,
-      "description": this.createCampaignObj.campaignsDescription,
-      "status": this.createCampaignObj.campaignsStatus,
-      "autoDispose": this.createCampaignObj.campaignsAutoDispose,
-      "minimumTime": this.createCampaignObj.campaignsMinimumTime,
-      "maximumTime": this.createCampaignObj.campaignsMaximumTime,
-      "callStartUrl": this.createCampaignObj.campaignsStartCallUrl,
-      "tableId": this.createCampaignObj.selectedCrmTableId,
-      "domainId": this.domainId,
-      "crmId": this.createCampaignObj.campaignsCrm,
-      "isMask": this.createCampaignObj.campaignsMask,
-      "crmHistory": this.createCampaignObj.campaignsCrmHistory,
-      "disposition": [
-        {
+    this.newCampaign.crmId = this.createCampaignObj.campaignsCrm;
+    this.newCampaign.isMask = this.createCampaignObj.campaignsMask;
+    this.newCampaign.domainId = this.domainId;
 
-          "name": data.name,
-          "description": data.description,
-          "type": data.type,
-          "otherType": data.campaignsOtherType,
-          "autoDispose": data.autoDispose
-        }
-      ]
-    }
-    this.campaignsService.addCampaigns(dataObj).then(
+    this.newCampaign.crmHistory = this.createCampaignObj.campaignsCrmHistory;
+    this.newCampaign.disposition = this.createCampaignObj.disposition;
+
+    this.campaignsService.addCampaigns(this.newCampaign).then(
       res => {
         if (res != null) {
           this.campaignsData = res;
+          this.refreshCampaigns.emit();
         }
       },
       err => { this.campaignsData = err }
