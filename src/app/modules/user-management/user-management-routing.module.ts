@@ -13,12 +13,16 @@ const routes: Routes = [
   {
     path: '',
     component: MainComponent,
+    
     children: [
-      { path: '', redirectTo: rootNavigationRoutes.users, pathMatch: 'full', },
-
+      {
+        path: "",
+        redirectTo:rootNavigationRoutes.users,
+        pathMatch:'full',
+      },
       {
         path: rootNavigationRoutes.users,
-        component: UsersComponent
+        component: UsersComponent,
       },
       {
         path: rootNavigationRoutes.userGroups,

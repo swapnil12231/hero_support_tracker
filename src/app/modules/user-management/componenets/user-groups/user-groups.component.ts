@@ -8,8 +8,8 @@ import { UserGroupsService } from 'src/app/services/user-managenemt/user-groups.
 })
 export class UserGroupsComponent implements OnInit {
 
-
-  allUserGroup!:any;
+  public p!:any;
+  public allUserGroup!:any;
 
 
 
@@ -37,7 +37,6 @@ export class UserGroupsComponent implements OnInit {
         if(res!=null)
         {
             this.allUserGroup=res;
-            console.log("All user Group",this.allUserGroup);
             
         }
 

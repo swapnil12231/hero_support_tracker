@@ -22,7 +22,7 @@ export class SameUserComponent implements OnInit {
 
   submit()
   {
-    this.createSameUserSubmit.emit("same user created");
+    this.createSameUserSubmit.emit(this.sameUser);
   }
 
 }

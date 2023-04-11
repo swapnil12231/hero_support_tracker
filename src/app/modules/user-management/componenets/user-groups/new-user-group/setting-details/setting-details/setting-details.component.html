@@ -1,0 +1,428 @@
+<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="modal-header border-0">
+            <h1 class="modal-title fs-5 w-100 text-center" id="userGroupsModal">
+                Add User Group Setting
+            </h1>
+        </div>
+        <div class="modal-body pt-1 px-5 pb-3 pt-1 px-5 pb-5">
+
+            <div class="row gy-3">
+
+
+
+                <div class="col-md-6 ">
+                    <label>Manual Allow</label>
+                    <select class="form-select" name="manualAllow" id="manualAllow" #ManualAllow="ngModel" [(ngModel)]="settingDetails.manualAllow" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Agent Transfer Allow </label>
+                    <select class="form-select" name="agentTransferAllow" id="agentTransferAllow" #AgentTransferAllow="ngModel" [(ngModel)]="settingDetails.agentTransferAllow" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Ivr Transfer Allow </label>
+                    <select class="form-select" name="ivrTransferAllow" id="ivrTransferAllow" #IVRTransferAllow="ngModel" [(ngModel)]="settingDetails.ivrTransferAllow" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Queue Transfer Allow </label>
+                    <select class="form-select" name="queueTransferAllow" id="queueTransferAllow" #QueueTransferAllow="ngModel" [(ngModel)]="settingDetails.queueTransferAllow"  required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Transfer Allow </label>
+                    <select class="form-select" name="transferAllow" id="transferAllow" #TransferAllow="ngModel" [(ngModel)]="settingDetails.transferAllow" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Conference Allow </label>
+                    <select class="form-select" name="conferenceAllow" id="conferenceAllow" #ConferenceAllow="ngModel" [(ngModel)]="settingDetails.conferenceAllow" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Alternate Dial </label>
+                    <select class="form-select" name="alternateDial" id="alternateDial" #AlternateDial="ngModel" [(ngModel)]="settingDetails.alternateDial" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Redial</label>
+                    <select class="form-select" name="redial" id="redial" #Redial="ngModel" [(ngModel)]="settingDetails.redial" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label>CRM Mask</label>
+                    <select class="form-select" name="crmMask" id="crmMask" #CRMMask="ngModel" [(ngModel)]="settingDetails.crmMask" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+                <div class="col-md-6">
+                    <label>Accept Reject TimeOut </label>
+                    <input type="number" class="form-control" name="acceptRejectTimeOu" id="acceptRejectTimeOu" #AcceptRejectTimeOu="ngModel" [(ngModel)]="settingDetails.acceptRejectTimeOut" required>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Show Call Log Dial</label>
+                    <select class="form-select" name="showCallLogDial" id="showCallLogDial" #ShowCallLogDial="ngModel" [(ngModel)]="settingDetails.showCallLogDial" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Show Call Log Pay</label>
+                    <select class="form-select" name="showCallLogPlay" id="showCallLogPlay" #ShowCallLogPlay="ngModel" [(ngModel)]="settingDetails.showCallLogPlay" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Auto Followup Time</label>
+                    <input type="number" class="form-control" name="autoFollowupTime" id="autoFollowupTime" #AutoFollowupTime="ngModel" [(ngModel)]="settingDetails.autoFollowupTime" required>
+
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Auto Answer </label>
+                    <select class="form-select" name="autoAnswer" id="autoAnswer" #AutoAnswer="ngModel" [(ngModel)]="settingDetails.autoAnswer" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Extension Change </label>
+                    <select class="form-select" name="extensionChange" id="extensionChange" #ExtensionChange="ngModel" [(ngModel)]="settingDetails.extensionChange" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Followup Edit </label>
+                    <select class="form-select" name="followupEdit" id="followupEdit" #FollowupEdit="ngModel" [(ngModel)]="settingDetails.followupEdit" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Show Softphone Panel </label>
+                    <select class="form-select" name="showSoftphonePanel" id="showSoftphonePanel" #ShowSoftphonePanel="ngModel" [(ngModel)]="settingDetails.showSoftphonePanel" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Screen Recording </label>
+                    <select class="form-select" name="screenRecording" id="screenRecording" #ScreenRecording="ngModel" [(ngModel)]="settingDetails.screenRecording" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Followup Delete </label>
+                    <select class="form-select" name="followupDelete" id="followupDelete" #FollowupDelete="ngModel" [(ngModel)]="settingDetails.followupDelete" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Show Info Tab </label>
+                    <select class="form-select" name="showInfoTab" id="showInfoTab" #ShowInfoTab="ngModel" [(ngModel)]="settingDetails.showInfoTab" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Show Call Log Tab </label>
+                    <select class="form-select" name="showCallLogTab" id="showCallLogTab" #showCallLogTab="ngModel" [(ngModel)]="settingDetails.showCallLogTab" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Show Park Call Tab </label>
+                    <select class="form-select" name="showParkCallTab" id="showParkCallTab" #ShowParkCallTab="ngModel" [(ngModel)]="settingDetails.showParkCallTab" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Show Followup tab </label>
+                    <select class="form-select" name="showFollowuptab" id="showFollowuptab" #ShowFollowuptab="ngModel" [(ngModel)]="settingDetails.showFollowuptab" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+
+
+                <div class="col-md-6">
+                    <label>Show External CRM Tab</label>
+                    <select class="form-select" name="showExternalCRMTab" id="showExternalCRMTab" #ShowExternalCRMTab="ngModel" [(ngModel)]="settingDetails.showExternalCRMTab" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <label>Hangup Allow </label>
+                    <select class="form-select" name="hangupAllow" id="hangupAllow" #HangupAllow="ngModel" [(ngModel)]="settingDetails.hangupAllow" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+
+                <div class="col-md-6">
+                    <label>Disposition Allow </label>
+                    <select class="form-select" name="dispositionAllow" id="dispositionAllow" #DispositionAllow="ngModel" [(ngModel)]="settingDetails.dispositionAllow" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+
+                <div class="col-md-6">
+                    <label>External CRM Login </label>
+                    <input type="text" class="form-control" name="externalCRMLogin" id="externalCRMLogin" #ExternalCRMLogin="ngModel" [(ngModel)]="settingDetails.externalCRMLogin" required>
+
+                </div>
+
+
+
+
+
+                <div class="col-md-6">
+                    <label>Focus On Call </label>
+                    <select class="form-select" name="focusOnCall" id="focusOnCall" #FocusOnCall="ngModel" [(ngModel)]="settingDetails.focusOnCall" required>
+                        <option value="INTERNAL">INTERNAL</option>
+                        <option value="EXTERNAL">EXTERNAL</option>
+                        <option value="None">None</option>
+
+                    </select>
+                </div>
+
+
+
+
+
+                <div class="col-md-6">
+                    <label>Hold Allow </label>
+                    <select class="form-select" name="holdAllow" id="holdAllow" #HoldAllow="ngModel" [(ngModel)]="settingDetails.holdAllow" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+
+
+                <div class="col-md-6">
+                    <label>Mute Allow </label>
+                    <select class="form-select" name="muteAllow" id="muteAllow" #MuteAllow="ngModel" [(ngModel)]="settingDetails.muteAllow" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+
+
+                <div class="col-md-6">
+                    <label>ROD Allow </label>
+                    <select class="form-select" name="rodAllow" id="rodAllow" #RodAllow="ngModel" [(ngModel)]="settingDetails.rodAllow" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+
+
+                <div class="col-md-6">
+                    <label>Auto Ready Duration</label>
+                    <input type="number" class="form-control" name="autoReadyDuration" id="autoReadyDuration" #AutoReadyDuration="ngModel" [(ngModel)]="settingDetails.autoReadyDuration" required>
+
+                </div>
+
+
+
+
+
+                <div class="col-md-6">
+                    <label>Notification</label>
+                    <select class="form-select" name="notification" id="notification" #Notification="ngModel" [(ngModel)]="settingDetails.notification" required>
+                        <option value="OFF">OFF</option>
+                        <option value="ON INACTIVE">ON INACTIVE</option>
+                    </select>
+                </div>
+
+
+
+
+
+                <div class="col-md-6">
+                    <label>Stun Server Setting</label>
+                    <input type="text" class="form-control" name="stunServerSetting" id="stunServerSetting" #StunServerSetting="ngModel" [(ngModel)]="settingDetails.stunServerSetting" required>
+
+                </div>
+
+
+
+
+
+                <div class="col-md-6">
+                    <label>Show Timeline </label>
+                    <select class="form-select" name="showTimeline" id="showTimeline" #ShowTimeline="ngModel" [(ngModel)]="settingDetails.showTimeline" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+
+
+
+                <div class="col-md-6">
+                    <label>Disconnection On Rejection </label>
+                    <select class="form-select" name="disconnectionOnRejection" id="disconnectionOnRejection" #DisconnectionOnRejection="ngModel" [(ngModel)]="settingDetails.disconnectionOnRejection" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+
+
+                <div class="col-md-6">
+                    <label>Manual Dial Format </label>
+                    <select class="form-select" name="manualDialFormat" id="manualDialFormat" #ManualDialFormat="ngModel" [(ngModel)]="settingDetails.manualDialFormat" required>
+                        <option value="Numeric">Numeric</option>
+                    </select>
+                </div>
+
+
+
+
+
+                <div class="col-md-6">
+                    <label>Agent Changed Password </label>
+                    <select class="form-select" name="agentChangedPassword" id="agentChangedPassword" #AgentChangedPassword="ngModel" [(ngModel)]="settingDetails.agentChangedPassword" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+
+
+
+                <div class="col-md-6">
+                    <label> Agent Softphone SIP </label>
+                    <select class="form-select" name="agentSoftphoneSIP" id="agentSoftphoneSIP" #AgentSoftphoneSIP="ngModel" [(ngModel)]="settingDetails.agentSoftphoneSIP" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+
+            </div>
+
+            <div class="row g-3 mt-3">
+                <div class="col col-md-6 text-end"> <button type="button" class="btn btn-outline-warning px-4"
+                        data-bs-toggle="modal" data-bs-target="#userGroupsModal">PREVIOUS</button> </div>
+                <div class="col col-md-6 text-start"> <button type="button" class="btn btn-warning text-white px-4"
+                        (click)="submit()" data-bs-dismiss="modal">SUBMIT</button></div>
+            </div>
+        </div>
+    </div>

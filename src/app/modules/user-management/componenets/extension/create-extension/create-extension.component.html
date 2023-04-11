@@ -26,13 +26,17 @@
 
                         </ul>
 
+                        <div class="tab-content" id="createExtensionTab">
 
-                        <div>
-                            <app-same-pass (createSamePassSubmit)="createSamePassSubmit($event)"></app-same-pass>
-                        </div>
+                            <div class="tab-pane fade show active py-4" id="samePass" role="tabpanel" aria-labelledby="samePass-tab">
+                                <app-same-pass (createSamePassSubmit)="createSamePassSubmit($event)"></app-same-pass>
+                            </div>
 
-                        <div class="tab-pane fade py-4" id="doublePass" role="tabpanel" aria-labelledby="profile-tab">
-                            <app-double-pass (createDoublePassSubmit)="createDoublePassSubmit($event)"></app-double-pass>
+                            <div class="tab-pane fade py-4" id="doublePass" role="tabpanel"
+                                aria-labelledby="profile-tab">
+                                <app-double-pass
+                                    (createDoublePassSubmit)="createDoublePassSubmit($event)"></app-double-pass>
+                            </div>
                         </div>
                     </div>
                 </div>

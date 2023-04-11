@@ -1,7 +1,8 @@
 export class CreateSkillSet
 {
     name!:string;
-    color!:any;
+    color!:string;
     description!:string;
-    maxAgentInteraction!:any;
+    status:any="INACTIVE";
+    domainid!:any;
 }
