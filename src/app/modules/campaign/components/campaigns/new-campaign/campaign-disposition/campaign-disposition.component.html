@@ -10,7 +10,7 @@
                 <div class="col-md-12">
                     <button class="btn btn-warning btn-sm text-white"> Choose from Existing </button>
                 </div>
-                <div *ngFor="let obj of disposition; let i= index">
+                <div class="row" *ngFor="let obj of disposition; let i= index">
                     <div class="col-sm-6">
                         <label for="country" class="form-label">Disposition Type<sup class="text-red">*</sup></label>
                         <select class="form-select" name="type" #CampaignsDispositionType="ngModel"
