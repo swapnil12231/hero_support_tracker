@@ -7,19 +7,18 @@ import { MusicOnHoldService } from '../../services/music-on-hold.service';
   styleUrls: ['./music-on-hold.component.css']
 })
 export class MusicOnHoldComponent implements OnInit {
+  musicOnHoldData: any;
 
-  // constructor(private musicOnHoldService:MusicOnHoldService) { }
-  constructor(){}
+  constructor(private musicOnHoldService: MusicOnHoldService) { }
 
   ngOnInit(): void {
     this.getMusicOnHold();
   }
 
-
-  async getMusicOnHold(){
-
-
-
+  async getMusicOnHold() {
+    this.musicOnHoldService.getMusicOnHoldData().then((res: any) => {
+      this.musicOnHoldData = res;
+    })
   }
 
 }

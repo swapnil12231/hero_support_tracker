@@ -147,12 +147,12 @@ export class HttpClientService {
         );
     }
 
-    public put(url: string, body: any) {
-        return this.httpClient.put(url, body, this.getHttpHeaders()).pipe(
-            tap(res => res),
-            //catchError((error: any) => this.onErrorHandler(error))
-        );
-    }
+    // public put(url: string, body: any) {
+    //     return this.httpClient.put(url, body, this.getHttpHeaders()).pipe(
+    //         tap(res => res),
+            // catchError((error: any) => this.onErrorHandler(error))
+    //     );
+    // }
     public delete(url: string) {
         return this.httpClient.delete(url, this.getHttpHeaders()).pipe(
             tap(res => res),
@@ -212,6 +212,16 @@ export class HttpClientService {
 
     private deleteWithBodyUtil = <T>(url: string, payload: any, params?: any) => getCurrent(this.webServiceUrl$.pipe(
         switchMap(baseUrl => this.httpClient.request('delete', baseUrl + url, { body: payload, headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.getJwtToken() } })),
+        map(x => x as T)
+    ))
+
+    public async put(url: string, body: any = {}, params?: any) {
+        let response = await this.putForFormDataBody(url, body, params);
+        return response;
+    }
+
+    private putForFormDataBody = <T>(url: string, payload: any, params?: any) =>getCurrent(this.webServiceUrl$.pipe(
+        switchMap(baseUrl => this.httpClient.put(baseUrl + url, payload, this.getHttpHeadersformData())),
         map(x => x as T)
     ))
 

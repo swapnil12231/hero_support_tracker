@@ -27,7 +27,8 @@ export class SoundFileService {
   }
 
   async editSoundFile(formData:any,id:any){
-    let url=``
+    let url=`/voice-server/sound-files/${id}`;
+    return this.httpClientService.put(url,formData);
   }
 
   async playSoundFile(id:any,domainId:any)
