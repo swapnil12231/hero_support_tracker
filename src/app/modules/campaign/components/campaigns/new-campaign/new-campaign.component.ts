@@ -59,9 +59,11 @@ export class NewCampaignComponent implements OnInit {
     this.newCampaign.maximumTime = this.createCampaignObj.campaignsMaximumTime;
     this.newCampaign.callStartUrl = this.createCampaignObj.campaignsStartCallUrl;
     this.newCampaign.tableId = this.createCampaignObj.selectedCrmTableId;
+
     this.newCampaign.crmId = this.createCampaignObj.campaignsCrm;
     this.newCampaign.isMask = this.createCampaignObj.campaignsMask;
     this.newCampaign.domainId = this.domainId;
+
     this.newCampaign.crmHistory = this.createCampaignObj.campaignsCrmHistory;
     this.newCampaign.disposition = this.createCampaignObj.disposition;
 

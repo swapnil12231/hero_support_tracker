@@ -1,115 +1,28 @@
-<div class="modal-dialog modal-lg modal-dialog-centered  ">
+
+<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+
     <div class="modal-content">
+
         <div class="modal-header border-0">
             <h1 class="modal-title fs-5 w-100 text-center" id="campaignModalLabel">
                 Create Disposition
             </h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" id="btnmodel" aria-label="Close"></button>
-        </div>
-        <div class="modal-body pt-1 px-5 pb-5">
-            <div class="row">
-                <div class="col-sm-12">
-                    <label for="country" class="form-label">Campaign Type<sup class="text-red">*</sup></label>
-                    <select class="form-select" id="" required="">
-                        <option value="">Select Type</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row g-3" *ngFor="let item of campaignDisposition.campaignDisositionList; let i = index;">
-
-
-
-                <div class="col-sm-6">
-                    <label for="country" class="form-label">Disposition Type<sup class="text-red">*</sup></label>
-
-                    <div>
-                        <p-dropdown [style]="{'width':'100%', 'height':'38px'}" [options]="dispositionTypeList"
-                            placeholder="Select Disposition Type"
-                            [(ngModel)]="campaignDisposition.campaignDisositionList[i].dispositionTypes"
-                            optionLabel="name">
-                        </p-dropdown>
-                    </div>
-                </div>
-
-                <div class="col-sm-6">
-                    <label for="" class="form-label">Disposition Name <sup class="text-red">*</sup></label>
-                    <input type="text" class="form-control" name="Name" #dispositionDispositionType="ngModel"
-                        [(ngModel)]="campaignDisposition.campaignDisositionList[i].Name"
-                        placeholder="Enter Disposition Name" required>
-                    <span class="text-danger"
-                        *ngIf="dispositionDispositionType.invalid && dispositionDispositionType.touched">
-                        *disposition name is required
-                    </span>
-
-                </div>
-                <div class="row g-3">
-                    <div class="col-sm-12">
-                        <label for="" class="form-label">Description <sup class="text-red">*</sup></label>
-                        <input type="text" class="form-control" name="Descriptionkil" #dispositionDescription="ngModel"
-                            [(ngModel)]="campaignDisposition.campaignDisositionList[i].Description"
-                            placeholder="Enter Description here" value="" required="">
-                        <span class="text-danger"
-                            *ngIf="dispositionDescription.invalid && dispositionDescription.touched">
-                            *description time is required
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-12">
-                    <button class="btn btn-outline-warning btn-sm" (click)="addAnother()"> Add Another</button>
-                </div>
-            </div>
-            <div class="row g-3">
-                <h1 class="modal-title fs-5 w-100 text-center" id="campaignModalLabel">
-                    Choose from Existing
-                </h1>
-                <div class="col-sm-6">
-                    <label for="country" class="form-label">Campaign </label>
-                    <select class="form-select" (change)="getCampaignId($event)" id="campaign"
-                        name="dropDownExistingCampaign" #dispositionExistingCampaign="ngModel"
-                        [(ngModel)]="existingDesposition.Campaign" required>
-                        <option value="-1">Select Campaign</option>
-                        <option *ngFor="let obj of dispositionObj; let i=index" [value]="dispositionObj[i].campid">
-                            {{dispositionObj[i].campaign}}</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
-                    <label for="" class="form-label">Disposition Type </label>
-                    <p-multiSelect [(ngModel)]="multiDispositionType" [options]="vmDisposition.dispositionTypeArray"
-                        optionLabel="name" optionValue="name" [style]="{'width':'100%', 'height':'38px'}">
-                    </p-multiSelect>
-
-                </div>
-                <div class="col-md-12"><button class="btn btn-outline-warning btn-sm mt-3"
-                        (click)="addDisposition($event)">
-                        Add
-                    </button></div>
-
-            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <div class="modal-footer justify-content-center border-top-0">
-            <button type="button" class="btn btn-warning text-white px-4" data-bs-dismiss="modal"
-                (click)="submit()">SUBMIT</button>
-        </div>
-        <!-- <div class="row pt-1 px-5 pb-5">
+        <div class="row pt-1 px-5 pb-5">
             <div class="col-sm-6 ml-5">
                 <label for="country" class="form-label">Campaign </label>
-                <select class="form-select" (change)="getCampaignId($event)" id="campaign" name="dropDownExistingCampaign"
+                <select class="form-select" (change)="getCampaignId($event)" name="dropDownExistingCampaign"
                     #dispositionExistingCampaign="ngModel" [(ngModel)]="existingDesposition.Campaign" required>
                     <option value="-1">Select Campaign</option>
                     <option *ngFor="let obj of dispositionObj; let i=index" [value]="dispositionObj[i].campid">
                         {{dispositionObj[i].campaign}}</option>
                 </select>
             </div>
-        </div> -->
+        </div>
 
-        <!-- <div class="modal-body pt-1 px-5 pb-5">
+        <div class="modal-body pt-1 px-5 pb-5">
             <div class="row g-3" *ngFor="let item of campaignDisposition.campaignDisositionList; let i = index;">
                 <div class="col-sm-6">
                     <label for="country" class="form-label">Disposition Type<sup class="text-red">*</sup></label>
@@ -142,11 +55,13 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <button class="btn btn-outline-warning btn-sm mt-3" > Add
+
+                <button class="btn btn-outline-warning btn-sm mt-3" (click)="addAnother()"> Add
                     Another</button>
             </div>
-        </div>            
+
             <div class="row g-3">
+
                 <h1 class="modal-title fs-5 w-100 text-center" id="campaignModalLabel">
                     Choose from Existing
                 </h1>
@@ -161,20 +76,25 @@
 
                 </div>
                 <div class="col-sm-6">
+
                     <label for="country" class="form-label">Select Disposition </label>
                     <p-multiSelect [(ngModel)]="multiDispositionType" [options]="vmDisposition.dispositionTypeArray"
                         optionLabel="name" optionValue="name" [style]="{'width':'100%', 'height':'38px'}">
                     </p-multiSelect>
+
                 </div>
                 <div class="col-md-12"><button class="btn btn-outline-warning btn-sm mt-3"
                         (click)="addDisposition($event)">
                         Add
                     </button></div>
-            </div>   
+            </div>
+        </div>
+
         <div class="modal-footer justify-content-center border-top-0">
+
             <button type="button" class="btn btn-warning text-white px-4" data-bs-dismiss="modal"
                 (click)="submit()">SUBMIT</button>
-        </div> -->
+        </div>
 
     </div>
 </div>
