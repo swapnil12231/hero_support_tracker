@@ -51,16 +51,18 @@ export class LoginComponent implements OnInit {
 
   async verifyPassword() {
     this.loginService.verifyPassword(this.user).then((res:any)=>{
-      if(res.two_factor_authentication==true && res.sessionid!="") {       
+      if(res.two_factor_authentication==true && res.sessionid!="") {  
+        this.otpModel.userName = this.user.userName;
+        this.otpModel.sessionid = res.sessionid;     
        this.OTPVerified = true;
        this.verifyUser = false;
-       this.loginService.sendOtp(this.user.userName).then((res:any)=>{
-        if(res.sessionid!="") {
-          this.otpModel.userName = this.user.userName;
-          this.otpModel.sessionid = res.sessionid;
-        } 
+      //  this.loginService.sendOtp(this.user.userName).then((res:any)=>{
+      //   if(res.sessionid!="") {
+      //     this.otpModel.userName = this.user.userName;
+      //     this.otpModel.sessionid = res.sessionid;
+      //   } 
   
-      })
+      // })
       } 
 
     })
@@ -70,10 +72,10 @@ export class LoginComponent implements OnInit {
     this.otpModel.otp =this.emailOTP;
     this.loginService.VerifyOTP(this.otpModel).then((res:any)=>{
       if(res) {
-        this.authenticationService.LogonPortalSetCredentials(res.data);
-      sessionStorage.setItem('domainId', res.data.domainid);
-      sessionStorage.setItem('usergroupid', res.data.usergroupid);
-      sessionStorage.setItem('id', res.data.id);
+        this.authenticationService.LogonPortalSetCredentials(res);
+      sessionStorage.setItem('domainId', res.domainid);
+      sessionStorage.setItem('usergroupid', res.usergroupid);
+      sessionStorage.setItem('id', res.id);
       this.router.navigate(['/']);
       }
 
