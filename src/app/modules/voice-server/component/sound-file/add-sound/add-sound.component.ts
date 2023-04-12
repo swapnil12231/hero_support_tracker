@@ -21,7 +21,7 @@ export class AddSoundComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  childData(data: any) {debugger
+  childData(data: any) {
     this.voiceServerData = data;
     this.soundName=this.voiceServerData.data.name;
     this.newsoundModalCanShow = false;
@@ -67,7 +67,7 @@ export class AddSoundComponent implements OnInit {
     this.fileName = this.file.name;
   };
 
-  reset() {debugger
+  reset() {
     this.voiceServerData = null;
     this.modalHeaderText = 'Add Sound';
     this.soundName='';
