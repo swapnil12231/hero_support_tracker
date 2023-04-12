@@ -210,6 +210,11 @@ export class HttpClientService {
         return response;
     }
 
+    public async deleteBodyWithoutParameter(url: string, body: any = {}) {
+        let response = await this.deleteWithBodyUtil(url, body);
+        return response;
+    }
+
     private deleteWithBodyUtil = <T>(url: string, payload: any, params?: any) => getCurrent(this.webServiceUrl$.pipe(
         switchMap(baseUrl => this.httpClient.request('delete', baseUrl + url, { body: payload, headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.getJwtToken() } })),
         map(x => x as T)

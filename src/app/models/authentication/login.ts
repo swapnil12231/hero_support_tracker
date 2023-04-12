@@ -3,12 +3,11 @@ export class LoginModel {
     password!: string;
 }
 
-export class OtpModel {
-    userEmail!: string;
+export class OtpModel {   
     userName!: string;
     otp!: string;
-    rememberLogin!: boolean;
-    otpToken!: string;
+    sessionid!: string;
+   
 }
 
 export class OtpVerify {

@@ -16,7 +16,7 @@ export class CampaignsComponent implements OnInit {
   constructor(private campaignsService: CampaignsService) { }
 
   ngOnInit(): void {
-    this.domainId = sessionStorage.getItem('domainId');
+    this.domainId = 1673350192404;//sessionStorage.getItem('domainId');
     this.getAllCampaigns();
   }
 
@@ -30,4 +30,14 @@ export class CampaignsComponent implements OnInit {
       err => { this.campaignsData = err }
     )
   }
+
+  async deleteCampaign(row: any) {
+    const id = [row.id];    
+    this.campaignsService.deleteCampaign(id).then((res:any) => {
+       this.getAllCampaigns();
+    }).catch(err=>{
+      this.getAllCampaigns();
+    })
+  }
+
 }

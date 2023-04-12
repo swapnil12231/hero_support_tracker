@@ -22,4 +22,9 @@ export class CampaignsService {
         return this.httpClientService.post(url, data)
     }
 
+    async deleteCampaign(data:any){
+        let url=`/campaign/campaigns/delete`;
+        return this.httpClientService.deleteWithBody(url,data);
+      }
+
 }

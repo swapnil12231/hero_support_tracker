@@ -19,7 +19,7 @@
                                 <h1 class="h2">Log in to your account</h1>
                                 <p class="mb-4">Welcome back! Please enter your details.</p>
                             </div>
-                            <div class="form-group mb-4">
+                            <div *ngIf="!isTwoFactor" class="form-group mb-4">
                                 <div class="position-relative">
                                     <input name="username" class="ps-4 form-control" id="username"
                                         [(ngModel)]="user.userName" #username="ngModel" required placeholder="Username"
@@ -30,7 +30,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="form-group mb-4">
+                            <div *ngIf="verifyUser" class="form-group mb-4">
                                 <div class="position-relative">
                                     <input [type]="fieldTextType ? 'text' : 'password'" class="ps-4 form-control"
                                         #password="ngModel" [(ngModel)]="user.password" name="txtpassword" required
@@ -48,7 +48,25 @@
                                 </div>
                             </div>
 
-                            <div class="form-group mb-4 d-flex justify-content-between align-items-center">
+                            <div *ngIf="OTPVerified && !verifyUser" class="form-group mb-4">
+                                <div class="position-relative">
+                                    <input [type]="fieldTextType ? 'text' : 'emailOTP'" class="ps-4 form-control"
+                                        #password="ngModel" [(ngModel)]="emailOTP" name="emailOTP" required
+                                        placeholder="Enter OTP" type="text">
+                                    <span>
+                                        <i class="fa eye-icon" [ngClass]="{
+                                            'fa-eye-slash': !fieldTextType,
+                                            'fa-eye': fieldTextType
+                                          }" (click)="fieldTextType = !fieldTextType"></i>
+                                        <i class="bi bi-lock"></i>
+                                    </span>
+                                    <!-- <span class="text-danger">
+                                        *OTP is required
+                                    </span> -->
+                                </div>
+                            </div>
+
+                            <div *ngIf="verifyUser" class="form-group mb-4 d-flex justify-content-between align-items-center">
                                 <span class="small">
                                     <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe">
                                     Remember Me
@@ -57,20 +75,31 @@
                                         [routerLink]="navigationRoutes.forgotPassword">Forgot Password?</a></span>
                             </div>
 
-                            <div class="form-group mb-4   text-center">
-                                <button type="button" (click)="login()"
-                                    [disabled]="password.invalid || username.invalid"
+                            <div *ngIf="!isTwoFactor"  class="form-group mb-4   text-center">
+                                <button type="button" (click)="verifyUserEmail()"                                    
                                     class="btn btn-md btn-block btn-outline-warning px-5 w-100">
-                                    LOGIN </button>
+                                    Verify User </button>
                             </div>
 
-                            <div class="form-group mb-4  text-center">
+                            <div *ngIf="verifyUser"  class="form-group mb-4   text-center">
+                                <button type="button" (click)="verifyPassword()"                                    
+                                    class="btn btn-md btn-block btn-outline-warning px-5 w-100">
+                                    Verify Password </button>
+                            </div>
+
+                            <div *ngIf="OTPVerified && !verifyUser"  class="form-group mb-4   text-center">
+                                <button type="button"  (click)="verifyOTP()"                               
+                                    class="btn btn-md btn-block btn-outline-warning px-5 w-100">
+                                    Verify OTP </button>
+                            </div>
+
+                            <div class="form-group mb-4  text-center" *ngIf="isGenerateOtp">
                                 <span class="line">
                                     <h2 class="m-0"><span>OR LOGIN USING</span></h2>
                                 </span>
                             </div>
 
-                            <div class="form-group text-center">
+                            <div class="form-group text-center" *ngIf="isGenerateOtp">
                                 <button class="btn btn-md btn-block btn-custom-light px-5 w-100">
                                     OTP </button>
                             </div>
