@@ -10,7 +10,8 @@
                 <div class="col-md-12">
                     <button class="btn btn-warning btn-sm text-white"> Choose from Existing </button>
                 </div>
-                <div *ngFor="let obj of disposition; let i= index">
+                <!-- <span *ngFor="let obj of disposition; let i= index"> -->
+                    <div  class="row" *ngFor="let obj of disposition; let i= index">
                     <div class="col-sm-6">
                         <label for="country" class="form-label">Disposition Type<sup class="text-red">*</sup></label>
                         <select class="form-select" name="type" #CampaignsDispositionType="ngModel"
@@ -28,6 +29,7 @@
                             #CampaignsOtherType="ngModel" [(ngModel)]="disposition[i].campaignsOtherType"
                             placeholder="Enter Mention Other Type" required>
                     </div>
+               
                     <div class="col-sm-6">
                         <label for="" class="form-label">Disposition Name <sup class="text-red">*</sup></label>
                         <input type="text" class="form-control" id="txtCampaignsDescriptionName"
@@ -41,6 +43,7 @@
                             placeholder=" Enter Description here" required>
                     </div>
                 </div>
+                <!-- </span> -->
                 <div class="col-md-12">
 
                     <button class="btn btn-outline-warning btn-sm" (click)="AddAnotherDisposition()"> Add
