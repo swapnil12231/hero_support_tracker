@@ -11,7 +11,7 @@
                 <div class="row g-3">
                     <div class="col-sm-12">
                         <label for="" class="form-label" >Sound Name<sup class="text-red">*</sup></label>
-                        <input type="text" class="form-control" id='soundname' [(ngModel)]="soundname" name="soundName" #soundName="ngModel"
+                        <input type="text" class="form-control" id='soundFileName' [(ngModel)]="soundName" name="soundFileName" #soundFileName="ngModel"
                            placeholder="Enter Sound Name" required>
                         <!-- <span class="text-danger" *ngIf="soundname.invalid && soundname.touched">
                             *Sound Name is required
@@ -22,7 +22,7 @@
                     Upload Wav Files Only. 
                 </div>
                 <div class="dragFileArea mt-2 bg-light text-center p-3">
-                    <img src="images/file-icon.png" alt="File Icon" width="76" style="margin-bottom:25px;">
+                    <img src="./assets/images/sound-icon.png" alt="File Icon" width="76" style="margin-bottom:25px;">
                     <i class="fa-solid fa-music"></i>
                     <input type="file" #soundInput   required (change)="soundFileUpload($event)">
                     <h4>Click or drag file to this area to upload</h4>

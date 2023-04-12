@@ -19,14 +19,13 @@
                                 <td> {{item.duration}}</td>
                                 <td class="actionsColumn">
                                     <a title="Play" class="me-2" (click)="onSoundPlay(item)">
+                                        <img src="./assets/images/preview.png" alt="Play" width="17">
                                      </a>
-
                                     <a title="Edit" class="me-2" (click)="onSoundEdit(item)" data-bs-toggle="modal"
-                                    data-bs-target="#addSoundModal"><i  class="fa fa-edit"></i>
+                                    data-bs-target="#addSoundModal"><img src="./assets/images/edit.png" alt="Edit" width="17">
                                     </a>
-
-                                    <span title="Delete" (click)="onSoundDelete(item)"> <i class="fa fa-trash"></i>
-                                    </span>
+                                    <a title="Delete" (click)="onSoundDelete(item)"> <img src="./assets/images/sidebar/deleted-data.png" alt="Delete" width="17">
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
@@ -37,7 +36,6 @@
         </div>
     </div>
 </div>
-
 <app-add-sound (addSoundFileSubmit)="addSoundFileSubmit1()"></app-add-sound>
 
 
