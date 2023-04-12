@@ -9,7 +9,7 @@ import { SoundFileService } from '../../../services/sound-file.service';
 export class AddSoundComponent implements OnInit {
   @Output() addSoundFileSubmit = new EventEmitter<any>();
 
-  soundname = '';
+  soundName = '';
   file: any;
   fileName: any;
   voiceServerData: any;
@@ -23,6 +23,7 @@ export class AddSoundComponent implements OnInit {
 
   childData(data: any) {
     this.voiceServerData = data;
+    this.soundName=this.voiceServerData.data.name;
     this.newsoundModalCanShow = false;
     this.modalHeaderText = 'Edit Sound Files';
   }
@@ -34,11 +35,13 @@ export class AddSoundComponent implements OnInit {
       if (this.file.size <= 5000000) {
         var formData = new FormData();
         formData.append("file", this.file);
-        formData.append('name', this.soundname);
+        formData.append('name', this.soundName);
         formData.append('domainId', this.domainId);
         if (this.voiceServerData) {
-          this.soundFileService.editSoundFile(formData, this.voiceServerData.id).then((res: any) => {
+          this.soundFileService.editSoundFile(formData, this.voiceServerData.data.id).then((res: any) => {
+            console.log(res);
             this.addSoundFileSubmit.emit();
+            this.reset()
           }, err => {
             console.log(err);
             this.addSoundFileSubmit.emit();
@@ -46,6 +49,7 @@ export class AddSoundComponent implements OnInit {
         } else {
           this.soundFileService.addSoundFile(formData).then((res: any) => {
             this.addSoundFileSubmit.emit();
+            this.reset();
           }, err => {
             this.addSoundFileSubmit.emit();
           })
@@ -66,6 +70,8 @@ export class AddSoundComponent implements OnInit {
   reset() {
     this.voiceServerData = null;
     this.modalHeaderText = 'Add Sound';
+    this.soundName='';
+    console.log(this.soundName)
   }
 }
 
