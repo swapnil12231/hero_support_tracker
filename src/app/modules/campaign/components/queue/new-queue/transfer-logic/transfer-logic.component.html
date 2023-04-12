@@ -82,7 +82,7 @@
                                 <div class="col-sm-12">
                                     <label class="form-label">Event </label>
                                     <select class="form-select" name="queueEvent" #queueEvent="ngModel"
-                                        [(ngModel)]="voiceLogic.event" required>
+                                        [(ngModel)]="voiceLogic.event" required (change)="onEventChange(i)">
                                         <option [value]="-1">Select Type</option>
                                         <option *ngFor="let eventOption of eventOptionArray" [value]="eventOption.id">
                                             {{eventOption.value}}
@@ -97,8 +97,11 @@
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <select class="form-select" name="api-api" id="api-api" required
-                                            [(ngModel)]="voiceLogicEventApi.api">
+                                            [(ngModel)]="voiceLogic.data.api">
                                             <option [value]="-1">Select API</option>
+                                            <option *ngFor="let apiOption of apiOptionArray" [value]="apiOption.id">
+                                                {{apiOption.value}}
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="col-sm-6">
@@ -106,8 +109,10 @@
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <select class="form-select" name="api-reqtype" id="api-reqtype" required
-                                            [(ngModel)]="voiceLogicEventApi.requestType">
+                                            [(ngModel)]="voiceLogic.data.requestType">
                                             <option value="">Select Request Type</option>
+                                            <option *ngFor="let type of requestTypeOptionArray" [value]="type">{{type}}
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="col-sm-6">
@@ -115,8 +120,9 @@
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <select class="form-select" name="api-resptype" id="api-resptype" required
-                                            [(ngModel)]="voiceLogicEventApi.responseType">
+                                            [(ngModel)]="voiceLogic.data.responseType">
                                             <option value="">Select Response Type</option>
+                                            <option *ngFor="let type of responseTypeOptionArray" [value]="type">{{type}}
                                         </select>
                                     </div>
                                     <div class="col-sm-6">
@@ -125,7 +131,7 @@
                                         </label>
                                         <input type="text" class="form-control" name="api-resp" id="api-resp"
                                             placeholder="Response Variable Name" required
-                                            [(ngModel)]="voiceLogicEventApi.response">
+                                            [(ngModel)]="voiceLogic.data.response">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="api-resp" class="form-label">Response Status
@@ -133,7 +139,7 @@
                                         </label>
                                         <input type="text" class="form-control" name="api-resp-status"
                                             id="api-resp-status" placeholder="Response Status Variable Name" required
-                                            [(ngModel)]="voiceLogicEventApi.responseStatus">
+                                            [(ngModel)]="voiceLogic.data.responseStatus">
                                     </div>
                                 </div>
                                 <div class="row mt-3" *ngSwitchCase="2">
@@ -143,16 +149,19 @@
                                         </label>
                                         <input type="text" class="form-control" name="assignment-variable"
                                             id="assignment-variable" placeholder="Response Status Variable Name"
-                                            required [(ngModel)]="voiceLogicEventAssignment.variable">
+                                            required [(ngModel)]="voiceLogic.data.variable">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="assignment-operation" class="form-label required">Operation
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <select class="form-select" name="assignment-operation"
-                                            id="assignment-operation" required
-                                            [(ngModel)]="voiceLogicEventAssignment.operation">
-                                            <option value="">Select Request Type</option>
+                                            id="assignment-operation" required [(ngModel)]="voiceLogic.data.operation">
+                                            <option value="">Select Operation</option>
+                                            <option *ngFor="let operation of operationTypeOptionArray"
+                                                [value]="operation">
+                                                {{operation}}
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="col-sm-6">
@@ -162,15 +171,18 @@
                                         <input type="text" class="form-control" name="assignment-operand"
                                             id="assignment-operand"
                                             placeholder="Operand variable name or constant value" required
-                                            [(ngModel)]="voiceLogicEventAssignment.operand">
+                                            [(ngModel)]="voiceLogic.data.operand">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="assignment-function" class="form-label required">Function
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <select class="form-select" name="assignment-function" id="assignment-function"
-                                            required [(ngModel)]="voiceLogicEventAssignment.function">
+                                            required [(ngModel)]="voiceLogic.data.function">
                                             <option value="">Select Function</option>
+                                            <option *ngFor="let function of functionTypeOptionArray" [value]="function">
+                                                {{function}}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -181,7 +193,7 @@
                                         </label>
                                         <input type="text" class="form-control" name="ext-extenstion"
                                             id="ext-extenstion" placeholder="Response Status Variable Name" required
-                                            [(ngModel)]="voiceLogicEventExtension.extension">
+                                            [(ngModel)]="voiceLogic.data.extension">
                                     </div>
                                 </div>
                                 <div class="row mt-3" *ngSwitchCase="5">
@@ -190,8 +202,8 @@
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <p-calendar [timeOnly]="true" [showTime]="true"
-                                            [style]="{'width':'100%', 'height':'38px'}"
-                                            [(ngModel)]="voiceLogicEventFollowup.time">
+                                            [style]="{'width':'100%', 'height':'38px'}" name="follow-time"
+                                            id="follow-time" [(ngModel)]="voiceLogic.data.time">
                                         </p-calendar>
                                     </div>
                                 </div>
@@ -202,15 +214,19 @@
                                         </label>
                                         <input type="text" class="form-control" name="gotoif-variable"
                                             id="gotoif-variable" placeholder="Variable Name" required
-                                            [(ngModel)]="voiceLogicEventGoToIf.variable">
+                                            [(ngModel)]="voiceLogic.data.variable">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="gotoid-condition" class="form-label">Condition
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <select class="form-select" name="gotoid-condition" id="gotoid-condition"
-                                            required [(ngModel)]="voiceLogicEventGoToIf.condition">
+                                            required [(ngModel)]="voiceLogic.data.condition">
                                             <option value="">Select Condition</option>
+                                            <option *ngFor="let condition of conditionTypeOptionArray"
+                                                [value]="condition">
+                                                {{condition}}
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="col-sm-6">
@@ -218,7 +234,7 @@
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <input type="text" class="form-control" name="gotoif-value" id="gotoif-value"
-                                            placeholder="Any Value" required [(ngModel)]="voiceLogicEventGoToIf.value">
+                                            placeholder="Any Value" required [(ngModel)]="voiceLogic.data.value">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="gotoif-step-true" class="form-label">Go To Step(If TRUE)
@@ -226,7 +242,7 @@
                                         </label>
                                         <input type="number" class="form-control" name="gotoif-step-true"
                                             id="gotoif-step-true" placeholder="Step No" required
-                                            [(ngModel)]="voiceLogicEventGoToIf.goToIfTrue">
+                                            [(ngModel)]="voiceLogic.data.goToIfTrue">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="gotoif-variable" class="form-label">Go To Step(If FALSE)
@@ -234,7 +250,7 @@
                                         </label>
                                         <input type="number" class="form-control" name="gotoif-variable"
                                             id="gotoif-variable" placeholder="Step No" required
-                                            [(ngModel)]="voiceLogicEventGoToIf.goToIfFalse">
+                                            [(ngModel)]="voiceLogic.data.goToIfFalse">
                                     </div>
                                 </div>
                                 <div class="row mt-3" *ngSwitchCase="8">
@@ -243,7 +259,8 @@
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <input type="text" class="form-control" name="json-resp" id="gotoif-variable"
-                                            placeholder="Response Variable Name" required>
+                                            placeholder="Response Variable Name" required
+                                            [(ngModel)]="voiceLogic.data.resonseVariable">
                                     </div>
                                     <div class="col-sm-12 row mt-3">
                                         <div class="col-sm-6">
@@ -253,11 +270,11 @@
                                         </div>
                                         <div class="col-sm-6 mt-2">
                                             <button class="btn btn-outline-warning btn-sm"
-                                                (click)="addAnotherVoiceLogicEventJson()"> Add Another</button>
+                                                (click)="addAnotherVoiceLogicEventJson(i)"> Add Another</button>
                                         </div>
                                     </div>
                                     <div class="row mt-2"
-                                        *ngFor="let json of voiceLogicEventJson.voiceLogicEventJsonOptions">
+                                        *ngFor="let json of voiceLogic.data.voiceLogicEventJsonOptions">
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control" name="json-resp"
                                                 id="gotoif-variable" placeholder="Key" [(ngModel)]="json.key">
@@ -274,8 +291,11 @@
                                         <label for="music-class" class="form-label">Music Class
                                             <sup class="text-red">*</sup>
                                         </label>
-                                        <select class="form-select" name="music-class" id="music-class" required>
-                                            <option value="">Select Music Class</option>
+                                        <select class="form-select" name="music-class" id="music-class" required
+                                            [(ngModel)]="voiceLogic.data.musicClass">
+                                            <option [value]="-1">Select Music Class</option>
+                                            <option *ngFor="let music of musicClassOptionArray" [value]="music.id">
+                                                {{music.value}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -286,31 +306,33 @@
                                         </label>
                                         <input type="text" class="form-control" name="option-variable"
                                             id="option-variable" placeholder="Variable Name"
-                                            [(ngModel)]="voiceLogicEventOption.variable">
+                                            [(ngModel)]="voiceLogic.data.variable">
                                     </div>
 
                                     <div class="col-sm-6 mt-4">
                                         <input type="radio" name="option-type" id="option-file" value="FILE"
-                                            [(ngModel)]="voiceLogicEventOption.fileOrApi"> FILE
+                                            [(ngModel)]="voiceLogic.data.fileOrApi"> FILE
                                         <input type="radio" name="option-type" id="option-api" value="API"
-                                            [(ngModel)]="voiceLogicEventOption.fileOrApi"> API
+                                            [(ngModel)]="voiceLogic.data.fileOrApi"> API
                                     </div>
-                                    <div class="col-sm-6" *ngIf="voiceLogicEventOption.fileOrApi == 'FILE'">
+                                    <div class="col-sm-6" *ngIf="voiceLogic.data.fileOrApi == 'FILE'">
                                         <label for="option-sound-file" class="form-label">Sound File
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <select class="form-select" name="option-sound-file"
-                                            [(ngModel)]="voiceLogicEventOption.soundFile" id="option-sound-file"
-                                            required>
-                                            <option value="">Select Sound File</option>
+                                            [(ngModel)]="voiceLogic.data.soundFile" id="option-sound-file" required>
+                                            <option [value]="-1">Select Sound File</option>
+                                            <option *ngFor="let soundFile of soundFilesOptionArray"
+                                                [value]="soundFile.id">{{soundFile.value}}
+                                            </option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-6" *ngIf="voiceLogicEventOption.fileOrApi == 'API'">
+                                    <div class="col-sm-6" *ngIf="voiceLogic.data.fileOrApi == 'API'">
                                         <label for="option-file-url" class="form-label">File URL
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <input type="text" class="form-control" name="option-file-url"
-                                            id="option-file-url" [(ngModel)]="voiceLogicEventOption.fileUrl">
+                                            id="option-file-url" [(ngModel)]="voiceLogic.data.fileUrl">
                                     </div>
 
                                     <div class="col-sm-6">
@@ -318,49 +340,50 @@
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <input type="number" class="form-control"
-                                            [(ngModel)]="voiceLogicEventOption.fileDuration" name="option-duration"
+                                            [(ngModel)]="voiceLogic.data.fileDuration" name="option-duration"
                                             id="option-duration" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="option-timeout" class="form-label">Time Out
                                             <sup class="text-red">*</sup>
                                         </label>
-                                        <input type="number" class="form-control"
-                                            [(ngModel)]="voiceLogicEventOption.timeOut" name="option-timeout"
-                                            id="option-timeout" required>
+                                        <input type="number" class="form-control" [(ngModel)]="voiceLogic.data.timeOut"
+                                            name="option-timeout" id="option-timeout" required>
                                     </div>
                                 </div>
                                 <div class="row mt-3" *ngSwitchCase="11">
                                     <div class="col-sm-6 mt-4">
                                         <input type="radio" name="playprompt-type" id="playprompt-file" value="FILE"
-                                            [(ngModel)]="voiceLogicEventPlayPrompt.fileOrApi"> FILE
+                                            [(ngModel)]="voiceLogic.data.fileOrApi"> FILE
                                         <input type="radio" name="playprompt-type" id="playprompt-api" value="API"
-                                            [(ngModel)]="voiceLogicEventPlayPrompt.fileOrApi"> API
+                                            [(ngModel)]="voiceLogic.data.fileOrApi"> API
                                     </div>
-                                    <div class="col-sm-6" *ngIf="voiceLogicEventPlayPrompt.fileOrApi == 'FILE'">
+                                    <div class="col-sm-6" *ngIf="voiceLogic.data.fileOrApi == 'FILE'">
                                         <label for="playprompt-sound" class="form-label">Sound File
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <select class="form-select" name="playprompt-sound"
-                                            [(ngModel)]="voiceLogicEventPlayPrompt.soundFile" id="playprompt-sound"
-                                            required>
-                                            <option value="">Select Sound File</option>
+                                            [(ngModel)]="voiceLogic.data.soundFile" id="playprompt-sound" required>
+                                            <option [value]="-1">Select Sound File</option>
+                                            <option *ngFor="let soundFile of soundFilesOptionArray"
+                                                [value]="soundFile.id">{{soundFile.value}}
+                                            </option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-6" *ngIf="voiceLogicEventPlayPrompt.fileOrApi == 'API'">
+                                    <div class="col-sm-6" *ngIf="voiceLogic.data.fileOrApi == 'API'">
                                         <label for="playprompt-file-url" class="form-label">File URL
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <input type="text" class="form-control" name="playprompt-file-url"
-                                            id="playprompt-file-url" [(ngModel)]="voiceLogicEventPlayPrompt.fileUrl">
+                                            id="playprompt-file-url" [(ngModel)]="voiceLogic.data.fileUrl">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="playprompt-duration" class="form-label">File Duration
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <input type="number" class="form-control"
-                                            [(ngModel)]="voiceLogicEventPlayPrompt.fileDuration"
-                                            name="playprompt-duration" id="playprompt-duration" required>
+                                            [(ngModel)]="voiceLogic.data.fileDuration" name="playprompt-duration"
+                                            id="playprompt-duration" required>
                                     </div>
                                 </div>
                                 <div class="row mt-3" *ngSwitchCase="12">
@@ -370,58 +393,60 @@
                                         </label>
                                         <input type="text" class="form-control" name="question-variable"
                                             id="question-variable" placeholder="Variable Name"
-                                            [(ngModel)]="voiceLogicEventQuestion.variable">
+                                            [(ngModel)]="voiceLogic.data.variable">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="question-timeout" class="form-label">Digit Time Out
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <input type="number" class="form-control" name="question-timeout"
-                                            id="question-timeout" [(ngModel)]="voiceLogicEventQuestion.digitTimeOut">
+                                            id="question-timeout" [(ngModel)]="voiceLogic.data.digitTimeOut">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="question-escape" class="form-label">Escape Digit
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <input type="text" class="form-control" name="question-escape"
-                                            id="question-escape" [(ngModel)]="voiceLogicEventQuestion.escapeDigit">
+                                            id="question-escape" [(ngModel)]="voiceLogic.data.escapeDigit">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="question-max-digit" class="form-label">Max Digit
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <input type="number" class="form-control" name="question-max-digit"
-                                            id="question-max-digit" [(ngModel)]="voiceLogicEventQuestion.maxDigit">
+                                            id="question-max-digit" [(ngModel)]="voiceLogic.data.maxDigit">
                                     </div>
                                     <div class="col-sm-6 mt-4">
                                         <input type="radio" name="question-type" id="question-file" value="FILE"
-                                            [(ngModel)]="voiceLogicEventQuestion.fileOrApi"> FILE
+                                            [(ngModel)]="voiceLogic.data.fileOrApi"> FILE
                                         <input type="radio" name="question-type" id="question-api" value="API"
-                                            [(ngModel)]="voiceLogicEventQuestion.fileOrApi"> API
+                                            [(ngModel)]="voiceLogic.data.fileOrApi"> API
                                     </div>
-                                    <div class="col-sm-6" *ngIf="voiceLogicEventQuestion.fileOrApi == 'FILE'">
+                                    <div class="col-sm-6" *ngIf="voiceLogic.data.fileOrApi == 'FILE'">
                                         <label for="question-sound" class="form-label">Sound File
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <select class="form-select" name="question-sound"
-                                            [(ngModel)]="voiceLogicEventQuestion.soundFile" id="question-sound"
-                                            required>
-                                            <option value="">Select Sound File</option>
+                                            [(ngModel)]="voiceLogic.data.soundFile" id="question-sound" required>
+                                            <option [value]="-1">Select Sound File</option>
+                                            <option *ngFor="let soundFile of soundFilesOptionArray"
+                                                [value]="soundFile.id">{{soundFile.value}}
+                                            </option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-6" *ngIf="voiceLogicEventQuestion.fileOrApi == 'API'">
+                                    <div class="col-sm-6" *ngIf="voiceLogic.data.fileOrApi == 'API'">
                                         <label for="question-file-url" class="form-label">File URL
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <input type="text" class="form-control" name="question-file-url"
-                                            id="question-file-url" [(ngModel)]="voiceLogicEventQuestion.fileUrl">
+                                            id="question-file-url" [(ngModel)]="voiceLogic.data.fileUrl">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="question-duration" class="form-label">File Duration
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <input type="number" class="form-control"
-                                            [(ngModel)]="voiceLogicEventQuestion.fileDuration" name="question-duration"
+                                            [(ngModel)]="voiceLogic.data.fileDuration" name="question-duration"
                                             id="question-duration" required>
                                     </div>
                                 </div>
@@ -431,14 +456,14 @@
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <input type="text" class="form-control" name="record-escape" id="record-escape"
-                                            [(ngModel)]="voiceLogicEventRecord.escapeDigit">
+                                            [(ngModel)]="voiceLogic.data.escapeDigit">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="record-timeout" class="form-label">Time Out
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <input type="number" class="form-control" name="record-timeout"
-                                            id="record-timeout" [(ngModel)]="voiceLogicEventRecord.timeout">
+                                            id="record-timeout" [(ngModel)]="voiceLogic.data.timeout">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="record-max-timeout" class="form-label">Max Silence Timeout
@@ -446,78 +471,99 @@
                                         </label>
                                         <input type="number" class="form-control" name="record-max-timeout"
                                             id="record-max-timeout" placeholder="Variable Name"
-                                            [(ngModel)]="voiceLogicEventRecord.maxSilenceTimeout">
+                                            [(ngModel)]="voiceLogic.data.maxSilenceTimeout">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="record-dispotype" class="form-label">Disposition Type
                                             <sup class="text-red">*</sup>
                                         </label>
-                                        <select class="form-select" name="record-dispotype"
-                                            [(ngModel)]="voiceLogicEventRecord.dispositionType" id="record-dispotype"
-                                            required>
-                                            <option value="">Select Disposition Type</option>
-                                        </select>
+                                        <p-multiSelect [(ngModel)]="voiceLogic.data.dispositionType"
+                                            [options]="dispositionTypeOptionArray | dispositionFilter:campaignId"
+                                            (onChange)="onDispositionTypeChange(i)" optionLabel="name"
+                                            optionValue="name" id="record-dispotype" name="record-dispotype"
+                                            [style]="{'width':'100%', 'height':'38px'}">
+                                        </p-multiSelect>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="record-disponame" class="form-label">Disposition Name
                                             <sup class="text-red">*</sup>
                                         </label>
-                                        <select class="form-select" name="record-disponame"
-                                            [(ngModel)]="voiceLogicEventRecord.dispositionName" id="record-disponame"
-                                            required>
-                                            <option value="">Select Disposition Name</option>
-                                        </select>
+                                        <p-multiSelect [(ngModel)]="voiceLogic.data.disposition" name="record-disponame"
+                                            id="record-disponame" [options]="voiceLogic.data.dispositionOptionArray"
+                                            optionLabel="name" [style]="{'width':'100%', 'height':'38px'}">
+                                            <ng-template let-value pTemplate="selectedItems">
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div *ngFor="let option of voiceLogic.data.disposition">
+                                                        {{ option.name }}
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template let-disposition pTemplate=" item">
+                                                <div class="flex align-items-center gap-2">
+                                                    <div>
+                                                        {{disposition.name}}-
+                                                        {{disposition.description}}-
+                                                        {{disposition.type}}
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </p-multiSelect>
                                     </div>
                                     <div class="col-sm-6 mt-4">
                                         <label for="record-apicheck" class="form-label me-3">API Check
                                         </label>
                                         <input type="checkbox" name="record-apicheck" id="record-apicheck"
-                                            [value]="true" [(ngModel)]="voiceLogicEventRecord.apiCheck">
+                                            [(ngModel)]="voiceLogic.data.apiCheck">
                                     </div>
-                                    <div class="col-sm-6">
-                                        <label for="record-api" class="form-label">API
-                                            <sup class="text-red">*</sup>
-                                        </label>
-                                        <select class="form-select" name="record-api"
-                                            [(ngModel)]="voiceLogicEventRecord.api" id="record-api" required>
-                                            <option value="">Select API</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="record-reqtype" class="form-label">Request Type
-                                            <sup class="text-red">*</sup>
-                                        </label>
-                                        <select class="form-select" name="record-reqtype"
-                                            [(ngModel)]="voiceLogicEventRecord.requestType" id="record-reqtype"
-                                            required>
-                                            <option value="">Select Request Type</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="record-resptype" class="form-label">Response Type
-                                            <sup class="text-red">*</sup>
-                                        </label>
-                                        <select class="form-select" name="record-resptype"
-                                            [(ngModel)]="voiceLogicEventRecord.responseType" id="record-resptype"
-                                            required>
-                                            <option value="">Select Response Type</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="record-resp" class="form-label">Response
-                                            <sup class="text-red">*</sup>
-                                        </label>
-                                        <input type="text" class="form-control" name="record-resp"
-                                            placeholder="Response Variable Name" id="record-resp"
-                                            [(ngModel)]="voiceLogicEventRecord.response">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="record-respstatus" class="form-label">Response Status
-                                            <sup class="text-red">*</sup>
-                                        </label>
-                                        <input type="text" class="form-control" name="record-respstatus"
-                                            placeholder="Response Status Variable Name" id="record-respstatus"
-                                            [(ngModel)]="voiceLogicEventRecord.responseStatus">
+                                    <div class="row mt-2" *ngIf="voiceLogic.data.apiCheck">
+                                        <div class="col-sm-6">
+                                            <label for="record-api" class="form-label">API
+                                                <sup class="text-red">*</sup>
+                                            </label>
+                                            <select class="form-select" name="record-api"
+                                                [(ngModel)]="voiceLogic.data.api" id="record-api" required>
+                                                <option value="">Select API</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="record-reqtype" class="form-label">Request Type
+                                                <sup class="text-red">*</sup>
+                                            </label>
+                                            <select class="form-select" name="record-reqtype"
+                                                [(ngModel)]="voiceLogic.data.requestType" id="record-reqtype" required>
+                                                <option value="">Select Request Type</option>
+                                                <option *ngFor="let type of requestTypeOptionArray" [value]="type">
+                                                    {{type}}
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="record-resptype" class="form-label">Response Type
+                                                <sup class="text-red">*</sup>
+                                            </label>
+                                            <select class="form-select" name="record-resptype"
+                                                [(ngModel)]="voiceLogic.data.responseType" id="record-resptype"
+                                                required>
+                                                <option value="">Select Response Type</option>
+                                                <option *ngFor="let type of responseTypeOptionArray" [value]="type">
+                                                    {{type}}
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="record-resp" class="form-label">Response
+                                                <sup class="text-red">*</sup>
+                                            </label>
+                                            <input type="text" class="form-control" name="record-resp"
+                                                placeholder="Response Variable Name" id="record-resp"
+                                                [(ngModel)]="voiceLogic.data.response">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="record-respstatus" class="form-label">Response Status
+                                                <sup class="text-red">*</sup>
+                                            </label>
+                                            <input type="text" class="form-control" name="record-respstatus"
+                                                placeholder="Response Status Variable Name" id="record-respstatus"
+                                                [(ngModel)]="voiceLogic.data.responseStatus">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mt-3" *ngSwitchCase="15">
@@ -526,7 +572,7 @@
                                             <sup class="text-red">*</sup>
                                         </label>
                                         <input type="number" class="form-control" name="wait-time" id="wait-time"
-                                            [(ngModel)]="voiceLogicEventWait.time">
+                                            [(ngModel)]="voiceLogic.data.time">
                                     </div>
                                 </div>
                             </div>

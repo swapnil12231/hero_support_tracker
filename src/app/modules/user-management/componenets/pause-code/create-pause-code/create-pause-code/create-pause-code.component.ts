@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { PauseCodeService } from 'src/app/services/user-managenemt/pause-code.service';
+import { PauseCodeService } from 'src/app/modules/user-management/services/pause-code.service';
 import { CreatePausCode } from 'src/app/models/user-management/pause-code';
+import { Constants } from 'src/app/models/constants';
 
 @Component({
   selector: 'app-create-pause-code',
@@ -13,22 +14,23 @@ export class CreatePauseCodeComponent implements OnInit {
   public userGroupData: any;
   public result: any;
   Object = Object;
-  modalShowHide:boolean=false;
-  pauseCodeData:any;
-  modalHeaderText='Create Pause Code';
+  modalShowHide: boolean = false;
+  pauseCodeData: any;
+  modalHeaderText = 'Create Pause Code';
   createPausCode: CreatePausCode;
-  dropdowndata:any;
-  domainId=1672730382222;
+  dropdowndata: any;
+  domainId: number;
 
   constructor(private pauseCodeService: PauseCodeService) {
     this.createPausCode = new CreatePausCode();
+    this.domainId = parseInt(sessionStorage.getItem(Constants.domainId) || '0');
   }
   ngOnInit(): void {
     this.getUserGroupFieldData();
   }
 
   getUserGroupFieldData() {
-    this.pauseCodeService.getAllUserGroup(this.domainId).then((res: any) => {
+    this.pauseCodeService.getAllUserGroup().then((res: any) => {
       if (res) {
         res.forEach((item: any) => {
           this.userGroupData = item;
@@ -39,7 +41,7 @@ export class CreatePauseCodeComponent implements OnInit {
     })
   }
 
-  submit() { 
+  submit() {
     const usergroupId = (Object.keys(this.userGroupData) as (keyof typeof this.userGroupData)[]).find((key) => {
       return this.userGroupData[key] === this.dropdowndata;
     });
@@ -49,8 +51,8 @@ export class CreatePauseCodeComponent implements OnInit {
     //   "pausedescription": this.createPausCode.pausedescription,
     //   "domainId": this.domainId,
     // }
-    this.createPausCode.domainId=this.domainId;
-    this.createPausCode.usergroupId=Number(usergroupId);
+    this.createPausCode.domainId = this.domainId;
+    this.createPausCode.usergroupId = Number(usergroupId);
 
     this.pauseCodeService.addCreatedPauseCode(this.createPausCode).then((res: any) => {
       if (res.status) {
@@ -60,14 +62,14 @@ export class CreatePauseCodeComponent implements OnInit {
     })
   }
 
-  childData(data:any){
-    this.pauseCodeData=data;
-    this.modalHeaderText='Edit Pause Code';
+  childData(data: any) {
+    this.pauseCodeData = data;
+    this.modalHeaderText = 'Edit Pause Code';
   }
 
-  reset(){
-    this.pauseCodeData=null;
-    this.modalHeaderText='Add Pause Code';
+  reset() {
+    this.pauseCodeData = null;
+    this.modalHeaderText = 'Add Pause Code';
   }
 
 }

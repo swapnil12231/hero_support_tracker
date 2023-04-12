@@ -23,11 +23,7 @@ export class TeamsListComponent implements OnInit {
   }
 
   selectTeams(e: any) {
-    this.recentTeamsObj = {
-      date: e.target.value,
-      domainId: 1672730382222
-    }
-    this.dashboardService.getTeamListData(this.recentTeamsObj).then(res => {
+    this.dashboardService.getTeamListData(e.target.value).then(res => {
       this.teamListObj = res;
     });
   }

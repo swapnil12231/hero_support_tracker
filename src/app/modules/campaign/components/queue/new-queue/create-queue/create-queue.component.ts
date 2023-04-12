@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CreateQueue, PostCall } from 'src/app/models/campaign/queue';
+import { CreateNewQueue, CreateQueue, PostCall } from 'src/app/models/campaign/queue';
 import { QueueService } from 'src/app/modules/campaign/services/queue.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { QueueService } from 'src/app/modules/campaign/services/queue.service';
 export class CreateQueueComponent implements OnInit {
 
 
-  @Output() createQueueSubmit = new EventEmitter<any>();
+  @Output() createQueueSubmit = new EventEmitter<CreateNewQueue>();
 
   @Input()
   campaignsArray: Array<any> = [];
@@ -21,39 +21,44 @@ export class CreateQueueComponent implements OnInit {
   @Input()
   ivrOptionArray: Array<any> = [];
   @Input()
-  dispositionOptionTypeArray: Array<any> = [];
+  dispositionTypeOptionArray: Array<any> = [];
 
   dispositionOptionArray: Array<any> = [];
   queuePriorityArray: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   enablePostCall: boolean = false;
-  createQueue: CreateQueue;
-  postCallArray: Array<PostCall>;
+  createNewQueue: CreateNewQueue;
 
 
   constructor(private queueService: QueueService) {
-    this.createQueue = new CreateQueue();
-    this.postCallArray = new Array<PostCall>();
+    let createQueue = new CreateQueue();
+    let postCallArray = new Array<PostCall>();
+
+    this.createNewQueue = new CreateNewQueue();
+    this.createNewQueue.queue = createQueue;
+    this.createNewQueue.postCallArray = postCallArray;
+
 
     let postCall = new PostCall();
-    this.postCallArray.push(postCall);
+    this.createNewQueue.postCallArray.push(postCall);
   }
 
   addAnotherPostCall() {
     let postCall = new PostCall();
-    this.postCallArray.push(postCall);
+    this.createNewQueue.postCallArray.push(postCall);
   }
   onDispositionTypeChange(index: number) {
     let data = {
-      campId: this.createQueue.campaign,
-      dispoType: this.postCallArray[index].type.join()
+      campId: this.createNewQueue.queue.campaign,
+      dispoType: this.createNewQueue.postCallArray[index].type.join()
     }
     this.queueService.getDispositionData(data).then((res: any) => {
-      this.postCallArray[index].dispositionOptionArray = res;
+      this.createNewQueue.postCallArray[index].dispositionOptionArray = res;
     });
 
   }
   submit() {
-    // this.createQueueSubmit.emit(this.createQueue)
+
+    this.createQueueSubmit.emit(this.createNewQueue)
   }
 
 

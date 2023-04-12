@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { UserGroupsService } from 'src/app/services/user-managenemt/user-groups.service';
+import { UserGroupsService } from '../../../services/user-groups.service';
 
 @Component({
   selector: 'app-new-user-group',
@@ -13,45 +13,36 @@ export class NewUserGroupComponent implements OnInit {
   public createUserGroupRes!: any;
 
 
-public createUserSubmit!:any;
-public settingDetailsData!:any;
+  public createUserSubmit!: any;
+  public settingDetailsData!: any;
 
-  public settingDetails:boolean=false;
+  public settingDetails: boolean = false;
 
-  constructor(private userGroupsService:UserGroupsService) { }
+  constructor(private userGroupsService: UserGroupsService) { }
 
   ngOnInit(): void {
   }
 
-  
-  createUserGroupSubmit(data:any)
-{
 
-  this.createUserSubmit=data;
-  
-}
+  createUserGroupSubmit(data: any) {
 
-settingDetailsSubmit(data:any)
-  {
+    this.createUserSubmit = data;
+
+  }
+
+  settingDetailsSubmit(data: any) {
 
 
 
-    this.createUserSubmit.settingDetails=data;
+    this.createUserSubmit.settingDetails = data;
 
-console.log("dwhfjf",this.createUserSubmit);
-     
 
-this.userGroupsService.createUserGroup(this.createUserSubmit)
-      .then(
-        res => {
-          if (res != null) {
-            this.createUserGroupRes = res;
-            console.log("this.createUserGroupRes", this.createUserGroupRes);
 
-          }
-        },
-        err => { this.createUserGroupRes = err }
-      )
+    this.userGroupsService.createUserGroup(this.createUserSubmit).then(res => {
+      this.createUserGroupRes = res;
+    },
+      err => { this.createUserGroupRes = err }
+    )
 
 
   }

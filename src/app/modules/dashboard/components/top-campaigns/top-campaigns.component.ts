@@ -32,11 +32,7 @@ export class TopCampaignsComponent implements OnInit {
   }
 
   getCampaignDetails(e: any) {
-    this.dataCampaignObj = {
-      date: e.target.value,
-      domainId: 1672730382222,
-    }
-    this.dashboardService.getTopCampaignsData(this.dataCampaignObj).then(res => {
+    this.dashboardService.getTopCampaignsData(e.target.value).then(res => {
       this.campaignDetails = res;
       if (this.campaignDetails.length)
         this.maxCampaignsValue = this.campaignDetails.map((e: any) => e.value).reduce((a: number, b: number) => Math.max(a, b));

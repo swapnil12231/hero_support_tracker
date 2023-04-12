@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from 'src/app/services/user-managenemt/users.service';
+import { UsersService } from '../../../services/users.service';
 
 @Component({
   selector: 'app-create-user',
@@ -8,10 +8,10 @@ import { UsersService } from 'src/app/services/user-managenemt/users.service';
 })
 export class CreateUserComponent implements OnInit {
 
-public createUsersRes!:any;
+  public createUsersRes!: any;
 
   constructor(
-    private usersService:UsersService,
+    private usersService: UsersService,
   ) { }
 
   ngOnInit(): void {

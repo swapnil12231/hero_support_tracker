@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PauseCodeService } from 'src/app/services/user-managenemt/pause-code.service';
+import { PauseCodeService } from 'src/app/modules/user-management/services/pause-code.service';
 import { CreatePauseCodeComponent } from './create-pause-code/create-pause-code/create-pause-code.component';
 
 @Component({
@@ -22,8 +22,7 @@ export class PauseCodeComponent implements OnInit {
   }
 
   async getAllPauseCode() {
-    let domainID = 1672730382222;
-    this.pauseCodeService.getAllPauseCodeSet(domainID).then(res => {
+    this.pauseCodeService.getAllPauseCodeSet().then(res => {
       if (res) {
         this.pauseCodeDataRes = res;
       }
@@ -37,7 +36,7 @@ export class PauseCodeComponent implements OnInit {
   }
 
   pauseCodeEdit(row: any) {
-    this.canNewPauseCode=true;
+    this.canNewPauseCode = true;
     this.pauseCodeRowData = {
       'data': row,
       'canShowUpdate': true,

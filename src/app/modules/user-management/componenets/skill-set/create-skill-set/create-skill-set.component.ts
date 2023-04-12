@@ -1,7 +1,8 @@
-import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CreateSkillSet } from 'src/app/models/user-management/skill-set';
-import { SkillSetService } from 'src/app/services/user-managenemt/skill-set.service';
+import { SkillSetService } from '../../../services/skill-set.service';
+import { Constants } from 'src/app/models/constants';
 
 @Component({
   selector: 'app-create-skill-set',
@@ -10,30 +11,29 @@ import { SkillSetService } from 'src/app/services/user-managenemt/skill-set.serv
 })
 export class CreateSkillSetComponent implements OnInit {
 
-@Output() createSkillSetSubmit =new EventEmitter<any>();
+  @Output() createSkillSetSubmit = new EventEmitter<any>();
 
   public createSkillSetRes: any;
   public createSkillSet!: CreateSkillSet;
+  domainId: number;
 
-
-  constructor(
-    private skillSetService: SkillSetService,
-  ) {
+  constructor(private skillSetService: SkillSetService) {
     this.createSkillSet = new CreateSkillSet();
+    this.domainId = parseInt(sessionStorage.getItem(Constants.domainId) || '0');
   }
 
   ngOnInit(): void {
   }
 
 
-  submit(createSkillSetForm:NgForm) {
+  submit(createSkillSetForm: NgForm) {
 
     let dataObj = {
       "name": this.createSkillSet.name,
       "description": this.createSkillSet.description,
       "color": this.createSkillSet.color,
       "status": this.createSkillSet.status,
-      "domainId": 1672730382222
+      "domainId": this.domainId
     }
 
 
@@ -43,17 +43,17 @@ export class CreateSkillSetComponent implements OnInit {
 
     this.skillSetService.createSkillSet(dataObj)
       .then(
-        (res:any) => {
+        (res: any) => {
           if (res.status) {
             this.createSkillSetRes = res;
 
             this.createSkillSetSubmit.emit();
-           
+
             createSkillSetForm.resetForm();
-            
+
           }
         },
         err => { this.createSkillSetRes = err }
       )
-    }
+  }
 }

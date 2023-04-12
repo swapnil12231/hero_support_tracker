@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Constants } from 'src/app/models/constants';
 import { Priority, CreateUserGroup, Seat, IntractionAllowed, SkillsPriority } from 'src/app/models/user-management/user-groups';
-import { UserGroupsService } from 'src/app/services/user-managenemt/user-groups.service';
+import { UserGroupsService } from 'src/app/modules/user-management/services/user-groups.service';
 
 @Component({
   selector: 'app-create-user-group',
@@ -10,7 +11,7 @@ import { UserGroupsService } from 'src/app/services/user-managenemt/user-groups.
 export class CreateUserGroupComponent implements OnInit {
 
 
-  @Output() createUserGroupSubmit =new EventEmitter<any>();
+  @Output() createUserGroupSubmit = new EventEmitter<any>();
 
   public defaultCampaignValue = {
     id: '',
@@ -32,6 +33,7 @@ export class CreateUserGroupComponent implements OnInit {
   public campaignsArray: Array<any> = [];
   public skillsArray: Array<any> = [];
   public createUserGroupRes!: any;
+  domainId: number;
 
   constructor(
     private userGroupsService: UserGroupsService,
@@ -40,6 +42,7 @@ export class CreateUserGroupComponent implements OnInit {
     this.priority = new Priority();
     this.seat = new Seat();
     this.intractionAllowed = new IntractionAllowed();
+    this.domainId = parseInt(sessionStorage.getItem(Constants.domainId) || '0');
 
   }
 
@@ -51,11 +54,7 @@ export class CreateUserGroupComponent implements OnInit {
 
 
   async getUserGroupEntity() {
-
-
-
-    let domainId = 1672730382222;
-    this.userGroupsService.getUserGroupEntity(domainId)
+    this.userGroupsService.getUserGroupEntity()
       .then(
         (res: any) => {
           if (res) {
@@ -102,15 +101,14 @@ export class CreateUserGroupComponent implements OnInit {
   }
 
 
-submit()
-{
+  submit() {
 
     let dataObj = {
       "name": this.createUserGroup.name,
       "description": this.createUserGroup.description,
       "agentlogin": this.createUserGroup.agentCampaignSelection,
       "defaultCampId": this.defaultCampaignValue.id,
-      "domainId": 1672730382222,
+      "domainId": this.domainId,
       "interactionDetails": {
         "call": {
           //  "priority": "priority",
@@ -179,9 +177,9 @@ submit()
         },
         "maxinteraction": this.createUserGroup.agentMaxInteraction,
       },
-       "settingDetails": [
-      
-       ],
+      "settingDetails": [
+
+      ],
       "campaigns": [
         this.createUserGroup.campaign,
       ],
@@ -190,10 +188,10 @@ submit()
 
     }
 
-      this.createUserGroupSubmit.emit(dataObj)
+    this.createUserGroupSubmit.emit(dataObj)
 
-}
-  
+  }
+
 }
 
 
