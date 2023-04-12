@@ -1,10 +1,16 @@
 export class SameUser
-{
+{   
     name!:string;
-    id:any;
+    fullName!:string;
+    userGroup!:string;
+    phoneNo!:any;
+    emailId!:string;
     password!:string;
+    webRole!:string;
     extension!:string;
-    status!:string;
+    securityQuestion:string="teacher";
+    securityAnswer!:string;
+    status:string="ACTIVE";
 }
 
 export class MultiUser

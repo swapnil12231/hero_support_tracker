@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserGroupsService } from 'src/app/services/user-managenemt/user-groups.service';
+import { UserGroupsService } from '../../services/user-groups.service';
 
 @Component({
   selector: 'app-user-groups',
@@ -8,42 +8,23 @@ import { UserGroupsService } from 'src/app/services/user-managenemt/user-groups.
 })
 export class UserGroupsComponent implements OnInit {
 
+  public p!: any;
+  public allUserGroup!: any;
 
-  allUserGroup!:any;
 
 
-
-  constructor(
-    private userGroupsService:UserGroupsService
-  ) { 
-    
-  }
+  constructor(private userGroupsService: UserGroupsService) { }
 
   ngOnInit(): void {
-    this.getAllUserGroups()
+    this.getAllUserGroups();
   }
 
 
 
-  async getAllUserGroups()
-  {
-
-
-
-    let domainId = 1672730382222;
-    this.userGroupsService.getAllUserGroups(domainId)
-    .then(
-      res=>{  
-        if(res!=null)
-        {
-            this.allUserGroup=res;
-            console.log("All user Group",this.allUserGroup);
-            
-        }
-
-      }
-    )
-
-    }
+  async getAllUserGroups() {
+    this.userGroupsService.getAllUserGroups().then(res => {
+      this.allUserGroup = res;
+    });
+  }
 
 }

@@ -19,7 +19,7 @@ export class MultiUserComponent implements OnInit {
 
   submit()
   {
-    this.createMultiUserSubmit.emit("multi user created");
+    this.createMultiUserSubmit.emit(this.createMultiUserSubmit);
   }
 
 }

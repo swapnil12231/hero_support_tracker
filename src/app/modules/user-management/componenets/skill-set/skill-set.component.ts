@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SkillSetService } from 'src/app/services/user-managenemt/skill-set.service';
+import { SkillSetService } from '../../services/skill-set.service';
 
 @Component({
   selector: 'app-skill-set',
@@ -8,32 +8,25 @@ import { SkillSetService } from 'src/app/services/user-managenemt/skill-set.serv
 })
 export class SkillSetComponent implements OnInit {
 
-public allSkillSet!:any;
+  public p!: any;
+  public allSkillSet!: any;
 
-  constructor(
-    private skillSetService:SkillSetService
-  ) { }
+  constructor(private skillSetService: SkillSetService) { }
 
   ngOnInit(): void {
     this.getAllSkillSet()
   }
 
+  createPauseCodeSubmit() {
+    this.getAllSkillSet();
+  }
 
 
-  async getAllSkillSet()
-  {
-    let domainID=1672730382222;
 
-       this.skillSetService.getAllSkillSet(domainID)
-       .then(res=>{
-           if(res!=null)
-              {
-                this.allSkillSet=res;
-
-                console.log("skill data",this.allSkillSet);
-                
-              }
-       })
+  async getAllSkillSet() {
+    this.skillSetService.getAllSkillSet().then(res => {
+      this.allSkillSet = res;
+    })
   }
 
 }

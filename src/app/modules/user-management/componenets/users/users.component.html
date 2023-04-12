@@ -8,43 +8,44 @@
                         <thead class="light-blue">
                             <tr>
                                 <th><input type="checkbox"> </th>
-                                <th>Name </th>
-                                <th>User ID</th>
+                                <th>User Id </th>
+                                <th>User Name </th>
+                                <th>User Full Name</th>
                                 <th>Extension</th>
-
-
+                                <th>WebRole </th>
                                 <th> User Group</th>
-                                <th>Role </th>
-                                <th> Parent</th>
                                 <th> Status</th>
-
+                                <th> Parent</th>
                                 <th> Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr *ngFor="let user of users | paginate: { itemsPerPage: 5, currentPage: p }">
                                 <td><input type="checkbox"></td>
-                                <td> Nimal Pandya</td>
-                                <td> nirmal.pandya</td>
-                                <td> 2015</td>
-                                <td>Sales UG</td>
-                                <td>Admin</td>
-                                <td> Akash Chopra</td>
+                                <td> {{user.id}}</td>
+                                <td> {{user.name}}</td>
+                                <td> {{user.fullname}}</td>
+                                <td> {{user.extension}}</td>
+                                <td>{{user.webadminrole}}</td>
+                                <td>{{user.usergroupid}}</td>
+                                <td>{{user.status}}</td>
+                                <td> {{user.parentuser}}</td>
 
-                                <td>Active</td>
 
-                                <td class="actionsColumn">
-                                    <a href="" title="Edit" class="me-2">
-                                        <img src="images/user-management/edit.png" alt="Edit" width="17"></a>
-                                    <a href="" title="Delete"> <img src="images/user-management/deleted-data.png" alt="Delete" width="17"></a>
+                                <td>
+                                    <a href="" title="Edit">
+                                        <i class="p-2 border rounded fa fa-edit me-2 text-muted"></i></a>
+                                    <a href="" title="Delete"> <i class="p-2 border rounded fa fa-trash text-muted"></i></a>
                                 </td>
+                                
                             </tr>
 
 
                         </tbody>
                     </table>
+                    <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
 
-                    <div class="d-none">
+                    <!-- <div class="d-none">
                         <table class="table table-bordered">
                             <thead class="light-blue">
                                 <tr>
@@ -79,10 +80,10 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div> -->
                 </div>
             </div>
-            <div class="card-body">
+            <!-- <div class="card-body">
                 <div class="row">
 
                     <div class="col-md-12">
@@ -102,7 +103,11 @@
 
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
+</div>
+
+<div >
+    <app-create-user></app-create-user>
 </div>

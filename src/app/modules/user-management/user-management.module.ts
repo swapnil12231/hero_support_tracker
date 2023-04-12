@@ -10,7 +10,7 @@ import { ExtensionComponent } from './componenets/extension/extension.component'
 import { PauseCodeComponent } from './componenets/pause-code/pause-code.component';
 import { SameUserComponent } from './componenets/users/create-user/same-user/same-user.component';
 import { MultiUserComponent } from './componenets/users/create-user/multi-user/multi-user.component';
-import { CreateUserGroupComponent } from './componenets/user-groups/create-user-group/create-user-group.component';
+import { CreateUserGroupComponent } from './componenets/user-groups/new-user-group/create-user-group/create-user-group.component';
 import { CreateSkillSetComponent } from './componenets/skill-set/create-skill-set/create-skill-set.component';
 import { CreateExtensionComponent } from './componenets/extension/create-extension/create-extension.component';
 import { CreatePauseCodeComponent } from './componenets/pause-code/create-pause-code/create-pause-code/create-pause-code.component';
@@ -19,6 +19,9 @@ import { SamePassComponent } from './componenets/extension/create-extension/same
 import { DoublePassComponent } from './componenets/extension/create-extension/double-pass/double-pass.component'; 
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NewUserGroupComponent } from './componenets/user-groups/new-user-group/new-user-group.component';
+import { SettingDetailsComponent } from './componenets/user-groups/new-user-group/setting-details/setting-details/setting-details.component'; 
+
 
 
 @NgModule({
@@ -37,7 +40,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CreatePauseCodeComponent,
     CreateUserComponent,
     SamePassComponent,
-    DoublePassComponent
+    DoublePassComponent,
+    NewUserGroupComponent,
+    SettingDetailsComponent,
+    
   ],
   imports: [
     CommonModule,

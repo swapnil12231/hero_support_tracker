@@ -15,30 +15,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let skillSet of allSkillSet;">
+                        <tr *ngFor="let skillSet of allSkillSet | paginate: { itemsPerPage: 5, currentPage: p }">
                             <td><input type="checkbox"></td>
                             <td>{{skillSet.skillname}} </td>
                             <td> {{skillSet.description}} </td>
-                            <td> <input type="color" name="favcolor" [ngStyle]="{color:skillSet.color}"></td>
+                            <td>
+                                <div [style]="{'background': skillSet.color, 'width':'48px', 'height': '20px'}"></div>
+                               
+                            </td>
 
                             <td>{{skillSet.status}}</td>
 
 
-                            <td class="actionsColumn">
-                                <a href="" title="Edit" class="me-2">
-                                    <img src="images/edit.png" alt="Edit" width="17"></a>
-                                <a href="" title="Delete"> <img src="images/delete.png" alt="Delete" width="17"></a>
+                            <td>
+                                <a href="" title="Edit">
+                                    <i class="p-2 border rounded fa fa-edit me-2 text-muted"></i></a>
+                                <a href="" title="Delete"> <i class="p-2 border rounded fa fa-trash text-muted"></i></a>
                             </td>
                         </tr>
 
-                        
+
                     </tbody>
                 </table>
+                <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
 
 
             </div>
         </div>
-        <div class="card-body">
+        <!-- <div class="card-body">
             <div class="row">
 
                 <div class="col-md-12">
@@ -58,7 +62,8 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
 </div>
+<app-create-skill-set (createSkillSetSubmit)="createPauseCodeSubmit()"></app-create-skill-set>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
-import { TransferLogic, VoiceLogic, VoiceLogicEventApi, VoiceLogicEventAssignment, VoiceLogicEventExtension, VoiceLogicEventFollowup, VoiceLogicEventGoToIf, VoiceLogicEventJson, VoiceLogicEventJsonOptions, VoiceLogicEventOption, VoiceLogicEventPlayPrompt, VoiceLogicEventQuestion, VoiceLogicEventRecord, VoiceLogicEventWait } from 'src/app/models/campaign/queue';
+import { TransferLogic, VoiceLogic, VoiceLogicEventApi, VoiceLogicEventAssignment, VoiceLogicEventExtension, VoiceLogicEventFollowup, VoiceLogicEventGoToIf, VoiceLogicEventJson, VoiceLogicEventJsonOptions, VoiceLogicEventMusic, VoiceLogicEventOption, VoiceLogicEventPlayPrompt, VoiceLogicEventQuestion, VoiceLogicEventRecord, VoiceLogicEventWait } from 'src/app/models/campaign/queue';
+import { QueueService } from 'src/app/modules/campaign/services/queue.service';
 
 @Component({
   selector: 'app-transfer-logic',
@@ -12,6 +13,16 @@ export class TransferLogicComponent implements OnInit {
 
   @Input()
   skillOptionArray: Array<any> = [];
+  @Input()
+  soundFilesOptionArray: Array<any> = [];
+  @Input()
+  musicClassOptionArray: Array<any> = [];
+  @Input()
+  dispositionTypeOptionArray: Array<any> = [];
+  @Input()
+  campaignId: number = 0;
+  @Input()
+  apiOptionArray: Array<any> = [];
 
   transferLogicArray: Array<TransferLogic>;
   voiceLogicArray: Array<VoiceLogic>;
@@ -34,45 +45,21 @@ export class TransferLogicComponent implements OnInit {
     { id: 14, value: "Record" },
     { id: 15, value: "Wait" }
   ];
-  voiceLogicEventJson: VoiceLogicEventJson;
-  voiceLogicEventOption: VoiceLogicEventOption;
-  voiceLogicEventPlayPrompt: VoiceLogicEventPlayPrompt;
-  voiceLogicEventQuestion: VoiceLogicEventQuestion;
-  voiceLogicEventRecord: VoiceLogicEventRecord;
-  voiceLogicEventWait: VoiceLogicEventWait;
-  voiceLogicEventApi: VoiceLogicEventApi;
-  voiceLogicEventAssignment: VoiceLogicEventAssignment;
-  voiceLogicEventExtension: VoiceLogicEventExtension;
-  voiceLogicEventFollowup: VoiceLogicEventFollowup;
-  voiceLogicEventGoToIf: VoiceLogicEventGoToIf;
+  requestTypeOptionArray: Array<string> = ["TEXT", "JSON", "XML"];
+  responseTypeOptionArray: Array<string> = ["TEXT", "JSON", "XML"];
+  operationTypeOptionArray: Array<string> = ["append", "assignment", "decrement", "increment"];
+  functionTypeOptionArray: Array<string> = ["clear()", "getData(x)", "getData(x,y)", "length()", "toLower()", "toUpper()", "split(symbol)"];
+  conditionTypeOptionArray: Array<string> = ["eq", "eq-ignore-case", "gt", "lt", "not-eq", "lt-eq", "gt-eq", "contains", "not-contains", "starts-with", "is-blank", "is-null"];
 
-
-  constructor() {
+  constructor(private queueService: QueueService) {
     this.transferLogicArray = new Array<TransferLogic>();
     this.voiceLogicArray = new Array<VoiceLogic>();
-    this.voiceLogicEventOption = new VoiceLogicEventOption();
-    this.voiceLogicEventPlayPrompt = new VoiceLogicEventPlayPrompt();
-    this.voiceLogicEventQuestion = new VoiceLogicEventQuestion();
-    this.voiceLogicEventRecord = new VoiceLogicEventRecord();
-    this.voiceLogicEventWait = new VoiceLogicEventWait();
-    this.voiceLogicEventApi = new VoiceLogicEventApi();
-    this.voiceLogicEventAssignment = new VoiceLogicEventAssignment();
-    this.voiceLogicEventExtension = new VoiceLogicEventExtension();
-    this.voiceLogicEventFollowup = new VoiceLogicEventFollowup();
-    this.voiceLogicEventGoToIf = new VoiceLogicEventGoToIf();
 
     let transferLogic = new TransferLogic();
     this.transferLogicArray.push(transferLogic);
 
     let voiceLogic = new VoiceLogic();
     this.voiceLogicArray.push(voiceLogic);
-
-    let voiceLogicEventJson = new VoiceLogicEventJson();
-    let voiceLogicEventJsonOption = new VoiceLogicEventJsonOptions();
-    let voiceLogicEventJsonOptionArray = new Array<VoiceLogicEventJsonOptions>();
-    voiceLogicEventJsonOptionArray.push(voiceLogicEventJsonOption);
-    voiceLogicEventJson.voiceLogicEventJsonOptions = voiceLogicEventJsonOptionArray;
-    this.voiceLogicEventJson = voiceLogicEventJson;
   }
   addAnotherTransferLogic() {
     let transferLogic = new TransferLogic();
@@ -82,12 +69,81 @@ export class TransferLogicComponent implements OnInit {
     let voiceLogic = new VoiceLogic();
     this.voiceLogicArray.push(voiceLogic);
   }
-  addAnotherVoiceLogicEventJson() {
+  onEventChange(index: number) {
+    if (this.voiceLogicArray[index].event == 1) {
+      let voiceLogicEventApi = new VoiceLogicEventApi();
+      this.voiceLogicArray[index].data = voiceLogicEventApi;
+    }
+    else if (this.voiceLogicArray[index].event == 2) {
+      let voiceLogicEventAssignment = new VoiceLogicEventAssignment();
+      this.voiceLogicArray[index].data = voiceLogicEventAssignment;
+    }
+    else if (this.voiceLogicArray[index].event == 4) {
+      let voiceLogicEventExtension = new VoiceLogicEventExtension();
+      this.voiceLogicArray[index].data = voiceLogicEventExtension;
+    }
+    else if (this.voiceLogicArray[index].event == 5) {
+      let voiceLogicEventFollowup = new VoiceLogicEventFollowup();
+      this.voiceLogicArray[index].data = voiceLogicEventFollowup;
+    }
+    else if (this.voiceLogicArray[index].event == 6) {
+      let voiceLogicEventGoToIf = new VoiceLogicEventGoToIf();
+      this.voiceLogicArray[index].data = voiceLogicEventGoToIf;
+    }
+    else if (this.voiceLogicArray[index].event == 8) {
+      let voiceLogicEventJson = new VoiceLogicEventJson();
+
+      let voiceLogicEventJsonOptionArray = new Array<VoiceLogicEventJsonOptions>();
+      let voiceLogicEventJsonOption = new VoiceLogicEventJsonOptions();
+      voiceLogicEventJsonOptionArray.push(voiceLogicEventJsonOption);
+      voiceLogicEventJson.voiceLogicEventJsonOptions = voiceLogicEventJsonOptionArray;
+
+      this.voiceLogicArray[index].data = voiceLogicEventJson;
+    }
+    else if (this.voiceLogicArray[index].event == 9) {
+      let voiceLogicEventMusic = new VoiceLogicEventMusic();
+      this.voiceLogicArray[index].data = voiceLogicEventMusic;
+    }
+    else if (this.voiceLogicArray[index].event == 10) {
+      let voiceLogicEventOption = new VoiceLogicEventOption();
+      this.voiceLogicArray[index].data = voiceLogicEventOption;
+    }
+    else if (this.voiceLogicArray[index].event == 11) {
+      let voiceLogicEventPlayPrompt = new VoiceLogicEventPlayPrompt();
+      this.voiceLogicArray[index].data = voiceLogicEventPlayPrompt;
+    }
+    else if (this.voiceLogicArray[index].event == 12) {
+      let voiceLogicEventQuestion = new VoiceLogicEventQuestion();
+      this.voiceLogicArray[index].data = voiceLogicEventQuestion;
+    }
+    else if (this.voiceLogicArray[index].event == 14) {
+      let voiceLogicEventRecord = new VoiceLogicEventRecord();
+      this.voiceLogicArray[index].data = voiceLogicEventRecord;
+    }
+    else if (this.voiceLogicArray[index].event == 15) {
+      let voiceLogicEventWait = new VoiceLogicEventWait();
+      this.voiceLogicArray[index].data = voiceLogicEventWait;
+    }
+
+  }
+  addAnotherVoiceLogicEventJson(index: number) {
+
     let voiceLogicEventJsonOption = new VoiceLogicEventJsonOptions();
-    this.voiceLogicEventJson.voiceLogicEventJsonOptions.push(voiceLogicEventJsonOption);
+    this.voiceLogicArray[index].data.voiceLogicEventJsonOptions.push(voiceLogicEventJsonOption);
+  }
+  onDispositionTypeChange(index: number) {
+    let data = {
+      campId: this.campaignId,
+      dispoType: this.voiceLogicArray[index].data.disposition.join()
+    }
+    this.queueService.getDispositionData(data).then((res: any) => {
+      this.voiceLogicArray[index].data.dispositionOptionArray = res;
+    });
+    // this.voiceLogicArray[index].data.disposition = ;
   }
   submit() {
     // this.transferLogicSubmit.emit(this.transferLogicArray);
+    console.log("Test ", this.voiceLogicArray);
   }
 
   ngOnInit(): void {

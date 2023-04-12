@@ -1,35 +1,78 @@
-<div class="tab-content" id="createUserTabContent">
+<!-- <div class="tab-content" id="createUserTabContent"> -->
 
-    <div class="tab-pane fade show active py-4" id="sameUser-tab-pane" role="tabpanel" aria-labelledby="sameUser-tab"
-        tabindex="0">
-        <div class="row gy-3">
+<div class="tab-pane fade show active py-4" id="sameUser-tab-pane" role="tabpanel" aria-labelledby="sameUser-tab"
+    tabindex="0">
+    <div class="row gy-3">
+        <div class="col-sm-6">
+            <label for="" class="form-label">User Name <sup class="text-red">*</sup></label>
+            <input type="text" class="form-control" name="SameUserName" id="sameUserName" #SameUserName="ngModel"
+                [(ngModel)]="sameUser.name" placeholder="Enter campaign name" required>
+            <span class="text-danger" *ngIf="SameUserName.invalid && SameUserName.touched">
+                *user name is required
+            </span>
+        </div>
+
+
+        <div class="col-sm-6">
+            <label for="" class="form-label">Password<sup class="text-red">*</sup></label>
+            <input type="password" class="form-control" name="SameUserPassword" id="sameUserPassword"
+                #SameUserPassword="ngModel" [(ngModel)]="sameUser.password" placeholder="Enter password" required>
+            <span class="text-danger" *ngIf="SameUserPassword.invalid && SameUserPassword.touched">
+                *password is required
+            </span>
+        </div>
+
+        <div class="col-sm-6">
+            <label for="" class="form-label">User Full Name <sup class="text-red">*</sup></label>
+            <input type="text" class="form-control" name="SameUserFullName" id="SameUserFullName"
+                #SameUserFullName="ngModel" [(ngModel)]="sameUser.fullName" placeholder="Enter user full name" required>
+            <span class="text-danger" *ngIf="SameUserFullName.invalid && SameUserFullName.touched">
+                *user Id name is required
+            </span>
+        </div>
+
+   
+
+
             <div class="col-sm-6">
-                <label for="" class="form-label">User Name <sup class="text-red">*</sup></label>
-                <input type="text" class="form-control" name="SameUserName" #SameUserName="ngModel" [(ngModel)]="sameUser.name" placeholder="Enter campaign name"  required>
-                <span class="text-danger" *ngIf="SameUserName.invalid && SameUserName.touched">
-                    *user name is required
+                <label for="state" class="form-label">User Group <sup class="text-red">*</sup></label>
+                <select class="form-select" name="SameUserUserGroup" #SameUserUserGroup="ngModel"
+                    [(ngModel)]="sameUser.userGroup" required>
+                    <option value="undefined" selected>Select status</option>
+                    <option value="salesUG" selected>salesUG</option>
+
+                </select>
+
+            </div>
+
+            <div class="col-sm-6">
+                <label for="" class="form-label">Phone Number <sup class="text-red">*</sup></label>
+                <input type="text" class="form-control" name="SameUserPhoneNo" id="SameUserPhoneNo"
+                    #SameUserPhoneNo="ngModel" [(ngModel)]="sameUser.phoneNo" placeholder="Enter user full name"
+                    required>
+                <span class="text-danger" *ngIf="SameUserPhoneNo.invalid && SameUserPhoneNo.touched">
+                    *phone no is required
                 </span>
             </div>
 
 
+            
+
             <div class="col-sm-6">
-                <label for="" class="form-label">User ID <sup class="text-red">*</sup></label>
-                <input type="text" class="form-control" name="SameUserId" #SameUserId="ngModel" [(ngModel)]="sameUser.id" placeholder="Enter user ID" required  >
-                <span class="text-danger" *ngIf="SameUserId.invalid && SameUserId.touched">
-                    *user Id name is required
+                <label for="" class="form-label">Email ID <sup class="text-red">*</sup></label>
+                <input type="text" class="form-control" name="SameUserEmailId" id="SameUserEmailId"
+                    #SameUserEmailId="ngModel" [(ngModel)]="sameUser.emailId" placeholder="Enter user full name"
+                    required>
+                <span class="text-danger" *ngIf="SameUserEmailId.invalid && SameUserEmailId.touched">
+                    *email id is required
                 </span>
             </div>
 
-            <div class="col-sm-6">
-                <label for="" class="form-label">Password<sup class="text-red">*</sup></label>
-                <input type="password" class="form-control" name="SameUserPassword" #SameUserPassword="ngModel" [(ngModel)]="sameUser.password" placeholder="Enter password" required >
-                <span class="text-danger" *ngIf="SameUserPassword.invalid && SameUserPassword.touched">
-                    *password is required
-                </span>
-            </div>
             <div class="col-sm-6 d-flex align-items-center">
-                <div class="w-100"> <label for="" class="form-label">Extension <sup class="text-red">*</sup></label>
-                    <select class="form-select" name="SameUserExtension" #SameUserExtension="ngModel" [(ngModel)]="sameUser.extension" required>
+                <div class="w-100"> <label for="" class="form-label">User Extension <sup
+                            class="text-red">*</sup></label>
+                    <select class="form-select" name="SameUserExtension" #SameUserExtension="ngModel"
+                        [(ngModel)]="sameUser.extension" required>
                         <option value="-1">Select music</option>
                     </select>
                 </div>
@@ -41,10 +84,45 @@
                 </div>
 
             </div>
+
+
+            <div class="col-sm-6">
+                <label for="state" class="form-label">Web Role <sup class="text-red">*</sup></label>
+                <select class="form-select" name="SameUserWebRole" #SameUserWebRole="ngModel"
+                    [(ngModel)]="sameUser.webRole" required>
+                    <option value="undefined" selected>Select status</option>
+
+                </select>
+
+            </div>
+            <div class="col-sm-6">
+                <label for="state" class="form-label">Security Question <sup class="text-red">*</sup></label>
+                <select class="form-select" name="SameUserSecurityQuestion" #SameUserSecurityQuestion="ngModel"
+                    [(ngModel)]="sameUser.securityQuestion" required>
+                    <!-- <option value="undefined" selected>Select status</option> -->
+                    <option value="teacher" selected>Your Favourite Teacher Name</option>
+                    <option value="destination" selected>Your Favourite Destination Name</option>
+                </select>
+
+            </div>
+
+            <div class="col-sm-6">
+                <label for="" class="form-label">Security Answer <sup class="text-red">*</sup></label>
+                <input type="text" class="form-control" name="SameUserSecurityAnswer" id="SameUserSecurityAnswer"
+                    #SameUserSecurityAnswer="ngModel" [(ngModel)]="sameUser.securityAnswer"
+                    placeholder="Enter user full name" required>
+                <span class="text-danger" *ngIf="SameUserSecurityAnswer.invalid && SameUserSecurityAnswer.touched">
+                    *security answer is required
+                </span>
+            </div>
+
             <div class="col-sm-6">
                 <label for="state" class="form-label">Status <sup class="text-red">*</sup></label>
-                <select class="form-select" name="SameUserStatus" #SameUserStatus="ngModel" [(ngModel)]="sameUser.status" required>
-                    <option value="-1">Select status</option>
+                <select class="form-select" name="SameUserStatus" #SameUserStatus="ngModel"
+                    [(ngModel)]="sameUser.status" required>
+                    <!-- <option value="undefined" selected>Select status</option> -->
+                    <option value="ACTIVE" selected>ACTIVE</option>
+                    <option value="INACTIVE" selected>INACTIVE</option>
 
                 </select>
 
@@ -53,10 +131,10 @@
 
 
 
-        </div>
-        <div class="col col-md-12 text-center mt-3"> <button type="button" class="btn btn-warning text-white px-4" (click)="submit()">SUBMIT</button></div>
+        <div class="col col-md-12 text-center mt-3"> <button type="button" class="btn btn-warning text-white px-4"
+                (click)="submit()" data-bs-dismiss="modal">SUBMIT</button></div>
 
     </div>
 
 
-</div>
+    <!-- </div> -->

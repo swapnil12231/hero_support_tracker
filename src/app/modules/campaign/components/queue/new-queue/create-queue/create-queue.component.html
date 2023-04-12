@@ -13,7 +13,7 @@
                         <sup class="text-red">*</sup>
                     </label>
                     <select class="form-select" name="queueCampaign" #queueCampaign="ngModel"
-                        [(ngModel)]="createQueue.campaign" required>
+                        [(ngModel)]="createNewQueue.queue.campaign" required>
                         <option [value]="-1">Select campaign</option>
                         <option *ngFor="let campaign of campaignsArray" [value]="campaign.id">{{campaign.value}}
                         </option>
@@ -24,7 +24,7 @@
                         <sup class="text-red">*</sup>
                     </label>
                     <input type="text" class="form-control" name="queueQueueName" #queueQueueName="ngModel"
-                        [(ngModel)]="createQueue.name" placeholder="Enter name" required>
+                        [(ngModel)]="createNewQueue.queue.name" placeholder="Enter name" required>
                     <span class="text-danger" *ngIf="queueQueueName.invalid && queueQueueName.touched">
                         *Queue name is required
                     </span>
@@ -35,7 +35,7 @@
                         <sup class="text-red">*</sup>
                     </label>
                     <select class="form-select" name="queueQueuepriority" #queueQueuepriority="ngModel"
-                        [(ngModel)]="createQueue.priority" required>
+                        [(ngModel)]="createNewQueue.queue.priority" required>
                         <option [value]="-1">Select any</option>
                         <option [value]="0">0</option>
                         <option [value]="1">1</option>
@@ -56,7 +56,7 @@
                             <sup class="text-red">*</sup>
                         </label>
                         <select class="form-select" name="queueMusicClass" #queueMusicClass="ngModel"
-                            [(ngModel)]="createQueue.musicClass" required>
+                            [(ngModel)]="createNewQueue.queue.musicClass" required>
                             <option [value]="-1">Select music</option>
                             <option *ngFor="let music of musicClassArray" [value]="music.id">{{music.value}}</option>
                         </select>
@@ -82,7 +82,7 @@
                     Post Call
                 </h1>
                 <div class="accordion" id="post-call-acc">
-                    <div class="accordion-item" *ngFor="let postCall of postCallArray;let i = index">
+                    <div class="accordion-item" *ngFor="let postCall of createNewQueue.postCallArray;let i = index">
                         <h2 class="accordion-header" [id]="'post-acc-heading' + i">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 [attr.data-bs-target]="'#post-acc-body' + i" aria-expanded="false"
@@ -101,7 +101,7 @@
                                             </label>
                                             <div>
                                                 <p-multiSelect [(ngModel)]="postCall.type"
-                                                    [options]="dispositionOptionTypeArray | dispositionFilter:createQueue.campaign"
+                                                    [options]="dispositionTypeOptionArray | dispositionFilter:createNewQueue.queue.campaign"
                                                     optionLabel="name" optionValue="name"
                                                     [style]="{'width':'100%', 'height':'38px'}"
                                                     (onChange)="onDispositionTypeChange(i)">
