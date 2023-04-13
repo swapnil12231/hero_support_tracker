@@ -26,8 +26,7 @@ export class LoginComponent implements OnInit {
 
     this.user = new LoginModel();
     this.otpModel = new OtpModel();
-    this.user.userName = "demo@contaque.com";
-    this.user.password = "1234";
+
     this.rememberMe = !!localStorage.getItem('RememberMe');
     if (this.rememberMe)
       this.user.userName = localStorage.getItem('Username') || "";
@@ -82,12 +81,7 @@ export class LoginComponent implements OnInit {
     }
     this.loginService.login(this.user).then((res: any) => {
       this.authenticationService.LogonPortalSetCredentials(res.data);
-      sessionStorage.setItem('domainId', res.data.domainid);
-      sessionStorage.setItem('usergroupid', res.data.usergroupid);
-      sessionStorage.setItem('id', res.data.id);
       this.router.navigate(['/']);
     });
-
   }
-
 }
