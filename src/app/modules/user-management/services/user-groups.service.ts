@@ -13,13 +13,22 @@ export class UserGroupsService {
 
 
   async getAllUserGroups() {
+    this.domainId=1672730382222
+
     let url = `/usermanagement/usergroup/?domainid=${this.domainId}`;
     return this.httpClientService.get(url);
   }
 
 
   async getUserGroupEntity() {
+
+this.domainId=1672730382222
+
     let url = `/usermanagement/usergroup/get-entity?domainid=${this.domainId}`;
+
+
+    console.log({url});
+    
     return this.httpClientService.get(url);
   }
 

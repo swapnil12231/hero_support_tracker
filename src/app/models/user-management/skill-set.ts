@@ -6,3 +6,17 @@ export class CreateSkillSet
     status:any="INACTIVE";
     domainid!:any;
 }
+
+export class SkillSetData
+{
+    data!:any;
+    canShowUpdate:boolean=false;
+}
+
+
+
+export class UpdateSkillSetData
+{
+    data!:any;
+    canShowUpdate:boolean=false;
+}

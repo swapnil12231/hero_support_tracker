@@ -32,8 +32,8 @@
                     <div class="w-100"> <label for="" class="form-label">Campaign <sup class="text-red">*</sup></label>
                         <select class="form-select" name="UserGroupCampaign"
                             (change)="selectedCampaign(UserGroupCampaign.value)" #UserGroupCampaign="ngModel"
-                            [(ngModel)]="createUserGroup.campaign" required>
-                            <option value="undefined" selected>Select campaign</option>
+                            [(ngModel)]="createUserGroup.campaigns" required>
+                            <option [value]="undefined" selected>Select campaign</option>
                             <option *ngFor="let campaign of campaignsArray;" [value]="campaign.id">{{campaign.value}}
                             </option>
                         </select>
@@ -53,7 +53,7 @@
                         <select class="form-select" name="UserGroupSkills"
                             (change)="selectedSkill(UserGroupSkills.value)" #UserGroupSkills="ngModel"
                             [(ngModel)]="createUserGroup.skills" required>
-                            <option value="undefined" selected>Select Skills</option>
+                            <option [value]="undefined" selected>Select Skills</option>
                             <option *ngFor="let skill of skillsArray;" [value]="skill.id">{{skill.value}}</option>
                         </select>
                     </div>
@@ -70,8 +70,8 @@
                 <div class="col-sm-6">
                     <label for="state" class="form-label">Agent Campaign Selection <sup class="text-red">*</sup></label>
                     <select class="form-select" name="UserGroupAgentCampaign" #UserGroupNameAgentCampaign="ngModel"
-                        [(ngModel)]="createUserGroup.agentCampaignSelection" required>
-                        <option value="undefined">Select any</option>
+                        [(ngModel)]="createUserGroup.agentlogin" required>
+                        <option [value]="undefined">Select any</option>
                         <option value="No" selected>No</option>
                         <option value="Yes" selected>Yes</option>
 
@@ -81,8 +81,8 @@
                 <div class="col-sm-6">
                     <label for="state" class="form-label">Max Agent Interaction<sup class="text-red">*</sup></label>
                     <select class="form-select" name="UserGroupAgentInteraction" #UserGroupAgentInteraction="ngModel"
-                        [(ngModel)]="createUserGroup.agentMaxInteraction" required>
-                        <option value="undefined" selected>Select any</option>
+                        [(ngModel)]="createUserGroup.maxinteraction" required>
+                        <option [value]="undefined" selected>Select any</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -90,9 +90,9 @@
                     </select>
                 </div>
 
-                <div class="col-sm-6" [hidden]="createUserGroup.campaign=='undefined'">
+                <div class="col-sm-6" [hidden]="createUserGroup.campaigns=='undefined'">
                     <label for="state" class="form-label">Default Campaign<sup class="text-red">*</sup></label>
-                    <select class="form-select" name="UserGroupDefaultCamp" required>
+                    <select class="form-select" name="UserGroupDefaultCamp"  required>
                         <option value="{{defaultCampaignValue.value}}">{{defaultCampaignValue.value}}</option>
 
 
@@ -124,19 +124,19 @@
                         <div class="border rounded p-2 d-flex justify-content-between align-items-center">
                             <label class="col-md-4 checkbox">Call</label>
                             <input type="number" class="col-md-3 me-3 mb-1 mt-1 counterBox" name="CallSeats"
-                                id="CallSeats" #CallSeats="ngModel" [(ngModel)]="seat.call  " required>
+                                id="CallSeats" #CallSeats="ngModel" [(ngModel)]="interaction.call.seat" required>
                             <label for="" class="col-md-3 form-label">Priority </label>
                         </div>
 
 
                         <div class="border rounded p-2 d-flex justify-content-between align-items-center">
-                            <span class="col-md-4"> <input type="checkbox" [(ngModel)]="intractionAllowed.inCall "
-                                    class="me-2"> In
+                            <span class="col-md-4"> <input type="checkbox"
+                                    [(ngModel)]="interaction.inCall.intractionAllowed " class="me-2"> In
                                 Call</span>
                             <input type="number" class="col-md-3 counterBox" name="InCallSeats" id="InCallSeats"
-                                #InCallSeats="ngModel" [(ngModel)]="seat.inCall  " required>
+                                #InCallSeats="ngModel" [(ngModel)]="interaction.inCall.seat" required>
                             <select class="col-md-3 form-select counterBox d-inline py-1" name="InCallPriority"
-                                #InCallPriority="ngModel" [(ngModel)]="priority .inCall">
+                                #InCallPriority="ngModel" [(ngModel)]="interaction.inCall.priority">
 
                                 <option *ngFor="let priority of prioritys" value="{{priority}}" selected>
                                     {{priority}}</option>
@@ -146,13 +146,13 @@
 
 
                         <div class="border rounded p-2 d-flex justify-content-between align-items-center">
-                            <span class="col-md-4"> <input type="checkbox" [(ngModel)]="intractionAllowed.outCall "
-                                    class="me-2">Out
+                            <span class="col-md-4"> <input type="checkbox"
+                                    [(ngModel)]="interaction.outCall.intractionAllowed " class="me-2">Out
                                 call</span>
                             <input type="number" class="col-md-3 counterBox" name="OutCallSeat" id="OutCallSeat  "
-                                #OutCallSeat="ngModel" [(ngModel)]="seat.outCall  " required>
+                                #OutCallSeat="ngModel" [(ngModel)]="interaction.outCall.seat " required>
                             <select class=" col-md-3form-select counterBox d-inline py-1" name="OutallPriority"
-                                #OutCallPriority="ngModel" [(ngModel)]="priority .outCall">
+                                #OutCallPriority="ngModel" [(ngModel)]="interaction.outCall.priority">
 
                                 <option *ngFor="let priority of prioritys" value="{{priority}}" selected>
                                     {{priority}}</option>
@@ -167,19 +167,19 @@
                             <label class="col-md-3">Social</label>
 
                             <input type="number" class="col-md-3 mb-1 ms-1 mt-1 counterBox" name="SocailSeats"
-                                id="SocialSeats" #SocialSeats="ngModel" [(ngModel)]="seat.social  " required>
+                                id="SocialSeats" #SocialSeats="ngModel" [(ngModel)]="interaction.social.seat " required>
                             <label for="" class="col-md-3 form-label">Priority </label>
                         </div>
 
 
                         <div class="border rounded p-2 d-flex justify-content-between align-items-center">
-                            <span class="col-md-4"> <input type="checkbox" [(ngModel)]="intractionAllowed.email "
-                                    class="me-2">
+                            <span class="col-md-4"> <input type="checkbox"
+                                    [(ngModel)]="interaction.email.intractionAllowed " class="me-2">
                                 Email</span>
                             <input type="number" class="col-md-3 counterBox" name="EmailSeats" id="EmailSeats"
-                                #EmailSeats="ngModel" [(ngModel)]="seat.email  " required>
+                                #EmailSeats="ngModel" [(ngModel)]="interaction.email.seat" required>
                             <select class="col-md-3 form-select counterBox d-inline py-1 " name="EmailPriority"
-                                #EmailPriority="ngModel" [(ngModel)]="priority .email">
+                                #EmailPriority="ngModel" [(ngModel)]="interaction.email.priority">
                                 <option *ngFor="let priority of prioritys" value="{{priority}}" selected>
                                     {{priority}}</option>
 
@@ -187,13 +187,13 @@
                         </div>
 
                         <div class="border rounded p-2 d-flex justify-content-between align-items-center">
-                            <span class="col-md-4"> <input type="checkbox" [(ngModel)]="intractionAllowed.whatsapp "
-                                    class="me-2">
+                            <span class="col-md-4"> <input type="checkbox"
+                                    [(ngModel)]="interaction.whatsapp.intractionAllowed " class="me-2">
                                 WhatsApp</span>
                             <input type="number" class="col-md-3 counterBox" name="WhatsappSeats" id="WhatsappSeats"
-                                #WhatsappSeats="ngModel" [(ngModel)]="seat.whatsapp  " required>
+                                #WhatsappSeats="ngModel" [(ngModel)]="interaction.whatsapp.seat" required>
                             <select class="col-md-3 form-select counterBox d-inline py-1" name="WhatsappPriority"
-                                #WhatsappPriority="ngModel" [(ngModel)]="priority .whatsapp">
+                                #WhatsappPriority="ngModel" [(ngModel)]="interaction.whatsapp.priority">
 
                                 <option *ngFor="let priority of prioritys" value="{{priority}}" selected>
                                     {{priority}}</option>
@@ -202,11 +202,14 @@
                         </div>
 
                         <div class="border rounded p-2 d-flex justify-content-between align-items-center">
-                            <span class="col-md-4"> <input type="checkbox" class="me-2"> SMS</span>
-                            <input type="number" class="col-md-3 counterBox" [(ngModel)]="intractionAllowed.sms "
-                                name="SmsSeats" id="SmsSeats" #SmsSeats="ngModel" [(ngModel)]="seat.sms  " required>
+                            <span class="col-md-4"> <input type="checkbox"
+                                    [(ngModel)]="interaction.sms.intractionAllowed" class="me-2">
+                                SMS</span>
+                                 <input type="number" class="col-md-3 counterBox"
+                                [(ngModel)]="interaction.sms.intractionAllowed " name="SmsSeats" id="SmsSeats"
+                                #SmsSeats="ngModel" [(ngModel)]="interaction.sms.seat " required>
                             <select class="col-md-3 form-select counterBox d-inline py-1" name="SmsPriority"
-                                #SmsPriority="ngModel" [(ngModel)]="priority .sms">
+                                #SmsPriority="ngModel" [(ngModel)]="interaction.sms.priority">
 
                                 <option *ngFor="let priority of prioritys" value="{{priority}}" selected>
                                     {{priority}}</option>
@@ -215,13 +218,13 @@
                         </div>
 
                         <div class="border rounded p-2 d-flex justify-content-between align-items-center">
-                            <span class="col-md-4"> <input type="checkbox" [(ngModel)]="intractionAllowed.facebook "
-                                    class="me-2">
+                            <span class="col-md-4"> <input type="checkbox"
+                                    [(ngModel)]="interaction.facebook.intractionAllowed" class="me-2">
                                 Facebook</span>
                             <input type="number" class="col-md-3 counterBox" name="FacebookSeats" id="FacebookSeats"
-                                #FacebookSeats="ngModel" [(ngModel)]="seat.facebook  " required>
+                                #FacebookSeats="ngModel" [(ngModel)]="interaction.facebook.seat" required>
                             <select class="col-md-3 form-select counterBox d-inline py-1" name="FacebookPriority"
-                                #FacebookPriority="ngModel" [(ngModel)]="priority .facebook">
+                                #FacebookPriority="ngModel" [(ngModel)]="interaction.facebook.priority">
 
                                 <option *ngFor="let priority of prioritys" value="{{priority}}" selected>
                                     {{priority}}</option>
@@ -231,13 +234,13 @@
 
 
                         <div class="border rounded p-2 d-flex justify-content-between align-items-center">
-                            <span class="col-md-4"> <input type="checkbox" [(ngModel)]="intractionAllowed.twitter "
-                                    class="me-2">
+                            <span class="col-md-4"> <input type="checkbox"
+                                    [(ngModel)]="interaction.twitter.intractionAllowed" class="me-2">
                                 Twitter</span>
                             <input type="number" class="col-md-3 counterBox" name="TwitterSeats" id="TwitterSeats"
-                                #TwitterSeats="ngModel" [(ngModel)]="seat.twitter  " required>
+                                #TwitterSeats="ngModel" [(ngModel)]="interaction.twitter.seat" required>
                             <select class="col-md-3 form-select counterBox d-inline py-1" name="TwitterPriority"
-                                #TwitterPriority="ngModel" [(ngModel)]="priority .twitter">
+                                #TwitterPriority="ngModel" [(ngModel)]="interaction.twitter.priority">
 
                                 <option *ngFor="let priority of prioritys" value="{{priority}}" selected>
                                     {{priority}}</option>
@@ -246,13 +249,16 @@
                         </div>
 
                         <div class="border rounded p-2 d-flex justify-content-between align-items-center">
-                            <span class="col-md-4"> <input type="checkbox" [(ngModel)]="intractionAllowed.instagram "
-                                    class="me-2">
+
+
+                            <span class="col-md-4"> <input type="checkbox"
+                                    [(ngModel)]="interaction.instagram.intractionAllowed" class="me-2">
                                 Instagram</span>
+
                             <input type="number" class="col-md-3 counterBox " name="InstagramSeats" id="InstagramSeats"
-                                #InstagramSeats="ngModel" [(ngModel)]="seat.instagram  " required>
+                                #InstagramSeats="ngModel" [(ngModel)]="interaction.instagram.seat" required>
                             <select class="col-md-3 form-select counterBox d-inline py-1" name="InstagramPriority"
-                                #InstagramPriority="ngModel" [(ngModel)]="priority .instagram">
+                                #InstagramPriority="ngModel" [(ngModel)]="interaction.instagram.priority">
 
                                 <option *ngFor="let priority of prioritys" value="{{priority}}" selected>
                                     {{priority}}</option>
@@ -261,13 +267,13 @@
                         </div>
 
                         <div class="border rounded p-2 d-flex justify-content-between align-items-center">
-                            <span class="col-md-4"> <input type="checkbox" [(ngModel)]="intractionAllowed.viber "
-                                    class="me-2">
+                            <span class="col-md-4"> <input type="checkbox"
+                                    [(ngModel)]="interaction.viber.intractionAllowed" class="me-2">
                                 Viber</span>
                             <input type="number" class="col-md-3 counterBox" name="ViberSeats" id="ViberSeats"
-                                #ViberSeats="ngModel" [(ngModel)]="seat.viber  " required>
+                                #ViberSeats="ngModel" [(ngModel)]="interaction.viber.seat" required>
                             <select class="col-md-3 form-select counterBox d-inline py-1" name="ViberPriority"
-                                #ViberPriority="ngModel" [(ngModel)]="priority .viber">
+                                #ViberPriority="ngModel" [(ngModel)]="interaction.viber.priority">
 
                                 <option *ngFor="let priority of prioritys" value="{{priority}}" selected>
                                     {{priority}}</option>
@@ -277,13 +283,13 @@
 
 
                         <div class="border rounded p-2 d-flex justify-content-between align-items-center">
-                            <span class="col-md-4"> <input type="checkbox" [(ngModel)]="intractionAllowed.chat "
-                                    class="me-2">
+                            <span class="col-md-4"> <input type="checkbox"
+                                    [(ngModel)]="interaction.chat.intractionAllowed" class="me-2">
                                 Chat</span>
                             <input type="number" class="col-md-3 counterBox" name="ChatSeat" id="ChatSeat"
-                                #ChatSeat="ngModel" [(ngModel)]="seat.chat  " required>
+                                #ChatSeat="ngModel" [(ngModel)]="interaction.chat.seat" required>
                             <select class="col-md-3 form-select counterBox d-inline py-1" name="ChatPriority"
-                                #ChatPriority="ngModel" [(ngModel)]="priority .chat">
+                                #ChatPriority="ngModel" [(ngModel)]="interaction.chat.priority">
 
                                 <option *ngFor="let priority of prioritys" value="{{priority}}" selected>
                                     {{priority}}</option>
@@ -296,13 +302,13 @@
 
 
                         <div class="border rounded p-2 d-flex justify-content-between align-items-center">
-                            <span class="col-md-4"> <input type="checkbox" [(ngModel)]="intractionAllowed.videoChat "
-                                    class="me-2">
+                            <span class="col-md-4"> <input type="checkbox"
+                                    [(ngModel)]="interaction.videoChat.intractionAllowed" class="me-2">
                                 Video Chat</span>
                             <input type="number" class="col-md-3 counterBox" name="ViceoChatSeats" id="ViceoChatSeats"
-                                #ViceoChatSeats="ngModel" [(ngModel)]="seat.videoChat  " required>
+                                #ViceoChatSeats="ngModel" [(ngModel)]="interaction.videoChat.seat" required>
                             <select class="col-md-3 form-select counterBox d-inline py-1" name="VideoChatPriority"
-                                #VideoChatPriority="ngModel" [(ngModel)]="priority.videoChat">
+                                #VideoChatPriority="ngModel" [(ngModel)]="interaction.videoChat.priority">
 
                                 <option *ngFor="let priority of prioritys" value="{{priority}}" selected>
                                     {{priority}}</option>
@@ -315,7 +321,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 " *ngIf="skillsPrioritys!=null">
+                <div class="col-md-6 " *ngIf="skillsPriorities!=null">
                     <h5 class="mt-4 d-flex justify-content-center">Add priority To Skills </h5>
 
                     <div class="row gy-4 mt-1">
@@ -329,7 +335,7 @@
 
 
 
-                        <span *ngFor="let skillsPriority of skillsPrioritys; let i=index">
+                        <span *ngFor="let skillsPriority of skillsPriorities; let i=index">
                             <div class="border rounded p-2 d-flex justify-content-between align-items-center">
                                 <label class="me-2">{{skillsPriority.skill}}</label>
 
