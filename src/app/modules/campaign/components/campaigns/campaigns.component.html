@@ -3,7 +3,6 @@
         <div class="card  mb-3">
             <div class="card-body">
                 <div class="campaignTable  table-responsive">
-
                     <p-table class="table table-borderless table-md" [value]="campaignsData" styleClass="p-datatable-sm"
                         [rowHover]="true" [rows]="5" [rowsPerPageOptions]="[5,10,15]" [showCurrentPageReport]="true"
                         [paginator]="true">
@@ -28,13 +27,11 @@
                                 <td>{{item.description}} </td>
                                 <td>{{item.status}}</td>
                                 <td>{{item.autodispose}}</td>
-
                                 <td class="actionsColumn">
-                                    <a  title="Edit" class="me-2">                                                             
-                                        <img src="assets/images/edit.png" alt="Edit"  width="17"></a> 
-                                        <a  title="Delete">  <img src="assets/images/delete.png" alt="Delete" width="17" (click)="deleteCampaign(item)"></a>
-                                    <!-- <a  title="Delete" (click)="deleteCampaign(item)"> <i class="fa fa-trash"></i></a> -->
-                                    <!-- <button class="btn" (click)="deleteCampaign(item)">Delete </button> -->
+                                    <a title="Edit" class="me-2" (click)="editCampaign(item)" data-bs-target="#campaignModal" data-bs-toggle="modal"> 
+                                        <img src="assets/images/edit.png" alt="Edit" width="17"></a>
+                                    <a title="Delete"> <img src="assets/images/delete.png" alt="Delete" width="17"
+                                            (click)="deleteCampaign(item)"></a>
                                 </td>
                             </tr>
                         </ng-template>

@@ -1,8 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { dispositionType, newCampaign } from 'src/app/models/campaign/campaignDisposition';
 import { Disposition } from 'src/app/models/campaign/campaigns';
 import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.service';
-import { CampaignsComponent } from '../campaigns.component';
+import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
 
 @Component({
   selector: 'app-new-campaign',
@@ -10,6 +10,11 @@ import { CampaignsComponent } from '../campaigns.component';
   styleUrls: ['./new-campaign.component.css']
 })
 export class NewCampaignComponent implements OnInit {
+
+  @ViewChild(CreateCampaignComponent)
+  createCampaignComponent!: CreateCampaignComponent;
+  createCampaignEditData: any;
+
 
   @Output()
   refreshCampaigns = new EventEmitter<void>();
@@ -76,5 +81,11 @@ export class NewCampaignComponent implements OnInit {
       },
       err => { this.campaignsData = err }
     )
+  }
+
+  transferDataTonewCampaignChild(parentData: any) {
+    console.log(parentData);
+    this.createCampaignComponent.childData(parentData);
+
   }
 }
