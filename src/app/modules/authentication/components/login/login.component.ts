@@ -17,11 +17,11 @@ export class LoginComponent implements OnInit {
   fieldTextType: boolean = false;
   rememberMe!: boolean;
   navigationRoutes: any = navigationRoutes;
-  verifyUser!:boolean;
-  isTwoFactor!:boolean;
-  isGenerateOtp!:boolean;
-  OTPVerified!:boolean;
-  emailOTP!:string;  
+  verifyUser!: boolean;
+  isTwoFactor!: boolean;
+  isGenerateOtp!: boolean;
+  OTPVerified!: boolean;
+  emailOTP!: string;
   constructor(private loginService: LoginService, private router: Router, private authenticationService: AuthenticationService) {
 
     this.user = new LoginModel();
@@ -36,13 +36,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async verifyUserEmail() {   
-    this.loginService.verifyUser(this.user.userName).then((res:any)=>{
-      if(res.two_factor_authentication==true) {
-        this.verifyUser =  true;
+  async verifyUserEmail() {
+    this.loginService.verifyUser(this.user.userName).then((res: any) => {
+      if (res.two_factor_authentication == true) {
+        this.verifyUser = true;
         this.isTwoFactor = true;
       } else {
-        this.verifyUser =  false;
+        this.verifyUser = false;
         this.isTwoFactor = false;
       }
 
@@ -50,26 +50,23 @@ export class LoginComponent implements OnInit {
   }
 
   async verifyPassword() {
-    this.loginService.verifyPassword(this.user).then((res:any)=>{
-      if(res.two_factor_authentication==true && res.sessionid!="") {  
+    this.loginService.verifyPassword(this.user).then((res: any) => {
+      if (res.two_factor_authentication == true && res.sessionid != "") {
         this.otpModel.userName = this.user.userName;
-        this.otpModel.sessionid = res.sessionid;     
-       this.OTPVerified = true;
-       this.verifyUser = false;      
-      } 
+        this.otpModel.sessionid = res.sessionid;
+        this.OTPVerified = true;
+        this.verifyUser = false;
+      }
 
     })
   }
 
   async verifyOTP() {
-    this.otpModel.otp =this.emailOTP;
-    this.loginService.VerifyOTP(this.otpModel).then((res:any)=>{
-      if(res) {
+    this.otpModel.otp = this.emailOTP;
+    this.loginService.VerifyOTP(this.otpModel).then((res: any) => {
+      if (res) {
         this.authenticationService.LogonPortalSetCredentials(res);
-      sessionStorage.setItem('domainId', res.domainid);
-      sessionStorage.setItem('usergroupid', res.usergroupid);
-      sessionStorage.setItem('id', res.id);
-      this.router.navigate(['/']);
+        this.router.navigate(['/']);
       }
 
     })

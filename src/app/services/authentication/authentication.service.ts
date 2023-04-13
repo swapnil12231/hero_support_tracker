@@ -80,7 +80,7 @@ export class AuthenticationService {
         const parsedToken = this.jwtService.decodeToken(data.authtokens.refreshtoken);
         this.saveJwtToken(data.authtokens.accesstoken);
         this.saveRefreshToken(data.authtokens.refreshtoken, data.authtokens.accesstoken);
-        this.saveDomainId(data.domainid);
+        this.saveUserData(data);
 
         if (parsedToken.sub) {
             this.isLoggedIn = true;
@@ -154,7 +154,9 @@ export class AuthenticationService {
         document.cookie = Constants.RefToken + '=' + token + ';expires=' +
             new Date(this.jwtService.decodeJwtToken(jwtToken).exp * 1000 + 60000).toUTCString() + ';path=/';
     }
-    saveDomainId(domainId: string) {
-        sessionStorage.setItem(Constants.domainId, domainId);
+    saveUserData(data: any) {
+        sessionStorage.setItem(Constants.domainId, data.domainId);
+        sessionStorage.setItem(Constants.userGroupId, data.usergroupid);
+        sessionStorage.setItem(Constants.userId, data.id);
     }
 }

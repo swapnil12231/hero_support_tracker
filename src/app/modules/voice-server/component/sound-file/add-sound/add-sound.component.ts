@@ -23,7 +23,7 @@ export class AddSoundComponent implements OnInit {
 
   childData(data: any) {
     this.voiceServerData = data;
-    this.soundName=this.voiceServerData.data.name;
+    this.soundName = this.voiceServerData.data.name;
     this.newsoundModalCanShow = false;
     this.modalHeaderText = 'Edit Sound Files';
   }
@@ -39,11 +39,9 @@ export class AddSoundComponent implements OnInit {
         formData.append('domainId', this.domainId);
         if (this.voiceServerData) {
           this.soundFileService.editSoundFile(formData, this.voiceServerData.data.id).then((res: any) => {
-            console.log(res);
             this.addSoundFileSubmit.emit();
             this.reset()
           }, err => {
-            console.log(err);
             this.addSoundFileSubmit.emit();
           })
         } else {
@@ -70,8 +68,7 @@ export class AddSoundComponent implements OnInit {
   reset() {
     this.voiceServerData = null;
     this.modalHeaderText = 'Add Sound';
-    this.soundName='';
-    console.log(this.soundName)
+    this.soundName = '';
   }
 }
 

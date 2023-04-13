@@ -17,7 +17,6 @@ export class DebugCampaignComponent implements OnInit {
 
   async getDebugCampaign() {
     this.debugCampaignService.getDebugCampaign(this.domainId).then((res: any) => {
-      console.log('res:',res)
       this.debugCampaignData = res;
     })
   }

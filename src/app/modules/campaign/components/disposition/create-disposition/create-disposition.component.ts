@@ -91,7 +91,7 @@ export class CreateDispositionComponent implements OnInit {
   }
 
   async getEntityToAddDisposition() {
-    this.dispositionService.getEntityToAddDispotision(this.domainId, this.usergroupid).then(
+    this.dispositionService.getEntityToAddDispotision().then(
       res => {
         if (res != 0) {
           this.dispositionObj = res;

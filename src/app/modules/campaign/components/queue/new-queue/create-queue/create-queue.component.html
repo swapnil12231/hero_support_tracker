@@ -13,7 +13,7 @@
                         <sup class="text-red">*</sup>
                     </label>
                     <select class="form-select" name="queueCampaign" #queueCampaign="ngModel"
-                        [(ngModel)]="createNewQueue.queue.campaign" required>
+                        [(ngModel)]="createNewQueue.campid" required>
                         <option [value]="-1">Select campaign</option>
                         <option *ngFor="let campaign of campaignsArray" [value]="campaign.id">{{campaign.value}}
                         </option>
@@ -24,7 +24,7 @@
                         <sup class="text-red">*</sup>
                     </label>
                     <input type="text" class="form-control" name="queueQueueName" #queueQueueName="ngModel"
-                        [(ngModel)]="createNewQueue.queue.name" placeholder="Enter name" required>
+                        [(ngModel)]="createNewQueue.queueName" placeholder="Enter name" required>
                     <span class="text-danger" *ngIf="queueQueueName.invalid && queueQueueName.touched">
                         *Queue name is required
                     </span>
@@ -35,7 +35,7 @@
                         <sup class="text-red">*</sup>
                     </label>
                     <select class="form-select" name="queueQueuepriority" #queueQueuepriority="ngModel"
-                        [(ngModel)]="createNewQueue.queue.priority" required>
+                        [(ngModel)]="createNewQueue.queuePriority" required>
                         <option [value]="-1">Select any</option>
                         <option [value]="0">0</option>
                         <option [value]="1">1</option>
@@ -56,7 +56,7 @@
                             <sup class="text-red">*</sup>
                         </label>
                         <select class="form-select" name="queueMusicClass" #queueMusicClass="ngModel"
-                            [(ngModel)]="createNewQueue.queue.musicClass" required>
+                            [(ngModel)]="createNewQueue.musicClassId" required>
                             <option [value]="-1">Select music</option>
                             <option *ngFor="let music of musicClassArray" [value]="music.id">{{music.value}}</option>
                         </select>
@@ -72,17 +72,17 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <input type="checkbox" [(ngModel)]="enablePostCall" name="enablePostCall">
+                    <input type="checkbox" [(ngModel)]="createNewQueue.postCall" name="enablePostCall">
                     Post Call
                 </div>
             </div>
 
-            <div class="row g-3 mt-3" *ngIf="enablePostCall">
+            <div class="row g-3 mt-3" *ngIf="createNewQueue.postCall">
                 <h1 class="modal-title fs-5 w-100 text-center">
                     Post Call
                 </h1>
                 <div class="accordion" id="post-call-acc">
-                    <div class="accordion-item" *ngFor="let postCall of createNewQueue.postCallArray;let i = index">
+                    <div class="accordion-item" *ngFor="let postCall of createNewQueue.postCallDetails;let i = index">
                         <h2 class="accordion-header" [id]="'post-acc-heading' + i">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 [attr.data-bs-target]="'#post-acc-body' + i" aria-expanded="false"
@@ -101,22 +101,24 @@
                                             </label>
                                             <div>
                                                 <p-multiSelect [(ngModel)]="postCall.type"
-                                                    [options]="dispositionTypeOptionArray | dispositionFilter:createNewQueue.queue.campaign"
+                                                    [options]="dispositionTypeOptionArray | dispositionFilter:createNewQueue.campid"
                                                     optionLabel="name" optionValue="name"
                                                     [style]="{'width':'100%', 'height':'38px'}"
-                                                    (onChange)="onDispositionTypeChange(i)">
+                                                    (onChange)="onDispositionTypeChange(i)" name="dispoType"
+                                                    id="dispoType">
                                                 </p-multiSelect>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <label class="form-label">Disposition <sup class="text-red">*</sup> </label>
                                             <div>
-                                                <p-multiSelect [(ngModel)]="postCall.disposition"
+                                                <p-multiSelect [(ngModel)]="postCall.dispoId"
                                                     [options]="postCall.dispositionOptionArray" optionLabel="name"
-                                                    [style]="{'width':'100%', 'height':'38px'}">
+                                                    [style]="{'width':'100%', 'height':'38px'}" name="dispoName"
+                                                    id="dispoName">
                                                     <ng-template let-value pTemplate="selectedItems">
                                                         <div class="d-flex align-items-center gap-2">
-                                                            <div *ngFor="let option of postCall.disposition">
+                                                            <div *ngFor="let option of postCall.dispoId">
                                                                 {{ option.name }}
                                                             </div>
                                                         </div>
@@ -136,10 +138,10 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-sm-6">
-                                            <input type="radio" value="api" [(ngModel)]="postCall.apiOrIvr"
+                                            <input type="radio" value="api" [(ngModel)]="postCall.postMethodType"
                                                 [name]="'api-ivr-radio' + i">
                                             API
-                                            <input type="radio" value="ivr" [(ngModel)]="postCall.apiOrIvr"
+                                            <input type="radio" value="ivr" [(ngModel)]="postCall.postMethodType"
                                                 [name]="'api-ivr-radio' + i" class="ms-3"> IVR
                                         </div>
                                         <div class="col-sm-6">
@@ -147,16 +149,16 @@
                                                 <sup class="text-red">*</sup>
                                             </label>
                                             <select class="form-select" name="queueAPIIVROptions"
-                                                #queueAPIIVROptions="ngModel" [(ngModel)]="postCall.APIIVROptions"
+                                                #queueAPIIVROptions="ngModel" [(ngModel)]="postCall.postMethodTypeValue"
                                                 required>
                                                 <option [value]="-1">Select Any</option>
-                                                <ng-container *ngIf="postCall.apiOrIvr === 'api'">
+                                                <ng-container *ngIf="postCall.postMethodType === 'api'">
                                                     <option *ngFor="let apiOption of apiOptionArray"
                                                         [value]="apiOption.id">
                                                         {{apiOption.value}}
                                                     </option>
                                                 </ng-container>
-                                                <ng-container *ngIf="postCall.apiOrIvr === 'ivr'">
+                                                <ng-container *ngIf="postCall.postMethodType === 'ivr'">
                                                     <option *ngFor="let ivrOption of ivrOptionArray"
                                                         [value]="ivrOption.id">
                                                         {{ivrOption.value}}

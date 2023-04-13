@@ -3,6 +3,7 @@ import { dispositionType, newCampaign } from 'src/app/models/campaign/campaignDi
 import { Disposition } from 'src/app/models/campaign/campaigns';
 import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.service';
 import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
+import { Constants } from 'src/app/models/constants';
 
 @Component({
   selector: 'app-new-campaign',
@@ -32,7 +33,7 @@ export class NewCampaignComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.domainId = sessionStorage.getItem('domainId');
+    this.domainId = parseInt(sessionStorage.getItem(Constants.domainId) || '0');
   }
 
 
@@ -84,7 +85,6 @@ export class NewCampaignComponent implements OnInit {
   }
 
   transferDataTonewCampaignChild(parentData: any) {
-    console.log(parentData);
     this.createCampaignComponent.childData(parentData);
 
   }

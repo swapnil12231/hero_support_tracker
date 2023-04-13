@@ -28,4 +28,9 @@ export class QueueService {
     let url = `/campaign/queue/${queueId}`;
     this.httpClientService.delete(url);
   }
+
+  async createQueue(data: any) {
+    let url = `/campaign/queue/`;
+    this.httpClientService.post(url, data);
+  }
 }

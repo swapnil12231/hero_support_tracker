@@ -31,20 +31,12 @@ export class NewUserGroupComponent implements OnInit {
   }
 
   settingDetailsSubmit(data: any) {
-
-
-
     this.createUserSubmit.settingDetails = data;
+    this.userGroupsService.createUserGroup(this.createUserSubmit).then((res: any) => {
 
-
-    console.log(this.createUserSubmit);
-    
-
-    this.userGroupsService.createUserGroup(this.createUserSubmit).then((res:any) => {
-
-      if(res.status){
-      this.createUserGroupRes = res;
-      this.newUserGroupSubmit.emit();
+      if (res.status) {
+        this.createUserGroupRes = res;
+        this.newUserGroupSubmit.emit();
       }
     },
       err => { this.createUserGroupRes = err }

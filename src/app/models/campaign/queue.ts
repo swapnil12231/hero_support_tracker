@@ -1,26 +1,28 @@
 export class CreateNewQueue {
-    queue!: CreateQueue;
-    postCallArray!: Array<PostCall>;
-}
-export class CreateQueue {
-    campaign: number = -1;
-    name!: string;
-    priority: number = -1;
-    musicClass: number = -1;
+    domainId!: number;
+    campid: number = -1;
+    queueName!: string;
+    queuePriority: number = -1;
+    musicClassId: number = -1;
+    postCall: string = "Y";
+    postCallDetails!: Array<PostCall>;
+    queueTransferDetails!: Array<TransferLogic>;
+    queueVoiceDetails!: Array<VoiceLogic>;
 }
 
 export class PostCall {
     type: Array<string> = [];
-    disposition: Array<any> = [];
-    APIIVROptions: number = -1;
-    apiOrIvr: string = 'api';
+    dispoId: Array<any> = [];
+    postMethodTypeValue: number = -1;
+    postMethodType: string = 'api';
     dispositionOptionArray: Array<any> = [];
 }
 
 export class TransferLogic {
+    step!: number;
     criteria!: string;
     transferType: string = '';
-    skill: number = -1;
+    transferData: number = -1;
 }
 
 export class VoiceLogic {
@@ -30,10 +32,10 @@ export class VoiceLogic {
 
 export class VoiceLogicEventApi {
     api: number = -1;
-    requestType: string = "";
-    responseType: string = "";
+    request_type: string = "";
+    response_type: string = "";
     response!: string;
-    responseStatus!: string;
+    response_status!: string;
 }
 
 export class VoiceLogicEventAssignment {
@@ -41,6 +43,9 @@ export class VoiceLogicEventAssignment {
     operation: string = "";
     operand!: string;
     function: string = "";
+    x!: number;
+    y!: number;
+    symbol!: string;
 }
 
 export class VoiceLogicEventExtension {
@@ -54,12 +59,12 @@ export class VoiceLogicEventGoToIf {
     variable!: string;
     condition: string = "";
     value!: string;
-    goToIfTrue!: number;
-    goToIfFalse!: number;
+    gotoif_true!: number;
+    gotoif_false!: number;
 }
 
 export class VoiceLogicEventJson {
-    resonseVariable!: string;
+    res_variable!: string;
     voiceLogicEventJsonOptions!: Array<VoiceLogicEventJsonOptions>;
 }
 export class VoiceLogicEventJsonOptions {
@@ -68,51 +73,52 @@ export class VoiceLogicEventJsonOptions {
 }
 
 export class VoiceLogicEventMusic {
-    musicClass: number = -1;
+    music_class: number = -1;
+    music_class_name: string = "";
 }
 
 
 export class VoiceLogicEventOption {
 
     variable!: string;
-    fileOrApi: string = "FILE";
-    soundFile: number = -1;
-    fileUrl!: string;
-    fileDuration!: number;
-    timeOut!: number;
+    type: string = "FILE";
+    file_id: number = -1;
+    file_url!: string;
+    file_duration!: number;
+    timeout!: number;
 
 }
 
 export class VoiceLogicEventPlayPrompt {
-    fileOrApi: string = "FILE";
-    soundFile: number = -1;
-    fileUrl!: string;
-    fileDuration!: number;
+    type: string = "FILE";
+    file_id: number = -1;
+    file_url!: string;
+    file_duration!: number;
 }
 
 export class VoiceLogicEventQuestion {
     variable!: string;
-    digitTimeOut!: number;
-    escapeDigit!: string;
-    maxDigit!: number;
-    fileOrApi: string = "FILE";
-    soundFile: number = -1;
-    fileUrl!: string;
-    fileDuration!: number;
+    digit_timeout!: number;
+    escape_digit!: string;
+    max_digit!: number;
+    type: string = "FILE";
+    file_id: number = -1;
+    file_url!: string;
+    file_duration!: number;
 }
 
 export class VoiceLogicEventRecord {
-    escapeDigit!: string;
+    escape_digit!: string;
     timeout!: number;
-    maxSilenceTimeout!: number;
-    dispositionType: string = "";
-    disposition: Array<any> = [];
-    apiCheck: boolean = true;
+    slience_timeout!: number;
+    disposition_type: string = "";
+    disposition!: number;
+    apicheck: boolean = true;
     api: number = -1;
-    requestType: string = "";
-    responseType: string = "";
+    request_type: string = "";
+    response_type: string = "";
     response!: string;
-    responseStatus!: string;
+    response_status!: string;
     dispositionOptionArray: Array<any> = [];
 }
 
