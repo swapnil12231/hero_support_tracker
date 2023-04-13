@@ -19,7 +19,6 @@ export class CreateUserComponent implements OnInit {
 
 
   createSameUserSubmit(sameUser: any) {
-    console.log({ sameUser });
 
     let dataObj = {
       "data": {
@@ -66,7 +65,6 @@ export class CreateUserComponent implements OnInit {
 
 
   createMultiUserSubmit(data: any) {
-    console.log({ data });
 
   }
 }

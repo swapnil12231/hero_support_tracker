@@ -31,7 +31,6 @@ export class CreateSkillSetComponent implements OnInit {
 
   UpdateSkillSetData(childData: any) {
 
-    console.log({ childData });
 
 
     this.createSkillSet.name = childData.data.skillname;
@@ -53,7 +52,6 @@ export class CreateSkillSetComponent implements OnInit {
     this.createSkillSet.domainid = 1672730382222;
 
 
-    console.log(this.createSkillSet);
 
 
     this.skillSetService.createSkillSet(this.createSkillSet)
