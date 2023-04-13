@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QueueService } from '../../../services/queue.service';
 import { CreateNewQueue } from 'src/app/models/campaign/queue';
+import { Constants } from 'src/app/models/constants';
 
 @Component({
   selector: 'app-new-queue',
@@ -19,8 +20,10 @@ export class NewQueueComponent implements OnInit {
   selectedCampaignId!: number;
   createNewQueue!: CreateNewQueue;
   campaignId: number = 0;
+  domainId: number;
 
   constructor(private queueService: QueueService) {
+    this.domainId = parseInt(sessionStorage.getItem(Constants.domainId) || '0');
     this.getQueueDropdownsData();
   }
 
@@ -40,10 +43,18 @@ export class NewQueueComponent implements OnInit {
   }
   createQueueSubmit(createNewQueue: CreateNewQueue) {
     this.createNewQueue = createNewQueue;
-    this.campaignId = createNewQueue.queue.campaign;
+    this.campaignId = createNewQueue.campid;
   }
 
   createQueueNextSubmit(data: any) {
+    let createNewQueueObj: any = {};
+    createNewQueueObj = this.createNewQueue;
+    createNewQueueObj.postCallDetails = this.createNewQueue.postCallDetails.map(e => ({ ...e, dispoId: e.dispoId.flatMap(dispo => dispo.id) }));
+    createNewQueueObj = { ...data, ...createNewQueueObj, domainid: this.domainId };
+    createNewQueueObj.postCall = createNewQueueObj.postCall ? "Y" : "N";
+
+    this.queueService.createQueue(createNewQueueObj);
+
   }
 
   ngOnInit(): void {

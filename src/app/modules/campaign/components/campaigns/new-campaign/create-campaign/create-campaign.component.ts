@@ -15,7 +15,6 @@ export class CreateCampaignComponent implements OnInit {
 
   createCampaign!: CreateCampaigns;
   campaignsData: any = [];
-  domainId: any;
   crmData: any;
   isAutodispose: boolean = false;
   startCallCrmData: any;
@@ -23,7 +22,6 @@ export class CreateCampaignComponent implements OnInit {
   modalHeaderText = 'Create Campaign';
 
   constructor(private campaignsService: CampaignsService) {
-    this.domainId = sessionStorage.getItem('domainId');
     this.createCampaign = new CreateCampaigns();
   }
 
@@ -41,23 +39,21 @@ export class CreateCampaignComponent implements OnInit {
   }
 
   // data from parent component edit
-    childData(parentData: any) {
+  childData(parentData: any) {
     this.modalHeaderText = 'Update Campaign';
-    console.log(parentData);
-    console.log('shital')
     this.createCampaign.campaignsName = parentData.data.name;
     this.createCampaign.campaignsDescription = parentData.data.description;
     this.createCampaign.campaignsStatus = parentData.data.status;
     this.createCampaign.campaignsAutoDispose = parentData.data.autodispose;
   }
 
-  resetModal(){
+  resetModal() {
     this.modalHeaderText = 'Create Campaign';
     this.createCampaign = new CreateCampaigns();
   }
 
   async getStartCallCrmData() {
-    this.campaignsService.getEntityToAddCampaign(this.domainId).then(
+    this.campaignsService.getEntityToAddCampaign().then(
       res => {
         if (res) {
           this.startCallCrmData = res;

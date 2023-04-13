@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Constants } from 'src/app/models/constants';
-import { Priority, CreateUserGroup, Seat, IntractionAllowed, SkillsPriority } from 'src/app/models/user-management/user-groups';
-import { UserGroupsService } from 'src/app/modules/user-management/services/user-groups.service';
+import {  Call, Chat, CreateUserGroup, Email, Facebook, InCall, Instagram, Interaction, OutCall, SMS, SkillsPriority, Social, Twitter, Viber, VideoChat, Whatsapp} from 'src/app/models/user-management/user-groups';
+import { UserGroupsService } from 'src/app/modules/user-management/services/user-groups.service'; 
 
 @Component({
   selector: 'app-create-user-group',
@@ -11,38 +10,69 @@ import { UserGroupsService } from 'src/app/modules/user-management/services/user
 export class CreateUserGroupComponent implements OnInit {
 
 
-  @Output() createUserGroupSubmit = new EventEmitter<any>();
+  @Output() createUserGroupSubmit =new EventEmitter<any>();
 
   public defaultCampaignValue = {
     id: '',
     value: ''
   };
-  public skillsPriority!: SkillsPriority;
   public createUserGroup!: CreateUserGroup;
-  public priority!: Priority;
-  public seat!: Seat;
-  public intractionAllowed!: IntractionAllowed;
 
+  public interaction!: Interaction;
+  public skillsPriority!:SkillsPriority
+  
   public prioritys: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   public deffaultCampaign: boolean = false;
 
-  public skillsPrioritys: Array<any> = [];
+  public skillsPriorities: Array<any> = [];
 
   public userGroupEntityData!: any;
   public campaignsArray: Array<any> = [];
   public skillsArray: Array<any> = [];
   public createUserGroupRes!: any;
-  domainId: number;
 
   constructor(
     private userGroupsService: UserGroupsService,
   ) {
+
+
+    this.skillsPriority=new SkillsPriority();
+
     this.createUserGroup = new CreateUserGroup();
-    this.priority = new Priority();
-    this.seat = new Seat();
-    this.intractionAllowed = new IntractionAllowed();
-    this.domainId = parseInt(sessionStorage.getItem(Constants.domainId) || '0');
+    let call=new Call();
+    let inCall=new InCall();
+    let outCall=new OutCall();
+    let social=new Social();
+    let email=new Email();
+    let whatsapp=new Whatsapp();
+    let facebook=new Facebook();
+    let instagram=new Instagram();
+    let sms=new SMS();
+    let twitter=new Twitter();
+    let viber=new Viber();
+    let chat=new Chat();
+    let videoChat=new VideoChat();
+
+    this.interaction=new Interaction();
+
+    this.interaction.call=call;
+    this.interaction.inCall=inCall;
+    this.interaction.outCall=outCall;
+    this.interaction.social=social;
+    this.interaction.email=email;
+    this.interaction.whatsapp=whatsapp;
+    this.interaction.facebook=facebook;
+    this.interaction.instagram=instagram;
+    this.interaction.sms=sms;
+    this.interaction.twitter=twitter;
+    this.interaction.viber=viber;
+    this.interaction.chat=chat;
+    this.interaction.videoChat=videoChat;
+
+    this.createUserGroup = new CreateUserGroup();
+   this.createUserGroup.interactionDetails=this.interaction;
+    // this.intractionAllowed = new IntractionAllowed();
 
   }
 
@@ -54,6 +84,10 @@ export class CreateUserGroupComponent implements OnInit {
 
 
   async getUserGroupEntity() {
+
+
+
+    // let domainId = 1672730382222;
     this.userGroupsService.getUserGroupEntity()
       .then(
         (res: any) => {
@@ -64,7 +98,7 @@ export class CreateUserGroupComponent implements OnInit {
 
             this.skillsArray = Object.keys(res.skills).map((e: any) => ({ id: e, value: res.skills[e] }));
 
-            this.skillsPrioritys = [];
+            this.skillsPriorities = [];
 
 
           }
@@ -96,102 +130,24 @@ export class CreateUserGroupComponent implements OnInit {
     this.skillsPriority.skill = value
     this.skillsPriority.priotity = 0;
 
-    this.skillsPrioritys.push(this.skillsPriority);
+    this.skillsPriorities.push(this.skillsPriority);
 
   }
 
 
-  submit() {
+submit()
+{
 
-    let dataObj = {
-      "name": this.createUserGroup.name,
-      "description": this.createUserGroup.description,
-      "agentlogin": this.createUserGroup.agentCampaignSelection,
-      "defaultCampId": this.defaultCampaignValue.id,
-      "domainId": this.domainId,
-      "interactionDetails": {
-        "call": {
-          //  "priority": "priority",
-          "seat": this.seat.call,
-          "intractionAllowed": this.intractionAllowed.call
-        },
-        "inCall": {
-          "priority": this.priority.inCall,
-          "seat": this.seat.inCall,
-          "intractionAllowed": this.intractionAllowed.inCall
-        },
-        "outCall": {
-          "priority": this.priority.outCall,
-          "seat": this.seat.outCall,
-          "intractionAllowed": this.intractionAllowed.outCall
-        },
-        "social": {
-          //  "priority": "priority",
-          "seat": this.seat.social,
-          "intractionAllowed": this.intractionAllowed.social
-        },
-        "email": {
-          "priority": this.priority.email,
-          "seat": this.seat.email,
-          "intractionAllowed": this.intractionAllowed.email
-        },
-        "whatsapp": {
-          "priority": this.priority.whatsapp,
-          "seat": this.seat.whatsapp,
-          "intractionAllowed": this.intractionAllowed.whatsapp
-        },
-        "sms": {
-          "priority": this.priority.sms,
-          "seat": this.seat.sms,
-          "intractionAllowed": this.intractionAllowed.sms
-        },
-        "facebook": {
-          "priority": this.priority.facebook,
-          "seat": this.seat.facebook,
-          "intractionAllowed": this.intractionAllowed.facebook
-        },
-        "twitter": {
-          "priority": this.priority.twitter,
-          "seat": this.seat.twitter,
-          "intractionAllowed": this.intractionAllowed.twitter
-        },
-        "instagram": {
-          "priority": this.priority.instagram,
-          "seat": this.seat.instagram,
-          "intractionAllowed": this.intractionAllowed.instagram
-        },
-        "viber": {
-          "priority  ": this.priority.viber,
-          "seat": this.seat.viber,
-          "intractionAllowed": this.intractionAllowed.viber
-        },
-        "chat": {
-          "priority": this.priority.chat,
-          "seat": this.seat.chat,
-          "intractionAllowed": this.intractionAllowed.chat
-        },
-        "videoChat": {
-          "priority": this.priority.videoChat,
-          "seat": this.seat.videoChat,
-          "intractionAllowed": this.intractionAllowed.videoChat
-        },
-        "maxinteraction": this.createUserGroup.agentMaxInteraction,
-      },
-      "settingDetails": [
+  // this.createUserGroup.campaigns.push()
+  this.createUserGroup.domainId=1672730382222;
+  this.createUserGroup.defaultCampId=this.defaultCampaignValue.value
+  this.createUserGroup.skillPriority=Object.keys(this.skillsPriorities).map((e: any) => ({ skillId: this.skillsPriorities[e].skillId, priority: this.skillsPriorities[e].priotity }))
+  
+   
+      this.createUserGroupSubmit.emit(this.createUserGroup)
 
-      ],
-      "campaigns": [
-        this.createUserGroup.campaign,
-      ],
-      "skillPriority": Object.keys(this.skillsPrioritys).map((e: any) => ({ skillId: this.skillsPrioritys[e].skillId, priority: this.skillsPrioritys[e].priotity }))
-
-
-    }
-
-    this.createUserGroupSubmit.emit(dataObj)
-
-  }
-
+}
+  
 }
 
 

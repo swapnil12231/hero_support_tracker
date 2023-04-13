@@ -13,6 +13,8 @@ export class CreateSkillSetComponent implements OnInit {
 
   @Output() createSkillSetSubmit = new EventEmitter<any>();
 
+  public modalHeaderText!: string;
+  public skillSetData: any;
   public createSkillSetRes: any;
   public createSkillSet!: CreateSkillSet;
   domainId: number;
@@ -26,26 +28,40 @@ export class CreateSkillSetComponent implements OnInit {
   }
 
 
+
+  UpdateSkillSetData(childData: any) {
+
+
+
+    this.createSkillSet.name = childData.data.skillname;
+    this.createSkillSet.description = childData.data.description;
+    this.createSkillSet.color = childData.data.color;
+    this.createSkillSet.status = childData.data.status;
+    this.modalHeaderText = 'Update Skill Set';
+
+  }
+
+  reset() {
+    this.skillSetData = null;
+    this.modalHeaderText = 'Add Pause Code';
+  }
+
+
   submit(createSkillSetForm: NgForm) {
 
-    let dataObj = {
-      "name": this.createSkillSet.name,
-      "description": this.createSkillSet.description,
-      "color": this.createSkillSet.color,
-      "status": this.createSkillSet.status,
-      "domainId": this.domainId
-    }
+    this.createSkillSet.domainid = 1672730382222;
 
 
 
 
-
-
-    this.skillSetService.createSkillSet(dataObj)
+    this.skillSetService.createSkillSet(this.createSkillSet)
       .then(
         (res: any) => {
+
           if (res.status) {
             this.createSkillSetRes = res;
+
+
 
             this.createSkillSetSubmit.emit();
 

@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from '../../../services/authentication/httpclient.service';
+import { Constants } from 'src/app/models/constants';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CampaignsService {
-    constructor(private httpClientService: HttpClientService) { }
+    domainId: number;
+    constructor(private httpClientService: HttpClientService) {
+        this.domainId = parseInt(sessionStorage.getItem(Constants.domainId) || '0');
+    }
 
-    async getEntityToAddCampaign(domainId: any) {
-        let url = `/campaign/campaigns/get-entity?domainid=${domainId}`;
+    async getEntityToAddCampaign() {
+        let url = `/campaign/campaigns/get-entity?domainid=${this.domainId}`;
         return this.httpClientService.get(url)
     }
 
-    async getAllCampaigns(domainId: any) {
-        let url = `/campaign/campaigns/?domainid=${domainId}`;
+    async getAllCampaigns() {
+        let url = `/campaign/campaigns/?domainid=${this.domainId}`;
         return this.httpClientService.get(url)
     }
 
@@ -22,9 +26,9 @@ export class CampaignsService {
         return this.httpClientService.post(url, data)
     }
 
-    async deleteCampaign(data:any){
-        let url=`/campaign/campaigns/delete`;
-        return this.httpClientService.deleteWithBody(url,data);
-      }
+    async deleteCampaign(data: any) {
+        let url = `/campaign/campaigns/delete`;
+        return this.httpClientService.deleteWithBody(url, data);
+    }
 
 }

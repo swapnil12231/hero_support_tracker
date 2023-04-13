@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
+import { Constants } from 'src/app/models/constants';
 import { HttpClientService } from 'src/app/services/authentication/httpclient.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DispositionService {
+  domainId: number;
+  userGroupId: number;
+  userId: number;
+  constructor(private httpClientService: HttpClientService) {
+    this.domainId = parseInt(sessionStorage.getItem(Constants.domainId) || '0');
+    this.userGroupId = parseInt(sessionStorage.getItem(Constants.userGroupId) || '0');
+    this.userId = parseInt(sessionStorage.getItem(Constants.userId) || '0');
 
-  constructor(private httpClientService: HttpClientService) { }
+  }
 
-  async getEntityToAddDispotision(domainId: any, userGroupId: any) {
-    let url = `/campaign/disposition/get-entity?domainId=${domainId}&userGroupId=${userGroupId}`;
+  async getEntityToAddDispotision() {
+    let url = `/campaign/disposition/get-entity?domainId=${this.domainId}&userGroupId=${this.userGroupId}`;
     return this.httpClientService.get(url)
   }
 
-  async getAllCampaignDispositionData(domainId: any, userId: any, userGroupId: any) {
-    let url = `/campaign/disposition/?domainId=${domainId}&userId=${userId}&userGroupId=${userGroupId}`;
+  async getAllCampaignDispositionData() {
+    let url = `/campaign/disposition/?domainId=${this.domainId}&userId=${this.userId}&userGroupId=${this.userGroupId}`;
     return this.httpClientService.get(url);
   }
 

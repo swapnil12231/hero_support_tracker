@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Constants } from 'src/app/models/constants';
 import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.service';
 import { NewCampaignComponent } from './new-campaign/new-campaign.component';
 
@@ -19,15 +20,15 @@ export class CampaignsComponent implements OnInit {
   domainId: any;
   canNewCampaign: boolean = true;
 
-  constructor(private campaignsService: CampaignsService) { }
+  constructor(private campaignsService: CampaignsService) {
+  }
 
   ngOnInit(): void {
-    this.domainId = 1673350192404;//sessionStorage.getItem('domainId');
     this.getAllCampaigns();
   }
 
   getAllCampaigns() {
-    this.campaignsService.getAllCampaigns(this.domainId).then(
+    this.campaignsService.getAllCampaigns().then(
       res => {
         if (res != null) {
           this.campaignsData = res;
@@ -47,14 +48,12 @@ export class CampaignsComponent implements OnInit {
   }
 
   editCampaign(row: any) {
-    console.log(row);
     this.canNewCampaign = false;
     this.createCampaignEditData = {
       'data': row,
       'canShowUpdate': true,
       'canNewSoundFile': this.canNewCampaign
     }
-    console.log(this.createCampaignEditData);
     this.newCampaignComponent.transferDataTonewCampaignChild(this.createCampaignEditData);
   }
 

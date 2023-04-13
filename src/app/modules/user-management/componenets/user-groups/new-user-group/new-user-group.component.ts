@@ -8,7 +8,7 @@ import { UserGroupsService } from '../../../services/user-groups.service';
 })
 export class NewUserGroupComponent implements OnInit {
 
-  @Output() userManagement = new EventEmitter<boolean>();
+  @Output() newUserGroupSubmit = new EventEmitter<any>();
 
   public createUserGroupRes!: any;
 
@@ -31,15 +31,13 @@ export class NewUserGroupComponent implements OnInit {
   }
 
   settingDetailsSubmit(data: any) {
-
-
-
     this.createUserSubmit.settingDetails = data;
+    this.userGroupsService.createUserGroup(this.createUserSubmit).then((res: any) => {
 
-
-
-    this.userGroupsService.createUserGroup(this.createUserSubmit).then(res => {
-      this.createUserGroupRes = res;
+      if (res.status) {
+        this.createUserGroupRes = res;
+        this.newUserGroupSubmit.emit();
+      }
     },
       err => { this.createUserGroupRes = err }
     )

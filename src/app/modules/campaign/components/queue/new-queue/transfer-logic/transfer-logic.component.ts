@@ -9,7 +9,7 @@ import { QueueService } from 'src/app/modules/campaign/services/queue.service';
 })
 export class TransferLogicComponent implements OnInit {
 
-  @Output() transferLogicSubmit = new EventEmitter<any>();
+  @Output() createQueueNextSubmit = new EventEmitter<any>();
 
   @Input()
   skillOptionArray: Array<any> = [];
@@ -69,6 +69,9 @@ export class TransferLogicComponent implements OnInit {
     let voiceLogic = new VoiceLogic();
     this.voiceLogicArray.push(voiceLogic);
   }
+  onMusicClassChange(index: number) {
+    this.voiceLogicArray[index].data.music_class_name = this.musicClassOptionArray.find(e => e.id == this.voiceLogicArray[index].data.music_class).value;
+  }
   onEventChange(index: number) {
     if (this.voiceLogicArray[index].event == 1) {
       let voiceLogicEventApi = new VoiceLogicEventApi();
@@ -124,6 +127,9 @@ export class TransferLogicComponent implements OnInit {
       let voiceLogicEventWait = new VoiceLogicEventWait();
       this.voiceLogicArray[index].data = voiceLogicEventWait;
     }
+    else {
+      this.voiceLogicArray[index].data = null;
+    }
 
   }
   addAnotherVoiceLogicEventJson(index: number) {
@@ -134,16 +140,51 @@ export class TransferLogicComponent implements OnInit {
   onDispositionTypeChange(index: number) {
     let data = {
       campId: this.campaignId,
-      dispoType: this.voiceLogicArray[index].data.disposition.join()
+      dispoType: this.voiceLogicArray[index].data.disposition_type
     }
     this.queueService.getDispositionData(data).then((res: any) => {
       this.voiceLogicArray[index].data.dispositionOptionArray = res;
     });
-    // this.voiceLogicArray[index].data.disposition = ;
   }
   submit() {
-    // this.transferLogicSubmit.emit(this.transferLogicArray);
-    console.log("Test ", this.voiceLogicArray);
+    let transferObj: any = {};
+    this.transferLogicArray = this.transferLogicArray.map((e, index) => ({ ...e, step: index + 1 }));
+    let steps: any = {};
+    let voiceLogicObject = this.voiceLogicArray.map(e => {
+      let tempObj: any = {};
+      tempObj.event = this.eventOptionArray[e.event].value;
+      tempObj.data = e.data;
+      if (e.event == 5) {
+        let followUpObj: any = {};
+        let time = new Date(e.data.time);
+        followUpObj.hour = time.getHours();
+        followUpObj.minutes = time.getMinutes();
+
+        tempObj.data = followUpObj;
+      }
+      else if (e.event == 8) {
+        let parseObj: any = {};
+        e.data.voiceLogicEventJsonOptions.forEach((json: VoiceLogicEventJsonOptions) => parseObj[json.key] = json.name);
+        tempObj.data.parse = parseObj;
+      }
+      else if (e.event == 14) {
+        e.data.dispositionOptionArray = undefined;
+      }
+      else {
+        tempObj.data = e.data;
+      }
+      return tempObj;
+    }).forEach((q, i) => {
+      steps[i + 1] = q;
+    });
+    let stepData = {
+      steps: steps
+    }
+
+    transferObj.queueTransferDetails = this.transferLogicArray;
+    transferObj.queueVoiceDetails = [JSON.stringify(stepData)];
+
+    this.createQueueNextSubmit.emit(transferObj);
   }
 
   ngOnInit(): void {

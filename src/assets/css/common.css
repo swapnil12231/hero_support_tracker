@@ -877,3 +877,6 @@ h1.modal-title {
 .yellow-progressbar .p-progressbar .p-progressbar-value {
     background-color: rgb(255, 193, 7);
 }
+.p-multiselect .p-multiselect-label {
+    padding: 0.3rem 0 0 0.75rem !important;
+}

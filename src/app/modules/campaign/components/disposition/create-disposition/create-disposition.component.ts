@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CampaignDisposition, dispositionList, dispositionType } from 'src/app/models/campaign/campaignDisposition';
 import { CampdispositionType, CreateDisposition, disposition, dispositionTypeArray, Existingdisposition, VmDisposition } from 'src/app/models/campaign/disposition';
 import { DispositionService } from '../../../services/disposition.service';
+import { Constants } from 'src/app/models/constants';
 
 @Component({
   selector: 'app-create-disposition',
@@ -23,8 +24,11 @@ export class CreateDispositionComponent implements OnInit {
   despositionDetails: any;
   usergroupid: any;
   constructor(private dispositionService: DispositionService,) {
-    this.domainId = sessionStorage.getItem('domainId');
-    this.usergroupid = sessionStorage.getItem('usergroupid');
+
+    this.domainId = parseInt(sessionStorage.getItem(Constants.domainId) || '0');
+    this.usergroupid = parseInt(sessionStorage.getItem(Constants.userGroupId) || '0');;
+
+
     this.vmDisposition = new VmDisposition();
     this.campaignDisposition = new CampaignDisposition();
     this.campaignDisposition.campaignDisositionList = new Array<dispositionList>();
@@ -91,7 +95,7 @@ export class CreateDispositionComponent implements OnInit {
   }
 
   async getEntityToAddDisposition() {
-    this.dispositionService.getEntityToAddDispotision(this.domainId, this.usergroupid).then(
+    this.dispositionService.getEntityToAddDispotision().then(
       res => {
         if (res != 0) {
           this.dispositionObj = res;

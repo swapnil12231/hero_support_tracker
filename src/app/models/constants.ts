@@ -4,6 +4,8 @@ export class Constants {
     public static Token = 'AvisToken';
     public static RefToken = 'AvisToken';
     public static domainId = 'AvisDomainId';
+    public static userGroupId = 'AvisUserGroupId';
+    public static userId = 'AvisUserId';
     // Cokkies encryption
     public static encryptionKey = 'Contique';
 
