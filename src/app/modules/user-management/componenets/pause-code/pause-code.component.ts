@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PauseCodeService } from 'src/app/modules/user-management/services/pause-code.service';
+import { ToastService } from 'src/app/services/common/toast.service';
 import { CreatePauseCodeComponent } from './create-pause-code/create-pause-code/create-pause-code.component';
 
 @Component({
@@ -16,8 +17,9 @@ export class PauseCodeComponent implements OnInit {
   @ViewChild(CreatePauseCodeComponent)
   createPauseCodeComponent!: CreatePauseCodeComponent;
 
-  constructor(private pauseCodeService: PauseCodeService) { }
+  constructor(private pauseCodeService: PauseCodeService,private toastService:ToastService) { }
   ngOnInit(): void {
+    this.toastService.showSuccess("loaded succesfully!","success");
     this.getAllPauseCode();
   }
 
@@ -27,6 +29,7 @@ export class PauseCodeComponent implements OnInit {
         this.pauseCodeDataRes = res;
       }
     }, err => {
+      this.toastService.showError("something went wrong","error");
       this.pauseCodeDataRes = err;
     })
   }

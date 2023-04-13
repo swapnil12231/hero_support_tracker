@@ -1,42 +1,51 @@
-<div class="tab-pane "  role="tabpanel" >
+<div class="tab-pane " role="tabpanel">
     <div class="col-md-12 col-lg-12">
         <div class="card  mb-3">
             <div class="card-body">
                 <div class="campaignTable  table-responsive">
-                    <table class="table table-bordered table-md">
-                        <thead class="light-blue">
+                    <p-table class="table table-borderless table-md" [value]="soundFileResponse"
+                        styleClass="p-datatable-sm" [rowHover]="true" [rows]="5" [rowsPerPageOptions]="[5,10,15]"
+                        [showCurrentPageReport]="true" [paginator]="true">
+                        <ng-template pTemplate="header">
                             <tr>
-                                <th><input type="checkbox"> </th>
+                                <th style="width: 3rem">
+                                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                </th>
                                 <th>Sound Name</th>
-                                <th>Duration</th>   
-                                <th>Actions</th>   
+                                <th>Duration</th>
+                                <th>Actions</th>
                             </tr>
-                        </thead>
-                       <tbody *ngFor="let item of soundFileResponse | paginate: { itemsPerPage: 5, currentPage: p }">
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
                             <tr>
-                                <td><input type="checkbox"></td>
+                                <td>
+                                    <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                                </td>
                                 <td> {{item.name}}</td>
                                 <td> {{item.duration}}</td>
                                 <td class="actionsColumn">
                                     <a title="Play" class="me-2" (click)="onSoundPlay(item)">
                                         <img src="./assets/images/preview.png" alt="Play" width="17">
-                                     </a>
-                                    <a title="Edit" class="me-2" (click)="onSoundEdit(item)" data-bs-toggle="modal"
-                                    data-bs-target="#addSoundModal"><img src="./assets/images/edit.png" alt="Edit" width="17">
                                     </a>
-                                    <a title="Delete" (click)="onSoundDelete(item)"> <img src="./assets/images/sidebar/deleted-data.png" alt="Delete" width="17">
+                                    <a title="Edit" class="me-2" (click)="onSoundEdit(item)" data-bs-toggle="modal"
+                                        data-bs-target="#addSoundModal"><img src="./assets/images/edit.png" alt="Edit"
+                                            width="17">
+                                    </a>
+                                    <a title="Delete" (click)="onSoundDelete(item)"> <img
+                                            src="./assets/images/sidebar/deleted-data.png" alt="Delete" width="17">
                                     </a>
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
-                <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="7">No customers found.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <app-add-sound (addSoundFileSubmit)="addSoundFileSubmit1()"></app-add-sound>
-
-
-
