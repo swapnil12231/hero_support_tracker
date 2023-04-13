@@ -18,6 +18,8 @@ export class SkillSetService {
 
 
   async getAllSkillSet() {
+
+    this.domainId=1672730382222;
     let url = `/usermanagement/skills/?domainid=${this.domainId}`;
     return this.httpClientService.get(url);
   }

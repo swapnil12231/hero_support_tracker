@@ -20,6 +20,12 @@ export class UserGroupsComponent implements OnInit {
   }
 
 
+  newUserGroupSubmit()
+  {
+    this.getAllUserGroups();
+
+  }
+
 
   async getAllUserGroups() {
     this.userGroupsService.getAllUserGroups().then(res => {
