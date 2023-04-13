@@ -55,14 +55,7 @@ export class LoginComponent implements OnInit {
         this.otpModel.userName = this.user.userName;
         this.otpModel.sessionid = res.sessionid;     
        this.OTPVerified = true;
-       this.verifyUser = false;
-      //  this.loginService.sendOtp(this.user.userName).then((res:any)=>{
-      //   if(res.sessionid!="") {
-      //     this.otpModel.userName = this.user.userName;
-      //     this.otpModel.sessionid = res.sessionid;
-      //   } 
-  
-      // })
+       this.verifyUser = false;      
       } 
 
     })
