@@ -1,11 +1,10 @@
-<!-- <div    class="modal" id="campaignModal" tabindex="-1" aria-labelledby=" " aria-hidden="true"> -->
-
 <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
         <div class="modal-header border-0">
             <h1 class="modal-title fs-5 w-100 text-center" id="campaignModalLabel">
-                Create Campaign </h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                {{modalHeaderText}}
+             </h1>
+            <button type="button" (click)="resetModal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body pt-1 px-5 pb-5 pt-1 px-5 pb-5">
             <div class="row g-3">

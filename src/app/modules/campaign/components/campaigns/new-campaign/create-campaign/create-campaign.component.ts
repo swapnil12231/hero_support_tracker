@@ -20,12 +20,12 @@ export class CreateCampaignComponent implements OnInit {
   isAutodispose: boolean = false;
   startCallCrmData: any;
   startCallUrl: any;
+  modalHeaderText = 'Create Campaign';
 
   constructor(private campaignsService: CampaignsService) {
     this.domainId = sessionStorage.getItem('domainId');
     this.createCampaign = new CreateCampaigns();
   }
-
 
   autoDisposeValue() {
     if (this.createCampaign.campaignsAutoDispose == 'allow') {
@@ -34,13 +34,27 @@ export class CreateCampaignComponent implements OnInit {
     else {
       this.isAutodispose = false;
     }
-
   }
 
   submit() {
     this.createCampaignSubmit.emit(this.createCampaign);
   }
 
+  // data from parent component edit
+    childData(parentData: any) {
+    this.modalHeaderText = 'Update Campaign';
+    console.log(parentData);
+    console.log('shital')
+    this.createCampaign.campaignsName = parentData.data.name;
+    this.createCampaign.campaignsDescription = parentData.data.description;
+    this.createCampaign.campaignsStatus = parentData.data.status;
+    this.createCampaign.campaignsAutoDispose = parentData.data.autodispose;
+  }
+
+  resetModal(){
+    this.modalHeaderText = 'Create Campaign';
+    this.createCampaign = new CreateCampaigns();
+  }
 
   async getStartCallCrmData() {
     this.campaignsService.getEntityToAddCampaign(this.domainId).then(
