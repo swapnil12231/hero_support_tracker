@@ -28,7 +28,7 @@ export class CampaignsService {
 
     async deleteCampaign(data: any) {
         let url = `/campaign/campaigns/delete`;
-        return this.httpClientService.deleteWithBody(url, data);
+        return this.httpClientService.delete(url, data);
     }
 
 }

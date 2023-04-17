@@ -14,12 +14,12 @@ export class DashboardService {
     }
 
     async getTopCampaignsData(date: string) {
-        let url = `/dashboard/?date=${date}&domainId=${this.domainId}`;
+        let url = `/dashboard/campaigns?date=${date}&domainId=${this.domainId}`;
         return this.httpClientService.get(url);
     }
 
     async getRecentUsersData(date: string) {
-        let url = `/dashboard/recentUsers?date=${date}&domainId=${this.domainId}`;
+        let url = `/dashboard/users?date=${date}&domainId=${this.domainId}`;
         return this.httpClientService.get(url);
     }
 

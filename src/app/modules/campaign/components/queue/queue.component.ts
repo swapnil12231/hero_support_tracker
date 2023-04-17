@@ -19,4 +19,12 @@ export class QueueComponent implements OnInit {
       this.queueData = res;
     });
   }
+  deleteQueue(queueId: number) {
+    this.queueService.deleteQueue(queueId).then(res => {
+      setTimeout(() => {
+        this.getQueueData();
+      }, 100);
+    });
+  }
+
 }
