@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NewUserGroupComponent } from './componenets/user-groups/new-user-group/new-user-group.component';
 import { SettingDetailsComponent } from './componenets/user-groups/new-user-group/setting-details/setting-details/setting-details.component'; 
+import { TableModule } from 'primeng/table';
 
 
 
@@ -49,7 +50,8 @@ import { SettingDetailsComponent } from './componenets/user-groups/new-user-grou
     CommonModule,
     UserManagementRoutingModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    TableModule,
   ]
 })
 export class UserManagementModule { }

@@ -13,6 +13,7 @@ import { CreateVoiceRecordingComponent } from './component/recording/create-voic
 import { MainComponent } from './component/main/main.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     VoiceServerRoutingModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+    TableModule
 
   ]
 })
