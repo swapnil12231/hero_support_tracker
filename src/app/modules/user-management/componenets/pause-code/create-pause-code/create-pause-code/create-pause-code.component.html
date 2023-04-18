@@ -12,7 +12,7 @@
                     <div class="col-sm-6">
                         <label for="country" class="form-label">User Group <sup class="text-red">*</sup></label>
                         <select class="form-select" name="pauseCodeUserGroup" #pauseCodeUserGroup="ngModel"
-                            [(ngModel)]="dropdowndata" required>
+                            [(ngModel)]="dropdowndata" [value]="userGroupData.key" required>
                             <option [value]="-1">Select any</option>
                             <option *ngFor="let key of Object.keys(this.userGroupData)" >
                                 {{ userGroupData[key] }}
@@ -42,7 +42,7 @@
             </div>
             <div class="modal-footer justify-content-center border-top-0">
                 <button type="button" class="btn btn-warning text-white px-4" data-bs-dismiss="modal"
-                    (click)="submit()">{{ pauseCodeData?.canShowUpdate?'UPDATE':'SUBMIT'}}</button>
+                    (click)="submit()">{{ pauseCodeEditData?.canShowUpdate?'UPDATE':'SUBMIT'}}</button>
             </div>
         </div>
     </div>

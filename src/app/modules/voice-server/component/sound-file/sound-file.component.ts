@@ -1,32 +1,30 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ToastService } from 'src/app/services/common/toast.service';
 import { SoundFileService } from '../../services/sound-file.service';
 import { AddSoundComponent } from './add-sound/add-sound.component';
-
 @Component({
   selector: 'app-sound-file',
   templateUrl: './sound-file.component.html',
   styleUrls: ['./sound-file.component.css']
 })
 export class SoundFileComponent implements OnInit {
- soundFileResponse: any;
-   p: any;
-   showModal: boolean = false;
+  soundFileResponse: any;
+  showModal: boolean = false;
   canNewSoundFile: boolean = true;
   soundData: any;
   canShowSoundPopUp: boolean = false;
-  base64ResponseData:any;
+  base64ResponseData: any;
+  audioSource = '';
 
-  domainID=1672730382222;
   @ViewChild(AddSoundComponent)
   addSoundComponent!: AddSoundComponent;
-
-  constructor(private soundFileService: SoundFileService) { }
+  constructor(private soundFileService: SoundFileService,private toastService:ToastService) { }
   ngOnInit(): void {
     this.getAllSoundFile();
   }
 
   async getAllSoundFile() {
-    this.soundFileService.getAllSoundFiles(this.domainID).then(res => {
+    this.soundFileService.getAllSoundFiles().then(res => {
       if (res) {
         this.soundFileResponse = res;
       }
@@ -37,15 +35,16 @@ export class SoundFileComponent implements OnInit {
 
   async onSoundDelete(row: any) {
     const id = [row.id];
-    this.soundFileService.deleteSoundFiles(this.domainID,id).then((res:any) => {
-       this.getAllSoundFile();
-    }).catch(err=>{
+    this.soundFileService.deleteSoundFiles(id).then((res: any) => {
+      this.getAllSoundFile();
+      this.toastService.showSuccess(res,'Success');
+    }).catch(err => {
       this.getAllSoundFile();
     })
   }
 
   onSoundEdit(row: any) {
-    this.canNewSoundFile = false; 
+    this.canNewSoundFile = false;
     this.soundData = {
       'data': row,
       'canShowUpdate': true,
@@ -56,30 +55,33 @@ export class SoundFileComponent implements OnInit {
 
   onSoundPlay(row: any) {
     const id = [row.id];
-    this.soundFileService.playSoundFile(this.domainID, id).then(res => {
-      this.base64ResponseData=res;
-    },err=>{})
+    this.soundFileService.playSoundFile(id).then(res => {
+      if (res) {
+        console.log(res);
+        this.base64ResponseData = res;
+      }
+    }, err => {
+
+    })
   }
 
-  
-  loadAudioClick(){
-    let binary= this.convertDataURIToBinary(this.base64ResponseData);
-    let blob=new Blob([binary], {type : 'audio/ogg'});
-    // let blobUrl = URL.createObjectURL(blob);
-    // this.audioSource = blobUrl;
-    //this.audioTag.nativeElement.setAttribute('src',this.audioSource);
-    }
-  
-    
-    convertDataURIToBinary(data:any) {
+  loadAudioClick() {
+    let binary = this.convertDataURIToBinary(this.base64ResponseData);
+    let blob = new Blob([binary], { type: 'audio/ogg' });
+    let blobUrl = URL.createObjectURL(blob);
+    this.audioSource = blobUrl;
+    // this.audioTag.nativeElement.setAttribute('src',this.audioSource);
+  }
+
+  convertDataURIToBinary(data: any) {
     let BASE64_MARKER = ';base64,';
     let base64Index = data.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
     let base64 = data.substring(base64Index);
     let raw = window.atob(base64);
     let rawLength = raw.length;
     let array = new Uint8Array(new ArrayBuffer(rawLength));
-  
-    for(let i = 0; i < rawLength; i++) {
+
+    for (let i = 0; i < rawLength; i++) {
       array[i] = raw.charCodeAt(i);
     }
     return array;
@@ -88,5 +90,4 @@ export class SoundFileComponent implements OnInit {
   addSoundFileSubmit1() {
     this.getAllSoundFile();
   }
-
 }

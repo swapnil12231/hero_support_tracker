@@ -8,10 +8,9 @@ import { Constants } from 'src/app/models/constants';
 export class PauseCodeService {
   domainId: number;
   constructor(private httpClientService: HttpClientService) {
-    this.domainId = parseInt(sessionStorage.getItem(Constants.domainId) || '0');
+    this.domainId = parseInt(sessionStorage.getItem(Constants.domainId) || '1672730382222');
 
   }
-
 
   async getAllPauseCodeSet() {
     let url = `/usermanagement/pausecode/?domainid=${this.domainId}`;
@@ -28,14 +27,14 @@ export class PauseCodeService {
     return this.httpClientService.post(url, data);
   }
 
-  //  async editePausecode(data:any){
-  //    let url=``;
-  //    return this.httpClientService.put(url,data);
-  //  }
+   async editePausecode(id:any,data:any){
+     let url=`/usermanagement/pausecode/${id}`;
+     return this.httpClientService.patch(url,data);
+   }
 
-  //  async deletePausecode(data:any){
-  //    let url=``;
-  //    return this.httpClientService.delete(url);
-  //  }
+   async deletePausecode(data:any){
+     let url=`/usermanagement/pausecode/?domainid=${this.domainId}`;
+     return this.httpClientService.deleteBodyWithoutParameter(url,data);
+   }
 
 }

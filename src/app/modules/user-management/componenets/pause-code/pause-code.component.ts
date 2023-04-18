@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgConfirmService } from 'ng-confirm-box';
 import { PauseCodeService } from 'src/app/modules/user-management/services/pause-code.service';
 import { ToastService } from 'src/app/services/common/toast.service';
 import { CreatePauseCodeComponent } from './create-pause-code/create-pause-code/create-pause-code.component';
@@ -17,9 +18,9 @@ export class PauseCodeComponent implements OnInit {
   @ViewChild(CreatePauseCodeComponent)
   createPauseCodeComponent!: CreatePauseCodeComponent;
 
-  constructor(private pauseCodeService: PauseCodeService,private toastService:ToastService) { }
+  constructor(private pauseCodeService: PauseCodeService, private toastService: ToastService, private confirmService: NgConfirmService) { }
   ngOnInit(): void {
-    this.toastService.showSuccess("loaded succesfully!","success");
+
     this.getAllPauseCode();
   }
 
@@ -29,8 +30,7 @@ export class PauseCodeComponent implements OnInit {
         this.pauseCodeDataRes = res;
       }
     }, err => {
-      this.toastService.showError("something went wrong","error");
-      this.pauseCodeDataRes = err;
+      this.toastService.showError("Something Went Wrong", "Error");
     })
   }
 
@@ -49,15 +49,14 @@ export class PauseCodeComponent implements OnInit {
   }
 
   pauseCodeDelete(row: any) {
-    // console.log(row);
-    // let domainID = 1672730382222;
-    // this.pauseCodeService.getAllPauseCodeSet(domainID).then(res => {
-    //   if (res) {
-    //     this.pauseCodeDataRes = res;
-    // this.getAllPauseCode();
-    //   }
-    // }, err => {
-    //   this.pauseCodeDataRes = err;
-    // })
+    const id = [row.id];
+    this.pauseCodeService.deletePausecode(id).then((res: any) => {
+      if (res) {
+        this.getAllPauseCode();
+        this.toastService.showSuccess(res, "Success");
+      }
+    }, err => {
+      this.toastService.showError("Something Went Wrong", "Error");
+    })
   }
 }

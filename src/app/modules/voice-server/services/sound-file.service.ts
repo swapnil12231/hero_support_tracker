@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Constants } from 'src/app/models/constants';
 import { HttpClientService } from 'src/app/services/authentication/httpclient.service';
 
 
@@ -7,12 +8,16 @@ import { HttpClientService } from 'src/app/services/authentication/httpclient.se
   providedIn: 'root'
 })
 export class SoundFileService {
+  domainId:number;
 
-  constructor(private  httpClientService: HttpClientService,private httpClient: HttpClient) { }
+  constructor(private  httpClientService: HttpClientService,private httpClient: HttpClient) { 
+    this.domainId = parseInt(sessionStorage.getItem(Constants.domainId) || '0');
 
-  async getAllSoundFiles(domainId:any)
+  }
+
+  async getAllSoundFiles()
   {
-       let url=`/voice-server/sound-files/?domainId=${domainId}`;
+       let url=`/voice-server/sound-files/?domainId=${this.domainId}`;
        return this.httpClientService.get(url);
   }  
   
@@ -21,8 +26,8 @@ export class SoundFileService {
     return this.httpClientService.postWithFormData(url,formData);
   }
 
-  async deleteSoundFiles(domainId:any,data:any){
-    let url=`/voice-server/sound-files/?domainId=${domainId}`;
+  async deleteSoundFiles(data:any){
+    let url=`/voice-server/sound-files/?domainId=${this.domainId}`;
     return this.httpClientService.deleteWithBody(url,data);
   }
 
@@ -31,9 +36,9 @@ export class SoundFileService {
     return this.httpClientService.put(url,formData);
   }
 
-  async playSoundFile(id:any,domainId:any)
+  async playSoundFile(id:any)
   {
-    let url=`/voice-server/sound-files/playfile/${id}?domainId=${domainId}`;
+    let url=`/voice-server/sound-files/playfile/${id}?domainId=${this.domainId}`;
     return this.httpClientService.get(url);
   }
 }

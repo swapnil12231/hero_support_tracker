@@ -79,6 +79,11 @@ export class HttpClientService {
         return response;
     }
 
+    public async patch(url: string, body: any = {}, params?: any){
+        let response = await this.patchRequest(url, body, params);
+        return response;
+    }
+
     public async postWithFormData(url: string, body: any, params?: any) {
         return await this.postRequestForFormData(url, body, params);   
     }
@@ -153,6 +158,8 @@ export class HttpClientService {
             // catchError((error: any) => this.onErrorHandler(error))
     //     );
     // }
+
+
     public delete(url: string) {
         return this.httpClient.delete(url, this.getHttpHeaders()).pipe(
             tap(res => res),
@@ -190,6 +197,11 @@ export class HttpClientService {
         );
     }
     
+    private patchRequest = <T>(url: string, payload: any, params?: any) =>getCurrent(this.webServiceUrl$.pipe(
+        switchMap(baseUrl => this.httpClient.patch(baseUrl + url, payload, this.getHttpHeaders())),
+        map(x => x as T)
+    ))
+
     private postRequest = <T>(url: string, payload: any, params?: any) =>getCurrent(this.webServiceUrl$.pipe(
         switchMap(baseUrl => this.httpClient.post(baseUrl + url, payload, this.getHttpHeaders())),
         map(x => x as T)
@@ -215,10 +227,11 @@ export class HttpClientService {
         return response;
     }
 
-    private deleteWithBodyUtil = <T>(url: string, payload: any, params?: any) => getCurrent(this.webServiceUrl$.pipe(
+    private deleteWithBodyUtil = <T>(url: string, payload: any, params?: any) => getCurrent(this.webServiceUrl$.pipe( 
         switchMap(baseUrl => this.httpClient.request('delete', baseUrl + url, { body: payload, headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.getJwtToken() } })),
         map(x => x as T)
     ))
+    
 
     public async put(url: string, body: any = {}, params?: any) {
         let response = await this.putForFormDataBody(url, body, params);
