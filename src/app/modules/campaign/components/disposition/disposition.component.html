@@ -31,53 +31,22 @@
                             <td>{{item.autoDispose}}</td>
                             <td>{{item.status}}</td>
                             <td class="actionsColumn">
-                                <a href="" title="Edit" class="me-2">
-                                    <i class="p-2 border rounded fa fa-edit me-2 text-muted"></i></a>
-                                <a href="" title="Delete"> <i
-                                        class="p-2 border me-2 rounded fa fa-trash text-muted"></i></a>
+                                <a href="" title="Edit" class="me-2" data-bs-target="#dispositionModal"
+                                    data-bs-toggle="modal" (click)="editDisposition(item)">
+                                    <i class="p-2 border rounded fa fa-edit me-2 text-muted"></i>
+                                </a>
+                                <a href="" title="Delete">
+                                    <i class="p-2 border me-2 rounded fa fa-trash text-muted"></i>
+                                </a>
                             </td>
                         </tr>
                     </ng-template>
                 </p-table>
-
-                <div class="d-none">
-                    <table class="table table-borderless">
-                        <thead class="light-blue">
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Status</th>
-                                <th>Auto Dispose </th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>salescamp</td>
-                                <td>Lorem Ipsum is simply dummy text</td>
-                                <td>Active</td>
-                                <td> Disallow </td>
-                                <td>
-                                    <div class="d-flex">
-                                        <span class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
-                                                checked>
-                                            <label class="form-check-label" for="flexSwitchCheckChecked"> </label>
-                                        </span>
-                                        <span class="me-2"> <a href="#" class="" data-bs-toggle="modal"
-                                                data-bs-target="#campaignModal"> <i class="fa fa-edit"></i></a> </span>
-                                        <span> <a href="#"><i class="fa fa-trash"></i></a> </span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
     </div>
 </div>
 
 <div class="modal fade" id="dispositionModal">
-    <app-create-disposition></app-create-disposition>
+    <app-create-disposition (refreshDisposition)="getCampaignDispositionData()"></app-create-disposition>
 </div>

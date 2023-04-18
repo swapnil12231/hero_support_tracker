@@ -78,6 +78,10 @@ export class HttpClientService {
         let response = await this.postRequest(url, body, params);
         return response;
     }
+    public async patch(url: string, body: any = {}, params?: any) {
+        let response = await this.patchRequest(url, body, params);
+        return response;
+    }
 
     public async postWithFormData(url: string, body: any, params?: any) {
         return await this.postRequestForFormData(url, body, params);
@@ -190,6 +194,11 @@ export class HttpClientService {
 
     private postRequest = <T>(url: string, payload: any, params?: any) => getCurrent(this.webServiceUrl$.pipe(
         switchMap(baseUrl => this.httpClient.post(baseUrl + url, payload, this.getHttpHeaders())),
+        map(x => x as T)
+    ))
+
+    private patchRequest = <T>(url: string, payload: any, params?: any) => getCurrent(this.webServiceUrl$.pipe(
+        switchMap(baseUrl => this.httpClient.patch(baseUrl + url, payload, this.getHttpHeaders())),
         map(x => x as T)
     ))
 

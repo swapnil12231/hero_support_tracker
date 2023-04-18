@@ -19,7 +19,7 @@ export class dispositionType {
     type!: string;
     otherType!: string;
     autoDispose!: string;
-    isActive!: boolean;
+    status!: string;
 }
 
 export class newCampaign {

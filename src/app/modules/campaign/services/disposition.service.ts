@@ -31,5 +31,10 @@ export class DispositionService {
     return this.httpClientService.post(url, data);
   }
 
+  async editDisposition(data: any) {
+    let url = `/campaign/disposition/`;
+    return this.httpClientService.patch(url, data);
+  }
+
 
 }
