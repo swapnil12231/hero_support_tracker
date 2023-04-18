@@ -1,6 +1,6 @@
 export class CreateNewQueue {
     domainId!: number;
-    campid: number = -1;
+    campid!: number;
     queueName!: string;
     queuePriority: number = -1;
     musicClassId: number = -1;

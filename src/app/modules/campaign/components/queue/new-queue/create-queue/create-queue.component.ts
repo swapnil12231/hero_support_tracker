@@ -12,17 +12,12 @@ export class CreateQueueComponent implements OnInit {
 
   @Output() createQueueSubmit = new EventEmitter<CreateNewQueue>();
 
-  @Input()
-  campaignsArray: Array<any> = [];
-  @Input()
-  musicClassArray: Array<any> = [];
-  @Input()
-  apiOptionArray: Array<any> = [];
-  @Input()
-  ivrOptionArray: Array<any> = [];
-  @Input()
-  dispositionTypeOptionArray: Array<any> = [];
 
+  campaignsArray: Array<any> = [];
+  musicClassArray: Array<any> = [];
+  apiOptionArray: Array<any> = [];
+  ivrOptionArray: Array<any> = [];
+  dispositionTypeOptionArray: Array<any> = [];
   dispositionOptionArray: Array<any> = [];
   queuePriorityArray: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   createNewQueue: CreateNewQueue;
