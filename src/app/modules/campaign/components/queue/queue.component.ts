@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QueueService } from '../../services/queue.service';
+import { ToastService } from 'src/app/services/common/toast.service';
 
 @Component({
   selector: 'app-queue',
@@ -8,7 +9,7 @@ import { QueueService } from '../../services/queue.service';
 })
 export class QueueComponent implements OnInit {
   queueData: Array<any> = [];
-  constructor(private queueService: QueueService) {
+  constructor(private queueService: QueueService, private toastService: ToastService) {
     this.getQueueData();
   }
   ngOnInit(): void {
@@ -23,7 +24,10 @@ export class QueueComponent implements OnInit {
     this.queueService.deleteQueue(queueId).then(res => {
       setTimeout(() => {
         this.getQueueData();
-      }, 100);
+      }, 500);
+      this.toastService.showSuccess("Queue deleted successfully", "Success");
+    }).catch(error => {
+      this.toastService.showError("Something went wrong", "Error");
     });
   }
 

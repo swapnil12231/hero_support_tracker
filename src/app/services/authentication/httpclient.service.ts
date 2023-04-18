@@ -228,7 +228,7 @@ export class HttpClientService {
     // }
 
     private deleteRequest = <T>(url: string, body: any = {}, params?: any) => getCurrent(this.webServiceUrl$.pipe(
-        switchMap(baseUrl => this.httpClient.request('delete', baseUrl + url, { body: body, headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.getJwtToken() }, params: params })),
+        switchMap(baseUrl => this.httpClient.request('delete', baseUrl + url, { body: body, headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.getJwtToken(), 'version': 'V1.0.0' }, params: params })),
         map(x => x as T)
     ))
 

@@ -100,10 +100,11 @@ export class CreateDispositionComponent implements OnInit {
 
     this.dispositionService.addDisposition(postArray).then(res => {
       this.despositionDetails = res;
+      this.toastrService.showSuccess("Disposition created successfully", "Success");
       this.refreshDisposition.emit();
-    },
-      err => { this.despositionDetails = err },
-    )
+    }).catch(error => {
+      this.toastrService.showError("Something went wrong", "Error");
+    })
   }
 
   getDispoType(e: any) {
@@ -115,14 +116,9 @@ export class CreateDispositionComponent implements OnInit {
   }
 
   async getEntityToAddDisposition() {
-    this.dispositionService.getEntityToAddDispotision().then(
-      res => {
-        if (res != 0) {
-          this.dispositionObj = res;
-        }
-      },
-      err => { this.dispositionObj = err }
-    )
+    this.dispositionService.getEntityToAddDispotision().then(res => {
+      this.dispositionObj = res;
+    });
   }
 
   getCampaignId(e: any) {

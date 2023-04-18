@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { QueueService } from '../../../services/queue.service';
 import { CreateNewQueue } from 'src/app/models/campaign/queue';
 import { Constants } from 'src/app/models/constants';
+import { ToastService } from 'src/app/services/common/toast.service';
 
 @Component({
   selector: 'app-new-queue',
@@ -9,6 +10,9 @@ import { Constants } from 'src/app/models/constants';
   styleUrls: ['./new-queue.component.css']
 })
 export class NewQueueComponent implements OnInit {
+
+  @Output()
+  refreshQueue = new EventEmitter<void>();
 
   campaignsArray: Array<any> = [];
   musicClassArray: Array<any> = [];
@@ -22,7 +26,7 @@ export class NewQueueComponent implements OnInit {
   campaignId: number = 0;
   domainId: number;
 
-  constructor(private queueService: QueueService) {
+  constructor(private queueService: QueueService, private toastService: ToastService) {
     this.domainId = parseInt(sessionStorage.getItem(Constants.domainId) || '0');
     this.getQueueDropdownsData();
   }
@@ -53,7 +57,14 @@ export class NewQueueComponent implements OnInit {
     createNewQueueObj = { ...data, ...createNewQueueObj, domainid: this.domainId };
     createNewQueueObj.postCall = createNewQueueObj.postCall ? "Y" : "N";
 
-    this.queueService.createQueue(createNewQueueObj);
+    this.queueService.createQueue(createNewQueueObj).then(res => {
+      setTimeout(() => {
+        this.refreshQueue.emit();
+      }, 500);
+      this.toastService.showSuccess("Queue created successfully", "Success");
+    }).catch(error => {
+      this.toastService.showError("Something went wrong", "Error");
+    });
 
   }
 
