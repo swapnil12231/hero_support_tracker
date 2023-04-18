@@ -31,9 +31,9 @@ export class newCampaign {
     maximumTime!: string
     callStartUrl!: string;
     tableId!: string;
-    crmId!: string;
-    domainId !: string;
-    isMask!: string;
+    crmId!: any;
+    domainId !: any;
+    isMask!: any;
     crmHistory!: string;
     disposition!: Disposition[];
 }

@@ -7,19 +7,16 @@
                 <h1 class="modal-title fs-5 w-100 text-center">
                     Dispositions
                 </h1>
-                <div class="col-md-12">
-                    <button class="btn btn-warning btn-sm text-white"> Choose from Existing </button>
-                </div>
                 <div class="row" *ngFor="let obj of disposition; let i= index">
                     <div class="col-sm-6">
                         <label for="country" class="form-label">Disposition Type<sup class="text-red">*</sup></label>
                         <select class="form-select" name="type" #CampaignsDispositionType="ngModel"
                             (change)="getDispoType($event)" [(ngModel)]="disposition[i].type" required>
                             <option value="undefined" selected>Select </option>
-                            <option value="followup">FOLLOWUP</option>
-                            <option value="dnd">DND</option>
-                            <option value="transfer">TRANSFER</option>
-                            <option value="others">OTHERS</option>
+                            <option *ngFor="let obj of dispositionTypeArray ; let i = index"
+                                [value]="dispositionTypeArray[i].id">
+                                {{dispositionTypeArray[i].value}}
+                            </option>
                         </select>
                     </div>
                     <div class="col-sm-6" *ngIf="campaignsOtherType">

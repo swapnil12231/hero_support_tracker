@@ -26,6 +26,11 @@ export class CampaignsService {
         return this.httpClientService.post(url, data)
     }
 
+    async editCampaign(campaignId: any, campBody: any) {
+        let url = `/campaign/campaigns/${campaignId}`;
+        return this.httpClientService.patch(url, campBody);
+    }
+
     async deleteCampaign(data: any) {
         let url = `/campaign/campaigns/delete`;
         return this.httpClientService.delete(url, data);

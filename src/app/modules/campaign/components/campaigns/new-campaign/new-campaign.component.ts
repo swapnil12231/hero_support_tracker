@@ -4,6 +4,7 @@ import { Disposition } from 'src/app/models/campaign/campaigns';
 import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.service';
 import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
 import { Constants } from 'src/app/models/constants';
+import { CampaignDispositionComponent } from './campaign-disposition/campaign-disposition.component';
 
 @Component({
   selector: 'app-new-campaign',
@@ -14,6 +15,10 @@ export class NewCampaignComponent implements OnInit {
 
   @ViewChild(CreateCampaignComponent)
   createCampaignComponent!: CreateCampaignComponent;
+
+  @ViewChild(CampaignDispositionComponent)
+  campaignDispositionComponent!: CampaignDispositionComponent;
+
   createCampaignEditData: any;
 
 
@@ -42,19 +47,17 @@ export class NewCampaignComponent implements OnInit {
   }
 
   createCampaignNextSubmit(data: any) {
-
     this.createCampaignObj.disposition = data;
-    if (this.createCampaignObj.campaignsMask == 'true') {
-      this.createCampaignObj.campaignsMask = true;
-    }
-
-    else {
-      this.createCampaignObj.isMask = false;
-    }
-
     if (this.createCampaignObj.campaignsMinimumTime == undefined || this.createCampaignObj.campaignsMinimumTime == null) {
       this.createCampaignObj.campaignsMinimumTime = "";
       this.createCampaignObj.campaignsMaximumTime = "";
+    }
+
+    if (this.createCampaignObj.campaignsMask == "YES") {
+      this.createCampaignObj.campaignsMask = true;
+    }
+    else {
+      this.createCampaignObj.campaignsMask = false;
     }
 
     this.newCampaign.name = this.createCampaignObj.campaignsName;
@@ -65,14 +68,11 @@ export class NewCampaignComponent implements OnInit {
     this.newCampaign.maximumTime = this.createCampaignObj.campaignsMaximumTime;
     this.newCampaign.callStartUrl = this.createCampaignObj.campaignsStartCallUrl;
     this.newCampaign.tableId = this.createCampaignObj.selectedCrmTableId;
-
     this.newCampaign.crmId = this.createCampaignObj.campaignsCrm;
     this.newCampaign.isMask = this.createCampaignObj.campaignsMask;
     this.newCampaign.domainId = this.domainId;
-
     this.newCampaign.crmHistory = this.createCampaignObj.campaignsCrmHistory;
-    this.newCampaign.disposition = this.createCampaignObj.disposition;
-
+    this.newCampaign.disposition = this.createCampaignObj.disposition.map((e: any) => ({ ...e, autoDispose: e.type == "OTHER" ? true : false }));
     this.campaignsService.addCampaigns(this.newCampaign).then(
       res => {
         if (res != null) {

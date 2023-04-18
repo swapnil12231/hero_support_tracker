@@ -16,6 +16,13 @@ export class CampaignDispositionComponent implements OnInit {
   dispositionModel!: DispositionModel;
   campaignsOtherType: boolean = false;
   newCampaign!: newCampaign;
+
+  dispositionTypeArray: Array<any> = [
+    { id: 1, value: "FOLLOWUP", },
+    { id: 2, value: "DND" },
+    { id: 3, value: "TRANSFER" },
+    { id: 4, value: "OTHER" },
+  ];
   constructor() {
 
     this.disposition = new Array<Disposition>();
@@ -33,14 +40,17 @@ export class CampaignDispositionComponent implements OnInit {
   }
 
   getDispoType(e: any) {
-    if (e.target.value == 'others') {
-      this.campaignsOtherType = true;
+    if (e.target.value == '4') {
+      this.campaignsOtherType = true;  //if select other disposition type then add other type textbox
     } else {
       this.campaignsOtherType = false;
     }
   }
 
   submit() {
+    for (let i = 0; i < this.disposition.length; i++) {
+      this.disposition[i].type = this.dispositionTypeArray.find(x => x.id == this.disposition[i].type).value;
+    }
     this.dispositionSubmit.emit(this.disposition);
   }
   ngOnInit(): void {
