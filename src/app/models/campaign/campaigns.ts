@@ -3,6 +3,8 @@ export class CreateCampaigns {
     campaignsDescription!: string;
     campaignsStatus!: string;
     campaignsAutoDispose!: string;
+    autoDisposeStatus !: any;
+    autoDispoStatus!: string;
     campaignsMaximumTime!: string;
     campaignsMinimumTime!: string;
     campaignsStartCallUrl!: string;
@@ -10,6 +12,7 @@ export class CreateCampaigns {
     campaignsCrm!: string;
     campaignsCrmHistory!: string;
     selectedCrmTableId!: string;
+    autoDispoid !: string;
 }
 
 export class Disposition {

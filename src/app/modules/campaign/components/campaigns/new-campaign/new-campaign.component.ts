@@ -63,7 +63,7 @@ export class NewCampaignComponent implements OnInit {
     this.newCampaign.name = this.createCampaignObj.campaignsName;
     this.newCampaign.description = this.createCampaignObj.campaignsDescription;
     this.newCampaign.status = this.createCampaignObj.campaignsStatus;
-    this.newCampaign.autoDispose = this.createCampaignObj.campaignsAutoDispose;
+    this.newCampaign.autoDispoStatus = this.createCampaignObj.campaignsAutoDispose;
     this.newCampaign.minimumTime = this.createCampaignObj.campaignsMinimumTime;
     this.newCampaign.maximumTime = this.createCampaignObj.campaignsMaximumTime;
     this.newCampaign.callStartUrl = this.createCampaignObj.campaignsStartCallUrl;

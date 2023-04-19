@@ -83,7 +83,7 @@
                     <label for="country" class="form-label">Start Call URL</label>
                     <select class="form-select" name="campaignsStartCallUrl" #campaignsStartCallUrl="ngModel"
                         [(ngModel)]="createCampaign.campaignsStartCallUrl" required>
-                        <option value="" selected>SELECT</option>
+                        <option value="undefined" selected>SELECT</option>
                         <option *ngFor="let obj of startCallUrl; let i=index" [value]="startCallUrl[i].id">
                             {{startCallUrl[i].name}}</option>
 
@@ -132,6 +132,17 @@
                             *crm history  is required
                         </span> -->
 
+                </div>
+
+                <div class="col-sm-6" *ngIf="isAutodispose">
+                    <label for="country" class="form-label">Auto Dispose Status<sup class="text-red">*</sup></label>
+                    <select class="form-select" name="campaignsAutoDispoStatus" #campaignsAutoDispoStatus="ngModel"
+                        (change)="getAutoDispoId($event)" [(ngModel)]="createCampaign.autoDispoStatus" required>
+                        <option value="" selected>SELECT</option>
+                        <option *ngFor="let obj of autoDispoStatusArray; let i=index"
+                            [value]="autoDispoStatusArray[i].id">
+                            {{autoDispoStatusArray[i].value}}</option>
+                    </select>
                 </div>
             </div>
             <div class="row g-3 mt-3">

@@ -27,6 +27,7 @@ export class newCampaign {
     description!: string
     status!: string
     autoDispose!: string
+    autoDispoStatus !: string
     minimumTime!: string
     maximumTime!: string
     callStartUrl!: string;
@@ -35,5 +36,6 @@ export class newCampaign {
     domainId !: any;
     isMask!: any;
     crmHistory!: string;
+    autoDispoid !: string;
     disposition!: Disposition[];
 }

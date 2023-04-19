@@ -51,6 +51,7 @@ export class CreateCampaignComponent implements OnInit {
   campaignObjDetails: any;
   domainId: number;
   isUpdate: boolean = false;
+  autoDispoStatusArray: any = [];
 
   constructor(private campaignsService: CampaignsService,
     private toastr: ToastrService) {
@@ -60,7 +61,7 @@ export class CreateCampaignComponent implements OnInit {
   }
 
   autoDisposeValue() {
-    if (this.createCampaign.campaignsAutoDispose == '1') {
+    if (this.createCampaign.campaignsAutoDispose == '1' || this.createCampaign.campaignsAutoDispose == '3') {
       this.isAutodispose = true;
     }
     else {
@@ -68,6 +69,11 @@ export class CreateCampaignComponent implements OnInit {
     }
   }
 
+  getAutoDispoId(e: any) {
+    this.createCampaign.autoDispoStatus = e.target.value;
+    this.createCampaign.autoDispoid = this.createCampaign.autoDispoStatus;
+
+  }
   submit() {
     this.createCampaign.campaignsStatus = this.campaignStatusArray.find(x => x.id == this.createCampaign.campaignsStatus).value;
     this.createCampaign.campaignsAutoDispose = this.campaignAutoDisposeArray.find(x => x.id == this.createCampaign.campaignsAutoDispose).value;
@@ -84,23 +90,29 @@ export class CreateCampaignComponent implements OnInit {
     this.modalHeaderText = 'Update Campaign';
     this.campaignIdtoEdit = parentData.data.id;
     this.campaignObjDetails = this.campaignsData.filter((x: any) => x.id == parentData.data.id);
+    const autoDisposeObj = this.campaignObjDetails[0].autoDispoStatus;
+    this.autoDispoStatusArray = Object.keys(autoDisposeObj).map((e: any) => ({ id: e, value: autoDisposeObj[e] }));
+    this.createCampaign.autoDispoStatus = this.autoDispoStatusArray.find((x: any) => x.id == this.campaignObjDetails[0].autoDispoId)?.id || "";
     this.editCampaignObj.crmId = this.campaignObjDetails[0].id;
     this.editCampaignObj.tableId = this.campaignObjDetails[0].tableId;
     if (this.campaignObjDetails[0]) {
       this.isUpdate = true;
+      this.editable = true;
     } else {
       this.isUpdate = false;
+      this.editable = false;
     }
     this.createCampaign.campaignsName = this.campaignObjDetails[0].name;
     this.createCampaign.campaignsDescription = this.campaignObjDetails[0].description;
-
     this.createCampaign.campaignsAutoDispose = this.campaignAutoDisposeArray.find(x => x.value == this.campaignObjDetails[0].autodispose)?.id || "";
-    if (this.campaignObjDetails[0].autodispose == "ALLOW") {
+    if (this.campaignObjDetails[0].autodispose == "ALLOW" || this.campaignObjDetails[0].autodispose == "ALERT") {
       this.isAutodispose = true;
+
       this.createCampaign.campaignsMaximumTime = this.campaignObjDetails[0].automaxtime;
       this.createCampaign.campaignsMinimumTime = this.campaignObjDetails[0].automintime;
+    } else {
+      this.isAutodispose = false;
     }
-    this.isAutodispose = false;
     this.createCampaign.campaignsStatus = this.campaignStatusArray.find(x => x.value == this.campaignObjDetails[0].status).id;
 
     if (this.campaignObjDetails[0].ismask == false) {
@@ -152,27 +164,27 @@ export class CreateCampaignComponent implements OnInit {
   }
 
   async editCampaign() {
-    this.editCampaignObj.name = this.createCampaign.campaignsName,
-      this.editCampaignObj.description = this.createCampaign.campaignsDescription,
+    this.editCampaignObj.description = this.createCampaign.campaignsDescription,
       this.editCampaignObj.status = this.createCampaign.campaignsStatus,
       this.editCampaignObj.minimumTime = this.createCampaign.campaignsMinimumTime,
       this.editCampaignObj.maximumTime = this.createCampaign.campaignsMaximumTime,
       this.editCampaignObj.callStartUrl = this.createCampaign.campaignsStartCallUrl,
-      this.editCampaignObj.autoDispose = this.createCampaign.campaignsAutoDispose,
+      this.editCampaignObj.autoDispoid = this.createCampaign.autoDispoid == undefined ? "0" : this.createCampaign.autoDispoid;
+    this.editCampaignObj.autoDispoStatus = this.createCampaign.campaignsAutoDispose,
       this.editCampaignObj.domainId = this.domainId,
       this.editCampaignObj.isMask = this.createCampaign.campaignsMask == "YES" ? true : false,
       this.editCampaignObj.crmHistory = this.createCampaign.campaignsCrmHistory,
-      this.editCampaignObj.crmId = this.createCampaign.campaignsCrm;
 
-    this.campaignsService.editCampaign(this.editCampaignObj.crmId, this.editCampaignObj).then(
-      res => {
-        if (res != null) {
-          this.editCampdata = res;
-          this.toastr.success("Campaign Updated Successfully");
-        }
-      },
-      err => { this.editCampdata = err }
-    )
+      this.campaignsService.editCampaign(this.editCampaignObj.crmId, this.editCampaignObj).then(
+        res => {
+          if (res != null) {
+            this.editCampdata = res;
+            this.toastr.success("Campaign Updated Successfully");
+            this.getAllCampaigns();
+          }
+        },
+        err => { this.editCampdata = err }
+      )
   }
 
   getCrmTableId(event: any) {
