@@ -19,7 +19,7 @@ export class dispositionType {
     type!: string;
     otherType!: string;
     autoDispose!: string;
-    isActive!: boolean;
+    status!: string;
 }
 
 export class newCampaign {
@@ -31,9 +31,9 @@ export class newCampaign {
     maximumTime!: string
     callStartUrl!: string;
     tableId!: string;
-    crmId!: string;
-    domainId !: string;
-    isMask!: string;
+    crmId!: any;
+    domainId !: any;
+    isMask!: any;
     crmHistory!: string;
     disposition!: Disposition[];
 }

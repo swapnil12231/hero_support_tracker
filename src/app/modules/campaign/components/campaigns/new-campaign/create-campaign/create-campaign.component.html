@@ -3,8 +3,9 @@
         <div class="modal-header border-0">
             <h1 class="modal-title fs-5 w-100 text-center" id="campaignModalLabel">
                 {{modalHeaderText}}
-             </h1>
-            <button type="button" (click)="resetModal()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </h1>
+            <button type="button" (click)="resetModal()" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
         </div>
         <div class="modal-body pt-1 px-5 pb-5 pt-1 px-5 pb-5">
             <div class="row g-3">
@@ -33,9 +34,9 @@
                     <select class="form-select" name="campaignsStatus" #campaignsStatus="ngModel"
                         [(ngModel)]="createCampaign.campaignsStatus">
                         <option value="undefined" selected>SELECT</option>
-                        <option value="active">ACTIVE</option>
-                        <option value="inactive">INACTIVE</option>
-
+                        <option *ngFor="let obj of campaignStatusArray; let i=index"
+                            [value]="campaignStatusArray[i].id">
+                            {{campaignStatusArray[i].value}}</option>
                     </select>
                     <!-- <span class="text-danger" *ngIf="campaignsStatus.invalid && campaignsStatus.touched">
                             *status is required
@@ -47,9 +48,9 @@
                     <select class="form-select" name="campaignsAutoDispose" (change)="autoDisposeValue()"
                         #autoDispose="ngModel" [(ngModel)]="createCampaign.campaignsAutoDispose" required>
                         <option value="undefined" selected>SELECT</option>
-                        <option value="disallow">DISALLOW</option>
-                        <option value="allow">ALLOW</option>
-                        <option value="alert">ALERT</option>
+                        <option *ngFor="let obj of campaignAutoDisposeArray; let i=index"
+                            [value]="campaignAutoDisposeArray[i].id">
+                            {{campaignAutoDisposeArray[i].value}}</option>
                     </select>
                     <div class="invalid-feedback">
                         Please provide a valid state.
@@ -100,8 +101,8 @@
                     <select class="form-select" name="campaignsMask" #campaignsMask="ngModel"
                         [(ngModel)]="createCampaign.campaignsMask" required>
                         <option value="undefined" selected>SELECT</option>
-                        <option value=true>YES</option>
-                        <option value=false>NO</option>
+                        <option *ngFor="let obj of maskArray; let i=index" [value]="maskArray[i].id">
+                            {{maskArray[i].value}}</option>
                     </select>
                     <!-- <span class="text-danger" *ngIf="campaignsMask.invalid && campaignsMask.touched">
                             *mask  is required
@@ -125,9 +126,8 @@
                     <select class="form-select" name="campaignsCrmHistory" #campaignsCrmHistory="ngModel"
                         [(ngModel)]="createCampaign.campaignsCrmHistory" required>
                         <option value="undefined" selected>SELECT</option>
-                        <option value="yes">YES</option>
-                        <option value="no">NO</option>
-
+                        <option *ngFor="let obj of crmHistoryArray; let i=index" [value]="crmHistoryArray[i].id">
+                            {{crmHistoryArray[i].value}}</option>
                     </select>
                     <!-- <span class="text-danger" *ngIf="campaignsCrmHistory.invalid && campaignsCrmHistory.touched">
                             *crm history  is required
@@ -139,9 +139,12 @@
                 <div class="col col-md-6 text-end">
                     <button type="button" class="btn btn-outline-warning px-4 " data-bs-dismiss="modal">BACK</button>
                 </div>
-                <div class="col col-md-6 text-start">
+                <div class="col col-md-6 text-start" *ngIf="!isUpdate">
                     <button type="button" class="btn btn-warning text-white px-4 " (click)="submit()"
-                        data-bs-toggle="modal" data-bs-target="#campaignDisposition">NEXT</button>
+                        data-bs-toggle="modal" data-bs-target="#campaignDisposition">Next</button>
+                </div>
+                <div class="col col-md-6 text-start" *ngIf="isUpdate">
+                    <button type="button" class="btn btn-warning text-white px-4" data-bs-dismiss="modal" (click)="submit()" >Update</button>
                 </div>
             </div>
 
@@ -149,4 +152,3 @@
         </div>
 
     </div>
-    <!-- </div> -->

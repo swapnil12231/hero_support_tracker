@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CampaignDisposition, dispositionList, dispositionType } from 'src/app/models/campaign/campaignDisposition';
 import { CampdispositionType, CreateDisposition, disposition, dispositionTypeArray, Existingdisposition, VmDisposition } from 'src/app/models/campaign/disposition';
 import { DispositionService } from '../../../services/disposition.service';
 import { Constants } from 'src/app/models/constants';
+import { ToastService } from 'src/app/services/common/toast.service';
 
 @Component({
   selector: 'app-create-disposition',
@@ -10,6 +11,9 @@ import { Constants } from 'src/app/models/constants';
   styleUrls: ['./create-disposition.component.css']
 })
 export class CreateDispositionComponent implements OnInit {
+
+  @Output()
+  refreshDisposition = new EventEmitter<void>();
 
   vmDisposition!: VmDisposition;
   vmDispositionArray: any = [];
@@ -23,24 +27,12 @@ export class CreateDispositionComponent implements OnInit {
   multiDispositionType!: dispositionTypeArray[];
   despositionDetails: any;
   usergroupid: any;
-  constructor(private dispositionService: DispositionService,) {
+  isEditEnabled: boolean = false;
 
+  constructor(private dispositionService: DispositionService, private toastrService: ToastService) {
     this.domainId = parseInt(sessionStorage.getItem(Constants.domainId) || '0');
-    this.usergroupid = parseInt(sessionStorage.getItem(Constants.userGroupId) || '0');;
-
-
-    this.vmDisposition = new VmDisposition();
-    this.campaignDisposition = new CampaignDisposition();
-    this.campaignDisposition.campaignDisositionList = new Array<dispositionList>();
-    this.campaignDisposition.campaignDisositionList.push(new dispositionList);
-    this.dispositionTypeList = this.GetCustomerData();
-    this.vmDisposition.dispositionTypeArray = new dispositionTypeArray();
-    this.vmDisposition.CreateDisposition = new Array<CreateDisposition>();
-    this.vmDisposition.CreateDisposition.push(new CreateDisposition());
-    this.vmDisposition.dispositionTypeArray = new Array<disposition>();
-    this.existingDesposition = new Existingdisposition();
-    this.existingDesposition.MultipleCamdispositionType = new Array<CampdispositionType>();
-    this.existingDesposition.MultipleCamdispositionType.push(new CampdispositionType())
+    this.usergroupid = parseInt(sessionStorage.getItem(Constants.userGroupId) || '0');
+    this.initializeModalData();
   }
 
   addAnother() {
@@ -50,9 +42,40 @@ export class CreateDispositionComponent implements OnInit {
     item1.dispositionTypes = Object.assign({});
     this.campaignDisposition.campaignDisositionList.push(item1);
   }
+  initializeModalData() {
+    this.isEditEnabled = false;
+    this.vmDisposition = new VmDisposition();
+    this.campaignDisposition = new CampaignDisposition();
+    this.campaignDisposition.campaignDisositionList = new Array<dispositionList>();
+    let dispoList = new dispositionList();
+    dispoList.dispositionTypes = new dispositionType();
+    this.campaignDisposition.campaignDisositionList.push(dispoList);
+    this.dispositionTypeList = this.GetCustomerData();
+    this.vmDisposition.dispositionTypeArray = new dispositionTypeArray();
+    this.vmDisposition.CreateDisposition = new Array<CreateDisposition>();
+    this.vmDisposition.CreateDisposition.push(new CreateDisposition());
+    this.vmDisposition.dispositionTypeArray = new Array<disposition>();
+    this.existingDesposition = new Existingdisposition();
+    this.existingDesposition.MultipleCamdispositionType = new Array<CampdispositionType>();
+    this.existingDesposition.MultipleCamdispositionType.push(new CampdispositionType());
+  }
+  editDisposition() {
+    let data = {
+      id: this.campaignDisposition.campaignDisositionList[0].id,
+      type: this.campaignDisposition.campaignDisositionList[0].dispositionTypes.name,
+      desc: this.campaignDisposition.campaignDisositionList[0].Description,
+      status: this.campaignDisposition.campaignDisositionList[0].dispositionTypes.status,
+    };
 
 
-  submit() {
+    this.dispositionService.editDisposition(data).then(res => {
+      this.toastrService.showSuccess("Disposition edited successfully", "Success");
+      this.refreshDisposition.emit();
+    }).catch(error => {
+      this.toastrService.showError("Something went wrong", "Error");
+    });
+  }
+  createDisposition() {
     let postArray: any = [];
     this.campaignDisposition.campaignDisositionList.forEach(element => {
       let post = {
@@ -61,8 +84,7 @@ export class CreateDispositionComponent implements OnInit {
         "name": element?.Name ? element?.Name : "",
         "description": element?.Description ? element?.Description : "",
         "type": element.dispositionTypes?.name ? element.dispositionTypes?.name : "",
-        "status": element.dispositionTypes?.isActive == true ? "ACTIVE" : "INACTIVE"
-
+        "status": "ACTIVE"
       };
       if (post.description || post.type || post.name) {
         postArray.push(post);
@@ -76,14 +98,13 @@ export class CreateDispositionComponent implements OnInit {
 
   AddCampaignDisposition(postArray: any) {
 
-    this.dispositionService.addDisposition(postArray).then(
-      res => {
-        if (res != null) {
-          this.despositionDetails = res;
-        }
-      },
-      err => { this.despositionDetails = err },
-    )
+    this.dispositionService.addDisposition(postArray).then(res => {
+      this.despositionDetails = res;
+      this.toastrService.showSuccess("Disposition created successfully", "Success");
+      this.refreshDisposition.emit();
+    }).catch(error => {
+      this.toastrService.showError("Something went wrong", "Error");
+    })
   }
 
   getDispoType(e: any) {
@@ -95,14 +116,9 @@ export class CreateDispositionComponent implements OnInit {
   }
 
   async getEntityToAddDisposition() {
-    this.dispositionService.getEntityToAddDispotision().then(
-      res => {
-        if (res != 0) {
-          this.dispositionObj = res;
-        }
-      },
-      err => { this.dispositionObj = err }
-    )
+    this.dispositionService.getEntityToAddDispotision().then(res => {
+      this.dispositionObj = res;
+    });
   }
 
   getCampaignId(e: any) {
@@ -116,7 +132,24 @@ export class CreateDispositionComponent implements OnInit {
   ngOnInit(): void {
     this.getEntityToAddDisposition();
   }
+  setEditDispositionData(data: any) {
+    this.isEditEnabled = true;
 
+    this.campaignDisposition = new CampaignDisposition();
+    this.campaignDisposition.campaignDisositionList = new Array<dispositionList>();
+    this.existingDesposition.Campaign = this.dispositionObj.find((e: any) => e.campaign == data.campaign).campid || -1;
+
+
+    let disposition = new dispositionList();
+    disposition.dispositionTypes = this.dispositionTypeList.find((e: any) => e.name == data.type) || new dispositionType();
+    disposition.dispositionTypes.status = data.status;
+    disposition.Name = data.disposition;
+    disposition.Description = data.description;
+    disposition.id = data.id;
+
+    this.campaignDisposition.campaignDisositionList.push(disposition);
+
+  }
   addDisposition(e: any) {
     var count = this.dispositionTypeList.length;
     for (let i = 0; i < this.multiDispositionType.length; i++) {
@@ -124,7 +157,7 @@ export class CreateDispositionComponent implements OnInit {
       item1.id = count + i;
       const name = this.multiDispositionType[i];
       item1.name = String(name);
-      item1.isActive = true;
+      item1.status = "ACTIVE";
       this.dispositionTypeList.push(item1)
       const item = new dispositionList();
       item.id = item1.id

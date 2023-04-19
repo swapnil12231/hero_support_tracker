@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constants } from 'src/app/models/constants';
 import { HttpClientService } from 'src/app/services/authentication/httpclient.service';
@@ -28,12 +28,12 @@ export class SoundFileService {
 
   async deleteSoundFiles(data:any){
     let url=`/voice-server/sound-files/?domainId=${this.domainId}`;
-    return this.httpClientService.deleteWithBody(url,data);
+    return this.httpClientService.delete(url,data);
   }
 
-  async editSoundFile(formData:any,id:any){
-    let url=`/voice-server/sound-files/${id}`;
-    return this.httpClientService.put(url,formData);
+  async editSoundFile(formData: any, id: any) {
+    let url = `/voice-server/sound-files/${id}`;
+    return this.httpClientService.put(url, formData);
   }
 
   async playSoundFile(id:any)

@@ -1,21 +1,23 @@
-
 <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
 
     <div class="modal-content">
 
         <div class="modal-header border-0">
             <h1 class="modal-title fs-5 w-100 text-center" id="campaignModalLabel">
-                Create Disposition
+                {{isEditEnabled ? "Edit Disposition":"Create Disposition"}}
             </h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" (click)="initializeModalData()" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close">
+            </button>
         </div>
 
         <div class="row pt-1 px-5 pb-5">
             <div class="col-sm-6 ml-5">
                 <label for="country" class="form-label">Campaign </label>
                 <select class="form-select" (change)="getCampaignId($event)" name="dropDownExistingCampaign"
-                    #dispositionExistingCampaign="ngModel" [(ngModel)]="existingDesposition.Campaign" required>
-                    <option value="-1">Select Campaign</option>
+                    #dispositionExistingCampaign="ngModel" [(ngModel)]="existingDesposition.Campaign" required
+                    [disabled]="isEditEnabled">
+                    <option [value]="-1">Select Campaign</option>
                     <option *ngFor="let obj of dispositionObj; let i=index" [value]="dispositionObj[i].campid">
                         {{dispositionObj[i].campaign}}</option>
                 </select>
@@ -33,34 +35,43 @@
                 </div>
                 <div class="col-sm-6">
                     <label for="" class="form-label">Disposition Name <sup class="text-red">*</sup></label>
-                    <input type="text" class="form-control" name="Name"
-                        #dispositionDispositionType="ngModel"
+                    <input type="text" class="form-control" name="Name" #dispositionDispositionType="ngModel"
                         [(ngModel)]="campaignDisposition.campaignDisositionList[i].Name"
-                        placeholder="Enter Disposition Name" required>
+                        placeholder="Enter Disposition Name" required [disabled]="isEditEnabled">
                     <span class="text-danger"
                         *ngIf="dispositionDispositionType.invalid && dispositionDispositionType.touched">
-                        *disposition name is required
+                        *Disposition name is required
                     </span>
                 </div>
 
                 <div class="col-sm-12">
                     <label for="" class="form-label">Description <sup class="text-red">*</sup></label>
-                    <input type="text" class="form-control" name="Descriptionkil"
-                        #dispositionDescription="ngModel"
+                    <input type="text" class="form-control" name="Descriptionkil" #dispositionDescription="ngModel"
                         [(ngModel)]="campaignDisposition.campaignDisositionList[i].Description"
                         placeholder="Enter Description here" value="" required="">
                     <span class="text-danger" *ngIf="dispositionDescription.invalid && dispositionDescription.touched">
-                        *description time is required
+                        *Description is required
+                    </span>
+                </div>
+                <div class="col-sm-6" *ngIf="isEditEnabled">
+                    <label for="status" class="form-label">Status <sup class="text-red">*</sup></label>
+                    <select class="form-control" name="status" id="status" #status="ngModel" required
+                        [(ngModel)]="campaignDisposition.campaignDisositionList[i].dispositionTypes.status">
+                        <option value="ACTIVE">ACTIVE</option>
+                        <option value="INACTIVE">INACTIVE</option>
+                    </select>
+                    <span class="text-danger" *ngIf="status.invalid && status.touched">
+                        *Status is required
                     </span>
                 </div>
             </div>
-            <div class="col-md-12">
-
-                <button class="btn btn-outline-warning btn-sm mt-3" (click)="addAnother()"> Add
-                    Another</button>
+            <div class="col-md-12" *ngIf="!isEditEnabled">
+                <button class="btn btn-outline-warning btn-sm mt-3" (click)="addAnother()">
+                    Add Another
+                </button>
             </div>
 
-            <div class="row g-3">
+            <div class="row g-3" *ngIf="!isEditEnabled">
 
                 <h1 class="modal-title fs-5 w-100 text-center" id="campaignModalLabel">
                     Choose from Existing
@@ -76,24 +87,23 @@
 
                 </div>
                 <div class="col-sm-6">
-
                     <label for="country" class="form-label">Select Disposition </label>
                     <p-multiSelect [(ngModel)]="multiDispositionType" [options]="vmDisposition.dispositionTypeArray"
-                        optionLabel="name" optionValue="name" [style]="{'width':'100%', 'height':'38px'}">
+                        optionLabel="name" optionValue="name">
                     </p-multiSelect>
 
                 </div>
                 <div class="col-md-12"><button class="btn btn-outline-warning btn-sm mt-3"
                         (click)="addDisposition($event)">
                         Add
-                    </button></div>
+                    </button>
+                </div>
             </div>
         </div>
 
         <div class="modal-footer justify-content-center border-top-0">
-
             <button type="button" class="btn btn-warning text-white px-4" data-bs-dismiss="modal"
-                (click)="submit()">SUBMIT</button>
+                (click)="isEditEnabled ? editDisposition(): createDisposition() ">SUBMIT</button>
         </div>
 
     </div>

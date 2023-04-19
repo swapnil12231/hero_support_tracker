@@ -11,19 +11,13 @@ export class TransferLogicComponent implements OnInit {
 
   @Output() createQueueNextSubmit = new EventEmitter<any>();
 
-  @Input()
-  skillOptionArray: Array<any> = [];
-  @Input()
-  soundFilesOptionArray: Array<any> = [];
-  @Input()
-  musicClassOptionArray: Array<any> = [];
-  @Input()
-  dispositionTypeOptionArray: Array<any> = [];
-  @Input()
-  campaignId: number = 0;
-  @Input()
-  apiOptionArray: Array<any> = [];
 
+  skillOptionArray: Array<any> = [];
+  soundFilesOptionArray: Array<any> = [];
+  musicClassOptionArray: Array<any> = [];
+  dispositionTypeOptionArray: Array<any> = [];
+  campaignId: number = 0;
+  apiOptionArray: Array<any> = [];
   transferLogicArray: Array<TransferLogic>;
   voiceLogicArray: Array<VoiceLogic>;
   transferTypeOptionArray: Array<string> = ['AGENT', 'SKILL', 'HANGUP', 'OVERFLOW', 'EXTERNAL'];

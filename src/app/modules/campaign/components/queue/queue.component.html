@@ -2,30 +2,40 @@
     <div class="card mb-3">
         <div class="card-body">
             <div class="queueTable  table-responsive">
-                <table class="table table-borderless table-md">
-                    <thead class="light-blue">
+                <p-table class="table table-borderless table-md" [value]="queueData" styleClass="p-datatable-sm"
+                    [rowHover]="true" [rows]="5" [rowsPerPageOptions]="[5,10,15]" [showCurrentPageReport]="true"
+                    [paginator]="true">
+                    <ng-template pTemplate="header">
                         <tr>
-                            <th><input type="checkbox"> </th>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
                             <th>Queue Name </th>
                             <th>Campaign</th>
                             <th>Priority</th>
 
                             <th>Actions</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let queue of queueData">
-                            <td><input type="checkbox"></td>
-                            <td>{{queue.name}}</td>
-                            <td> {{queue.campid}} </td>
-                            <td>{{queue.priority}}</td>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                        <tr>
                             <td>
-                                <a title="Edit"> <i class="p-2 border rounded fa fa-edit me-2 text-muted"></i></a>
-                                <a title="Delete"> <i class="p-2 border rounded fa fa-trash text-muted"></i></a>
+                                <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                            </td>
+                            <td>{{item.name}}</td>
+                            <td> {{item.campid}} </td>
+                            <td>{{item.priority}}</td>
+                            <td>
+                                <a title="Edit" class="cursor-pointer">
+                                    <i class="p-2 border rounded fa fa-edit me-2 text-muted"></i>
+                                </a>
+                                <a title="Delete" class="cursor-pointer" (click)="deleteQueue(item.id)">
+                                    <i class="p-2 border rounded fa fa-trash text-muted"></i>
+                                </a>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
+                    </ng-template>
+                </p-table>
 
                 <div class="d-none">
                     <table class="table table-borderless">
@@ -52,7 +62,8 @@
                                             <label class="form-check-label" for="flexSwitchCheckChecked"> </label>
                                         </span>
                                         <span class="me-2"> <a href="#" class="" data-bs-toggle="modal"
-                                                data-bs-target="#campaignModal"> <i class="fa fa-edit"></i></a> </span>
+                                                data-bs-target="#campaignModal"> <i class="fa fa-edit"></i></a>
+                                        </span>
                                         <span> <a href="#"><i class="fa fa-trash"></i></a> </span>
                                     </div>
                                 </td>
@@ -62,31 +73,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="card-body">
-
-            <div class="row">
-
-                <div class="col-md-12">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-
-                </div>
-            </div>
-
-
-        </div>
     </div>
 </div>
-<app-new-queue></app-new-queue>
+<app-new-queue (refreshQueue)="getQueueData()"></app-new-queue>

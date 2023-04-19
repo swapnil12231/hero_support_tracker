@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DispositionService } from '../../services/disposition.service';
+import { CreateDisposition } from 'src/app/models/campaign/disposition';
+import { CreateDispositionComponent } from './create-disposition/create-disposition.component';
 
 
 @Component({
@@ -10,6 +12,9 @@ import { DispositionService } from '../../services/disposition.service';
 export class DispositionComponent implements OnInit {
   crmDispoData: any = [];
 
+  @ViewChild(CreateDispositionComponent)
+  createDisposition!: CreateDispositionComponent;
+
   constructor(private dispositionService: DispositionService) {
   }
   ngOnInit(): void {
@@ -17,7 +22,9 @@ export class DispositionComponent implements OnInit {
     this.getCampaignDispositionData();
   }
 
-
+  editDisposition(data: any) {
+    this.createDisposition.setEditDispositionData(data);
+  }
   getCampaignDispositionData() {
 
     this.dispositionService.getAllCampaignDispositionData().then(res => {
