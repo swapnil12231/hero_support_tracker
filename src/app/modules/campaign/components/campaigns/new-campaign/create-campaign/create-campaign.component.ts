@@ -94,7 +94,7 @@ export class CreateCampaignComponent implements OnInit {
     this.createCampaign.campaignsName = this.campaignObjDetails[0].name;
     this.createCampaign.campaignsDescription = this.campaignObjDetails[0].description;
 
-    this.createCampaign.campaignsAutoDispose = this.campaignAutoDisposeArray.find(x => x.value == this.campaignObjDetails[0].autodispose).id;
+    this.createCampaign.campaignsAutoDispose = this.campaignAutoDisposeArray.find(x => x.value == this.campaignObjDetails[0].autodispose)?.id || "";
     if (this.campaignObjDetails[0].autodispose == "ALLOW") {
       this.isAutodispose = true;
       this.createCampaign.campaignsMaximumTime = this.campaignObjDetails[0].automaxtime;
@@ -115,8 +115,8 @@ export class CreateCampaignComponent implements OnInit {
     } else {
       this.createCampaign.campaignsCrmHistory = this.crmHistoryArray.find(x => x.id == 2).id;
     }
-    var res: any = this.startCallUrl.filter((x: any) => x.id == this.campaignObjDetails[0].callstarturl);
-    this.createCampaign.campaignsStartCallUrl = res[0].id;
+    this.createCampaign.campaignsStartCallUrl = this.startCallUrl.find((x: any) => x.id == this.campaignObjDetails[0].callstarturl)?.id || "";
+
     var res1: any = this.crmData.filter((x: any) => x.id == this.campaignObjDetails[0].crmId); //binded static value
     this.createCampaign.campaignsCrm = res1[0].id;
   }
@@ -164,7 +164,7 @@ export class CreateCampaignComponent implements OnInit {
       this.editCampaignObj.crmHistory = this.createCampaign.campaignsCrmHistory,
       this.editCampaignObj.crmId = this.createCampaign.campaignsCrm;
 
-    this.campaignsService.editCampaign(this.editCampaignObj.crmId,this.editCampaignObj).then(
+    this.campaignsService.editCampaign(this.editCampaignObj.crmId, this.editCampaignObj).then(
       res => {
         if (res != null) {
           this.editCampdata = res;

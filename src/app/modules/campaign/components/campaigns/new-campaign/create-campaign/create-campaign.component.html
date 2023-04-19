@@ -47,7 +47,7 @@
                     <label for="state" class="form-label">Auto Dispose <sup class="text-red">*</sup></label>
                     <select class="form-select" name="campaignsAutoDispose" (change)="autoDisposeValue()"
                         #autoDispose="ngModel" [(ngModel)]="createCampaign.campaignsAutoDispose" required>
-                        <option value="undefined" selected>SELECT</option>
+                        <option value="" selected>SELECT</option>
                         <option *ngFor="let obj of campaignAutoDisposeArray; let i=index"
                             [value]="campaignAutoDisposeArray[i].id">
                             {{campaignAutoDisposeArray[i].value}}</option>
@@ -79,12 +79,11 @@
                         </span> -->
                 </div>
 
-
                 <div class="col-sm-6">
                     <label for="country" class="form-label">Start Call URL</label>
                     <select class="form-select" name="campaignsStartCallUrl" #campaignsStartCallUrl="ngModel"
                         [(ngModel)]="createCampaign.campaignsStartCallUrl" required>
-                        <option value="undefined" selected>SELECT</option>
+                        <option value="" selected>SELECT</option>
                         <option *ngFor="let obj of startCallUrl; let i=index" [value]="startCallUrl[i].id">
                             {{startCallUrl[i].name}}</option>
 
@@ -144,7 +143,8 @@
                         data-bs-toggle="modal" data-bs-target="#campaignDisposition">Next</button>
                 </div>
                 <div class="col col-md-6 text-start" *ngIf="isUpdate">
-                    <button type="button" class="btn btn-warning text-white px-4" data-bs-dismiss="modal" (click)="submit()" >Update</button>
+                    <button type="button" class="btn btn-warning text-white px-4" data-bs-dismiss="modal"
+                        (click)="submit()">Update</button>
                 </div>
             </div>
 

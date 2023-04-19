@@ -26,7 +26,7 @@ export class ExtensionService {
   
   async deleteExtension(data:any){
     let url = `/usermanagement/extension/delete`;
-    return this.httpClientService.deleteBodyWithoutParameter(url,data);
+    return this.httpClientService.delete(url,data);
   }
 
   async updateExtension(){

@@ -34,7 +34,7 @@ export class PauseCodeService {
 
    async deletePausecode(data:any){
      let url=`/usermanagement/pausecode/?domainid=${this.domainId}`;
-     return this.httpClientService.deleteBodyWithoutParameter(url,data);
+     return this.httpClientService.delete(url,data);
    }
 
 }
