@@ -12,12 +12,16 @@
                     <label for="country" class="form-label">Campaign
                         <sup class="text-red">*</sup>
                     </label>
-                    <select class="form-select" name="queueCampaign" #queueCampaign="ngModel"
+                    <!-- <select class="form-select" name="queueCampaign" #queueCampaign="ngModel"
                         [(ngModel)]="createNewQueue.campid" required>
                         <option [value]="-1">Select campaign</option>
                         <option *ngFor="let campaign of campaignsArray" [value]="campaign.id">{{campaign.value}}
                         </option>
-                    </select>
+                    </select> -->
+                    <p-dropdown [options]="campaignsArray" placeholder="Select Campaign Type"
+                        [(ngModel)]="createNewQueue.campid" optionLabel="value" optionValue="id" name="campaign"
+                        id="campaign">
+                    </p-dropdown>
                 </div>
                 <div class="col-sm-6">
                     <label class="form-label">Queue Name
@@ -34,7 +38,11 @@
                     <label class="form-label">Queue Priority
                         <sup class="text-red">*</sup>
                     </label>
-                    <select class="form-select" name="queueQueuepriority" #queueQueuepriority="ngModel"
+                    <p-dropdown [options]="queuePriorityArray" placeholder="Select Queue Priority"
+                        [(ngModel)]="createNewQueue.campid" optionLabel="value" optionValue="id" name="priority"
+                        id="priority">
+                    </p-dropdown>
+                    <!-- <select class="form-select" name="queueQueuepriority" #queueQueuepriority="ngModel"
                         [(ngModel)]="createNewQueue.queuePriority" required>
                         <option [value]="-1">Select any</option>
                         <option [value]="0">0</option>
@@ -47,7 +55,7 @@
                         <option [value]="7">7</option>
                         <option [value]="8">8</option>
                         <option [value]="9">9</option>
-                    </select>
+                    </select> -->
 
                 </div>
                 <div class="col-sm-6 d-flex align-items-center">
@@ -55,11 +63,10 @@
                         <label class="form-label">Music Class
                             <sup class="text-red">*</sup>
                         </label>
-                        <select class="form-select" name="queueMusicClass" #queueMusicClass="ngModel"
-                            [(ngModel)]="createNewQueue.musicClassId" required>
-                            <option [value]="-1">Select music</option>
-                            <option *ngFor="let music of musicClassArray" [value]="music.id">{{music.value}}</option>
-                        </select>
+                        <p-dropdown [options]="musicClassArray" placeholder="Select Music Class"
+                            [(ngModel)]="createNewQueue.musicClassId" optionLabel="value" optionValue="id"
+                            name="music-class" id="music-class">
+                        </p-dropdown>
                     </div>
 
                     <div class="w-25 text-end">
@@ -104,7 +111,7 @@
                                                     [options]="dispositionTypeOptionArray | dispositionFilter:createNewQueue.campid"
                                                     optionLabel="name" optionValue="name"
                                                     (onChange)="onDispositionTypeChange(i)" name="dispoType"
-                                                    id="dispoType">
+                                                    id="dispoType" placeholder="Select Disposition Types">
                                                 </p-multiSelect>
                                             </div>
                                         </div>
@@ -113,15 +120,16 @@
                                             <div>
                                                 <p-multiSelect [(ngModel)]="postCall.dispoId"
                                                     [options]="postCall.dispositionOptionArray" optionLabel="name"
-                                                    name="dispoName" id="dispoName">
+                                                    name="dispoName" id="dispoName" defaultLabel="Select Dispositions">
                                                     <ng-template let-value pTemplate="selectedItems">
-                                                        <div class="d-flex align-items-center gap-2">
+                                                        <div class="d-flex align-items-center gap-2" *ngIf="value">
                                                             <div *ngFor="let option of postCall.dispoId">
                                                                 {{ option.name }}
                                                             </div>
                                                         </div>
                                                     </ng-template>
-                                                    <ng-template let-disposition pTemplate=" item">
+
+                                                    <ng-template let-disposition pTemplate="item">
                                                         <div class="flex align-items-center gap-2">
                                                             <div>
                                                                 {{disposition.name}}-

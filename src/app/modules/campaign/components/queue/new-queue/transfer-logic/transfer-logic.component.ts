@@ -20,7 +20,7 @@ export class TransferLogicComponent implements OnInit {
   apiOptionArray: Array<any> = [];
   transferLogicArray: Array<TransferLogic>;
   voiceLogicArray: Array<VoiceLogic>;
-  transferTypeOptionArray: Array<string> = ['AGENT', 'SKILL', 'HANGUP', 'OVERFLOW', 'EXTERNAL'];
+  transferTypeOptionArray: Array<any> = [];
   eventOptionArray: Array<any> = [
     { id: 0, value: "Abandon", },
     { id: 1, value: "API" },
@@ -39,11 +39,10 @@ export class TransferLogicComponent implements OnInit {
     { id: 14, value: "Record" },
     { id: 15, value: "Wait" }
   ];
-  requestTypeOptionArray: Array<string> = ["TEXT", "JSON", "XML"];
-  responseTypeOptionArray: Array<string> = ["TEXT", "JSON", "XML"];
-  operationTypeOptionArray: Array<string> = ["append", "assignment", "decrement", "increment"];
-  functionTypeOptionArray: Array<string> = ["clear()", "getData(x)", "getData(x,y)", "length()", "toLower()", "toUpper()", "split(symbol)"];
-  conditionTypeOptionArray: Array<string> = ["eq", "eq-ignore-case", "gt", "lt", "not-eq", "lt-eq", "gt-eq", "contains", "not-contains", "starts-with", "is-blank", "is-null"];
+  reqResTypeOptionArray: Array<any> = [];
+  operationTypeOptionArray: Array<any> = [];
+  functionTypeOptionArray: Array<any> = [];
+  conditionTypeOptionArray: Array<any> = [];
 
   constructor(private queueService: QueueService) {
     this.transferLogicArray = new Array<TransferLogic>();
@@ -54,6 +53,11 @@ export class TransferLogicComponent implements OnInit {
 
     let voiceLogic = new VoiceLogic();
     this.voiceLogicArray.push(voiceLogic);
+    this.transferTypeOptionArray = this.getTransferTypeData();
+    this.reqResTypeOptionArray = this.getRequestResponseTypeData();
+    this.operationTypeOptionArray = this.getOperationTypeData();
+    this.functionTypeOptionArray = this.getFunctionTypeData();
+    this.conditionTypeOptionArray = this.getConditionTypeData();
   }
   addAnotherTransferLogic() {
     let transferLogic = new TransferLogic();
@@ -180,7 +184,58 @@ export class TransferLogicComponent implements OnInit {
 
     this.createQueueNextSubmit.emit(transferObj);
   }
+  getTransferTypeData() {
+    return [
+      { id: 1, value: 'AGENT' },
+      { id: 2, value: 'SKILL' },
+      { id: 3, value: 'HANGUP' },
+      { id: 4, value: 'OVERFLOW' },
+      { id: 5, value: 'EXTERNAL' }
+    ];
+  }
+  getRequestResponseTypeData() {
+    return [
+      { id: 1, value: "TEXT" },
+      { id: 2, value: "JSON" },
+      { id: 3, value: "XML" }
+    ];
+  }
+  getOperationTypeData() {
+    return [
+      { id: 1, value: "append" },
+      { id: 2, value: "assignment" },
+      { id: 3, value: "decrement" },
+      { id: 4, value: "increment" }
+    ];
+  }
+  getFunctionTypeData() {
+    return [
+      { id: 1, value: "clear()" },
+      { id: 2, value: "getData(x)" },
+      { id: 3, value: "getData(x,y)" },
+      { id: 4, value: "length()" },
+      { id: 5, value: "toLower()" },
+      { id: 6, value: "toUpper()" },
+      { id: 7, value: "split(symbol)" }
+    ];
+  }
 
+  getConditionTypeData() {
+    return [
+      { id: 1, value: "eq" },
+      { id: 2, value: "eq-ignore-case" },
+      { id: 3, value: "gt" },
+      { id: 4, value: "lt" },
+      { id: 5, value: "not-eq" },
+      { id: 6, value: "lt-eq" },
+      { id: 7, value: "gt-eq" },
+      { id: 8, value: "contains" },
+      { id: 9, value: "not-contains" },
+      { id: 10, value: "starts-with" },
+      { id: 11, value: "is-blank" },
+      { id: 12, value: "is-null" }
+    ];
+  }
   ngOnInit(): void {
   }
 

@@ -32,17 +32,17 @@ export class VoiceLogic {
 
 export class VoiceLogicEventApi {
     api: number = -1;
-    request_type: string = "";
-    response_type: string = "";
+    request_type!: string;
+    response_type!: string;
     response!: string;
     response_status!: string;
 }
 
 export class VoiceLogicEventAssignment {
     variable!: string;
-    operation: string = "";
+    operation!: string;
     operand!: string;
-    function: string = "";
+    function!: string;
     x!: number;
     y!: number;
     symbol!: string;
@@ -57,7 +57,7 @@ export class VoiceLogicEventFollowup {
 
 export class VoiceLogicEventGoToIf {
     variable!: string;
-    condition: string = "";
+    condition!: string;
     value!: string;
     gotoif_true!: number;
     gotoif_false!: number;
@@ -73,7 +73,7 @@ export class VoiceLogicEventJsonOptions {
 }
 
 export class VoiceLogicEventMusic {
-    music_class: number = -1;
+    music_class!: number;
     music_class_name: string = "";
 }
 
@@ -82,7 +82,7 @@ export class VoiceLogicEventOption {
 
     variable!: string;
     type: string = "FILE";
-    file_id: number = -1;
+    file_id!: number;
     file_url!: string;
     file_duration!: number;
     timeout!: number;

@@ -32,26 +32,19 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <label for="country" class="form-label">Transfer Type </label>
-                                            <select class="form-select" name="queueTransferType"
-                                                #queueTransferType="ngModel" [(ngModel)]="transferLogic.transferType"
-                                                required>
-                                                <option value="">Select Type</option>
-                                                <option *ngFor="let transfer of transferTypeOptionArray"
-                                                    [value]="transfer">
-                                                    {{transfer}}
-                                                </option>
-                                            </select>
+                                            <p-dropdown [options]="transferTypeOptionArray"
+                                                placeholder="Select Transfer Type"
+                                                [(ngModel)]="transferLogic.transferType" optionLabel="value"
+                                                optionValue="value" name="transfer-type" id="transfer-type">
+                                            </p-dropdown>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6 mt-2">
-                                        <label for="country" class="form-label">Skill </label>
-                                        <select class="form-select" name="queueSkill" #queueSkill="ngModel"
-                                            [(ngModel)]="transferLogic.transferData" required>
-                                            <option [value]="-1">Select Any</option>
-                                            <option *ngFor="let skillOption of skillOptionArray"
-                                                [value]="skillOption.id">
-                                                {{skillOption.value}}</option>
-                                        </select>
+                                        <div class="col-sm-6 mt-2">
+                                            <label for="country" class="form-label">Skill </label>
+                                            <p-dropdown [options]="skillOptionArray" placeholder="Select Skill"
+                                                [(ngModel)]="transferLogic.transferData" optionLabel="value"
+                                                optionValue="id" name="skill" id="skill">
+                                            </p-dropdown>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -81,13 +74,10 @@
                             <div class="row mt-3">
                                 <div class="col-sm-12">
                                     <label class="form-label">Event </label>
-                                    <select class="form-select" name="queueEvent" #queueEvent="ngModel"
-                                        [(ngModel)]="voiceLogic.event" required (change)="onEventChange(i)">
-                                        <option [value]="-1">Select Type</option>
-                                        <option *ngFor="let eventOption of eventOptionArray" [value]="eventOption.id">
-                                            {{eventOption.value}}
-                                        </option>
-                                    </select>
+                                    <p-dropdown [options]="eventOptionArray" placeholder="Select Event"
+                                        (onChange)="onEventChange(i)" [(ngModel)]="voiceLogic.event" optionLabel="value"
+                                        optionValue="id">
+                                    </p-dropdown>
                                 </div>
                             </div>
                             <div [ngSwitch]="voiceLogic.event">
@@ -96,34 +86,30 @@
                                         <label for="api-api" class="form-label">API
                                             <sup class="text-red">*</sup>
                                         </label>
-                                        <select class="form-select" name="api-api" id="api-api" required
-                                            [(ngModel)]="voiceLogic.data.api">
-                                            <option [value]="-1">Select API</option>
-                                            <option *ngFor="let apiOption of apiOptionArray" [value]="apiOption.id">
-                                                {{apiOption.value}}
-                                            </option>
-                                        </select>
+                                        <p-dropdown [options]="apiOptionArray" placeholder="Select API" name="api-api"
+                                            id="api-api" [(ngModel)]="voiceLogic.data.api" optionLabel="value"
+                                            optionValue="id">
+                                        </p-dropdown>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="api-reqtype" class="form-label required">Request Type
                                             <sup class="text-red">*</sup>
                                         </label>
-                                        <select class="form-select" name="api-reqtype" id="api-reqtype" required
-                                            [(ngModel)]="voiceLogic.data.request_type">
-                                            <option value="">Select Request Type</option>
-                                            <option *ngFor="let type of requestTypeOptionArray" [value]="type">{{type}}
-                                            </option>
-                                        </select>
+                                        <p-dropdown [options]="reqResTypeOptionArray" placeholder="Select Request Type"
+                                            name="api-reqtype" id="api-reqtype"
+                                            [(ngModel)]="voiceLogic.data.request_type" optionLabel="value"
+                                            optionValue="value">
+                                        </p-dropdown>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="api-resptype" class="form-label">Response Type
                                             <sup class="text-red">*</sup>
                                         </label>
-                                        <select class="form-select" name="api-resptype" id="api-resptype" required
-                                            [(ngModel)]="voiceLogic.data.response_type">
-                                            <option value="">Select Response Type</option>
-                                            <option *ngFor="let type of responseTypeOptionArray" [value]="type">{{type}}
-                                        </select>
+                                        <p-dropdown [options]="reqResTypeOptionArray" placeholder="Select Response Type"
+                                            name="api-resptype" id="api-resptype"
+                                            [(ngModel)]="voiceLogic.data.response_type" optionLabel="value"
+                                            optionValue="value">
+                                        </p-dropdown>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="api-resp" class="form-label">Response
@@ -155,14 +141,11 @@
                                         <label for="assignment-operation" class="form-label required">Operation
                                             <sup class="text-red">*</sup>
                                         </label>
-                                        <select class="form-select" name="assignment-operation"
-                                            id="assignment-operation" required [(ngModel)]="voiceLogic.data.operation">
-                                            <option value="">Select Operation</option>
-                                            <option *ngFor="let operation of operationTypeOptionArray"
-                                                [value]="operation">
-                                                {{operation}}
-                                            </option>
-                                        </select>
+                                        <p-dropdown [options]="operationTypeOptionArray" name="assignment-operation"
+                                            id="assignment-operation" placeholder="Select Operation Type"
+                                            [(ngModel)]="voiceLogic.data.operation" optionLabel="value"
+                                            optionValue="value">
+                                        </p-dropdown>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="assignment-operand" class="form-label">Operand
@@ -177,13 +160,11 @@
                                         <label for="assignment-function" class="form-label required">Function
                                             <sup class="text-red">*</sup>
                                         </label>
-                                        <select class="form-select" name="assignment-function" id="assignment-function"
-                                            required [(ngModel)]="voiceLogic.data.function">
-                                            <option value="">Select Function</option>
-                                            <option *ngFor="let function of functionTypeOptionArray" [value]="function">
-                                                {{function}}
-                                            </option>
-                                        </select>
+                                        <p-dropdown [options]="functionTypeOptionArray" name="assignment-operation"
+                                            id="assignment-operation" placeholder="Select Function"
+                                            [(ngModel)]="voiceLogic.data.function" optionLabel="value"
+                                            optionValue="value">
+                                        </p-dropdown>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="assignment-x" class="form-label">X
@@ -240,14 +221,11 @@
                                         <label for="gotoid-condition" class="form-label">Condition
                                             <sup class="text-red">*</sup>
                                         </label>
-                                        <select class="form-select" name="gotoid-condition" id="gotoid-condition"
-                                            required [(ngModel)]="voiceLogic.data.condition">
-                                            <option value="">Select Condition</option>
-                                            <option *ngFor="let condition of conditionTypeOptionArray"
-                                                [value]="condition">
-                                                {{condition}}
-                                            </option>
-                                        </select>
+                                        <p-dropdown [options]="conditionTypeOptionArray" name="gotoid-condition"
+                                            id="gotoid-condition" placeholder="Select Condition"
+                                            [(ngModel)]="voiceLogic.data.condition" optionLabel="value"
+                                            optionValue="value">
+                                        </p-dropdown>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="gotoif-value" class="form-label">Value
@@ -311,12 +289,11 @@
                                         <label for="music-class" class="form-label">Music Class
                                             <sup class="text-red">*</sup>
                                         </label>
-                                        <select class="form-select" name="music-class" id="music-class" required
-                                            [(ngModel)]="voiceLogic.data.music_class" (change)="onMusicClassChange(i)">
-                                            <option [value]="-1">Select Music Class</option>
-                                            <option *ngFor="let music of musicClassOptionArray" [value]="music.id">
-                                                {{music.value}}</option>
-                                        </select>
+                                        <p-dropdown [options]="musicClassOptionArray" placeholder="Select Music Class"
+                                            [(ngModel)]="voiceLogic.data.music_class" optionLabel="value"
+                                            optionValue="id" name="music-class" id="music-class">
+                                        </p-dropdown>
+
                                     </div>
                                 </div>
                                 <div class="row mt-3" *ngSwitchCase="10">
@@ -339,13 +316,10 @@
                                         <label for="option-sound-file" class="form-label">Sound File
                                             <sup class="text-red">*</sup>
                                         </label>
-                                        <select class="form-select" name="option-sound-file"
-                                            [(ngModel)]="voiceLogic.data.file_id" id="option-sound-file" required>
-                                            <option [value]="-1">Select Sound File</option>
-                                            <option *ngFor="let soundFile of soundFilesOptionArray"
-                                                [value]="soundFile.id">{{soundFile.value}}
-                                            </option>
-                                        </select>
+                                        <p-dropdown [options]="musicClassOptionArray" placeholder="Select Sound File"
+                                            name="option-sound-file" [(ngModel)]="voiceLogic.data.file_ids"
+                                            id="option-sound-file" optionLabel="value" optionValue="id">
+                                        </p-dropdown>
                                     </div>
                                     <div class="col-sm-6" *ngIf="voiceLogic.data.type == 'API'">
                                         <label for="option-file-url" class="form-label">File URL
@@ -382,13 +356,10 @@
                                         <label for="playprompt-sound" class="form-label">Sound File
                                             <sup class="text-red">*</sup>
                                         </label>
-                                        <select class="form-select" name="playprompt-sound"
-                                            [(ngModel)]="voiceLogic.data.file_id" id="playprompt-sound" required>
-                                            <option [value]="-1">Select Sound File</option>
-                                            <option *ngFor="let soundFile of soundFilesOptionArray"
-                                                [value]="soundFile.id">{{soundFile.value}}
-                                            </option>
-                                        </select>
+                                        <p-dropdown [options]="soundFilesOptionArray" placeholder="Select Sound File"
+                                            name="playprompt-sound" id="playprompt-sound"
+                                            [(ngModel)]="voiceLogic.data.file_id" optionLabel="value" optionValue="id">
+                                        </p-dropdown>
                                     </div>
                                     <div class="col-sm-6" *ngIf="voiceLogic.data.type == 'API'">
                                         <label for="playprompt-file-url" class="form-label">File URL
@@ -446,13 +417,10 @@
                                         <label for="question-sound" class="form-label">Sound File
                                             <sup class="text-red">*</sup>
                                         </label>
-                                        <select class="form-select" name="question-sound"
-                                            [(ngModel)]="voiceLogic.data.file_id" id="question-sound" required>
-                                            <option [value]="-1">Select Sound File</option>
-                                            <option *ngFor="let soundFile of soundFilesOptionArray"
-                                                [value]="soundFile.id">{{soundFile.value}}
-                                            </option>
-                                        </select>
+                                        <p-dropdown [options]="soundFilesOptionArray" placeholder="Select Sound File"
+                                            name="question-sound" [(ngModel)]="voiceLogic.data.file_id"
+                                            id="question-sound" optionLabel="value" optionValue="id">
+                                        </p-dropdown>
                                     </div>
                                     <div class="col-sm-6" *ngIf="voiceLogic.data.type == 'API'">
                                         <label for="question-file-url" class="form-label">File URL
@@ -546,7 +514,7 @@
                                             <select class="form-select" name="record-reqtype"
                                                 [(ngModel)]="voiceLogic.data.request_type" id="record-reqtype" required>
                                                 <option value="">Select Request Type</option>
-                                                <option *ngFor="let type of requestTypeOptionArray" [value]="type">
+                                                <option *ngFor="let type of reqResTypeOptionArray" [value]="type">
                                                     {{type}}
                                             </select>
                                         </div>
@@ -558,7 +526,7 @@
                                                 [(ngModel)]="voiceLogic.data.response_type" id="record-resptype"
                                                 required>
                                                 <option value="">Select Response Type</option>
-                                                <option *ngFor="let type of responseTypeOptionArray" [value]="type">
+                                                <option *ngFor="let type of reqResTypeOptionArray" [value]="type">
                                                     {{type}}
                                             </select>
                                         </div>

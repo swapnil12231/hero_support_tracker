@@ -19,7 +19,7 @@ export class CreateQueueComponent implements OnInit {
   ivrOptionArray: Array<any> = [];
   dispositionTypeOptionArray: Array<any> = [];
   dispositionOptionArray: Array<any> = [];
-  queuePriorityArray: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  queuePriorityArray: Array<any> = [];
   createNewQueue: CreateNewQueue;
 
 
@@ -32,6 +32,7 @@ export class CreateQueueComponent implements OnInit {
 
     let postCall = new PostCall();
     this.createNewQueue.postCallDetails.push(postCall);
+    this.queuePriorityArray = this.getQueuePriorityData();
   }
 
   addAnotherPostCall() {
@@ -52,8 +53,21 @@ export class CreateQueueComponent implements OnInit {
     this.createQueueSubmit.emit(this.createNewQueue)
   }
 
-
   ngOnInit(): void {
   }
 
+  getQueuePriorityData() {
+    return [
+      { id: 0, value: "0" },
+      { id: 1, value: "1" },
+      { id: 2, value: "2" },
+      { id: 3, value: "3" },
+      { id: 4, value: "4" },
+      { id: 5, value: "5" },
+      { id: 6, value: "6" },
+      { id: 7, value: "7" },
+      { id: 8, value: "8" },
+      { id: 9, value: "9" }
+    ];
+  }
 }
