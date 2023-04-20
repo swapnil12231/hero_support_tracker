@@ -36,5 +36,10 @@ export class DispositionService {
     return this.httpClientService.patch(url, data);
   }
 
+  async deleteDisposition(id: any) {
+    let url = `/campaign/disposition/${id}`;
+    return this.httpClientService.delete(url);
+  }
+
 
 }

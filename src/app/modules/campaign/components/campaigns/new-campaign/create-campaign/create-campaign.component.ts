@@ -15,6 +15,8 @@ import { CampaignsService } from 'src/app/modules/campaign/services/campaigns.se
 export class CreateCampaignComponent implements OnInit {
   // @Output() hideCreateCampaignPopup = new EventEmitter<boolean>();
   @Output() createCampaignSubmit = new EventEmitter<any>();
+  @Output()
+  refreshCampaigns = new EventEmitter<void>();
   editCampaignObj!: newCampaign;
   createCampaign!: CreateCampaigns;
   campaignsData: any = [];
@@ -71,6 +73,7 @@ export class CreateCampaignComponent implements OnInit {
     }
     else {
       this.isAutodispose = false;
+      this.isAutoDisposeStatus = false;
     }
   }
 
@@ -190,7 +193,7 @@ export class CreateCampaignComponent implements OnInit {
           if (res != null) {
             this.editCampdata = res;
             this.toastr.success("Campaign Updated Successfully");
-            this.getAllCampaigns();
+            // this.refreshCampaigns.emit();
           }
         },
         err => { this.editCampdata = err }

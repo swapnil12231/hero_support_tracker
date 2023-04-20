@@ -31,12 +31,12 @@
                             <td>{{item.autoDispose}}</td>
                             <td>{{item.status}}</td>
                             <td class="actionsColumn">
-                                <a href="" title="Edit" class="me-2" data-bs-target="#dispositionModal"
+                                <a  title="Edit" class="me-2" data-bs-target="#dispositionModal"
                                     data-bs-toggle="modal" (click)="editDisposition(item)">
                                     <i class="p-2 border rounded fa fa-edit me-2 text-muted"></i>
                                 </a>
-                                <a href="" title="Delete">
-                                    <i class="p-2 border me-2 rounded fa fa-trash text-muted"></i>
+                                <a  title="Delete">
+                                    <i class="p-2 border me-2 rounded fa fa-trash text-muted" (click)="deleteDisposition(item)"></i>
                                 </a>
                             </td>
                         </tr>
