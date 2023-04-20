@@ -51,7 +51,9 @@ export class CreateCampaignComponent implements OnInit {
   campaignObjDetails: any;
   domainId: number;
   isUpdate: boolean = false;
+  isReadOnly: boolean = false;
   autoDispoStatusArray: any = [];
+  isAutoDisposeStatus: boolean = false;
 
   constructor(private campaignsService: CampaignsService,
     private toastr: ToastrService) {
@@ -63,6 +65,9 @@ export class CreateCampaignComponent implements OnInit {
   autoDisposeValue() {
     if (this.createCampaign.campaignsAutoDispose == '1' || this.createCampaign.campaignsAutoDispose == '3') {
       this.isAutodispose = true;
+      if (this.isUpdate == true) {
+        this.isAutoDisposeStatus = true;
+      }
     }
     else {
       this.isAutodispose = false;
@@ -97,9 +102,12 @@ export class CreateCampaignComponent implements OnInit {
     this.editCampaignObj.tableId = this.campaignObjDetails[0].tableId;
     if (this.campaignObjDetails[0]) {
       this.isUpdate = true;
+      this.isAutoDisposeStatus = true;
       this.editable = true;
+      this.isReadOnly = true;
     } else {
       this.isUpdate = false;
+      this.isReadOnly = false;
       this.editable = false;
     }
     this.createCampaign.campaignsName = this.campaignObjDetails[0].name;
@@ -107,7 +115,9 @@ export class CreateCampaignComponent implements OnInit {
     this.createCampaign.campaignsAutoDispose = this.campaignAutoDisposeArray.find(x => x.value == this.campaignObjDetails[0].autodispose)?.id || "";
     if (this.campaignObjDetails[0].autodispose == "ALLOW" || this.campaignObjDetails[0].autodispose == "ALERT") {
       this.isAutodispose = true;
-
+      if (this.isUpdate) {
+        this.isAutoDisposeStatus = true;
+      }
       this.createCampaign.campaignsMaximumTime = this.campaignObjDetails[0].automaxtime;
       this.createCampaign.campaignsMinimumTime = this.campaignObjDetails[0].automintime;
     } else {
